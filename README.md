@@ -1,8 +1,4 @@
-<p align="center">
-<img src="./docs/mark.png" alt="Open-Source Hub log" width="60" height="60">
-</p>
-
-<h1 align="center">Open-Source Hub</h1>
+# Open-Source Hub
 
 Welcome to Open-Source Hub! This website and community connects open source maintainers and collaborators. Please join [our Discord channel](https://discord.gg/opensource) if you have any questions or just want to chat!
 
@@ -85,6 +81,14 @@ That's it!
 The CodeSee Map below is a good way to get familiar with the codebase:
 
 [<img alt="CodeSee Map preview" src="docs/codebase-map.png" width="500">](https://app.codesee.io/maps/public/848e3630-1650-11ec-8bc1-7d4a4822cc27)
+
+## Contributing
+
+First and foremost, all contributors must read and agree to our [code of conduct](https://github.com/Codesee-io/opensourcehub/blob/main/code_of_conduct.md).
+
+Then, the best way to get started is to [create an issue](https://github.com/Codesee-io/opensourcehub/issues) and tag one of the maintainers.
+
+If you're ready to dive into some code, we recommend reading through [the "How this works" document](./docs/how-this-works.md).
 
 ## Content
 

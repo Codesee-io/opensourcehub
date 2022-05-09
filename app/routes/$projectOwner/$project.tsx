@@ -31,7 +31,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   const { projectOwner, project: projectName } = params;
 
   const slug = `${projectOwner}/${projectName}`.toLowerCase();
-  const project = await getProject(slug);
+  const project = getProject(slug);
   const githubData = getGitHubDataForProject(slug);
 
   let featuredMapMetadata: CodeSeeMapMetadata | undefined;
