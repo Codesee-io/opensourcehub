@@ -35,6 +35,11 @@ function getCodeSeeMapIdFromUrl(url: string) {
   return undefined;
 }
 
+/**
+ * Returns metadata for a CodeSee Map. This requires an API token which is
+ * defined in .env.sample. If the token isn't present, this method returns
+ * `undefined`.
+ */
 export async function getCodeSeeMapMetadata(mapUrl: string) {
   const mapId = getCodeSeeMapIdFromUrl(mapUrl);
   if (!mapId) {

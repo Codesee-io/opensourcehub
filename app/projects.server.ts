@@ -1,11 +1,18 @@
 import projects from "./data/projects.json";
 import type { Project, ProjectCategory } from "./types";
 
+/**
+ * Returns a list of projects
+ */
 export function getProjects() {
   return projects as Array<Project>;
 }
 
-export async function getProject(slug: string): Promise<Project | undefined> {
+/**
+ * Returns a project that matches the slug provided, or `undefined` if there's
+ * no match.
+ */
+export function getProject(slug: string): Project | undefined {
   const matchingProject = getProjects().find(
     (project) => project.slug === slug.toLowerCase()
   );
@@ -53,6 +60,10 @@ export function getProjectsMetadata() {
   return { allLanguages, allTags, allSeeking };
 }
 
+/**
+ * Returns a search index of all the projects that can be used by the
+ * `js-search` module.
+ */
 export function generateSearchIndex() {
   return getProjects().map((project) => ({
     slug: project.slug,
