@@ -1,8 +1,8 @@
 {
-  "name": "oss-port",
+  "name": "opensourcehub",
   "version": "1.0.0",
   "private": true,
-  "description": "OSS Port",
+  "description": "Open-Source Hub",
   "author": "Maxime Preaux",
   "license": "MIT",
   "keywords": [

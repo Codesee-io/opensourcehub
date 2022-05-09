@@ -1,10 +1,10 @@
 <p align="center">
-<img src="./docs/mark.png" alt="OSS Port logo" width="60" height="60">
+<img src="./docs/mark.png" alt="Open-Source Hub log" width="60" height="60">
 </p>
 
-<h1 align="center">OSS Port</h1>
+<h1 align="center">Open-Source Hub</h1>
 
-Welcome to OSS Port! This website and community connects open source maintainers and collaborators. Please join [our Discord channel](https://discord.gg/opensource) if you have any questions or just want to chat!
+Welcome to Open-Source Hub! This website and community connects open source maintainers and collaborators. Please join [our Discord channel](https://discord.gg/opensource) if you have any questions or just want to chat!
 
 ## Project setup
 
@@ -15,7 +15,7 @@ Welcome to OSS Port! This website and community connects open source maintainers
 
 **First-time setup:**
 
-1. check out this repository and navigate into it with `cd oss-port`
+1. check out this repository and navigate into it with `cd opensourcehub`
 2. install the dependencies: `yarn`
 
 🚀 When you've completed the setup steps, run the app:
@@ -26,11 +26,11 @@ yarn dev
 
 ### github.dev environment
 
-You can also contribute to OSS Port without having to run the app on your local machine! Go ahead and check out the github.dev steps below.
+You can also contribute to OSH without having to run the app on your local machine! Go ahead and check out the github.dev steps below.
 
 If you have a JavaScript development environment set up already and prefer to run locally, the approach will be familiar.
 
-1. [Create a fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of the OSS Port.
+1. [Create a fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of the OSH.
 1. Once on your fork's page, either press the full stop `.` key or replace `.com` in the location bar in your browser to `.dev`.
 
 Now you're in the github.dev editor! Feel free to hop ahead to [our contributing section](#contributing).
@@ -43,9 +43,9 @@ For more information on the Github.dev editor, please [see their docs](https://d
 1. Create your project's `.mdx` file:
    1. Create a new folder inside `/public/projects/` and name it the same as your GitHub handle or organization
    1. Add a new `.mdx` file to that folder, and give it the name of your public repo. For example,
-      - if your project URl is: `https://github.com/Codesee-io/oss-port`
-      - you would create: `/public/projects/Codesee-io/oss-port.mdx`.
-   1. Copy/paste the contents of [`/app/projects/_template.mdx`](https://raw.githubusercontent.com/Codesee-io/oss-port/main/app/projects/_template.mdx) into that file
+      - if your project URl is: `https://github.com/Codesee-io/opensourcehub`
+      - you would create: `/public/projects/Codesee-io/opensourcehub.mdx`.
+   1. Copy/paste the contents of [`/app/projects/_template.mdx`](https://raw.githubusercontent.com/Codesee-io/opensourcehub/main/app/projects/_template.mdx) into that file
 1. Fill out the information — most of it is optional, but extremely helpful for potential contributors. If you opt not to include the optional content, delete it from your template.
 1. Add a 200x200 image for your organization to your folder, for example, `./app/projects/distributeaid/da.png`
 1. Preview your changes by running `yarn dev`
@@ -90,11 +90,11 @@ The CodeSee Map below is a good way to get familiar with the codebase:
 
 ### Tag policy
 
-Final tags are up to the maintainers of OSS Port. Your tags may be modified for the benefit of the community and to improve discoverability.
+Final tags are up to the maintainers of Open-Source Hub. Your tags may be modified for the benefit of the community and to improve discoverability.
 
 We use title-casing for tags. For example: "First-Timer Friendly, Social Activism, C#, JavaScript".
 
-### How to remove your project from OSS Port
+### How to remove your project from Open-Source Hub
 
 Open a PR to remove your project folder from this repository.
 
