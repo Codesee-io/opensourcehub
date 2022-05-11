@@ -75,16 +75,10 @@ const Login: FC = () => {
   return (
     <RootLayout>
       <main className="px-4 py-12 max-w-2xl text-center mx-auto space-y-4">
-        <h1 className="text-lg">Log in to Open-Source Hub</h1>
         <p className="text-black-400">
           Use your GitHub account to log in and manage your profile.
         </p>
-        <Button
-          onClick={signIn}
-          className="bg-yellow-200 text-black-900 hover:bg-yellow-300 text-sm font-bold py-2 px-4 rounded"
-        >
-          Log in with GitHub
-        </Button>
+        <Button onClick={signIn}>Log in with GitHub</Button>
       </main>
     </RootLayout>
   );

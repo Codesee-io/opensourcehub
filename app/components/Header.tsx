@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Form, Link } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import {
   // HOW_TO_LIST_PROJECT_URL,
   RESOURCES_LINK,
@@ -8,7 +8,7 @@ import {
   // SIGNUP_LINK,
   // LINK_FORMATS,
 } from "../utils/constants";
-import CallToAction from "./CallToAction";
+// import CallToAction from "./CallToAction";
 import NavLink from "./NavLink";
 import logo from "~/images/logo.svg";
 
@@ -50,14 +50,13 @@ const Header: FC = () => (
             </div>
           </NavLink>
         </div>
-        <div>
-          <NavLink to="/login">Log in</NavLink>
-        </div>
+
+        {/* Hide the "Log out" button for now
         <Form method="post" action="/logout">
           <button className="px-3 py-1 supports-hover:hover:bg-blue-900 inline-block rounded">
             Log out
           </button>
-        </Form>
+        </Form> */}
 
         {/* Temporarily hide */}
         {/* <div className="hidden md:block ml-5">
