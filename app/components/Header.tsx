@@ -1,27 +1,23 @@
 import type { FC } from "react";
 import { Link } from "@remix-run/react";
 import {
-  // HOW_TO_LIST_PROJECT_URL,
+  // HOW_TO_LIST_PROJECT_LINK,
   RESOURCES_LINK,
+  ABOUR_LINK,
   DISCORD_LINK,
   // SIGNIN_LINK,
   // SIGNUP_LINK,
   // LINK_FORMATS,
 } from "../utils/constants";
-import CallToAction from "./CallToAction";
+// import CallToAction from "./CallToAction";
 import NavLink from "./NavLink";
-import logo from "~/images/logo.svg";
+import logo from "~/images/logo.png";
 
 const Header: FC = () => (
   <header className="bg-indigo-850 sm:sticky top-0 z-50">
     <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
       <Link to="/" className="block">
-        <img
-          src={logo}
-          alt=""
-          className="my-2"
-          style={{ width: 305, height: 40 }}
-        />
+        <img src={logo} alt="" className="my-2" style={{ height: 35 }} />
       </Link>
       <div className="flex items-center justify-center text-white whitespace-nowrap">
         <div className="hidden sm:block">
@@ -31,7 +27,7 @@ const Header: FC = () => (
           <NavLink to={RESOURCES_LINK}>Learn</NavLink>
         </div>
         <div className="hidden sm:block">
-          <NavLink to="/about/">About</NavLink>
+          <NavLink to={ABOUR_LINK}>About</NavLink>
         </div>
         <div className="hidden sm:block">
           <NavLink to={DISCORD_LINK}>

@@ -2,7 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import RootLayout from "../components/RootLayout";
 import CallToAction from "../components/CallToAction";
 import ExternalLink from "../components/ExternalLink";
-import { HOW_TO_LIST_PROJECT_URL } from "../utils/constants";
+import { HOW_TO_LIST_PROJECT_LINK } from "../utils/constants";
 
 export const meta: MetaFunction = () => ({
   title: "About Open-Source Hub",
@@ -20,7 +20,7 @@ const About = () => {
           on a new codebase.
         </p>
         <CallToAction
-          href={HOW_TO_LIST_PROJECT_URL}
+          href={HOW_TO_LIST_PROJECT_LINK}
           className="mt-6 bg-yellow-200"
         >
           List Your Project
