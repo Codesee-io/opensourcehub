@@ -7,7 +7,7 @@ import type { GitHubData, Project, ProjectCategory } from "~/types";
 import {
   HOW_TO_LIST_PROJECT_URL,
   LINK_FORMATS,
-  SIGNUP_LINK,
+  // SIGNUP_LINK,
 } from "../utils/constants";
 import {
   generateSearchIndex,
@@ -101,11 +101,9 @@ export default function Index() {
         <h1 className="text-yellow-300 font-accent text-3xl lg:text-4xl text-center mb-4">
           Connecting People and Projects
         </h1>
-        <p className="text-white text-center px-2 mb-6 mt-2">
+        <p className="text-white text-center max-w-xl mx-auto mb-6 mt-2 px-2">
           Your next project is waiting to be discovered. Connect with devs
-          across the
-          <br />
-          globe, contribute to open source, and learn something new.
+          across the globe, contribute to open source, and learn something new.
         </p>
 
         <div className="flex items-center justify-center text-center px-2 mt-3">
@@ -115,19 +113,20 @@ export default function Index() {
             target="_blank"
             format={LINK_FORMATS.primary}
             inverse={true}
-            className="mr-5"
           >
             List Your Project
           </CallToAction>
-          <CallToAction
+          {/* Temporarily hide */}
+          {/* <CallToAction
             href={isLoggedIn ? HOW_TO_LIST_PROJECT_URL : SIGNUP_LINK}
             rel="noopener"
             target="_blank"
             format={LINK_FORMATS.secondary}
             inverse={true}
+            className="ml-5"
           >
             Contribute to a project
-          </CallToAction>
+          </CallToAction> */}
         </div>
 
         <div className="header-wave mt-12">
