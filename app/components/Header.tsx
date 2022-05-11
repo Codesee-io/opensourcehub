@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import { Link } from "@remix-run/react";
 import {
-  HOW_TO_LIST_PROJECT_URL,
+  // HOW_TO_LIST_PROJECT_URL,
   RESOURCES_LINK,
   DISCORD_LINK,
-  SIGNIN_LINK,
-  SIGNUP_LINK,
-  LINK_FORMATS,
+  // SIGNIN_LINK,
+  // SIGNUP_LINK,
+  // LINK_FORMATS,
 } from "../utils/constants";
 import CallToAction from "./CallToAction";
 import NavLink from "./NavLink";
@@ -25,7 +25,7 @@ const Header: FC = () => (
       </Link>
       <div className="flex items-center justify-center text-white whitespace-nowrap">
         <div className="hidden sm:block">
-          <NavLink to={HOW_TO_LIST_PROJECT_URL}>Projects</NavLink>
+          <NavLink to={"/"}>Projects</NavLink>
         </div>
         <div className="hidden sm:block">
           <NavLink to={RESOURCES_LINK}>Learn</NavLink>
@@ -51,7 +51,8 @@ const Header: FC = () => (
           </NavLink>
         </div>
 
-        <div className="hidden md:block ml-5">
+        {/* Temporarily hide */}
+        {/* <div className="hidden md:block ml-5">
           <NavLink
             to={SIGNIN_LINK}
             className="text-yellow-300 hover:text-indigo-50"
@@ -65,7 +66,7 @@ const Header: FC = () => (
           >
             Sign up
           </CallToAction>
-        </div>
+        </div> */}
       </div>
     </div>
   </header>
