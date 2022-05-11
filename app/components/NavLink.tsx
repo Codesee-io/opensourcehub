@@ -19,7 +19,7 @@ const NavLink: FunctionComponent<Props> = ({ children, to, className }) => {
         href={to}
         className={cx(
           "px-3 py-1 supports-hover:hover:text-yellow-300 inline-block rounded",
-          className || ""
+          className
         )}
       >
         {children}
@@ -32,7 +32,7 @@ const NavLink: FunctionComponent<Props> = ({ children, to, className }) => {
       to={to}
       className={cx(
         "px-3 py-1 supports-hover:hover:text-yellow-300 inline-block rounded",
-        className || ""
+        className
       )}
     >
       {children}
