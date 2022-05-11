@@ -31,6 +31,16 @@ module.exports = {
           700: "#005495",
           900: "#003f70",
         },
+        indigo: {
+          30: "#f7fafc",
+          50: "#eceaff",
+          400: "#8F80FE",
+          500: "#5F4DE7",
+          850: "#352B90",
+        },
+        violet: {
+          200: "#ddd9ff",
+        },
         aqua: {
           30: "#f7fcfc",
           50: "#e9f7f6",
@@ -47,7 +57,7 @@ module.exports = {
           100: "#ffeea0",
           200: "#ffd978",
           300: "#ffc756",
-          400: "#ffa722",
+          300: "#edda54",
         },
         magenta: {
           500: "#E10079",
