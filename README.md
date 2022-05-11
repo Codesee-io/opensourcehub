@@ -88,7 +88,10 @@ First and foremost, all contributors must read and agree to our [code of conduct
 
 Then, the best way to get started is to [create an issue](https://github.com/Codesee-io/opensourcehub/issues) and tag one of the maintainers.
 
-If you're ready to dive into some code, we recommend reading through [the "How this works" document](./docs/how-this-works.md).
+### Technical documentation
+
+- ["How this works"](./docs/how-this-works.md) explains the architecture of this project
+- Learn [how we use Firebase](./docs/firebase.md)
 
 ## Content
 

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import {
   // HOW_TO_LIST_PROJECT_URL,
   RESOURCES_LINK,
@@ -50,6 +50,14 @@ const Header: FC = () => (
             </div>
           </NavLink>
         </div>
+        <div>
+          <NavLink to="/login">Log in</NavLink>
+        </div>
+        <Form method="post" action="/logout">
+          <button className="px-3 py-1 supports-hover:hover:bg-blue-900 inline-block rounded">
+            Log out
+          </button>
+        </Form>
 
         {/* Temporarily hide */}
         {/* <div className="hidden md:block ml-5">

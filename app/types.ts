@@ -90,3 +90,9 @@ export type CodeSeeMapMetadata = {
   hasPrivateRepos: false;
   thumbnail: string;
 };
+
+export type FirebaseClientConfig = {
+  apiKey: string;
+  authDomain: string;
+  projectId: string;
+};
