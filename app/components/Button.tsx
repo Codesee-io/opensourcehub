@@ -1,16 +1,25 @@
-import React, { ButtonHTMLAttributes, FunctionComponent } from "react";
+import { ButtonHTMLAttributes, FunctionComponent } from "react";
 import cx from "classnames";
+import { linkStyle } from "~/utils/linkStyle";
 
-const Button: FunctionComponent<ButtonHTMLAttributes<HTMLButtonElement>> = ({
+type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+  format?: string;
+  inverse?: boolean;
+};
+
+const Button: FunctionComponent<Props> = ({
   children,
   type = "button",
   className,
+  format,
+  inverse,
   ...otherProps
 }) => {
   return (
     <button
       className={cx(
-        "bg-yellow-200 text-black-500 supports-hover:hover:bg-yellow-300 rounded px-8 py-1 font-semibold",
+        "rounded-lg px-8 py-1 font-semibold",
+        linkStyle({ format, inverse }),
         className
       )}
       type={type}
