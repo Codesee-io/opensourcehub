@@ -1,19 +1,31 @@
-import React, { AnchorHTMLAttributes, FunctionComponent } from "react";
+import { AnchorHTMLAttributes, FunctionComponent } from "react";
 import cx from "classnames";
+import { linkStyle } from "~/utils/linkStyle";
 
-const CallToAction: FunctionComponent<AnchorHTMLAttributes<HTMLAnchorElement>> =
-  ({ children, className, ...otherProps }) => {
-    return (
-      <a
-        className={cx(
-          "bg-yellow-200 text-black-500 supports-hover:hover:bg-yellow-300 rounded px-8 py-2 font-semibold",
-          className
-        )}
-        {...otherProps}
-      >
-        {children}
-      </a>
-    );
-  };
+type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  format?: string;
+  inverse?: boolean;
+};
+
+const CallToAction: FunctionComponent<Props> = ({
+  children,
+  className,
+  format,
+  inverse,
+  ...otherProps
+}) => {
+  return (
+    <a
+      className={cx(
+        "rounded-lg px-8 py-2 font-semibold",
+        linkStyle({ format, inverse }),
+        className
+      )}
+      {...otherProps}
+    >
+      {children}
+    </a>
+  );
+};
 
 export default CallToAction;
