@@ -4,7 +4,11 @@ import { useLoaderData } from "@remix-run/react";
 import { useMemo, useState } from "react";
 
 import type { GitHubData, Project, ProjectCategory } from "~/types";
-import { HOW_TO_LIST_PROJECT_URL } from "../utils/constants";
+import {
+  HOW_TO_LIST_PROJECT_URL,
+  LINK_FORMATS,
+  SIGNUP_LINK,
+} from "../utils/constants";
 import {
   generateSearchIndex,
   getProjects,
@@ -18,11 +22,16 @@ import SidebarWithFilters from "~/components/SidebarWithFilters";
 import ToggleFiltersButton from "~/components/ToggleFiltersButton";
 import CallToAction from "~/components/CallToAction";
 import RootLayout from "~/components/RootLayout";
+import Wave from "~/images/Wave";
 
+import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
 
 export function links() {
-  return [{ rel: "stylesheet", href: projectsStyles }];
+  return [
+    { rel: "stylesheet", href: headerStyles },
+    { rel: "stylesheet", href: projectsStyles },
+  ];
 }
 
 export const meta: MetaFunction = () => ({
@@ -76,6 +85,7 @@ export default function Index() {
   } = useLoaderData<LoaderData>();
 
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const tags = useMemo(() => {
     return {
@@ -87,25 +97,44 @@ export default function Index() {
 
   return (
     <RootLayout>
-      <div className="max-w-7xl mx-auto pt-12 px-2">
-        <h1 className="text-black-500 font-accent text-3xl lg:text-4xl text-center mb-4">
-          Welcome to Open-Source Hub
+      <div className="banner-bg mx-auto pt-12 md:pt-24 mb-12">
+        <h1 className="text-yellow-300 font-accent text-3xl lg:text-4xl text-center mb-4">
+          Connecting People and Projects
         </h1>
-        <p className="text-black-500 text-center mb-6 mt-2">
-          Connecting 100,000+ potential contributors with maintainers.
+        <p className="text-white text-center px-2 mb-6 mt-2">
+          Your next project is waiting to be discovered. Connect with devs
+          across the
           <br />
-          Helping all onboard better.
+          globe, contribute to open source, and learn something new.
         </p>
+
+        <div className="flex items-center justify-center text-center px-2 mt-3">
+          <CallToAction
+            href={HOW_TO_LIST_PROJECT_URL}
+            rel="noopener"
+            target="_blank"
+            format={LINK_FORMATS.primary}
+            inverse={true}
+            className="mr-5"
+          >
+            List Your Project
+          </CallToAction>
+          <CallToAction
+            href={isLoggedIn ? HOW_TO_LIST_PROJECT_URL : SIGNUP_LINK}
+            rel="noopener"
+            target="_blank"
+            format={LINK_FORMATS.secondary}
+            inverse={true}
+          >
+            Contribute to a project
+          </CallToAction>
+        </div>
+
+        <div className="header-wave mt-12">
+          <Wave />
+        </div>
       </div>
-      <div className="mb-6 text-center">
-        <CallToAction
-          href={HOW_TO_LIST_PROJECT_URL}
-          rel="noopener"
-          target="_blank"
-        >
-          List Your Project
-        </CallToAction>
-      </div>
+
       <SearchWrapper searchIndex={searchIndex} allProjects={projects}>
         <div className="max-w-5xl space-x-4 flex justify-center mx-auto px-2 mb-4">
           <SearchInput />
