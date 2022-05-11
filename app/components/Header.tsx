@@ -1,16 +1,19 @@
 import type { FC } from "react";
 import { Link } from "@remix-run/react";
 import {
-  HOW_TO_LIST_PROJECT_URL,
+  // HOW_TO_LIST_PROJECT_URL,
   RESOURCES_LINK,
   DISCORD_LINK,
+  // SIGNIN_LINK,
+  // SIGNUP_LINK,
+  // LINK_FORMATS,
 } from "../utils/constants";
 import CallToAction from "./CallToAction";
 import NavLink from "./NavLink";
-import logo from "~/images/logo_white.png";
+import logo from "~/images/logo.svg";
 
 const Header: FC = () => (
-  <header className="bg-blue-700 sm:sticky top-0 z-50">
+  <header className="bg-indigo-850 sm:sticky top-0 z-50">
     <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
       <Link to="/" className="block">
         <img
@@ -22,7 +25,10 @@ const Header: FC = () => (
       </Link>
       <div className="flex items-center justify-center text-white whitespace-nowrap">
         <div className="hidden sm:block">
-          <NavLink to={RESOURCES_LINK}>Resources</NavLink>
+          <NavLink to={"/"}>Projects</NavLink>
+        </div>
+        <div className="hidden sm:block">
+          <NavLink to={RESOURCES_LINK}>Learn</NavLink>
         </div>
         <div className="hidden sm:block">
           <NavLink to="/about/">About</NavLink>
@@ -30,7 +36,7 @@ const Header: FC = () => (
         <div className="hidden sm:block">
           <NavLink to={DISCORD_LINK}>
             <div className="flex">
-              Join Us
+              Discord
               <img
                 src="/icon_clyde_white_RGB.png"
                 alt=""
@@ -45,15 +51,22 @@ const Header: FC = () => (
           </NavLink>
         </div>
 
-        <div className="hidden md:block ml-5">
-          <CallToAction
-            href={HOW_TO_LIST_PROJECT_URL}
-            rel="noopener"
-            target="_blank"
+        {/* Temporarily hide */}
+        {/* <div className="hidden md:block ml-5">
+          <NavLink
+            to={SIGNIN_LINK}
+            className="text-yellow-300 hover:text-indigo-50"
           >
-            List Your Project
+            Sign in
+          </NavLink>
+          <CallToAction
+            href={SIGNUP_LINK}
+            format={LINK_FORMATS.secondary}
+            inverse={true}
+          >
+            Sign up
           </CallToAction>
-        </div>
+        </div> */}
       </div>
     </div>
   </header>
