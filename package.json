@@ -18,7 +18,8 @@
     "start": "remix-serve build",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev:firebase": "npx firebase emulators:start --project development --only auth --import seed"
+    "dev:firebase": "npx firebase emulators:start --project development --only auth --import seed",
+    "postinstall": "node scripts/post-install.js"
   },
   "dependencies": {
     "@mdx-js/react": "1.6.22",
