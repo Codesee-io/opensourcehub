@@ -13,8 +13,9 @@ Welcome to Open-Source Hub! This website and community connects open source main
 
 1. check out this repository and navigate into it with `cd opensourcehub`
 2. install the dependencies: `yarn`
+3. copy the contents of `.env.sample` to a `.env` file
 
-🚀 When you've completed the setup steps, run the app:
+🚀 When you've completed these steps, run the app:
 
 ```
 yarn dev
@@ -88,7 +89,10 @@ First and foremost, all contributors must read and agree to our [code of conduct
 
 Then, the best way to get started is to [create an issue](https://github.com/Codesee-io/opensourcehub/issues) and tag one of the maintainers.
 
-If you're ready to dive into some code, we recommend reading through [the "How this works" document](./docs/how-this-works.md).
+### Technical documentation
+
+- ["How this works"](./docs/how-this-works.md) explains the architecture of this project
+- Learn [how we use Firebase](./docs/firebase.md)
 
 ## Content
 

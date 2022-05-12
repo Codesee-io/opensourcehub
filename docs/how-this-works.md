@@ -16,6 +16,7 @@ Open-Source Hub is built with [Remix](https://remix.run), a server-side framewor
 | `public`          | Files that will be uploaded to the root of the website                                                                          |
 | `public/build`    | Remix stores the build output here. This isn't stored in source control.                                                        |
 | `public/projects` | All the user-generated projects are stored here                                                                                 |
+| `seed`            | Seed data for Firebase authentication and database                                                                              |
 | `styles`          | CSS files processed by PostCSS                                                                                                  |
 
 **Naming conventions:**

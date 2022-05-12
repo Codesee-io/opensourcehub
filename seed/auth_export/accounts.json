@@ -1,0 +1,65 @@
+{
+  "kind": "identitytoolkit#DownloadAccountResponse",
+  "users": [
+    {
+      "localId": "PgwL4o3w29wLRLPjKeVvk50tySeG",
+      "createdAt": "1652306563702",
+      "lastLoginAt": "1652306563702",
+      "displayName": "Raccoon Otter",
+      "screenName": "otter_raccoon",
+      "email": "raccoon.otter.851@example.com",
+      "emailVerified": true,
+      "providerUserInfo": [
+        {
+          "providerId": "github.com",
+          "rawId": "1682759284872527121678398696837361119341",
+          "federatedId": "1682759284872527121678398696837361119341",
+          "displayName": "Raccoon Otter",
+          "email": "raccoon.otter.851@example.com",
+          "screenName": "otter_raccoon"
+        }
+      ],
+      "lastRefreshAt": "2022-05-11T22:02:43.702Z"
+    },
+    {
+      "localId": "cu1wG3bBZhD9etuLeyQuucoRoSUc",
+      "createdAt": "1652306525843",
+      "lastLoginAt": "1652306525843",
+      "displayName": "Algae Mountain",
+      "screenName": "mountain_algae",
+      "email": "algae.mountain.228@example.com",
+      "emailVerified": true,
+      "providerUserInfo": [
+        {
+          "providerId": "github.com",
+          "rawId": "1394650563352539753864499375605540101442",
+          "federatedId": "1394650563352539753864499375605540101442",
+          "displayName": "Algae Mountain",
+          "email": "algae.mountain.228@example.com",
+          "screenName": "mountain_algae"
+        }
+      ],
+      "lastRefreshAt": "2022-05-11T22:02:05.843Z"
+    },
+    {
+      "localId": "hhD8xz8isgOBdMJephfJ8IGkD4OK",
+      "createdAt": "1652306722902",
+      "lastLoginAt": "1652306722902",
+      "displayName": "Panda Cactus",
+      "screenName": "spiky_panda",
+      "email": "spiky.panda.555@example.com",
+      "emailVerified": true,
+      "providerUserInfo": [
+        {
+          "providerId": "github.com",
+          "rawId": "4662305867274684130502059498543973079887",
+          "federatedId": "4662305867274684130502059498543973079887",
+          "displayName": "Panda Cactus",
+          "email": "spiky.panda.555@example.com",
+          "screenName": "spiky_panda"
+        }
+      ],
+      "lastRefreshAt": "2022-05-11T22:05:22.902Z"
+    }
+  ]
+}
