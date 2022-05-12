@@ -11,10 +11,12 @@ import {
 } from "@remix-run/react";
 
 import tailwindStyles from "./styles/index.css";
+import gradientStyles from "~/styles/gradient.css";
 
 export function links() {
   return [
     { rel: "stylesheet", href: tailwindStyles },
+    { rel: "stylesheet", href: gradientStyles },
     {
       rel: "icon",
       href: "/favicon.png",

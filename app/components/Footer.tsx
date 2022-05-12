@@ -9,19 +9,13 @@ import {
   // SIGNIN_LINK,
   // SIGNUP_LINK,
   LINK_FORMATS,
-  ABOUR_LINK,
+  ABOUT_LINK,
 } from "~/utils/constants";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
 import logo from "~/images/logo.png";
 
-import gradientStyles from "~/styles/gradient.css";
-
-export function links() {
-  return [{ rel: "stylesheet", href: gradientStyles }];
-}
-
 const Footer: FC = () => (
-  <footer className="bg-graident text-black-400 px-4 py-10">
+  <footer className="bg-gradient text-black-400 px-4 py-10">
     <Link to="/" className="block">
       <img src={logo} alt="" className="my-2 mx-auto" style={{ height: 35 }} />
     </Link>
@@ -65,7 +59,7 @@ const Footer: FC = () => (
       </a>
       <a
         className="supports-hover:hover:text-yellow-300 ml-1"
-        href={ABOUR_LINK}
+        href={ABOUT_LINK}
         target="_blank"
         rel="noreferrer"
       >
