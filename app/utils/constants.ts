@@ -1,10 +1,10 @@
-export const HOW_TO_LIST_PROJECT_URL =
+export const HOW_TO_LIST_PROJECT_LINK =
   "https://github.com/codesee-io/opensourcehub";
 
 export const DISCORD_LINK = "https://discord.gg/JbAChX3a3a";
-
-export const RESOURCES_LINK = "/resources/";
-export const REPO_URL = "https://github.com/Codesee-io/opensourcehub";
+export const ABOUT_LINK = "/about";
+export const RESOURCES_LINK = "/resources";
+export const REPO_LINK = "https://github.com/Codesee-io/opensourcehub";
 
 // Auth Link
 export const SIGNIN_LINK = "/login";

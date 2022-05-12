@@ -1,0 +1,15 @@
+.bg-gradient {
+  background: radial-gradient(
+        21.43% 66.26% at 2.91% 100%,
+        rgba(95, 77, 231, 0.4) 0%,
+        rgba(179, 158, 248, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        59.92% 399.61% at 109.92% 5.11%,
+        rgba(85, 124, 242, 0.6) 0%,
+        rgba(95, 77, 231, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    #1b145f;
+}

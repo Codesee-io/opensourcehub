@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 
 import type { GitHubData, Project, ProjectCategory } from "~/types";
 import {
-  HOW_TO_LIST_PROJECT_URL,
+  HOW_TO_LIST_PROJECT_LINK,
   LINK_FORMATS,
   // SIGNUP_LINK,
 } from "../utils/constants";
@@ -24,11 +24,13 @@ import CallToAction from "~/components/CallToAction";
 import RootLayout from "~/components/RootLayout";
 import Wave from "~/images/Wave";
 
+import gradientStyles from "~/styles/gradient.css";
 import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
 
 export function links() {
   return [
+    { rel: "stylesheet", href: gradientStyles },
     { rel: "stylesheet", href: headerStyles },
     { rel: "stylesheet", href: projectsStyles },
   ];
@@ -97,7 +99,7 @@ export default function Index() {
 
   return (
     <RootLayout>
-      <div className="banner-bg mx-auto pt-12 md:pt-24 mb-12">
+      <div className="bg-gradient mx-auto pt-12 md:pt-24 mb-12">
         <h1 className="text-yellow-300 font-accent text-3xl lg:text-4xl text-center mb-4">
           Connecting People and Projects
         </h1>
@@ -108,7 +110,7 @@ export default function Index() {
 
         <div className="flex items-center justify-center text-center px-2 mt-3">
           <CallToAction
-            href={HOW_TO_LIST_PROJECT_URL}
+            href={HOW_TO_LIST_PROJECT_LINK}
             rel="noopener"
             target="_blank"
             format={LINK_FORMATS.primary}
@@ -118,7 +120,7 @@ export default function Index() {
           </CallToAction>
           {/* Temporarily hide */}
           {/* <CallToAction
-            href={isLoggedIn ? HOW_TO_LIST_PROJECT_URL : SIGNUP_LINK}
+            href={isLoggedIn ? HOW_TO_LIST_PROJECT_LINK : SIGNUP_LINK}
             rel="noopener"
             target="_blank"
             format={LINK_FORMATS.secondary}
