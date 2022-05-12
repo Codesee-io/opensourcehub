@@ -13,8 +13,9 @@ Welcome to Open-Source Hub! This website and community connects open source main
 
 1. check out this repository and navigate into it with `cd opensourcehub`
 2. install the dependencies: `yarn`
+3. copy the contents of `.env.sample` to a `.env` file
 
-🚀 When you've completed the setup steps, run the app:
+🚀 When you've completed these steps, run the app:
 
 ```
 yarn dev
