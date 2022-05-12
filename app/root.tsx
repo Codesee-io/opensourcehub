@@ -22,11 +22,6 @@ export function links() {
       href: "/favicon.png",
       type: "image/png",
     },
-    {
-      rel: "icon",
-      href: "/favicon.svg",
-      type: "image/svg+xml",
-    },
   ];
 }
 
