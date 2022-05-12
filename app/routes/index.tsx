@@ -99,7 +99,7 @@ export default function Index() {
 
   return (
     <RootLayout>
-      <div className="bg-graident mx-auto pt-12 md:pt-24 mb-12">
+      <div className="bg-gradient mx-auto pt-12 md:pt-24 mb-12">
         <h1 className="text-yellow-300 font-accent text-3xl lg:text-4xl text-center mb-4">
           Connecting People and Projects
         </h1>

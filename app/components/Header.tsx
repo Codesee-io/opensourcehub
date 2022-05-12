@@ -3,7 +3,7 @@ import { Link } from "@remix-run/react";
 import {
   // HOW_TO_LIST_PROJECT_LINK,
   RESOURCES_LINK,
-  ABOUR_LINK,
+  ABOUT_LINK,
   DISCORD_LINK,
   // SIGNIN_LINK,
   // SIGNUP_LINK,
@@ -27,7 +27,7 @@ const Header: FC = () => (
           <NavLink to={RESOURCES_LINK}>Learn</NavLink>
         </div>
         <div className="hidden sm:block">
-          <NavLink to={ABOUR_LINK}>About</NavLink>
+          <NavLink to={ABOUT_LINK}>About</NavLink>
         </div>
         <div className="hidden sm:block">
           <NavLink to={DISCORD_LINK}>
