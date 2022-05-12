@@ -37,7 +37,6 @@ export async function getCurrentUser(session: Session) {
 
   const error = session.get("error");
   if (error) {
-    console.log("~~ we have an error!", error);
     throw new Error(error);
   }
 
@@ -45,6 +44,11 @@ export async function getCurrentUser(session: Session) {
     return null;
   }
 
-  const decodedClaims = await auth.verifyIdToken(idToken);
-  return decodedClaims;
+  try {
+    const decodedClaims = await auth.verifyIdToken(idToken);
+    return decodedClaims;
+  } catch (err) {
+    // The session isn't valid anymore so return undefined
+    return null;
+  }
 }

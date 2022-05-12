@@ -1,36 +1,14 @@
-import { json, redirect, Session } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
 import type { FC } from "react";
-import { commitSession, destroySession, getSession } from "~/session.server";
+import {
+  commitSession,
+  destroySession,
+  getCurrentUser,
+  getSession,
+} from "~/session.server";
 import { useLoaderData } from "@remix-run/react";
 import RootLayout from "~/components/RootLayout";
-import { auth } from "~/firebase.server";
-
-/**
- * Returns the user that's currently logged in, or null if there is none.
- *
- * @see https://firebase.google.com/docs/auth/admin/verify-id-tokens#web
- */
-export async function getCurrentUser(session: Session) {
-  const idToken = session.get("idToken");
-
-  const error = session.get("error");
-  if (error) {
-    throw new Error(error);
-  }
-
-  if (typeof idToken !== "string") {
-    return null;
-  }
-
-  try {
-    const decodedClaims = await auth.verifyIdToken(idToken);
-    return decodedClaims;
-  } catch (err) {
-    // The session isn't valid anymore so return undefined
-    return null;
-  }
-}
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
