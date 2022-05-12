@@ -96,3 +96,9 @@ export type FirebaseClientConfig = {
   authDomain: string;
   projectId: string;
 };
+
+export type User = {
+  displayName: string;
+  avatar?: string;
+  email?: string;
+};

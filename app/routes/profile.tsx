@@ -9,6 +9,7 @@ import {
 } from "~/session.server";
 import { useLoaderData } from "@remix-run/react";
 import RootLayout from "~/components/RootLayout";
+import { User } from "~/types";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
@@ -33,12 +34,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json(data, {
     headers: { "Set-Cookie": await commitSession(session) },
   });
-};
-
-type User = {
-  displayName: string;
-  avatar?: string;
-  email?: string;
 };
 
 const Profile: FC = () => {
