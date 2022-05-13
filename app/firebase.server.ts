@@ -7,11 +7,11 @@ import {
   ServiceAccount,
 } from "firebase-admin/app";
 import { getAuth, Auth } from "firebase-admin/auth";
-// import { getFirestore, Firestore } from "firebase-admin/firestore";
+import { getFirestore, Firestore } from "firebase-admin/firestore";
 
 let app: App;
 let auth: Auth;
-// let db: Firestore;
+let db: Firestore;
 
 const apiKey = process.env.FIREBASE_CLIENT_API_KEY;
 const authDomain = process.env.FIREBASE_CLIENT_AUTH_DOMAIN;
@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 auth = getAuth(app);
-// db = getFirestore(app);
+db = getFirestore(app);
 
 /**
  * The minimum Firebase configuration required to log in through GitHub on the
@@ -61,4 +61,4 @@ function getFirebaseClientConfig() {
   };
 }
 
-export { app, auth, /* db, */ getFirebaseClientConfig };
+export { app, auth, db, getFirebaseClientConfig };

@@ -1,5 +1,8 @@
+import { Octokit } from "@octokit/rest";
 import { createCookieSessionStorage, Session } from "@remix-run/node";
+import { DecodedIdToken } from "firebase-admin/auth";
 import { auth } from "./firebase.server";
+import { User } from "./types";
 
 const sessionCookieSecret = process.env.SESSION_COOKIE_SECRET;
 if (!sessionCookieSecret) {
@@ -32,8 +35,9 @@ export { getSession, commitSession, destroySession };
  *
  * @see https://firebase.google.com/docs/auth/admin/verify-id-tokens#web
  */
-export async function getCurrentUser(session: Session) {
+export async function getCurrentUser(session: Session): Promise<User | null> {
   const idToken = session.get("idToken");
+  const accessToken = session.get("accessToken");
 
   const error = session.get("error");
   if (error) {
@@ -44,11 +48,30 @@ export async function getCurrentUser(session: Session) {
     return null;
   }
 
+  let decodedClaims: DecodedIdToken | undefined;
+
   try {
-    const decodedClaims = await auth.verifyIdToken(idToken);
-    return decodedClaims;
+    decodedClaims = await auth.verifyIdToken(idToken);
   } catch (err) {
     // The session isn't valid anymore so return undefined
     return null;
   }
+
+  // We use the accessToken to fetch the user from GitHub. This is required
+  // because it's the only way to get the "login" field! However, we could
+  // probably save it once we've fetched it once.
+  const octokit = new Octokit({
+    auth: accessToken,
+  });
+  const { data: githubUserData } = await octokit.request("GET /user");
+
+  const user: User = {
+    uid: decodedClaims.uid,
+    githubLogin: githubUserData.login,
+    displayName: decodedClaims.name,
+    avatar: decodedClaims.picture || githubUserData.avatar_url,
+    email: decodedClaims.email || githubUserData.email || undefined,
+  };
+
+  return user;
 }

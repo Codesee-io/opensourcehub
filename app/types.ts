@@ -98,7 +98,21 @@ export type FirebaseClientConfig = {
 };
 
 export type User = {
+  uid: string;
+  githubLogin: string;
   displayName: string;
   avatar?: string;
   email?: string;
+};
+
+export type UserProfile = {
+  userUid: string;
+  displayName: string;
+  twitterUrl?: string;
+  linkedinUrl?: string;
+  githubUrl?: string;
+  pictureUrl?: string;
+  // TODO techInterests
+  // TODO subjectInterests
+  // TODO contributionInterests
 };

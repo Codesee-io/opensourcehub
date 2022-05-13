@@ -14,7 +14,7 @@ import NavLink from "./NavLink";
 import logo from "~/images/logo.png";
 
 const Header: FC = () => (
-  <header className="bg-indigo-850 sm:sticky top-0 z-50">
+  <header className="bg-indigo-850 sm:sticky top-0 z-40">
     <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
       <Link to="/" className="block">
         <img src={logo} alt="" className="my-2" style={{ height: 35 }} />

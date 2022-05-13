@@ -5,6 +5,7 @@ import { destroySession, getSession } from "~/session.server";
 export const action: ActionFunction = async ({ request }) => {
   let session = await getSession(request.headers.get("Cookie"));
   session.unset("idToken");
+  session.unset("accessToken");
 
   return redirect("/", {
     headers: { "Set-Cookie": await destroySession(session) },

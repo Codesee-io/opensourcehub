@@ -19,7 +19,8 @@
           "screenName": "otter_raccoon"
         }
       ],
-      "lastRefreshAt": "2022-05-11T22:02:43.702Z"
+      "lastRefreshAt": "2022-05-11T22:02:43.702Z",
+      "photoUrl": "https://picsum.photos/id/1025/400/400"
     },
     {
       "localId": "cu1wG3bBZhD9etuLeyQuucoRoSUc",
@@ -39,7 +40,8 @@
           "screenName": "mountain_algae"
         }
       ],
-      "lastRefreshAt": "2022-05-11T22:02:05.843Z"
+      "lastRefreshAt": "2022-05-11T22:02:05.843Z",
+      "photoUrl": "https://picsum.photos/id/40/400/400"
     },
     {
       "localId": "hhD8xz8isgOBdMJephfJ8IGkD4OK",
@@ -59,7 +61,8 @@
           "screenName": "spiky_panda"
         }
       ],
-      "lastRefreshAt": "2022-05-11T22:05:22.902Z"
+      "lastRefreshAt": "2022-05-11T22:05:22.902Z",
+      "photoUrl": "https://picsum.photos/id/1062/400/400"
     }
   ]
 }
