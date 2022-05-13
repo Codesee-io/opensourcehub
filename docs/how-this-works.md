@@ -92,6 +92,16 @@ To access that data, use the `getGitHubData()` and `getGitHubDataForProject()` m
 
 Check out `app/utils/github-data.ts` to understand how we gather this data.
 
+### How to fetch data from GitHub
+
+You'll need to generate an token to access the GitHub API.
+
+1. Visit https://github.com/settings/tokens
+2. Generate a new token (it doesn't need any scopes)
+3. Add an environment variable called `GITHUB_PERSONAL_ACCESS_TOKEN=<your_token>` to the `.env` file
+4. Run `yarn dev` again. This will iterate over all the projects and export data to `app/data/github.json`
+5. Once you've done this once, we recommend removing the variable to avoid slow start times.
+
 ### CodeSee Maps
 
 Each project can display a featured CodeSee Map using the `featuredMap` field in the frontmatter:
