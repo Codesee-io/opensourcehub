@@ -2,12 +2,7 @@ import { Search } from "js-search";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SearchResultsProvider } from "./SearchResultsContext";
 import { SelectOption, Project } from "../../types";
-import {
-  OPTION_MOST_ACTIVE,
-  OPTION_MOST_OPEN_ISSUES,
-  OPTION_MOST_POPULARITY,
-  SORT_OPTIONS,
-} from "~/utils/constants";
+import { SORT_OPTIONS } from "~/utils/constants";
 
 export type SearchIndexItem = {
   id: string;
@@ -78,18 +73,17 @@ const SearchWrapper: FunctionComponent<Props> = ({
     updateSearchResults(filters.search, []);
   };
 
-  const setSortOption = (option: SelectOption) => {
-    updateSearchResults(filters.search, filters.tags, option);
+  const setSortOption = (sortOption: SelectOption) => {
+    setFilters({
+      ...filters,
+      sortOption,
+    });
   };
 
   /**
    * Perform the search and cache the results
    */
-  const updateSearchResults = (
-    newSearchValue: string,
-    newTags: string[],
-    sortOption: SelectOption = SORT_OPTIONS[0]
-  ) => {
+  const updateSearchResults = (newSearchValue: string, newTags: string[]) => {
     // Filter projects
     let filteredProjects = [...allProjects];
 
@@ -124,23 +118,12 @@ const SearchWrapper: FunctionComponent<Props> = ({
       );
     }
 
-    if (sortOption.value === OPTION_MOST_OPEN_ISSUES) {
-      // Sort projects by most popularity
-      // filteredProjects = filteredProjects.sort()
-    } else if (sortOption.value === OPTION_MOST_ACTIVE) {
-      // Sort projects by most popularity
-      // filteredProjects = filteredProjects.sort()
-    } else if (sortOption.value === OPTION_MOST_POPULARITY) {
-      // Sort projects by most popularity
-      // filteredProjects = filteredProjects.sort()
-    }
-
     // Update the state
     setFilteredProjectSlugs(filteredProjects.map((project) => project.slug));
     setFilters({
       search: newSearchValue,
       tags: newTags,
-      sortOption,
+      sortOption: filters.sortOption,
     });
   };
 

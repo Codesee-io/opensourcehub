@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 import type { graphql } from "@octokit/graphql/dist-types/types";
 import { getInfoFromGitHubUrl } from "./getInfoFromGitHubUrl";
 import type { GitHubData, GitHubIssueData } from "../types";
@@ -92,7 +93,6 @@ function repoInfoQuery(githubAPI: graphql, owner: string, repoName: string) {
           }
         }
         issues(
-          labels: ["help wanted", "hacktoberfest"]
           states: OPEN
           orderBy: {field: CREATED_AT, direction: DESC}
           first: 10
@@ -198,6 +198,17 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
       }
     });
 
+    const contributors = await fetch(
+      `https://api.github.com/repos/${owner}/${repoName}/contributors`,
+      {
+        headers: {
+          accept: "application/vnd.github.v3+json",
+          authorization: `token ${process.env.GITHUB_PERSONAL_ACCESS_TOKEN}`,
+        },
+      }
+    );
+    const totalContributors = (await contributors.json()) as Array<any>;
+
     const githubData: GitHubData = {
       prsMerged: {
         count: mergedThisMonth,
@@ -207,10 +218,12 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
         count: 0,
         maybeMore: thereMayBeMoreCreatedData,
       },
+      totalContributors: (totalContributors || []).length,
       contributors: {
         count: contributorsThisMonth.size,
         maybeMore: thereMayBeMoreMergeData || thereMayBeMoreCreatedData,
       },
+      totalOpenIssues: issues.totalCount,
       helpIssues: issues.nodes.filter((issue) =>
         issue.labels.nodes.some((i) => i.name === "help wanted")
       ),

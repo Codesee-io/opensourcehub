@@ -65,7 +65,9 @@ export type GitHubMetric = {
 export type GitHubData = {
   prsMerged: GitHubMetric;
   prsCreated: GitHubMetric;
+  totalContributors: number;
   contributors: GitHubMetric;
+  totalOpenIssues: number;
   helpIssues: GitHubIssueData[];
   hacktoberfestIssues: GitHubIssueData[];
 };
