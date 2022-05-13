@@ -36,6 +36,7 @@
     "js-search": "2.0.0",
     "markdown-it": "^13.0.1",
     "markdown-it-emoji": "^2.0.2",
+    "node-fetch": "2.6.7",
     "postcss": "^8.4.13",
     "postcss-cli": "^9.1.0",
     "postcss-import": "^14.1.0",
