@@ -1,3 +1,5 @@
+import { SelectOption } from "~/types";
+
 export const HOW_TO_LIST_PROJECT_LINK =
   "https://github.com/codesee-io/opensourcehub";
 
@@ -16,3 +18,13 @@ export const LINK_FORMATS = {
   secondary: "secondary",
   custom: "custom",
 };
+
+// Project sort options
+export const OPTION_MOST_OPEN_ISSUES = "most_open_issues";
+export const OPTION_MOST_ACTIVE = "most_active";
+export const OPTION_MOST_POPULARITY = "most_popularity";
+export const SORT_OPTIONS: SelectOption[] = [
+  { label: "Sort by: Most open issues", value: OPTION_MOST_OPEN_ISSUES },
+  { label: "Sort by: Most active", value: OPTION_MOST_ACTIVE },
+  { label: "Sort by: Most popularity", value: OPTION_MOST_POPULARITY },
+];
