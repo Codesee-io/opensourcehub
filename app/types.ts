@@ -90,3 +90,5 @@ export type CodeSeeMapMetadata = {
   hasPrivateRepos: false;
   thumbnail: string;
 };
+
+export type SelectOption = { label: string; value: string };
