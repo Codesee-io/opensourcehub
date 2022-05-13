@@ -1,7 +1,13 @@
 import { Search } from "js-search";
-import React, { FunctionComponent, useEffect, useRef, useState } from "react";
-import { Project } from "../../types";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SearchResultsProvider } from "./SearchResultsContext";
+import { SelectOption, Project } from "../../types";
+import {
+  OPTION_MOST_ACTIVE,
+  OPTION_MOST_OPEN_ISSUES,
+  OPTION_MOST_POPULARITY,
+  SORT_OPTIONS,
+} from "~/utils/constants";
 
 export type SearchIndexItem = {
   id: string;
@@ -18,6 +24,7 @@ type Props = {
 type Filters = {
   search: string;
   tags: string[];
+  sortOption: SelectOption;
 };
 
 const SearchWrapper: FunctionComponent<Props> = ({
@@ -28,6 +35,7 @@ const SearchWrapper: FunctionComponent<Props> = ({
   const [filters, setFilters] = useState<Filters>({
     search: "",
     tags: [],
+    sortOption: SORT_OPTIONS[0],
   });
 
   const projectSearch = useRef<Search>();
@@ -70,10 +78,18 @@ const SearchWrapper: FunctionComponent<Props> = ({
     updateSearchResults(filters.search, []);
   };
 
+  const setSortOption = (option: SelectOption) => {
+    updateSearchResults(filters.search, filters.tags, option);
+  };
+
   /**
    * Perform the search and cache the results
    */
-  const updateSearchResults = (newSearchValue: string, newTags: string[]) => {
+  const updateSearchResults = (
+    newSearchValue: string,
+    newTags: string[],
+    sortOption: SelectOption = SORT_OPTIONS[0]
+  ) => {
     // Filter projects
     let filteredProjects = [...allProjects];
 
@@ -99,9 +115,8 @@ const SearchWrapper: FunctionComponent<Props> = ({
     }
 
     if (newSearchValue.length > 0) {
-      const searchProjects = projectSearch.current.search(
-        newSearchValue
-      ) as Project[];
+      const searchProjects =
+        (projectSearch.current?.search(newSearchValue) as Project[]) || [];
 
       const matchingSlugs = searchProjects.map((project) => project.slug);
       filteredProjects = filteredProjects.filter((project) =>
@@ -109,11 +124,23 @@ const SearchWrapper: FunctionComponent<Props> = ({
       );
     }
 
+    if (sortOption.value === OPTION_MOST_OPEN_ISSUES) {
+      // Sort projects by most popularity
+      // filteredProjects = filteredProjects.sort()
+    } else if (sortOption.value === OPTION_MOST_ACTIVE) {
+      // Sort projects by most popularity
+      // filteredProjects = filteredProjects.sort()
+    } else if (sortOption.value === OPTION_MOST_POPULARITY) {
+      // Sort projects by most popularity
+      // filteredProjects = filteredProjects.sort()
+    }
+
     // Update the state
     setFilteredProjectSlugs(filteredProjects.map((project) => project.slug));
     setFilters({
       search: newSearchValue,
       tags: newTags,
+      sortOption,
     });
   };
 
@@ -122,9 +149,11 @@ const SearchWrapper: FunctionComponent<Props> = ({
       value={{
         searchByText: performSearch,
         filterByTag,
+        sortOption: filters.sortOption,
         filteredProjectIds: filteredProjectSlugs,
         allActiveTags: filters.tags,
         clearAllTags,
+        setSortOption,
       }}
     >
       {children}
