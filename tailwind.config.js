@@ -3,12 +3,38 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        accent: "Frank Ruhl Libre",
+        sans: [
+          '"Work Sans"',
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          '"Noto Sans"',
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
+        ],
       },
       boxShadow: {
         menu: "0px 4px 20px rgba(2, 20, 67, 0.12);",
       },
       colors: {
+        light: {
+          type: "rgba(0, 0, 0, .87)",
+          "type-medium": "rgba(0, 0, 0, .61)",
+          "type-low": "rgba(0, 0, 0, .43)",
+          "type-disabled": "rgba(0, 0, 0, .23)",
+          "type-negative": "rgba(255, 255, 255, .87)",
+          interactive: "#5f4de7",
+          "interactive-fill": "#eceaff",
+          "background-shaded": "#f7f7f7",
+        },
         black: {
           30: "#fafafb",
           50: "#f0f2f6",

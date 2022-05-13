@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Frank Ruhl Libre";
-  src: url("/FrankRuhlLibre-Black.ttf");
+  font-family: "Work Sans";
+  src: url("/fonts/work-sans-variable.ttf");
   font-display: swap;
 }

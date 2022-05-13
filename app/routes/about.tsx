@@ -12,9 +12,7 @@ const About = () => {
   return (
     <RootLayout>
       <header className="mx-auto max-w-2xl px-4 mb-8 pt-12 text-center">
-        <h1 className="text-2xl font-accent my-3 text-center">
-          Let's onboard better.
-        </h1>
+        <h1 className="text-2xl my-3 text-center">Let's onboard better.</h1>
         <p className="text-center max-w-sm mx-auto mb-6">
           Helping contributors and maintainers eliminate the barriers to taking
           on a new codebase.

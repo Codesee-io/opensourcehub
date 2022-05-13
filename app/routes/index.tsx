@@ -100,7 +100,7 @@ export default function Index() {
   return (
     <RootLayout>
       <div className="bg-gradient mx-auto pt-12 md:pt-24 mb-12">
-        <h1 className="text-yellow-300 font-accent text-3xl lg:text-4xl text-center mb-4">
+        <h1 className="text-yellow-300 font-semibold text-3xl lg:text-4xl text-center mb-4">
           Connecting People and Projects
         </h1>
         <p className="text-white text-center max-w-xl mx-auto mb-6 mt-2 px-2">
