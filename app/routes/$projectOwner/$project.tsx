@@ -76,7 +76,7 @@ export function CatchBoundary() {
     return (
       <RootLayout>
         <main className="max-w-xl mx-auto p-4 py-16">
-          <h2 className="font-accent text-2xl mb-2 text-black-500">
+          <h2 className="font-semibold text-2xl mb-2 text-black-500">
             There is no project here <span role="img">🙀</span>
           </h2>
           <p className="text-black-400 mb-4">
@@ -96,7 +96,7 @@ export function CatchBoundary() {
   return (
     <RootLayout>
       <main className="max-w-xl mx-auto p-4 py-16">
-        <h2 className="font-accent text-2xl mb-2 text-black-500">
+        <h2 className="font-semibold text-2xl mb-2 text-black-500">
           {caught.status} {caught.statusText}
         </h2>
         <p className="text-black-400 mb-4">Something went terribly wrong</p>
@@ -138,7 +138,7 @@ const ProjectPage: FC = () => {
           </div>
         )}
         <div>
-          <h1 className="mt-2 mb-4 text-black-500 font-bold text-4xl font-accent">
+          <h1 className="mt-2 mb-4 text-black-500 font-bold text-4xl">
             {project.attributes.name}
           </h1>
           <div className="mb-4">

@@ -28,7 +28,7 @@ const Resources = () => (
       >
         <div className="max-w-5xl mx-auto py-32 px-4">
           <div className="text-center max-w-xl ml-auto mr-auto text-black-500">
-            <h1 className="text-4xl font-accent leading-large">Resources</h1>
+            <h1 className="text-4xl font-semibold leading-large">Resources</h1>
             <p className="my-4">
               All the info you need to onboard your crew at the Open-Source Hub:
               showcase or find a project, make a map, or create a tour.
@@ -54,7 +54,7 @@ const Resources = () => (
         <div className="max-w-5xl mx-auto py-24 px-4">
           <div className="md:flex justify-center gap-6">
             <div className="max-w-3xl text-center">
-              <h2 className="text-4xl mb-8 font-accent leading-large text-white">
+              <h2 className="text-4xl mb-8 font-semibold leading-large text-white">
                 Looking for more helpful and inspiring developer resources?
               </h2>
               <CallToAction
