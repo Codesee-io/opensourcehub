@@ -65,7 +65,9 @@ export type GitHubMetric = {
 export type GitHubData = {
   prsMerged: GitHubMetric;
   prsCreated: GitHubMetric;
+  totalContributors: number;
   contributors: GitHubMetric;
+  totalOpenIssues: number;
   helpIssues: GitHubIssueData[];
   hacktoberfestIssues: GitHubIssueData[];
 };
@@ -90,6 +92,8 @@ export type CodeSeeMapMetadata = {
   hasPrivateRepos: false;
   thumbnail: string;
 };
+
+export type SelectOption = { label: string; value: string };
 
 export type FirebaseClientConfig = {
   apiKey: string;

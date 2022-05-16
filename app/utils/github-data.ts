@@ -38,7 +38,9 @@ export async function getGitHubDataForProjects(projects: Project[]) {
         githubDataSet[project.slug] = {
           prsMerged: githubData.prsMerged,
           prsCreated: githubData.prsCreated,
+          totalContributors: githubData.totalContributors,
           contributors: githubData.contributors,
+          totalOpenIssues: githubData.totalOpenIssues,
           helpIssues: githubData.helpIssues,
           hacktoberfestIssues: githubData.hacktoberfestIssues,
         };

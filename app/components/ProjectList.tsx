@@ -1,21 +1,25 @@
-import React, { FunctionComponent } from "react";
-import { Project } from "../types";
+import { FunctionComponent } from "react";
+import { Project, GitHubData } from "../types";
 import ProjectListWrapper from "./local-search/ProjectListWrapper";
 import useSearch from "./local-search/useSearch";
 import ProjectCard from "./ProjectCard";
+import {
+  OPTION_MOST_ACTIVE,
+  OPTION_MOST_OPEN_ISSUES,
+  OPTION_MOST_POPULARITY,
+} from "~/utils/constants";
 
 type Props = {
   allProjects: Project[];
-  githubDataSet: any;
+  githubDataSet: { [key: string]: GitHubData };
   helpfulnessDataSet: { [slug: string]: number };
 };
 
 const ProjectList: FunctionComponent<Props> = ({
   allProjects,
   githubDataSet,
-  helpfulnessDataSet,
 }) => {
-  const { filteredProjectIds, allActiveTags } = useSearch();
+  const { filteredProjectIds, allActiveTags, sortOption } = useSearch();
 
   if (filteredProjectIds.length === 0) {
     return (
@@ -34,9 +38,31 @@ const ProjectList: FunctionComponent<Props> = ({
     filteredProjectIds.includes(project.slug)
   );
 
-  filteredProjects.sort((a: Project, b: Project) => {
-    return helpfulnessDataSet[b.slug] - helpfulnessDataSet[a.slug];
-  });
+  if (sortOption.value === OPTION_MOST_OPEN_ISSUES) {
+    // Sort projects by most open issues (highest count of opened issues)
+    filteredProjects.sort((projectA, projectB) => {
+      return (
+        githubDataSet[projectB.slug].totalOpenIssues -
+        githubDataSet[projectA.slug].totalOpenIssues
+      );
+    });
+  } else if (sortOption.value === OPTION_MOST_ACTIVE) {
+    // Sort projects by most active (highest count of recently-closed PRs)
+    filteredProjects.sort((projectA, projectB) => {
+      return (
+        githubDataSet[projectB.slug].prsMerged.count -
+        githubDataSet[projectA.slug].prsMerged.count
+      );
+    });
+  } else if (sortOption.value === OPTION_MOST_POPULARITY) {
+    // Sort projects by most popularity (highest number of contributors)
+    filteredProjects.sort((projectA, projectB) => {
+      return (
+        githubDataSet[projectB.slug].totalContributors -
+        githubDataSet[projectA.slug].totalContributors
+      );
+    });
+  }
 
   return (
     <ProjectListWrapper>

@@ -1,7 +1,8 @@
 import { Search } from "js-search";
-import React, { FunctionComponent, useEffect, useRef, useState } from "react";
-import { Project } from "../../types";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SearchResultsProvider } from "./SearchResultsContext";
+import { SelectOption, Project } from "../../types";
+import { SORT_OPTIONS } from "~/utils/constants";
 
 export type SearchIndexItem = {
   id: string;
@@ -18,6 +19,7 @@ type Props = {
 type Filters = {
   search: string;
   tags: string[];
+  sortOption: SelectOption;
 };
 
 const SearchWrapper: FunctionComponent<Props> = ({
@@ -28,6 +30,7 @@ const SearchWrapper: FunctionComponent<Props> = ({
   const [filters, setFilters] = useState<Filters>({
     search: "",
     tags: [],
+    sortOption: SORT_OPTIONS[0],
   });
 
   const projectSearch = useRef<Search>();
@@ -70,6 +73,13 @@ const SearchWrapper: FunctionComponent<Props> = ({
     updateSearchResults(filters.search, []);
   };
 
+  const setSortOption = (sortOption: SelectOption) => {
+    setFilters({
+      ...filters,
+      sortOption,
+    });
+  };
+
   /**
    * Perform the search and cache the results
    */
@@ -99,9 +109,8 @@ const SearchWrapper: FunctionComponent<Props> = ({
     }
 
     if (newSearchValue.length > 0) {
-      const searchProjects = projectSearch.current.search(
-        newSearchValue
-      ) as Project[];
+      const searchProjects =
+        (projectSearch.current?.search(newSearchValue) as Project[]) || [];
 
       const matchingSlugs = searchProjects.map((project) => project.slug);
       filteredProjects = filteredProjects.filter((project) =>
@@ -114,6 +123,7 @@ const SearchWrapper: FunctionComponent<Props> = ({
     setFilters({
       search: newSearchValue,
       tags: newTags,
+      sortOption: filters.sortOption,
     });
   };
 
@@ -122,9 +132,11 @@ const SearchWrapper: FunctionComponent<Props> = ({
       value={{
         searchByText: performSearch,
         filterByTag,
+        sortOption: filters.sortOption,
         filteredProjectIds: filteredProjectSlugs,
         allActiveTags: filters.tags,
         clearAllTags,
+        setSortOption,
       }}
     >
       {children}

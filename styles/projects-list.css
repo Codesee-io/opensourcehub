@@ -38,16 +38,17 @@ textarea.input {
 
 /* Match the width of the cards inside the projects-wrapper */
 .filters-wrapper {
-  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem auto 1rem;
   padding: 0 1.5rem;
   text-align: right;
   max-width: 100%;
-  display: none;
 }
 
 @media (min-width: 832px) {
   .filters-wrapper {
-    display: block;
     padding: 0;
     width: 832px;
   }

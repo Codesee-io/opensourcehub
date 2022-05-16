@@ -15,21 +15,24 @@ import {
   getProjectsMetadata,
 } from "~/projects.server";
 import { getGitHubData } from "~/github.server";
+import RootLayout from "~/components/RootLayout";
 import SearchWrapper from "~/components/local-search/SearchWrapper";
 import ProjectList from "~/components/ProjectList";
 import SearchInput from "~/components/local-search/SearchInput";
 import SidebarWithFilters from "~/components/SidebarWithFilters";
 import ToggleFiltersButton from "~/components/ToggleFiltersButton";
+import ProjectSort from "~/components/ProjectSort";
 import CallToAction from "~/components/CallToAction";
-import RootLayout from "~/components/RootLayout";
 import Wave from "~/images/Wave";
 
+import selectStyles from "~/styles/select.css";
 import gradientStyles from "~/styles/gradient.css";
 import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
 
 export function links() {
   return [
+    { rel: "stylesheet", href: selectStyles },
     { rel: "stylesheet", href: gradientStyles },
     { rel: "stylesheet", href: headerStyles },
     { rel: "stylesheet", href: projectsStyles },
@@ -86,8 +89,8 @@ export default function Index() {
     githubData,
   } = useLoaderData<LoaderData>();
 
-  const [showSidebar, setShowSidebar] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const tags = useMemo(() => {
     return {
@@ -141,7 +144,13 @@ export default function Index() {
           <SearchInput />
         </div>
         <div className="filters-wrapper">
-          <ToggleFiltersButton onClick={() => setShowSidebar(true)} />
+          <div className="flex items-center">
+            <h1 className="font-semibold mr-2">All Projects</h1>
+            <ToggleFiltersButton onClick={() => setShowSidebar(true)} />
+          </div>
+          <div className="w-56">
+            <ProjectSort />
+          </div>
         </div>
         <div className="mx-auto" style={{ maxWidth: 1600 }}>
           <ProjectList
