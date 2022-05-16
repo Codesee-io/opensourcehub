@@ -94,3 +94,15 @@ export type CodeSeeMapMetadata = {
 };
 
 export type SelectOption = { label: string; value: string };
+
+export type FirebaseClientConfig = {
+  apiKey: string;
+  authDomain: string;
+  projectId: string;
+};
+
+export type User = {
+  displayName: string;
+  avatar?: string;
+  email?: string;
+};

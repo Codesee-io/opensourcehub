@@ -155,8 +155,24 @@ async function exportProjectsToJson() {
 
   // Grab a bunch of information from GitHub if we have the right env vars
   const githubData = await getGitHubDataForProjects(projectsData);
+
   if (githubData != null) {
-    await fs.writeFile(outputGithubPath, JSON.stringify(githubData, null, 2));
+    // Check whether the file already exists
+    let fileExists: boolean;
+    try {
+      await fs.access(outputGithubPath);
+      fileExists = true;
+    } catch (_) {
+      fileExists = false;
+    }
+
+    // Check whether the data we want to store is an empty object
+    const dataIsEmpty = Object.keys(githubData).length === 0;
+
+    // Write to the file system unless the data is empty and the file exists
+    if (!(dataIsEmpty && fileExists)) {
+      await fs.writeFile(outputGithubPath, JSON.stringify(githubData, null, 2));
+    }
   }
 
   console.log(

@@ -4,14 +4,14 @@ import IssueList from "./IssueList";
 
 type Props = {
   repoUrl: string;
-  githubData: GitHubData;
+  githubData?: GitHubData;
 };
 
 const HelpWanted: FC<Props> = ({ githubData, repoUrl }) => (
   <IssueList
     title="Help wanted"
     repoUrl={repoUrl}
-    issues={githubData.helpIssues}
+    issues={githubData?.helpIssues}
     label="help wanted"
   />
 );

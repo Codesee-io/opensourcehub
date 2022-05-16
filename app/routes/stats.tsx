@@ -53,7 +53,7 @@ const StatsPage: FC = () => {
   return (
     <RootLayout>
       <main className="py-12 md:py-20 px-4 max-w-xl mx-auto">
-        <h1 className="text-3xl font-accent leading-relaxed text-center mt-4 mb-8">
+        <h1 className="text-3xl font-semibold leading-relaxed text-center mt-4 mb-8">
           Stats and trends
         </h1>
         <h2 className="text-xl text-black-500 font-bold mb-2">
