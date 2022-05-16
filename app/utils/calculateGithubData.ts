@@ -198,8 +198,10 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
       }
     });
 
+    // When we use pagination, we get some information in the Response Header about the total amount of pages according to how many items per page we are requesting (using the "per_page" parameter)
+    // So a trick could be requesting the list of contributors with one item per page:
     const contributors = await fetch(
-      `https://api.github.com/repos/${owner}/${repoName}/contributors`,
+      `https://api.github.com/repos/${owner}/${repoName}/contributors?per_page=1`,
       {
         headers: {
           accept: "application/vnd.github.v3+json",
@@ -207,7 +209,17 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
         },
       }
     );
-    const totalContributors = (await contributors.json()) as Array<any>;
+    // Doing this in our Response Header there will be a Link property with the following content:
+    // The below is an example format of Link property
+    // link: '<https://api.github.com/repositories/100050317/contributors?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/100050317/contributors?per_page=1&page=13>; rel="last"'
+    const linkHeader = contributors.headers.get("link");
+    const totalContributors = linkHeader
+      ? Number(
+          (linkHeader || "")
+            .substring(0, linkHeader.length - 13)
+            .split("&page=")[2] || 0
+        )
+      : 0;
 
     const githubData: GitHubData = {
       prsMerged: {
@@ -218,7 +230,7 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
         count: 0,
         maybeMore: thereMayBeMoreCreatedData,
       },
-      totalContributors: (totalContributors || []).length,
+      totalContributors,
       contributors: {
         count: contributorsThisMonth.size,
         maybeMore: thereMayBeMoreMergeData || thereMayBeMoreCreatedData,
