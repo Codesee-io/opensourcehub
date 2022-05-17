@@ -1,0 +1,50 @@
+.input[type="text"] {
+  background-color: #fafbff;
+  border: 1px solid #bdbdbd;
+  border-radius: 11px;
+  color: #000;
+  height: 48px;
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+
+.input[type="text"]:focus {
+  border-color: theme("colors.light.interactive");
+  outline: none;
+  box-shadow: 0 0 0 1px theme("colors.light.interactive");
+}
+
+.input[type="text"]:read-only {
+  background-color: #f4f4f4;
+  color: theme("colors.light.type-disabled");
+}
+
+.input-label {
+  color: theme("colors.light.type-medium");
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.input-label + .input[type="text"] {
+  margin-top: 0.25rem;
+}
+
+.modal-decoration {
+  background: conic-gradient(
+      from 126.92deg at 50.14% 50.04%,
+      rgba(95, 77, 231, 0.2) 0deg,
+      rgba(179, 158, 248, 0) 360deg
+    ),
+    conic-gradient(
+      from 187.7deg at 65.99% 20.56%,
+      rgba(85, 124, 242, 0.2) 0deg,
+      rgba(95, 77, 231, 0) 360deg
+    ),
+    #1b145f;
+  width: 347px;
+  height: 1143px;
+  position: absolute;
+  top: 0;
+  left: -162px;
+}

@@ -18,11 +18,12 @@
     "start": "remix-serve build",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev:firebase": "npx firebase emulators:start --project development --only auth --import seed"
+    "dev:firebase": "npx firebase emulators:start --project development --only auth,firestore --import seed"
   },
   "dependencies": {
     "@mdx-js/react": "1.6.22",
     "@octokit/graphql": "4.8.0",
+    "@octokit/rest": "^18.12.0",
     "@primer/octicons-react": "15.2.0",
     "@remix-run/node": "^1.4.3",
     "@remix-run/react": "^1.4.3",
