@@ -102,7 +102,7 @@ export type User = {
   githubLogin: string;
   displayName: string;
   avatar?: string;
-  email?: string;
+  email?: string | null;
 };
 
 export type UserProfile = {

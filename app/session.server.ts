@@ -65,7 +65,7 @@ async function getGitHubUserDataFromClaims(
     return {
       login: data.login,
       picture: data.avatar_url,
-      email: data.email || undefined,
+      email: data.email || null,
     };
   }
 }
@@ -107,7 +107,7 @@ export async function getCurrentUser(session: Session): Promise<User | null> {
     githubLogin: githubUserData.login,
     displayName: decodedClaims.name,
     avatar: decodedClaims.picture || githubUserData.picture,
-    email: decodedClaims.email || githubUserData.email || undefined,
+    email: decodedClaims.email || githubUserData.email || null,
   };
 
   return user;
