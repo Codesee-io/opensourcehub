@@ -8,10 +8,6 @@ type Props = {
 };
 
 const BlogList: FunctionComponent<Props> = ({ blogPosts }) => {
-  if (blogPosts.length === 0) {
-    return <></>;
-  }
-
   return (
     <ProjectListWrapper>
       {blogPosts.map((blogPost) => (

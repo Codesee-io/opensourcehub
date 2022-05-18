@@ -169,7 +169,7 @@ export default function Index() {
           <h1 className="w-full font-bold text-left">Blog Posts</h1>
         </div>
 
-        <BlogList blogPosts={blogPosts} />
+        {blogPosts.length > 0 && <BlogList blogPosts={blogPosts} />}
       </div>
 
       <SearchWrapper searchIndex={searchIndex} allProjects={projects}>
