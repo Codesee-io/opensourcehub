@@ -1,6 +1,6 @@
 import { redirect } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
-import { getCurrentUser, getSession } from "~/session.server";
+import { destroySession, getCurrentUser, getSession } from "~/session.server";
 import { getProfileRouteForUser } from "~/utils/routes";
 
 // If the user is logged in, we attempt to redirect them to their profile
@@ -13,5 +13,9 @@ export const loader: LoaderFunction = async ({ request }) => {
   }
 
   // Redirect to the login page
-  return redirect("/login");
+  return redirect("/login", {
+    headers: {
+      "Set-Cookie": await destroySession(session),
+    },
+  });
 };

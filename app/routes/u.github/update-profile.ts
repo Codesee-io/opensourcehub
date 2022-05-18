@@ -1,7 +1,6 @@
 import { ActionFunction, redirect } from "@remix-run/node";
 import { updateProfileForUser } from "~/database.server";
 import { getCurrentUser, getSession } from "~/session.server";
-import { UserProfile } from "~/types";
 import { getProfileRouteForUser } from "~/utils/routes";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -14,8 +13,8 @@ export const action: ActionFunction = async ({ request }) => {
 
   const formData = await request.formData();
 
-  const twitterUrl = formData.get("twitter")?.toString() ?? "";
-  const linkedinUrl = formData.get("linkedin")?.toString() ?? "";
+  const twitterUrl = formData.get("twitter")?.toString();
+  const linkedinUrl = formData.get("linkedin")?.toString();
 
   // TODO
   // const techInterests = formData.get("techInterests");
@@ -23,15 +22,13 @@ export const action: ActionFunction = async ({ request }) => {
   // const contributionInterests = formData.get("contributionInterests");
   // const joinDiscord = formData.get("joinDiscord");
 
-  const userProfile: UserProfile = {
+  await updateProfileForUser(currentUser, {
     displayName: currentUser.displayName,
-    userUid: currentUser.uid,
-    pictureUrl: currentUser.avatar,
+    userId: currentUser.uid,
+    pictureUrl: currentUser.pictureUrl,
     linkedinUrl,
     twitterUrl,
-  };
-
-  await updateProfileForUser(currentUser, userProfile);
+  });
 
   return redirect(getProfileRouteForUser(currentUser));
 };
