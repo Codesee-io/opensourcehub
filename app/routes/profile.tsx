@@ -15,6 +15,9 @@ export const loader: LoaderFunction = async ({ request }) => {
   // Redirect to the login page
   return redirect("/login", {
     headers: {
+      // It's possible that there is not current user but that the session still
+      // exists. So to avoid infinite redirects, we destroy the session before
+      // redirecting.
       "Set-Cookie": await destroySession(session),
     },
   });

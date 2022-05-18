@@ -95,11 +95,17 @@ export async function createProfileForUser(user: User) {
   }
 }
 
-type UpdateUserProfilePayload = Partial<UserProfile>;
-
+/**
+ * Updates a User in the database. The following fields are stripped from the
+ * payload:
+ * - createdAt
+ * - updatedAt (filled in automatically)
+ * - userId
+ * - githubUrl
+ */
 export async function updateProfileForUser(
   user: User,
-  updatedProfile: UpdateUserProfilePayload
+  updatedProfile: Partial<UserProfile>
 ) {
   const profileKey = getProfileKeyForUser(user);
 
