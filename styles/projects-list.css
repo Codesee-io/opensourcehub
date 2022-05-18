@@ -39,10 +39,9 @@ textarea.input {
 /* Match the width of the cards inside the projects-wrapper */
 .filters-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 2rem auto 1rem;
-  padding: 0 1.5rem;
+  padding: 0 0.5rem;
   text-align: right;
   max-width: 100%;
 }
@@ -51,6 +50,9 @@ textarea.input {
   .filters-wrapper {
     padding: 0;
     width: 832px;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
   }
 }
 
@@ -112,4 +114,63 @@ textarea.input {
 .prevent-mobile-scroll {
   overflow: hidden;
   padding-right: 15px;
+}
+
+/* Blog Post styles */
+.post-image {
+  border-radius: 10px;
+  box-shadow: 0 6px 10px 0 rgb(0 0 0 / 12%), 0 1px 18px 0 rgb(0 0 0 / 10%),
+    0 3px 5px 0 rgb(0 0 0 / 15%);
+  margin-bottom: 25px;
+}
+
+.post-tag {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 50px;
+  color: white;
+  height: 26px;
+}
+
+.post-title,
+.post-excerpt {
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+}
+
+.post-author-image {
+  width: 45px;
+  height: 45px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.post-vertical-line-small {
+  position: relative;
+  width: 2px;
+  height: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
+  @apply bg-indigo-500;
+  @apply text-indigo-500;
+}
+
+.post-vertical-line-small.more {
+  height: 20px;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+.post-dash {
+  display: block;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-size: 16px;
+  line-height: 26px;
 }
