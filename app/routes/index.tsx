@@ -164,13 +164,14 @@ export default function Index() {
         </div>
       </div>
 
-      <div className="mx-auto mb-20" style={{ maxWidth: 1600 }}>
-        <div className="filters-wrapper">
-          <h1 className="w-full font-bold text-left">Blog Posts</h1>
+      {blogPosts.length > 0 && (
+        <div className="mx-auto mb-20" style={{ maxWidth: 1600 }}>
+          <div className="filters-wrapper">
+            <h1 className="w-full font-bold text-left">Blog Posts</h1>
+          </div>
+          <BlogList blogPosts={blogPosts} />
         </div>
-
-        {blogPosts.length > 0 && <BlogList blogPosts={blogPosts} />}
-      </div>
+      )}
 
       <SearchWrapper searchIndex={searchIndex} allProjects={projects}>
         <div className="max-w-5xl space-x-4 flex justify-center mx-auto px-2 mb-4">
