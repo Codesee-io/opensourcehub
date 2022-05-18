@@ -2,14 +2,17 @@ import type { FC } from "react";
 import type { LoaderFunction, ActionFunction } from "@remix-run/node";
 import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { json, redirect } from "@remix-run/node";
-import { Octokit } from "@octokit/rest";
 import { useLoaderData, useSubmit } from "@remix-run/react";
 import { commitSession, getCurrentUser, getSession } from "~/session.server";
 import RootLayout from "~/components/RootLayout";
 import Button from "~/components/Button";
 import { getFirebaseClientConfig } from "~/firebase.server";
 import { initFirebaseClient } from "~/firebase.client";
-import { createProfileForUser, getUserProfileBySlug } from "~/database.server";
+import {
+  createProfileForUser,
+  createUser,
+  getUserProfileBySlug,
+} from "~/database.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
@@ -44,8 +47,12 @@ export const action: ActionFunction = async ({ request }) => {
   session.set("idToken", idToken);
   session.set("accessToken", accessToken);
 
-  // Check whether the user has a profile page. If not, ask them to create one.
-  const user = await getCurrentUser(session);
+  // Get or create a user for this person
+  let user = await getCurrentUser(session);
+  if (!user) {
+    // The user needs to be created
+    user = await createUser(session);
+  }
 
   if (!user) {
     throw new Error(
@@ -53,6 +60,7 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
+  // Check whether the user has a profile page. If not, ask them to create one.
   let redirectPath: string;
   const profile = await getUserProfileBySlug(user.githubLogin);
 

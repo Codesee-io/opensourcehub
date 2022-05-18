@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/rest";
 import { createCookieSessionStorage, Session } from "@remix-run/node";
 import { DecodedIdToken } from "firebase-admin/auth";
+import { getUserByUid } from "./database.server";
 import { auth } from "./firebase.server";
 import { User } from "./types";
 
@@ -41,10 +42,10 @@ export { getSession, commitSession, destroySession };
  * token. If we're running this code in development using the Firebase
  * emulators, we will fake the data.
  */
-async function getGitHubUserDataFromClaims(
+export async function getGitHubUserDataFromClaims(
   accessToken: string,
   decodedClaims: DecodedIdToken
-): Promise<{ login: string; picture?: string; email?: string }> {
+): Promise<{ login: string; picture?: string; email?: string | null }> {
   if (
     process.env.NODE_ENV === "development" &&
     accessToken === FIREBASE_FAKE_ACCESS_TOKEN
@@ -70,14 +71,8 @@ async function getGitHubUserDataFromClaims(
   }
 }
 
-/**
- * Returns the user that's currently logged in, or null if there is none.
- *
- * @see https://firebase.google.com/docs/auth/admin/verify-id-tokens#web
- */
-export async function getCurrentUser(session: Session): Promise<User | null> {
+export async function getClaimsFromSession(session: Session) {
   const idToken = session.get("idToken");
-  const accessToken = session.get("accessToken");
 
   const error = session.get("error");
   if (error) {
@@ -97,18 +92,20 @@ export async function getCurrentUser(session: Session): Promise<User | null> {
     return null;
   }
 
-  const githubUserData = await getGitHubUserDataFromClaims(
-    accessToken,
-    decodedClaims
-  );
+  return decodedClaims;
+}
 
-  const user: User = {
-    uid: decodedClaims.uid,
-    githubLogin: githubUserData.login,
-    displayName: decodedClaims.name,
-    avatar: decodedClaims.picture || githubUserData.picture,
-    email: decodedClaims.email || githubUserData.email || null,
-  };
+/**
+ * Returns the user that's currently logged in, or null if there is none.
+ *
+ * @see https://firebase.google.com/docs/auth/admin/verify-id-tokens#web
+ */
+export async function getCurrentUser(session: Session): Promise<User | null> {
+  const claims = await getClaimsFromSession(session);
 
-  return user;
+  if (!claims) {
+    return null;
+  }
+
+  return await getUserByUid(claims.uid);
 }

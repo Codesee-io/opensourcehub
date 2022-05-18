@@ -105,13 +105,18 @@ export type User = {
   uid: string;
   githubLogin: string;
   displayName: string;
-  avatar?: string;
   email?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  discordUserId?: string | null;
+  pictureUrl?: string;
 };
 
 export type UserProfile = {
-  userUid: string;
+  userId: string;
   displayName: string;
+  createdAt: string;
+  updatedAt: string;
   twitterUrl?: string;
   linkedinUrl?: string;
   githubUrl?: string;
