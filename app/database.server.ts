@@ -96,8 +96,8 @@ export async function createProfileForUser(user: User) {
 }
 
 /**
- * Updates a User in the database. The following fields are stripped from the
- * payload:
+ * Updates a User Profile in the database. The following fields are stripped
+ * from the payload:
  * - createdAt
  * - updatedAt (filled in automatically)
  * - userId
@@ -111,7 +111,6 @@ export async function updateProfileForUser(
 
   // Delete the fields we don't want to alter
   delete updatedProfile.createdAt;
-  delete updatedProfile.updatedAt;
   delete updatedProfile.userId;
   delete updatedProfile.githubUrl;
 
@@ -122,6 +121,26 @@ export async function updateProfileForUser(
     .collection(USER_PROFILES_COLLECTION)
     .doc(profileKey)
     .set(updatedProfile, { merge: true });
+}
+
+/**
+ * Updates a User in the database. The following fields are stripped from the
+ * payload:
+ * - createdAt
+ * - updatedAt (filled in automatically)
+ * - uid
+ * - githubLogin
+ */
+export async function updateUser(uid: string, user: Partial<User>) {
+  // Delete the fields we don't want to alter
+  delete user.createdAt;
+  delete user.uid;
+  delete user.githubLogin;
+
+  // Send the correct time stamp
+  user.updatedAt = new Date().toISOString();
+
+  await db.collection(USERS_COLLECTION).doc(uid).set(user, { merge: true });
 }
 
 export async function getUserProfileBySlug(

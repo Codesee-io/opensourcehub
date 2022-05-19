@@ -25,6 +25,9 @@ module.exports = {
         menu: "0px 4px 20px rgba(2, 20, 67, 0.12);",
       },
       colors: {
+        discord: {
+          blurple: "#5865F2",
+        },
         light: {
           type: "rgba(0, 0, 0, .87)",
           "type-medium": "rgba(0, 0, 0, .61)",
