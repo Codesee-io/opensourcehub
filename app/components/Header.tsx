@@ -47,12 +47,12 @@ const Header: FC = () => (
           </NavLink>
         </div>
 
-        {/* Hide the "Log out" button for now */}
+        {/* Hide the "Log out" button for now
         <Form method="post" action="/logout">
           <button className="px-3 py-1 supports-hover:hover:bg-blue-900 inline-block rounded">
             Log out
           </button>
-        </Form>
+        </Form>*/}
 
         {/* Temporarily hide */}
         {/* <div className="hidden md:block ml-5">

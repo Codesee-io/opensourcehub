@@ -1,5 +1,4 @@
-import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
-import DiscordOauth from "discord-oauth2";
+import { LoaderFunction, redirect } from "@remix-run/node";
 import { destroySession, getCurrentUser, getSession } from "~/session.server";
 import { getDiscordAccessToken, getDiscordUserId } from "~/discord.server";
 import { getProfileRouteForUser } from "~/utils/routes";
@@ -30,36 +29,11 @@ export const loader: LoaderFunction = async ({ request }) => {
     throw new Error("No code");
   }
 
-  // Grab an access token from the user's code
   const accessToken = await getDiscordAccessToken(code);
 
-  // Grab the user's Discord id
   const discordUserId = await getDiscordUserId(accessToken);
 
-  // Save the user's Discord id in our database
   await updateUser(currentUser.uid, { discordUserId });
 
   return redirect(getProfileRouteForUser(currentUser));
-};
-
-export const action: ActionFunction = async () => {
-  // Make sure the user is logged in
-
-  // If the user has already identified with Discord, we can exit early
-
-  // Interface with Discord
-  const discordAuth = new DiscordOauth();
-
-  await discordAuth
-    .tokenRequest({
-      clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET,
-
-      code: "query code",
-      scope: "identify guilds",
-      grantType: "authorization_code",
-
-      redirectUri: "http://localhost:3000/discord/callback",
-    })
-    .then(console.log);
 };
