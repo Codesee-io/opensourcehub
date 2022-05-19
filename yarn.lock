@@ -4246,6 +4246,11 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
+discord-oauth2@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/discord-oauth2/-/discord-oauth2-2.10.0.tgz#7d31baced2b96c739b194c0ae42254cace3dcecd"
+  integrity sha512-AV+pjKURHyGTCLCUO1vep83/M8zzlAaTkpjAB6bisBCjsyiQzJGihKR4dlM88UeAaJbyqDxnHIsHafePIO2ssg==
+
 dlv@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/dlv/-/dlv-1.1.3.tgz#5c198a8a11453596e751494d49874bc7732f2e79"
