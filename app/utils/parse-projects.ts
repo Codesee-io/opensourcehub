@@ -104,6 +104,7 @@ async function exportProjectsToJson() {
       const { attributes, body } = parseFrontMatter<{
         repoUrl: string;
         name: string;
+        maintainer: string;
         [key: string]: any;
       }>(file.toString());
 
