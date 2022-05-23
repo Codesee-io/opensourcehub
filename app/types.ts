@@ -125,3 +125,9 @@ export type UserProfile = {
   // TODO subjectInterests
   // TODO contributionInterests
 };
+
+export type Tag = {
+  id: string;
+  label: string;
+  color: string;
+};

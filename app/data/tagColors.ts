@@ -1,0 +1,17 @@
+export default {
+  lavender: "#B39EF8",
+  rose: "#E897B1",
+  teal: "#51A0B8",
+  oceanBlue: "#5687E0",
+  purple: "#6540DE",
+  scarlet: "#E93E3E",
+  seaGreen: "#71D297",
+  hunterGreen: "#4EA46B",
+  cyan: "#5CD6F1",
+  rust: "#A14B59",
+  hotPink: "#F355A1",
+  grassGreen: "#C3F179",
+  goldYellow: "#EDC700",
+  brown: "#A17F4B",
+  ochre: "#EF7C4,8",
+};
