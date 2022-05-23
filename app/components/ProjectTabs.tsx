@@ -17,7 +17,7 @@ const Tab: FunctionComponent<TabProps> = ({ children, isActive, href }) => {
         "text-black-500 px-3 py-1 inline-flex items-center border-b-2 border-transparent -mb-px",
         {
           "border-black-500 font-semibold": isActive,
-          "supports-hover:hover:border-blue-500": !isActive,
+          "supports-hover:hover:border-light-interactive": !isActive,
         }
       )}
     >
@@ -42,7 +42,7 @@ const ProjectTabs: FunctionComponent<ProjectTabProps> = ({
   }
 
   return (
-    <div className="border-b border-black-100 space-x-2 mb-8">
+    <div className="border-b border-light-border space-x-2 mb-8">
       {hasOverviewTab && (
         <Tab href="#overview">
           <HomeIcon className="w-4 h-4 mr-2" /> Overview

@@ -1,60 +1,64 @@
-import React, { FunctionComponent } from "react";
-import { ProjectFrontmatter } from "../types";
-import TwitterIcon from "./icons/TwitterIcon";
+import { FC } from "react";
 import { MarkGithubIcon, LinkIcon } from "@primer/octicons-react";
-import MapIcon from "./icons/MapIcon";
+import { ProjectAttributes } from "~/types";
+import TwitterIcon from "./icons/TwitterIcon";
+import DocumentIcon from "./icons/DocumentIcon";
 
 type Props = {
-  frontmatter: ProjectFrontmatter;
+  frontmatter: ProjectAttributes;
 };
 
-const RepoLinks: FunctionComponent<Props> = ({ frontmatter }) => {
+const RepoLinks: FC<Props> = ({ frontmatter }) => {
   return (
-    <div className="flex-grow md:mr-4">
-      <p className="text-black-500 mb-6">{frontmatter.description}</p>
-      <div className="flex space-x-4 mb-8">
+    <div className="flex-grow mb-4 basis-2/3">
+      <div className="flex space-x-4 mb-4 text-sm">
         <a
           target="_blank"
-          className="text-black-300 supports-hover:hover:text-blue-400"
+          className="flex gap-1 items-center text-light-interactive hover:underline"
           href={frontmatter.repoUrl}
           title="Visit this repository on GitHub"
+          rel="noreferrer"
         >
-          <MarkGithubIcon size={24} />
+          <MarkGithubIcon size={20} />
+          <span>GitHub</span>
         </a>
-        {frontmatter.featuredMap?.url && (
-          <a
-            target="_blank"
-            className="text-black-300 supports-hover:hover:text-blue-400"
-            href={frontmatter.featuredMap.url}
-            title={
-              frontmatter.featuredMap.description ||
-              "View this project's CodeSee map"
-            }
-          >
-            <MapIcon width={24} />
-          </a>
-        )}
         {frontmatter.twitterUrl && (
           <a
             target="_blank"
-            className="text-black-300 supports-hover:hover:text-blue-400"
+            className="flex gap-1 items-center text-light-interactive hover:underline"
             href={frontmatter.twitterUrl}
             title="Connect with this community on Twitter"
+            rel="noreferrer"
           >
-            <TwitterIcon />
+            <TwitterIcon className="w-5 h-5" />
+            <span>Twitter</span>
           </a>
         )}
         {frontmatter.websiteUrl && (
           <a
             target="_blank"
-            className="text-black-300 supports-hover:hover:text-blue-400"
+            className="flex gap-1 items-center text-light-interactive hover:underline"
             href={frontmatter.websiteUrl}
             title="Visit this project's website"
+            rel="noreferrer"
           >
-            <LinkIcon size={24} />
+            <LinkIcon size={20} />
+            <span>Website</span>
           </a>
         )}
       </div>
+      <p className="text-light-type text-sm mb-6">{frontmatter.description}</p>
+      <p>
+        <a
+          href={frontmatter.repoUrl + "#readme"}
+          target="_blank"
+          rel="noreferrer"
+          className="flex gap-1 text-light-interactive hover:underline font-medium text-lg items-center"
+        >
+          <DocumentIcon />
+          <span>Readme</span>
+        </a>
+      </p>
     </div>
   );
 };

@@ -37,6 +37,7 @@ module.exports = {
           interactive: "#5f4de7",
           "interactive-fill": "#eceaff",
           "background-shaded": "#f7f7f7",
+          border: "rgba(0, 0, 0, .11)", // TODO I don't like this name because token names shouldn't dictate how they're used
         },
         black: {
           30: "#fafafb",
@@ -94,6 +95,7 @@ module.exports = {
       },
       fill: (theme) => ({
         "black-200": theme("colors.black.200"),
+        "light-interactive": theme("colors.light.interactive"),
       }),
       screens: {
         "supports-hover": { raw: "(hover: hover)" },
