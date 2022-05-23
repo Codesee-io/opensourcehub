@@ -175,6 +175,7 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
       }
     });
 
+    let openedThisMonth = 0;
     let thereMayBeMoreCreatedData = openPullRequests.totalCount > 100;
     openPullRequests.nodes.forEach(({ createdAt, author }) => {
       // If author.botId is set, this means that the author is a bot because specifically cast
@@ -187,6 +188,7 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
       const now = Date.now();
       const isThisMonth = now - date < 30 /* days */ * 24 * 60 * 60 * 1000;
       if (isThisMonth) {
+        openedThisMonth++;
         if (author?.login) {
           contributorsThisMonth.add(author.login);
         }
@@ -227,7 +229,7 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
         maybeMore: thereMayBeMoreMergeData,
       },
       prsCreated: {
-        count: 0,
+        count: openedThisMonth,
         maybeMore: thereMayBeMoreCreatedData,
       },
       totalContributors,
