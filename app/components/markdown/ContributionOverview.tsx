@@ -11,7 +11,12 @@ type Props = {
 
 const ContributionOverview: FC<Props> = ({ contributionOverview }) => {
   if (!contributionOverview) {
-    return null;
+    return (
+      <p className="text-light-type-medium text-sm">
+        The maintainers of this project have not provided a contribution
+        overview.
+      </p>
+    );
   }
 
   const {
@@ -23,44 +28,44 @@ const ContributionOverview: FC<Props> = ({ contributionOverview }) => {
   } = contributionOverview;
 
   return (
-    <article className="bg-white p-4 max-w-full mb-4" style={{ width: 300 }}>
-      <h3 className="text-black-500 font-bold mb-4">Contribution overview</h3>
-      <div className="text-black-500 text-sm space-y-2">
-        {mainLocation && (
-          <p className="flex items-center">
-            <ClockIcon size={16} className="fill-black-200 mr-2" />
-            Most contributors are in&nbsp;<strong>{mainLocation}</strong>
+    <div className="text-light-type text-sm space-y-2">
+      {mainLocation && (
+        <p className="flex items-center">
+          <ClockIcon size={16} className="fill-light-interactive mr-2" />
+          <span>Most contributors are in {mainLocation}</span>
+        </p>
+      )}
+      {idealEffort && (
+        <p className="flex items-center">
+          <GitPullRequestIcon
+            size={16}
+            className="fill-light-interactive mr-2"
+          />
+          <span>Ideal: {idealEffort}</span>
+        </p>
+      )}
+      {isMentorshipAvailable && (
+        <p className="flex items-center">
+          <UsersIcon className="inline-block mr-2 text-light-interactive" />
+          Mentorship &amp; pairing available
+        </p>
+      )}
+      {automatedDevEnvironment && (
+        <p className="flex items-center">
+          <ToolsIcon className="inline-block mr-2 text-light-interactive" />
+          <a href={automatedDevEnvironment} target="_blank" rel="noreferrer">
+            Automated dev environment available
+          </a>
+        </p>
+      )}
+      {extras &&
+        extras.map((extra, index) => (
+          <p key={`extra-${index}`} className="flex items-center">
+            <InfoIcon className="inline-block w-4 h-4 mr-2 text-light-interactive" />
+            {extra}
           </p>
-        )}
-        {idealEffort && (
-          <p className="flex items-center">
-            <GitPullRequestIcon size={16} className="fill-black-200 mr-2" />
-            Ideal:&nbsp;<strong>{idealEffort}</strong>
-          </p>
-        )}
-        {isMentorshipAvailable && (
-          <p className="flex items-center">
-            <UsersIcon className="inline-block mr-2 text-black-200" />
-            Mentorship & pairing available
-          </p>
-        )}
-        {automatedDevEnvironment && (
-          <p className="flex items-center">
-            <ToolsIcon className="inline-block mr-2 text-black-200" />
-            <a href={automatedDevEnvironment} target="_blank">
-              Automated dev environment available
-            </a>
-          </p>
-        )}
-        {extras &&
-          extras.map((extra, index) => (
-            <p key={`extra-${index}`} className="flex items-center">
-              <InfoIcon className="inline-block w-4 h-4 mr-2 text-black-200" />
-              {extra}
-            </p>
-          ))}
-      </div>
-    </article>
+        ))}
+    </div>
   );
 };
 

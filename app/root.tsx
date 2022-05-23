@@ -69,7 +69,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-black-30">
+      <body className="bg-light-background-shaded">
         <Outlet />
         {fathomSiteId && (
           <script

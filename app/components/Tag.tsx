@@ -11,11 +11,12 @@ const Tag: FunctionComponent<Props> = ({ tag, className, isActive }) => {
   return (
     <span
       className={cx(
-        "inline-block rounded-md px-2 py-1 text-xs border",
+        "inline-block rounded-full px-2 py-0.5 text-xs border font-semibold lowercase",
         className,
         {
-          "text-black-400 border-black-100": !isActive,
-          "bg-blue-50 border-blue-500 text-blue-700": isActive,
+          "text-light-type-medium border-light-type-low": !isActive,
+          "bg-light-interactive-fill border-light-interactive text-light-interactive":
+            isActive,
         }
       )}
     >

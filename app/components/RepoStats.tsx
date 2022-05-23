@@ -1,6 +1,7 @@
 import { InfoIcon } from "@primer/octicons-react";
 import type { FC } from "react";
-import type { GitHubData, GitHubMetric } from "../types";
+import type { GitHubData } from "../types";
+import { formatMetric } from "~/utils/format-metric";
 
 const STATS_ARE_MISSING = process.env.NODE_ENV !== "production";
 
@@ -9,42 +10,20 @@ type Props = {
   stats?: GitHubData;
 };
 
-function formatMetric(metric?: GitHubMetric) {
-  if (metric == null) {
-    return "0";
-  }
-
-  if (metric.maybeMore) {
-    if (metric.count > 20) {
-      return Math.floor(metric.count / 10) * 10 + "+";
-    } else {
-      return metric.count + "+";
-    }
-  }
-  return metric.count;
-}
-
 const RepoStats: FC<Props> = ({ stats, className }) => {
-  const helpWantedCount = stats?.helpIssues?.length || 0;
-  const hacktoberfestCount = stats?.hacktoberfestIssues?.length || 0;
-  const [issueName, issueCount] =
-    hacktoberfestCount === 0 && helpWantedCount !== 0
-      ? ["Help Wanted", helpWantedCount]
-      : ["Hack-🎃-fest", hacktoberfestCount];
-
   return (
     <div className={className}>
-      <div className="flex flex-row items-center justify-between">
-        <h2 className="text-xs font-bold text-blue-500 mb-4">Open issues</h2>
-        <h2 className="text-xs font-bold text-blue-500 mb-4">Last 30 days</h2>
-      </div>
+      <h2 className="text-sm text-light-interactive mb-4">Last 30 days:</h2>
       <div className="flex justify-between text-black-500 space-x-4 text-center">
         <div>
-          <div className="text-2xl font-bold">
-            {formatMetric({ count: issueCount, maybeMore: false })}
+          <div className="text-2xl text-light-type font-semibold">
+            {formatMetric({
+              count: stats?.totalOpenIssues || 0,
+              maybeMore: false,
+            })}
           </div>
-          <small className="text-black-400 text-xs uppercase whitespace-nowrap">
-            {issueName}
+          <small className="text-light-type-medium text-xs uppercase whitespace-nowrap">
+            Open issues
           </small>
         </div>
         <div
@@ -56,18 +35,18 @@ const RepoStats: FC<Props> = ({ stats, className }) => {
           }}
         ></div>
         <div>
-          <div className="text-2xl font-bold">
+          <div className="text-2xl text-light-type font-semibold">
             {formatMetric(stats?.prsCreated)}
           </div>
-          <small className="text-black-400 text-xs uppercase whitespace-nowrap">
+          <small className="text-light-type-medium text-xs uppercase whitespace-nowrap">
             PRs opened
           </small>
         </div>
         <div>
-          <div className="text-2xl font-bold">
+          <div className="text-2xl text-light-type font-semibold">
             {formatMetric(stats?.contributors)}
           </div>
-          <small className="text-black-400 text-xs uppercase whitespace-nowrap">
+          <small className="text-light-type-medium text-xs uppercase whitespace-nowrap">
             Contributors
           </small>
         </div>

@@ -15,10 +15,10 @@ const LearnSection: FC<Props> = ({ learnLinks }) => {
   return (
     <div className="mb-8">
       <AnchorHeader id="learn">Learn</AnchorHeader>
-      <p className="mb-4">
+      <p className="mb-2 text-sm text-light-type">
         Resources to learn more about our technology and community.
       </p>
-      <ul className="list-inside list-disc text-black-400 text-sm">
+      <ul className="list-inside list-disc text-light-type text-sm">
         {learnLinks.map((link, index) => (
           <li key={index}>
             <FormattedLink href={link.url || ""}>{link.title}</FormattedLink>

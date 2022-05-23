@@ -27,17 +27,20 @@ const IssueList: FC<Props> = ({ issues, repoUrl, title, label }) => {
   }
 
   return (
-    <article className="bg-white p-4 max-w-full mb-6" style={{ width: 500 }}>
-      <h3 className="text-black-500 font-bold mb-4">{title}</h3>
+    <article
+      className="bg-white p-4 max-w-full mb-6 border border-light-border rounded"
+      style={{ width: 500 }}
+    >
+      <h3 className="text-light-type font-semibold mb-4">{title}</h3>
       <div className="space-y-2">
         {issues.slice(0, MAX_ISSUES).map((issue) => (
-          <div key={issue.id} className="text-sm text-black-400">
+          <div key={issue.id} className="text-sm text-light-type-medium">
             <span>#{issue.number}</span>
             <a
               href={issue.url}
               target="_blank"
               rel="noreferrer"
-              className="ml-2 font-semibold supports-hover:hover:text-blue-500"
+              className="ml-2 font-semibold supports-hover:hover:text-light-interactive"
             >
               {issue.title}
             </a>
@@ -50,7 +53,7 @@ const IssueList: FC<Props> = ({ issues, repoUrl, title, label }) => {
             href={getLabelUrl(repoUrl, label)}
             target="_blank"
             rel="noreferrer"
-            className="text-sm font-bold supports-hover:hover:text-blue-500"
+            className="text-sm font-semibold text-light-interactive hover:underline"
           >
             View all
           </a>
