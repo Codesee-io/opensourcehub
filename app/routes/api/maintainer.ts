@@ -1,4 +1,5 @@
 import { ActionFunction, json } from "@remix-run/node";
+import { requestHasValidAPIKey } from "~/api.server";
 import { getUserByUid } from "~/database.server";
 import { getProjectsMaintainedByUser } from "~/projects.server";
 
@@ -13,25 +14,13 @@ export const action: ActionFunction = async ({ request }) => {
   const { userId } = data;
   if (typeof userId !== "string") {
     return new Response(null, {
-      status: 500,
+      status: 400,
       statusText: "Malformed request",
     });
   }
 
   // Check that we have a valid API key
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader?.startsWith("Bearer ")) {
-    const receivedToken = authHeader.substring("Bearer ".length);
-
-    if (receivedToken !== process.env.BOT_API_KEY) {
-      if (typeof userId !== "string") {
-        return new Response(null, {
-          status: 403,
-          statusText: "Forbidden",
-        });
-      }
-    }
-  } else {
+  if (!requestHasValidAPIKey(request)) {
     return new Response(null, {
       status: 403,
       statusText: "Forbidden",
