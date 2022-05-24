@@ -1,24 +1,37 @@
-import React, { FunctionComponent } from "react";
+import { CSSProperties, FC } from "react";
 import cx from "classnames";
 
 type Props = {
   tag: string;
   className?: string;
-  isActive?: boolean;
+  color?: string;
+  filled?: boolean;
 };
 
-const Tag: FunctionComponent<Props> = ({ tag, className, isActive }) => {
+const Tag: FC<Props> = ({ tag, className, color, filled }) => {
+  const style: CSSProperties = {};
+  if (color) {
+    if (filled) {
+      style.backgroundColor = color;
+      style.borderColor = color;
+      style.color = "white";
+    } else {
+      style.borderColor = color;
+      style.color = color;
+    }
+  }
   return (
     <span
       className={cx(
-        "inline-block rounded-full px-2 py-0.5 text-xs border font-semibold lowercase",
+        "inline-flex rounded-full px-2 py-0.5 text-xs border font-semibold lowercase whitespace-nowrap",
         className,
         {
-          "text-light-type-medium border-light-type-low": !isActive,
-          "bg-light-interactive-fill border-light-interactive text-light-interactive":
-            isActive,
+          "text-light-type-medium border-light-type-medium":
+            color == null && !filled,
+          "bg-light-type-medium text-white": color == null && filled,
         }
       )}
+      style={style}
     >
       {tag}
     </span>

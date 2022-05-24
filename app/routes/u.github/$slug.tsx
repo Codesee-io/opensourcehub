@@ -2,6 +2,7 @@ import { json, LoaderFunction, redirect } from "@remix-run/node";
 import { Form, Link, Outlet, useCatch, useLoaderData } from "@remix-run/react";
 import { FC } from "react";
 import Button from "~/components/Button";
+import Interests from "~/components/profile/Interests";
 import RootLayout from "~/components/RootLayout";
 import { getUserProfileBySlug } from "~/database.server";
 import { getCurrentUser, getSession } from "~/session.server";
@@ -96,9 +97,9 @@ const ProfilePage: FC = () => {
 
   return (
     <RootLayout>
-      <main className="max-w-4xl mx-auto px-4 py-12">
-        <div className="bg-white border border-black-50 p-6 rounded-lg">
-          <div className="flex gap-6">
+      <main className="max-w-6xl mx-auto px-4 py-12">
+        <div className="bg-white border border-light-border p-6 rounded-lg">
+          <div className="flex gap-6 mb-4">
             {profile.pictureUrl && (
               <img
                 src={profile.pictureUrl}
@@ -148,6 +149,7 @@ const ProfilePage: FC = () => {
               </div>
             )}
           </div>
+          <Interests {...profile} />
         </div>
       </main>
       <Outlet />

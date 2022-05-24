@@ -1,17 +1,21 @@
+/**
+ * Colors used for tags! They must pass AAA contrast checks against white
+ * backgrounds.
+ */
 export default {
-  lavender: "#B39EF8",
-  rose: "#E897B1",
-  teal: "#51A0B8",
-  oceanBlue: "#5687E0",
-  purple: "#6540DE",
-  scarlet: "#E93E3E",
-  seaGreen: "#71D297",
-  hunterGreen: "#4EA46B",
-  cyan: "#5CD6F1",
-  rust: "#A14B59",
-  hotPink: "#F355A1",
-  grassGreen: "#C3F179",
-  goldYellow: "#EDC700",
-  brown: "#A17F4B",
-  ochre: "#EF7C4,8",
+  lavender: "#5728F0",
+  rose: "#A3244C",
+  teal: "#275F62",
+  oceanBlue: "#2053B1",
+  purple: "#5A32DC",
+  scarlet: "#AE1313",
+  seaGreen: "#20653A",
+  hunterGreen: "#2E613F",
+  cyan: "#0A5E71",
+  rust: "#8B414C",
+  hotPink: "#AC0C59",
+  grassGreen: "#3D5F07",
+  goldYellow: "#63561C",
+  brown: "#6C5533",
+  ochre: "#993B0F",
 };

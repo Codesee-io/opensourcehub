@@ -1,75 +1,76 @@
 import { Tag } from "~/types";
+import tagColors from "./tagColors";
 
 const roles: Tag[] = [
   {
     label: "Developers",
     id: "developers",
-    color: "#",
+    color: tagColors.brown,
   },
   {
     label: "Backend Developers",
     id: "backend_developers",
-    color: "#",
+    color: tagColors.cyan,
   },
   {
     label: "Maintainers",
     id: "maintainers",
-    color: "#",
+    color: tagColors.goldYellow,
   },
   {
     label: "Frontend Developers",
     id: "frontend_developers",
-    color: "#",
+    color: tagColors.grassGreen,
   },
   {
     label: "DevOps",
     id: "devops",
-    color: "#",
+    color: tagColors.hotPink,
   },
   {
     label: "Technical Writers",
     id: "technical_writers",
-    color: "#",
+    color: tagColors.hunterGreen,
   },
   {
     label: "UX",
     id: "ux",
-    color: "#",
+    color: tagColors.lavender,
   },
   {
     label: "Designers",
     id: "designers",
-    color: "#",
+    color: tagColors.oceanBlue,
   },
   {
     label: "Testers",
     id: "testers",
-    color: "#",
+    color: tagColors.ochre,
   },
   {
     label: "Project Owners",
     id: "project_owners",
-    color: "#",
+    color: tagColors.purple,
   },
   {
     label: "Code Reviewers",
     id: "reviewers",
-    color: "#",
+    color: tagColors.rose,
   },
   {
     label: "Mentors",
     id: "mentors",
-    color: "#",
+    color: tagColors.rust,
   },
   {
     label: "Researchers",
     id: "researchers",
-    color: "#",
+    color: tagColors.scarlet,
   },
   {
     label: "Issue Triage",
     id: "issue_triage",
-    color: "#",
+    color: tagColors.seaGreen,
   },
 ];
 

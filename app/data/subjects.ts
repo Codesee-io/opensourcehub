@@ -1,166 +1,167 @@
 import { Tag } from "~/types";
+import tagColors from "./tagColors";
 
-const interests: Tag[] = [
+const subjects: Tag[] = [
   {
     label: "First Timer Friendly",
     id: "first_timer_friendly",
-    color: "#",
+    color: tagColors.brown,
   },
   {
     label: "Tools",
     id: "tools",
-    color: "#",
+    color: tagColors.cyan,
   },
   {
     label: "Data Visualization",
     id: "data_viz",
-    color: "#",
+    color: tagColors.grassGreen,
   },
   {
     label: "Education",
     id: "education",
-    color: "#",
+    color: tagColors.hotPink,
   },
   {
     label: "Code Framework",
     id: "code_framework",
-    color: "#",
+    color: tagColors.hunterGreen,
   },
   {
     label: "Gaming",
     id: "gaming",
-    color: "#",
+    color: tagColors.lavender,
   },
   {
     label: "Starter Template",
     id: "starter_template",
-    color: "#",
+    color: tagColors.oceanBlue,
   },
   {
     label: "Productivity",
     id: "productivity",
-    color: "#",
+    color: tagColors.ochre,
   },
   {
     label: "Health",
     id: "health",
-    color: "#",
+    color: tagColors.purple,
   },
   {
     label: "Social Activism",
     id: "social_activism",
-    color: "#",
+    color: tagColors.rose,
   },
   {
     label: "Machine Learning",
     id: "machine_learning",
-    color: "#",
+    color: tagColors.rust,
   },
   {
     label: "Automation",
     id: "automation",
-    color: "#",
+    color: tagColors.scarlet,
   },
   {
     label: "Git",
     id: "git",
-    color: "#",
+    color: tagColors.seaGreen,
   },
   {
     label: "Environment",
     id: "environment",
-    color: "#",
+    color: tagColors.teal,
   },
   {
     label: "Browser Extension",
     id: "browser_extension",
-    color: "#",
+    color: tagColors.brown,
   },
   {
     label: "Scraping",
     id: "scraping",
-    color: "#",
+    color: tagColors.cyan,
   },
   {
     label: "Media",
     id: "media",
-    color: "#",
+    color: tagColors.goldYellow,
   },
   {
     label: "Android",
     id: "android",
-    color: "#",
+    color: tagColors.grassGreen,
   },
   {
     label: "E-Commerce",
     id: "e-commerce",
-    color: "#",
+    color: tagColors.hotPink,
   },
   {
     label: "Kubernetes",
     id: "kubernetes",
-    color: "#",
+    color: tagColors.hunterGreen,
   },
   {
     label: "Docker",
     id: "docker",
-    color: "#",
+    color: tagColors.lavender,
   },
   {
     label: "DevOps",
     id: "devops",
-    color: "#",
+    color: tagColors.oceanBlue,
   },
   {
     label: "Infosec",
     id: "infosec",
-    color: "#",
+    color: tagColors.ochre,
   },
   {
     label: "CLI",
     id: "cli",
-    color: "#",
+    color: tagColors.purple,
   },
   {
     label: "Embedded Systems",
     id: "embedded_systems",
-    color: "#",
+    color: tagColors.rose,
   },
   {
     label: "Raspberry Pi",
     id: "raspberry-pi",
-    color: "#",
+    color: tagColors.rust,
   },
   {
     label: "Social",
     id: "social",
-    color: "#",
+    color: tagColors.scarlet,
   },
   {
     label: "iOS",
     id: "ios",
-    color: "#",
+    color: tagColors.seaGreen,
   },
   {
     label: "Web Application",
     id: "web_application",
-    color: "#",
+    color: tagColors.teal,
   },
   {
     label: "Web Accessibility",
     id: "accessibility",
-    color: "#",
+    color: tagColors.brown,
   },
   {
     label: "Cryptography",
     id: "cryptography",
-    color: "#",
+    color: tagColors.cyan,
   },
   {
     label: "Finance",
     id: "finance",
-    color: "#",
+    color: tagColors.goldYellow,
   },
 ];
 
-export default interests;
+export default subjects;

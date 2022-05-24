@@ -121,9 +121,9 @@ export type UserProfile = {
   linkedinUrl?: string;
   githubUrl?: string;
   pictureUrl?: string;
-  // TODO techInterests
-  // TODO subjectInterests
-  // TODO contributionInterests
+  techInterests: string[];
+  subjectInterests: string[];
+  roleInterests: string[];
 };
 
 export type Tag = {
