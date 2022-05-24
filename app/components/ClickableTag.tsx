@@ -1,14 +1,13 @@
-import React, { FunctionComponent } from "react";
+import { FC } from "react";
 import cx from "classnames";
 
 type Props = {
   tag: string;
-
   isActive?: boolean;
   onClick?: (tag: string) => void;
 };
 
-const ClickableTag: FunctionComponent<Props> = ({ tag, onClick, isActive }) => {
+const ClickableTag: FC<Props> = ({ tag, onClick, isActive }) => {
   return (
     <button
       type="button"
@@ -20,7 +19,7 @@ const ClickableTag: FunctionComponent<Props> = ({ tag, onClick, isActive }) => {
           "border-blue-700 bg-blue-700 text-white": isActive,
         }
       )}
-      onClick={() => onClick(tag)}
+      onClick={() => onClick?.(tag)}
     >
       {tag}
     </button>
