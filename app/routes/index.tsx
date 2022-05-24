@@ -65,12 +65,14 @@ export const loader: LoaderFunction = async () => {
       version: "v3",
     });
 
-    // By default, the Ghost Content API returns posts in reverse chronological order by published date
-    // Fetch 3 most recent posts, including related tags and authros
+    // By default, the Ghost Content API returns posts in reverse chronological
+    // order by published date Fetch 3 most recent posts, including their
+    // authors' information. We only include posts tagged "Community".
     try {
       blogPosts = await api.posts.browse({
+        filter: "tag:community",
         limit: 3,
-        include: ["tags", "authors"],
+        include: ["authors"],
       });
     } catch (error) {
       blogPosts = [];
