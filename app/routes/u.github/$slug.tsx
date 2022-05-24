@@ -26,22 +26,11 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     });
   }
 
-  let payload: LoaderData;
-  if (profile.userId === user?.uid) {
-    // If the project is tied to the current user, send the user data down
-    payload = {
-      profile,
-      canEdit: true,
-      hasVerifiedDiscord: typeof user.discordUserId === "string",
-    };
-  } else {
-    // Otherwise, send only the profile data
-    payload = {
-      profile,
-      canEdit: false,
-      hasVerifiedDiscord: false, // this is private information
-    };
-  }
+  const payload: LoaderData = {
+    profile,
+    canEdit: profile.userId === user?.uid,
+    hasVerifiedDiscord: typeof user?.discordUserId === "string",
+  };
 
   return json(payload);
 };
