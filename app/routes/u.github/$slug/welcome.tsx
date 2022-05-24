@@ -8,20 +8,14 @@ import formStyles from "~/styles/forms.css";
 import Button from "~/components/Button";
 import CloseIcon from "~/components/icons/CloseIcon";
 import { getProfileRouteForUser } from "~/utils/routes";
-import languages from "~/data/languages";
 import ReactSelect, { MultiValue } from "react-select";
-import interests from "~/data/subjects";
-import roles from "~/data/roles";
-
-const TECH_INTERESTS = languages
-  .map((l) => ({ value: l.id, label: l.label }))
-  .sort((a, b) => a.label.localeCompare(b.label));
-const SUBJECT_INTERESTS = interests
-  .map((l) => ({ value: l.id, label: l.label }))
-  .sort((a, b) => a.label.localeCompare(b.label));
-const ROLE_INTERESTS = roles
-  .map((l) => ({ value: l.id, label: l.label }))
-  .sort((a, b) => a.label.localeCompare(b.label));
+import {
+  ROLE_INTERESTS,
+  SUBJECT_INTERESTS,
+  TECH_INTERESTS,
+} from "~/utils/tags";
+import TwitterIcon from "~/components/icons/TwitterIcon";
+import LinkedInIcon from "~/components/icons/LinkedInIcon";
 
 export function links() {
   return [{ rel: "stylesheet", href: formStyles }];
@@ -107,6 +101,7 @@ const Welcome: FC = () => {
                       value={user.githubLogin}
                       label="Name"
                       id="name"
+                      autoFocus
                     />
                   </div>
                   <div className="h-20">
@@ -118,10 +113,24 @@ const Welcome: FC = () => {
                     />
                   </div>
                   <div className="h-20">
-                    <TextField label="Twitter" id="twitter" />
+                    <TextField
+                      label={
+                        <span className="flex items-center gap-1">
+                          <TwitterIcon className="w-4 h-4" /> Twitter
+                        </span>
+                      }
+                      id="twitter"
+                    />
                   </div>
                   <div className="h-20">
-                    <TextField label="LinkedIn" id="linkedin" />
+                    <TextField
+                      label={
+                        <span className="flex items-center gap-1">
+                          <LinkedInIcon className="w-4 h-4" /> LinkedIn
+                        </span>
+                      }
+                      id="linkedin"
+                    />
                   </div>
                 </div>
                 <div className="w-full lg:w-1/2 space-y-4">

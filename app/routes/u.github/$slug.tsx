@@ -2,11 +2,12 @@ import { json, LoaderFunction, redirect } from "@remix-run/node";
 import { Form, Link, Outlet, useCatch, useLoaderData } from "@remix-run/react";
 import { FC } from "react";
 import Button from "~/components/Button";
+import EditIcon from "~/components/icons/EditIcon";
 import Interests from "~/components/profile/Interests";
 import RootLayout from "~/components/RootLayout";
 import { getUserProfileBySlug } from "~/database.server";
 import { getCurrentUser, getSession } from "~/session.server";
-import { User, UserProfile } from "~/types";
+import { UserProfile } from "~/types";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const slug = params.slug;
@@ -25,18 +26,19 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     });
   }
 
-  if (profile.userId === user?.uid) {
-    // If the project is tied to the current user, send the user data down
-    return json({ profile, user } as LoaderData);
-  } else {
-    // Otherwise, send only the profile data
-    return json({ profile, user: null } as LoaderData);
-  }
+  const payload: LoaderData = {
+    profile,
+    canEdit: profile.userId === user?.uid,
+    hasVerifiedDiscord: typeof user?.discordUserId === "string",
+  };
+
+  return json(payload);
 };
 
 type LoaderData = {
   profile: UserProfile;
-  user: User | null;
+  canEdit: boolean;
+  hasVerifiedDiscord: boolean;
 };
 
 export function CatchBoundary() {
@@ -89,17 +91,13 @@ export function CatchBoundary() {
 }
 
 const ProfilePage: FC = () => {
-  const { profile, user } = useLoaderData<LoaderData>();
-
-  const canEdit = user != null;
-  const hasVerifiedDiscord =
-    user != null && typeof user.discordUserId === "string";
+  const { profile, canEdit, hasVerifiedDiscord } = useLoaderData<LoaderData>();
 
   return (
     <RootLayout>
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="bg-white border border-light-border p-6 rounded-lg">
-          <div className="flex gap-6 mb-4">
+          <div className="flex gap-6 mb-4 relative">
             {profile.pictureUrl && (
               <img
                 src={profile.pictureUrl}
@@ -147,6 +145,15 @@ const ProfilePage: FC = () => {
                   </Form>
                 )}
               </div>
+            )}
+            {canEdit && (
+              <Link
+                to="edit"
+                title="Edit your profile"
+                className="absolute p-1 -top-1 -right-1 rounded hover:text-light-interactive"
+              >
+                <EditIcon />
+              </Link>
             )}
           </div>
           <Interests {...profile} />
