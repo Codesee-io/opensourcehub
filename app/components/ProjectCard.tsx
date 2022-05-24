@@ -119,7 +119,7 @@ const ProjectCard: FC<Props> = ({ project, githubData, activeTags = [] }) => {
                 tag={badge}
                 key={badge}
                 className="mr-2 mb-2"
-                isActive={activeTags.includes(badge)}
+                // isActive={activeTags.includes(badge)}
               />
             ))}
           </div>
@@ -132,7 +132,7 @@ const ProjectCard: FC<Props> = ({ project, githubData, activeTags = [] }) => {
                 tag={badge}
                 key={badge}
                 className="mr-2 mb-2"
-                isActive={activeTags.includes(badge)}
+                // isActive={activeTags.includes(badge)}
               />
             ))}
           </div>
