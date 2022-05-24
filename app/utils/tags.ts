@@ -27,3 +27,13 @@ export function getTag(category: TagCategory, key: string) {
   };
   return fallback;
 }
+
+export const TECH_INTERESTS = languages
+  .map((l) => ({ value: l.id, label: l.label }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+export const SUBJECT_INTERESTS = subjects
+  .map((l) => ({ value: l.id, label: l.label }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+export const ROLE_INTERESTS = roles
+  .map((l) => ({ value: l.id, label: l.label }))
+  .sort((a, b) => a.label.localeCompare(b.label));

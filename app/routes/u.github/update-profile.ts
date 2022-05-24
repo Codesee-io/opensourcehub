@@ -1,6 +1,7 @@
 import { ActionFunction, redirect } from "@remix-run/node";
 import { updateProfileForUser } from "~/database.server";
 import { getCurrentUser, getSession } from "~/session.server";
+import { UserProfile } from "~/types";
 import { getProfileRouteForUser } from "~/utils/routes";
 
 function arrayFromString(value?: string): string[] {
@@ -18,6 +19,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const formData = await request.formData();
 
+  const displayName = formData.get("displayName")?.toString();
   const twitterUrl = formData.get("twitter")?.toString();
   const linkedinUrl = formData.get("linkedin")?.toString();
 
@@ -33,8 +35,7 @@ export const action: ActionFunction = async ({ request }) => {
     formData.get("roleInterests")?.toString()
   );
 
-  await updateProfileForUser(currentUser, {
-    displayName: currentUser.displayName,
+  const updatedProfile: Partial<UserProfile> = {
     userId: currentUser.uid,
     pictureUrl: currentUser.pictureUrl,
     linkedinUrl,
@@ -42,7 +43,13 @@ export const action: ActionFunction = async ({ request }) => {
     techInterests,
     subjectInterests,
     roleInterests,
-  });
+  };
+
+  if (typeof displayName === "string" && displayName.length > 0) {
+    updatedProfile.displayName = displayName;
+  }
+
+  await updateProfileForUser(currentUser, updatedProfile);
 
   return redirect(getProfileRouteForUser(currentUser));
 };
