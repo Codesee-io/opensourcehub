@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 import dayjs from "dayjs";
-import cx from "classnames";
 import { PostOrPage } from "@tryghost/content-api";
 
 type Props = {
@@ -8,73 +7,70 @@ type Props = {
 };
 
 const BlogCard: FunctionComponent<Props> = ({ blogPost }) => {
-  const tags = (blogPost.tags || [])
-    .filter((tag) => tag.visibility === "public")
-    .slice(0, 2);
   const author = (blogPost.authors || [])[0];
 
   return (
     <div className="relative flex flex-col w-full" style={{ maxWidth: 400 }}>
       <div className="flex-grow">
-        <a href={blogPost.url} target="_blank" className="mb-2">
+        <a
+          href={blogPost.url}
+          target="_blank"
+          className="mb-2"
+          rel="noreferrer"
+        >
           <img
             src={blogPost.og_image || ""}
             alt="Read this article on CodeSee Learn"
-            className="post-image"
+            className="post-image rounded-lg mb-6"
+            style={{
+              width: 400,
+              boxShadow:
+                "0 6px 10px 0 rgb(0 0 0 / 12%), 0 1px 18px 0 rgb(0 0 0 / 10%), 0 3px 5px 0 rgb(0 0 0 / 15%);",
+            }}
           />
         </a>
-        <div className="flex">
-          {tags.map((tag) => (
-            <a
-              key={tag.id}
-              href={tag.url}
-              target="_blank"
-              className={cx("post-tag mr-2", {
-                "bg-indigo-500": tag.visibility === "public",
-              })}
-            >
-              {tag.visibility === "public" ? tag.name : ""}
-            </a>
-          ))}
-        </div>
         <div className="mt-6">
-          <a href={blogPost.url} target="_blank">
-            <h1 className="post-title text-lg font-bold text-black-500">
+          <a href={blogPost.url} target="_blank" rel="noreferrer">
+            <h1 className="text-lg font-semibold text-light-type">
               {blogPost.title}
             </h1>
           </a>
           {blogPost.custom_excerpt && (
-            <a href={blogPost.url} target="_blank">
-              <p className="post-excerpt text-sm overflow-hidden mt-3">
-                {blogPost.custom_excerpt}
-              </p>
+            <a href={blogPost.url} target="_blank" rel="noreferrer">
+              <p className="text-sm mt-3">{blogPost.custom_excerpt}</p>
             </a>
           )}
         </div>
-        <div className="post-meta mt-4">
-          <a href={author.url || "/"} target="_blank" className="inline-block">
+        <div className="flex items-center mt-4">
+          <a
+            href={author.url || "/"}
+            target="_blank"
+            className="inline-block"
+            rel="noreferrer"
+          >
             <img
-              src={author ? author.profile_image || "" : ""}
-              alt={author.name?.charAt(0) || ""}
-              className="post-author-image"
+              src={author.profile_image || ""}
+              alt={`Visit ${author.name}'s profile`}
+              className="w-12 h-12 rounded-full object-cover"
             />
           </a>
           <div>
             <a
               href={author.url || "/"}
               target="_blank"
-              className="flex items-center inline-block"
+              className="ml-3 inline-block font-medium"
+              rel="noreferrer"
             >
-              <div className="ml-3">{author.name}</div>
+              {author.name}
             </a>
             <div className="flex items-center">
-              <div className="post-vertical-line-small more"></div>
+              <div className="bg-indigo-500 w-0.5 h-5 mr-2 ml-3"></div>
               <time dateTime={blogPost.updated_at || new Date().toISOString()}>
                 {dayjs(blogPost.updated_at || new Date().toISOString()).format(
                   "MMMM DD, YYYY"
                 )}
               </time>
-              <div className="post-dash"> - </div>
+              <div className="mx-1"> - </div>
               <div>{blogPost.reading_time} min read</div>
             </div>
           </div>
