@@ -148,7 +148,7 @@ const ProfilePage: FC = () => {
             )}
             {canEdit && (
               <Link
-                to={"edit"}
+                to="edit"
                 title="Edit your profile"
                 className="absolute p-1 -top-1 -right-1 rounded hover:text-light-interactive"
               >

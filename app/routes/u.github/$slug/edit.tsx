@@ -14,7 +14,7 @@ import { getProfileRouteForUser } from "~/utils/routes";
 import Button from "~/components/Button";
 import CloseIcon from "~/components/icons/CloseIcon";
 import TextField from "~/components/TextField";
-import { User, UserProfile } from "~/types";
+import { UserProfile } from "~/types";
 import { getUserProfileBySlug } from "~/database.server";
 import TwitterIcon from "~/components/icons/TwitterIcon";
 import LinkedInIcon from "~/components/icons/LinkedInIcon";
@@ -43,13 +43,19 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return redirect("/");
   }
 
-  const profile = await getUserProfileBySlug(slug);
+  // If the profile is undefined, the parent route will throw a 404
+  const profile = (await getUserProfileBySlug(slug)) as UserProfile;
 
-  return json({ user: currentUser, profile });
+  const payload: LoaderData = {
+    profile,
+    profileRoute: getProfileRouteForUser(currentUser),
+  };
+
+  return json(payload);
 };
 
 type LoaderData = {
-  user: User;
+  profileRoute: string;
   profile: UserProfile;
 };
 
@@ -60,7 +66,7 @@ type TagsState = {
 };
 
 const Edit: FC = () => {
-  const { user, profile } = useLoaderData<LoaderData>();
+  const { profileRoute, profile } = useLoaderData<LoaderData>();
 
   const [tags, setTags] = useState<TagsState>({
     techInterests: profile.techInterests
@@ -87,10 +93,7 @@ const Edit: FC = () => {
           <h1 className="font-semibold text-2xl mb-4 text-light-type">
             Edit your profile
           </h1>
-          <Link
-            to={getProfileRouteForUser(user)}
-            className="absolute top-6 right-6 p-2"
-          >
+          <Link to={profileRoute} className="absolute top-6 right-6 p-2">
             <CloseIcon />
           </Link>
           <div>
@@ -183,7 +186,7 @@ const Edit: FC = () => {
               </div>
               <div className="mt-16 flex justify-end gap-6">
                 <Link
-                  to={getProfileRouteForUser(user)}
+                  to={profileRoute}
                   className="px-6 text-light-interactive hover:bg-light-interactive-fill rounded-lg font-semibold flex items-center justify-center"
                 >
                   Cancel
