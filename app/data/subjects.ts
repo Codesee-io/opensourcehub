@@ -98,16 +98,6 @@ const subjects: Tag[] = [
     color: tagColors.hotPink,
   },
   {
-    label: "Kubernetes",
-    id: "kubernetes",
-    color: tagColors.hunterGreen,
-  },
-  {
-    label: "Docker",
-    id: "docker",
-    color: tagColors.lavender,
-  },
-  {
     label: "DevOps",
     id: "devops",
     color: tagColors.oceanBlue,

@@ -81,6 +81,9 @@ export async function createProfileForUser(user: User) {
     pictureUrl: user.pictureUrl,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
+    roleInterests: [],
+    subjectInterests: [],
+    techInterests: [],
   };
 
   try {
