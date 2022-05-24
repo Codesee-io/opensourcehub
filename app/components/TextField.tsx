@@ -7,12 +7,12 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 
 const TextField: FC<Props> = ({ label, id, ...otherProps }) => {
   return (
-    <div>
+    <>
       <label className="input-label" htmlFor={id}>
         {label}
       </label>
       <input className="input" type="text" id={id} name={id} {...otherProps} />
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 .input[type="text"] {
   background-color: #fafbff;
   border: 1px solid #bdbdbd;
-  border-radius: 11px;
+  border-radius: 12px;
   color: #000;
   height: 48px;
   font-size: 0.875rem;
@@ -28,6 +28,52 @@
 
 .input-label + .input[type="text"] {
   margin-top: 0.25rem;
+}
+
+/* Style react-select dropdowns with an atrocious amount of !important */
+.custom-react-select__control {
+  background-color: #fafbff !important;
+  border-color: #bdbdbd !important;
+  border-radius: 12px !important;
+  min-height: 48px !important;
+}
+
+.custom-react-select__control--is-focused {
+  box-shadow: 0 0 0 1px theme("colors.light.interactive") !important;
+  border-color: theme("colors.light.interactive") !important;
+}
+
+.custom-react-select__multi-value {
+  background-color: transparent !important;
+}
+
+.custom-react-select__multi-value__label {
+  border-radius: 20px 0 0 20px !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.25rem !important;
+}
+
+.custom-react-select__multi-value__remove {
+  border-radius: 0 20px 20px 0 !important;
+  padding-right: 0.25rem !important;
+}
+
+.custom-react-select__multi-value__label,
+.custom-react-select__multi-value__remove {
+  background-color: theme("colors.light.interactive") !important;
+  color: white !important;
+}
+
+.custom-react-select__multi-value__remove:hover {
+  background-color: theme("colors.red.500") !important;
+}
+
+.custom-react-select__option {
+  color: theme("colors.light.type") !important;
+}
+
+.custom-react-select__option--is-focused {
+  background-color: theme("colors.light.interactive-fill") !important;
 }
 
 .modal-decoration {

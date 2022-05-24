@@ -1,6 +1,6 @@
 import { json, LoaderFunction, redirect } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import TextField from "~/components/TextField";
 import { destroySession, getCurrentUser, getSession } from "~/session.server";
 import { User } from "~/types";
@@ -8,6 +8,20 @@ import formStyles from "~/styles/forms.css";
 import Button from "~/components/Button";
 import CloseIcon from "~/components/icons/CloseIcon";
 import { getProfileRouteForUser } from "~/utils/routes";
+import languages from "~/data/languages";
+import ReactSelect, { MultiValue } from "react-select";
+import interests from "~/data/subjects";
+import roles from "~/data/roles";
+
+const TECH_INTERESTS = languages
+  .map((l) => ({ value: l.id, label: l.label }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+const SUBJECT_INTERESTS = interests
+  .map((l) => ({ value: l.id, label: l.label }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+const ROLE_INTERESTS = roles
+  .map((l) => ({ value: l.id, label: l.label }))
+  .sort((a, b) => a.label.localeCompare(b.label));
 
 export function links() {
   return [{ rel: "stylesheet", href: formStyles }];
@@ -30,8 +44,26 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json({ user: currentUser });
 };
 
+type TagsState = {
+  techInterests: MultiValue<{ label: string; value: string }>;
+  roleInterests: MultiValue<{ label: string; value: string }>;
+  subjectInterests: MultiValue<{ label: string; value: string }>;
+};
+
 const Welcome: FC = () => {
   const { user } = useLoaderData<{ user: User }>();
+
+  const [tags, setTags] = useState<TagsState>({
+    techInterests: [],
+    roleInterests: [],
+    subjectInterests: [],
+  });
+
+  const updateTags =
+    (key: keyof TagsState) =>
+    (updatedTags: MultiValue<{ label: string; value: string }>) => {
+      setTags({ ...tags, [key]: updatedTags });
+    };
 
   return (
     <section className="fixed inset-0 z-50 bg-light-background-shaded bg-opacity-75 overflow-auto">
@@ -43,7 +75,7 @@ const Welcome: FC = () => {
           <div className="modal-decoration" />
           <div className="flex gap-6 mb-8">
             <img
-              src={user.avatar}
+              src={user.pictureUrl}
               style={{ width: 108, height: 108 }}
               className="rounded-full flex-shrink-0"
               alt="Your avatar pulled from GitHub"
@@ -67,33 +99,86 @@ const Welcome: FC = () => {
               Tell us more about yourself
             </p>
             <Form method="post" action="/u/github/update-profile">
-              <div className="flex gap-8">
-                <div className="w-full md:w-1/2 space-y-6">
-                  <TextField
-                    readOnly
-                    value={user.githubLogin}
-                    label="Name"
-                    id="name"
-                  />
-                  <TextField
-                    readOnly
-                    value={user.email}
-                    label="Email"
-                    id="email"
-                  />
-                  <TextField label="Twitter" id="twitter" />
-                  <TextField label="LinkedIn" id="linkedin" />
+              <div className="lg:flex gap-8">
+                <div className="w-full lg:w-1/2 space-y-4">
+                  <div className="h-20">
+                    <TextField
+                      readOnly
+                      value={user.githubLogin}
+                      label="Name"
+                      id="name"
+                    />
+                  </div>
+                  <div className="h-20">
+                    <TextField
+                      readOnly
+                      value={user.email || ""}
+                      label="Email"
+                      id="email"
+                    />
+                  </div>
+                  <div className="h-20">
+                    <TextField label="Twitter" id="twitter" />
+                  </div>
+                  <div className="h-20">
+                    <TextField label="LinkedIn" id="linkedin" />
+                  </div>
                 </div>
-                <div className="w-full md:w-1/2 space-y-6">
-                  <TextField label="Tech interests" id="techInterests" />
-                  <TextField
-                    label="Subject matter interests"
-                    id="subjectInterests"
-                  />
-                  <TextField
-                    label="Contribution interests"
-                    id="contributionInterests"
-                  />
+                <div className="w-full lg:w-1/2 space-y-4">
+                  <div className="h-20">
+                    <label className="input-label">Tech interests</label>
+                    <input
+                      type="hidden"
+                      name="techInterests"
+                      value={tags.techInterests.map((t) => t.value).join(",")}
+                    />
+                    <ReactSelect
+                      classNamePrefix="custom-react-select"
+                      className="mt-1"
+                      placeholder="What technologies interest you?"
+                      options={TECH_INTERESTS}
+                      isMulti
+                      onChange={updateTags("techInterests")}
+                    />
+                  </div>
+                  <div className="h-20">
+                    <label className="input-label">
+                      Subject matter interests
+                    </label>
+                    <input
+                      type="hidden"
+                      name="subjectInterests"
+                      value={tags.subjectInterests
+                        .map((t) => t.value)
+                        .join(",")}
+                    />
+                    <ReactSelect
+                      classNamePrefix="custom-react-select"
+                      className="mt-1"
+                      placeholder="What subjects are you interested in?"
+                      options={SUBJECT_INTERESTS}
+                      isMulti
+                      onChange={updateTags("subjectInterests")}
+                    />
+                  </div>
+                  <div className="h-20">
+                    <label className="input-label">
+                      Contribution interests
+                    </label>
+                    <input
+                      type="hidden"
+                      name="roleInterests"
+                      value={tags.roleInterests.map((t) => t.value).join(",")}
+                    />
+                    <ReactSelect
+                      classNamePrefix="custom-react-select"
+                      className="mt-1"
+                      placeholder="What roles interest you?"
+                      options={ROLE_INTERESTS}
+                      isMulti
+                      onChange={updateTags("roleInterests")}
+                    />
+                  </div>
                   <div className="pt-10">
                     <label
                       className="text-sm flex gap-2 text-light-type-medium"
