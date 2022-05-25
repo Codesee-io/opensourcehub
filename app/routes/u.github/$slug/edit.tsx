@@ -8,7 +8,7 @@ import {
 } from "~/utils/tags";
 import formStyles from "~/styles/forms.css";
 import { json, LoaderFunction, redirect } from "@remix-run/node";
-import { destroySession, getCurrentUser, getSession } from "~/session.server";
+import { getCurrentUserOrRedirect } from "~/session.server";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import { getProfileRouteForUser } from "~/utils/routes";
 import Button from "~/components/Button";
@@ -24,18 +24,7 @@ export function links() {
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const currentUser = await getCurrentUser(session);
-
-  if (!currentUser) {
-    // Redirect to the login page if needed
-    session.unset("idToken");
-    return redirect("/login", {
-      headers: {
-        "Set-Cookie": await destroySession(session),
-      },
-    });
-  }
+  const currentUser = await getCurrentUserOrRedirect(request);
 
   const slug = params.slug;
 
