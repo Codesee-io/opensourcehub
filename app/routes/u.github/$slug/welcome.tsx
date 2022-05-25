@@ -2,7 +2,7 @@ import { json, LoaderFunction, redirect } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import { FC, useState } from "react";
 import TextField from "~/components/TextField";
-import { destroySession, getCurrentUser, getSession } from "~/session.server";
+import { getCurrentUserOrRedirect } from "~/session.server";
 import { User } from "~/types";
 import formStyles from "~/styles/forms.css";
 import Button from "~/components/Button";
@@ -22,19 +22,7 @@ export function links() {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const currentUser = await getCurrentUser(session);
-
-  if (!currentUser) {
-    // Redirect to the login page if needed
-    session.unset("idToken");
-    return redirect("/login", {
-      headers: {
-        "Set-Cookie": await destroySession(session),
-      },
-    });
-  }
-
+  const currentUser = getCurrentUserOrRedirect(request);
   return json({ user: currentUser });
 };
 

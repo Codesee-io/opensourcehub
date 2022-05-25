@@ -10,11 +10,7 @@ import { getCurrentUser, getSession } from "~/session.server";
 import { UserProfile } from "~/types";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
-  const slug = params.slug;
-
-  if (typeof slug !== "string") {
-    return redirect("/");
-  }
+  const slug = params.slug as string; // This can't be undefined or we wouldn't be here
 
   const session = await getSession(request.headers.get("Cookie"));
   const user = await getCurrentUser(session);
