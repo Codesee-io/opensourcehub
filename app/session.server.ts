@@ -110,6 +110,10 @@ export async function getCurrentUser(session: Session): Promise<User | null> {
   return await getUserByUid(claims.uid);
 }
 
+/**
+ * Returns the user that's currently logged in or redirects to the path
+ * provided (defaults to /login).
+ */
 export async function getCurrentUserOrRedirect(
   request: Request,
   redirectTo = "/login"
