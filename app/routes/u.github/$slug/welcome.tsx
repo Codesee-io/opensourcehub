@@ -22,7 +22,7 @@ export function links() {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const currentUser = getCurrentUserOrRedirect(request);
+  const currentUser = await getCurrentUserOrRedirect(request);
   return json({ user: currentUser });
 };
 
@@ -56,12 +56,14 @@ const Welcome: FC = () => {
         >
           <div className="modal-decoration" />
           <div className="flex gap-6 mb-8">
-            <img
-              src={user.pictureUrl}
-              style={{ width: 108, height: 108 }}
-              className="rounded-full flex-shrink-0"
-              alt="Your avatar pulled from GitHub"
-            />
+            {user.pictureUrl && (
+              <img
+                src={user.pictureUrl}
+                style={{ width: 108, height: 108 }}
+                className="rounded-full flex-shrink-0"
+                alt="Your avatar on GitHub"
+              />
+            )}
             <div>
               <h1 className="font-semibold text-2xl mb-2 text-light-type">
                 Welcome contributor!
@@ -69,7 +71,7 @@ const Welcome: FC = () => {
               <p className="max-w-md text-light-type-low text-sm">
                 You're almost done creating your profile on{" "}
                 <strong>Open-Source Hub</strong> using your GitHub account (
-                {user.email})
+                {user.githubLogin})
               </p>
             </div>
             <Link to="/profile" className="absolute top-6 right-6 p-2">
@@ -85,19 +87,11 @@ const Welcome: FC = () => {
                 <div className="w-full lg:w-1/2 space-y-4">
                   <div className="h-20">
                     <TextField
-                      readOnly
-                      value={user.githubLogin}
-                      label="Name"
-                      id="name"
+                      required
+                      defaultValue={user.displayName || ""}
+                      label="Display name"
+                      id="displayName"
                       autoFocus
-                    />
-                  </div>
-                  <div className="h-20">
-                    <TextField
-                      readOnly
-                      value={user.email || ""}
-                      label="Email"
-                      id="email"
                     />
                   </div>
                   <div className="h-20">
