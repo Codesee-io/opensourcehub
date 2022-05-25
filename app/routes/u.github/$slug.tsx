@@ -1,8 +1,12 @@
-import { json, LoaderFunction, redirect } from "@remix-run/node";
+import { MarkGithubIcon } from "@primer/octicons-react";
+import { json, LoaderFunction } from "@remix-run/node";
 import { Form, Link, Outlet, useCatch, useLoaderData } from "@remix-run/react";
 import { FC } from "react";
 import Button from "~/components/Button";
+import DiscordIcon from "~/components/icons/DiscordIcon";
 import EditIcon from "~/components/icons/EditIcon";
+import LinkedInIcon from "~/components/icons/LinkedInIcon";
+import TwitterIcon from "~/components/icons/TwitterIcon";
 import Interests from "~/components/profile/Interests";
 import RootLayout from "~/components/RootLayout";
 import { getUserProfileBySlug } from "~/database.server";
@@ -94,54 +98,82 @@ const ProfilePage: FC = () => {
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="bg-white border border-light-border p-6 rounded-lg">
           <div className="flex gap-6 mb-4 relative">
-            {profile.pictureUrl && (
-              <img
-                src={profile.pictureUrl}
-                style={{ width: 108, height: 108 }}
-                alt={`${profile.displayName}'s avatar`}
-                className="rounded-full flex-shrink-0"
-              />
-            )}
-            <div>
-              <h1 className="text-4xl text-light-type font-semibold">
-                {profile.displayName}
-              </h1>
-              <div className="space-x-4 text-light-interactive font-semibold">
+            <div className="flex-shrink-0">
+              {profile.pictureUrl && (
+                <img
+                  src={profile.pictureUrl}
+                  style={{ width: 108, height: 108 }}
+                  alt={`${profile.displayName}'s avatar`}
+                  className="rounded-full flex-shrink-0"
+                />
+              )}
+              <div className="space-x-2 text-light-interactive font-semibold mt-2">
                 {profile.githubUrl && (
-                  <a className="hover:underline" href={profile.githubUrl}>
-                    GitHub
+                  <a
+                    className="inline-flex p-1 text-light-type-medium hover:text-light-interactive"
+                    href={profile.githubUrl}
+                    title={`Visit ${profile.displayName}'s GitHub profile`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <MarkGithubIcon size={20} />
                   </a>
                 )}
                 {profile.twitterUrl && (
-                  <a className="hover:underline" href={profile.twitterUrl}>
-                    Twitter
+                  <a
+                    className="inline-flex p-1 text-light-type-medium hover:text-light-interactive"
+                    href={profile.twitterUrl}
+                    title={`Visit ${profile.displayName}'s Twitter feed`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <TwitterIcon className="w-5 h-5" />
                   </a>
                 )}
                 {profile.linkedinUrl && (
-                  <a className="hover:underline" href={profile.linkedinUrl}>
-                    LinkedIn
+                  <a
+                    className="inline-flex p-1 text-light-type-medium hover:text-light-interactive"
+                    href={profile.linkedinUrl}
+                    title={`Visit ${profile.displayName}'s LinkedIn profile`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <LinkedInIcon className="w-5 h-5" />
                   </a>
                 )}
               </div>
             </div>
-            {canEdit && (
-              <div>
-                {hasVerifiedDiscord ? (
-                  <div>
-                    <span
-                      title="You've verified your Discord account"
-                      className="inline-block px-2 py-1 rounded bg-discord-blurple text-white text-xs"
-                    >
-                      Discord verified
-                    </span>
-                  </div>
-                ) : (
-                  <Form action="/api/discord-auth-url" method="post">
-                    <Button type="submit">Verify on Discord</Button>
-                  </Form>
+            <div>
+              <h1 className="text-4xl text-light-type font-semibold mb-4">
+                {profile.displayName}
+                {canEdit && hasVerifiedDiscord && (
+                  <span
+                    title="You've verified your Discord account"
+                    className="ml-4 inline-block p-1 rounded-full bg-discord-blurple text-white text-xs"
+                  >
+                    <DiscordIcon className="w-3 h-3" />
+                  </span>
                 )}
-              </div>
-            )}
+              </h1>
+              {profile.intro && (
+                <p className="text-sm text-light-type-medium max-w-2xl whitespace-pre-line">
+                  {profile.intro}
+                </p>
+              )}
+              {canEdit && !profile.intro && (
+                <p className="text-sm">
+                  Why not{" "}
+                  <Link
+                    to="edit"
+                    className="text-light-interactive hover:underline font-semibold"
+                  >
+                    introduce yourself
+                  </Link>{" "}
+                  on your profile?
+                </p>
+              )}
+            </div>
+
             {canEdit && (
               <Link
                 to="edit"
@@ -153,6 +185,11 @@ const ProfilePage: FC = () => {
             )}
           </div>
           <Interests {...profile} />
+          {canEdit && !hasVerifiedDiscord && (
+            <Form action="/api/discord-auth-url" method="post" className="mt-6">
+              <Button type="submit">Verify on Discord</Button>
+            </Form>
+          )}
         </div>
       </main>
       <Outlet />

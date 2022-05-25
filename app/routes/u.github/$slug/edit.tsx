@@ -7,7 +7,7 @@ import {
   TECH_INTERESTS,
 } from "~/utils/tags";
 import formStyles from "~/styles/forms.css";
-import { json, LoaderFunction, redirect } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
 import { getCurrentUserOrRedirect } from "~/session.server";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import { getProfileRouteForUser } from "~/utils/routes";
@@ -18,6 +18,7 @@ import { UserProfile } from "~/types";
 import { getUserProfileBySlug } from "~/database.server";
 import TwitterIcon from "~/components/icons/TwitterIcon";
 import LinkedInIcon from "~/components/icons/LinkedInIcon";
+import TextArea from "~/components/TextArea";
 
 export function links() {
   return [{ rel: "stylesheet", href: formStyles }];
@@ -84,13 +85,21 @@ const Edit: FC = () => {
           <div>
             <Form method="post" action="/u/github/update-profile">
               <div className="space-y-4">
+                <div className="">
+                  <TextArea
+                    label="Introduction"
+                    defaultValue={profile.intro}
+                    id="intro"
+                    autoFocus
+                    style={{ minHeight: 120 }}
+                  />
+                </div>
                 <div className="h-20">
                   <TextField
                     label="Display name"
                     id="displayName"
                     defaultValue={profile.displayName}
                     required
-                    autoFocus
                   />
                 </div>
                 <div className="h-20">
