@@ -85,7 +85,7 @@ const Edit: FC = () => {
           <div>
             <Form method="post" action="/u/github/update-profile">
               <div className="space-y-4">
-                <div className="">
+                <div>
                   <TextArea
                     label="Introduction"
                     defaultValue={profile.intro}
