@@ -45,7 +45,7 @@ export async function createUser(session: Session) {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     githubLogin: githubUserData.login,
-    displayName: claims.name,
+    displayName: claims.name || githubUserData.login, // There isn't always a name in the claims!
     pictureUrl: claims.picture || githubUserData.picture,
     email: claims.email || githubUserData.email,
   };
