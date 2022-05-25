@@ -26,11 +26,7 @@ export function links() {
 export const loader: LoaderFunction = async ({ request, params }) => {
   const currentUser = await getCurrentUserOrRedirect(request);
 
-  const slug = params.slug;
-
-  if (typeof slug !== "string") {
-    return redirect("/");
-  }
+  const slug = params.slug as string;
 
   // If the profile is undefined, the parent route will throw a 404
   const profile = (await getUserProfileBySlug(slug)) as UserProfile;
