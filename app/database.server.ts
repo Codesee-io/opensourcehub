@@ -5,6 +5,7 @@ import {
   getGitHubUserDataFromClaims,
 } from "./session.server";
 import { User, UserProfile } from "./types";
+import { deleteEmptyFields } from "./utils/delete-empty-fields";
 
 // The names of collections in Firestore. Don't change these unless you're
 // absolutely sure of what you're doing!
@@ -45,7 +46,7 @@ export async function createUser(session: Session) {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     githubLogin: githubUserData.login,
-    displayName: claims.name,
+    displayName: claims.name || githubUserData.login, // There isn't always a name in the claims!
     pictureUrl: claims.picture || githubUserData.picture,
     email: claims.email || githubUserData.email,
   };
@@ -123,7 +124,7 @@ export async function updateProfileForUser(
   await db
     .collection(USER_PROFILES_COLLECTION)
     .doc(profileKey)
-    .set(updatedProfile, { merge: true });
+    .set(deleteEmptyFields(updatedProfile), { merge: true });
 }
 
 /**
