@@ -22,6 +22,7 @@ export const action: ActionFunction = async ({ request }) => {
   const displayName = formData.get("displayName")?.toString();
   const twitterUrl = formData.get("twitter")?.toString();
   const linkedinUrl = formData.get("linkedin")?.toString();
+  const intro = formData.get("intro")?.toString();
 
   // The tags come in as a comma-delimited string, like
   // "bash,nextjs,javascript". They can also be an empty string.
@@ -43,6 +44,7 @@ export const action: ActionFunction = async ({ request }) => {
     techInterests,
     subjectInterests,
     roleInterests,
+    intro,
   };
 
   if (typeof displayName === "string" && displayName.length > 0) {

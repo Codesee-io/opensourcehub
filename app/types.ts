@@ -121,6 +121,7 @@ export type UserProfile = {
   linkedinUrl?: string;
   githubUrl?: string;
   pictureUrl?: string;
+  intro?: string;
   techInterests: string[];
   subjectInterests: string[];
   roleInterests: string[];

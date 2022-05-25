@@ -1,4 +1,5 @@
-.input[type="text"] {
+.input[type="text"],
+textarea.input {
   background-color: #fafbff;
   border: 1px solid #bdbdbd;
   border-radius: 12px;
@@ -9,13 +10,15 @@
   width: 100%;
 }
 
-.input[type="text"]:focus {
+.input[type="text"]:focus,
+textarea.input {
   border-color: theme("colors.light.interactive");
   outline: none;
   box-shadow: 0 0 0 1px theme("colors.light.interactive");
 }
 
-.input[type="text"]:read-only {
+.input[type="text"]:read-only,
+textarea.input:read-only {
   background-color: #f4f4f4;
   color: theme("colors.light.type-disabled");
 }
@@ -26,7 +29,8 @@
   font-weight: 600;
 }
 
-.input-label + .input[type="text"] {
+.input-label + .input[type="text"],
+.input-label + textarea.input {
   margin-top: 0.25rem;
 }
 
