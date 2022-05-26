@@ -16,7 +16,6 @@ import {
   getProjectsMetadata,
 } from "~/projects.server";
 import { getGitHubData } from "~/github.server";
-import RootLayout from "~/components/RootLayout";
 import SearchWrapper from "~/components/local-search/SearchWrapper";
 import BlogList from "~/components/BlogList";
 import ProjectList from "~/components/ProjectList";
@@ -62,7 +61,7 @@ export const loader: LoaderFunction = async () => {
     const api = new GhostContentAPI({
       url: process.env.GHOST_API_URL,
       key: process.env.GHOST_API_KEY,
-      version: "v3",
+      version: "v5.0", // v5.0 is correct, but Ghost borked their own versions
     });
 
     // By default, the Ghost Content API returns posts in reverse chronological
@@ -128,7 +127,7 @@ export default function Index() {
   }, [allLanguages, allSeeking, allTags]);
 
   return (
-    <RootLayout>
+    <>
       <div className="bg-gradient mx-auto pt-12 md:pt-24 mb-12">
         <h1 className="text-yellow-300 font-semibold text-3xl lg:text-4xl text-center mb-4">
           Connecting People and Projects
@@ -203,6 +202,6 @@ export default function Index() {
           />
         </div>
       </SearchWrapper>
-    </RootLayout>
+    </>
   );
 }

@@ -8,7 +8,6 @@ import EditIcon from "~/components/icons/EditIcon";
 import LinkedInIcon from "~/components/icons/LinkedInIcon";
 import TwitterIcon from "~/components/icons/TwitterIcon";
 import Interests from "~/components/profile/Interests";
-import RootLayout from "~/components/RootLayout";
 import { getUserProfileBySlug } from "~/database.server";
 import { getCurrentUser, getSession } from "~/session.server";
 import { UserProfile } from "~/types";
@@ -46,36 +45,13 @@ export function CatchBoundary() {
 
   if (caught.status === 404) {
     return (
-      <RootLayout>
-        <main className="max-w-xl mx-auto p-4 py-16">
-          <h2 className="font-semibold text-2xl mb-2 text-black-500">
-            There is profile here <span role="img">🙀</span>
-          </h2>
-          <p className="text-light-type-medium mb-4">
-            Maybe the URL is incorrect or the person you're looking took down
-            their profile.
-          </p>
-          <p>
-            <Link
-              to="/"
-              className="text-light-interactive font-semibold hover:underline"
-            >
-              Go home
-            </Link>
-          </p>
-        </main>
-      </RootLayout>
-    );
-  }
-
-  return (
-    <RootLayout>
       <main className="max-w-xl mx-auto p-4 py-16">
         <h2 className="font-semibold text-2xl mb-2 text-black-500">
-          {caught.status} {caught.statusText}
+          There is no profile here <span role="img">🙀</span>
         </h2>
         <p className="text-light-type-medium mb-4">
-          Something went terribly wrong
+          Maybe the URL is incorrect or the person you're looking took down
+          their profile.
         </p>
         <p>
           <Link
@@ -86,7 +62,26 @@ export function CatchBoundary() {
           </Link>
         </p>
       </main>
-    </RootLayout>
+    );
+  }
+
+  return (
+    <main className="max-w-xl mx-auto p-4 py-16">
+      <h2 className="font-semibold text-2xl mb-2 text-black-500">
+        {caught.status} {caught.statusText}
+      </h2>
+      <p className="text-light-type-medium mb-4">
+        Something went terribly wrong
+      </p>
+      <p>
+        <Link
+          to="/"
+          className="text-light-interactive font-semibold hover:underline"
+        >
+          Go home
+        </Link>
+      </p>
+    </main>
   );
 }
 
@@ -94,7 +89,7 @@ const ProfilePage: FC = () => {
   const { profile, canEdit, hasVerifiedDiscord } = useLoaderData<LoaderData>();
 
   return (
-    <RootLayout>
+    <>
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="bg-white border border-light-border p-6 rounded-lg">
           <div className="flex gap-6 mb-4 relative">
@@ -193,7 +188,7 @@ const ProfilePage: FC = () => {
         </div>
       </main>
       <Outlet />
-    </RootLayout>
+    </>
   );
 };
 

@@ -8,7 +8,6 @@ import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useSubmit } from "@remix-run/react";
 import { commitSession, getCurrentUser, getSession } from "~/session.server";
-import RootLayout from "~/components/RootLayout";
 import Button from "~/components/Button";
 import { getFirebaseClientConfig } from "~/firebase.server";
 import { initFirebaseClient } from "~/firebase.client";
@@ -121,14 +120,12 @@ const Login: FC = () => {
   };
 
   return (
-    <RootLayout>
-      <main className="px-4 py-12 max-w-2xl text-center mx-auto space-y-4">
-        <p className="text-black-400">
-          Use your GitHub account to log in and manage your profile.
-        </p>
-        <Button onClick={signIn}>Log in with GitHub</Button>
-      </main>
-    </RootLayout>
+    <main className="px-4 py-12 max-w-2xl text-center mx-auto space-y-4">
+      <p className="text-black-400">
+        Use your GitHub account to log in and manage your profile.
+      </p>
+      <Button onClick={signIn}>Log in with GitHub</Button>
+    </main>
   );
 };
 

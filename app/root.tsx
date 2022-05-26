@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -12,6 +12,8 @@ import {
 
 import tailwindStyles from "./styles/index.css";
 import gradientStyles from "~/styles/gradient.css";
+import { isLoggedIn } from "./session.server";
+import RootLayout from "./components/RootLayout";
 
 export function links() {
   return [
@@ -54,14 +56,20 @@ export const meta: MetaFunction = () => ({
   // "twitter:image:alt": "TODO",
 });
 
-export async function loader() {
+export const loader: LoaderFunction = async ({ request }) => {
   return json({
     fathomSiteId: process.env.FATHOM_SITE_ID,
+    isLoggedIn: await isLoggedIn(request),
   });
-}
+};
+
+type LoaderData = {
+  fathomSiteId?: string;
+  isLoggedIn: boolean;
+};
 
 export default function App() {
-  const { fathomSiteId } = useLoaderData<{ fathomSiteId?: string }>();
+  const { fathomSiteId, isLoggedIn } = useLoaderData<LoaderData>();
 
   return (
     <html lang="en">
@@ -70,7 +78,9 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-light-background-shaded">
-        <Outlet />
+        <RootLayout isLoggedIn={isLoggedIn}>
+          <Outlet />
+        </RootLayout>
         {fathomSiteId && (
           <script
             src="https://cdn.usefathom.com/script.js"

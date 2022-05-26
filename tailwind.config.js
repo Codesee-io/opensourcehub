@@ -22,7 +22,9 @@ module.exports = {
         ],
       },
       boxShadow: {
-        menu: "0px 4px 20px rgba(2, 20, 67, 0.12);",
+        menu: "0px 4px 20px rgba(2, 20, 67, 0.12)",
+        1: "0px 0px 2px rgba(0, 0, 0, 0.14), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",
+        2: "0px 3px 3px rgba(0, 0, 0, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 1px 8px rgba(0, 0, 0, 0.2)",
       },
       colors: {
         discord: {
@@ -38,6 +40,9 @@ module.exports = {
           "interactive-fill": "#eceaff",
           "background-shaded": "#f7f7f7",
           border: "rgba(0, 0, 0, .11)", // TODO I don't like this name because token names shouldn't dictate how they're used
+        },
+        brand: {
+          warm: "#E07862",
         },
         black: {
           30: "#fafafb",

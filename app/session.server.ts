@@ -136,3 +136,8 @@ export async function getCurrentUserOrRedirect(
 
   return user;
 }
+
+export async function isLoggedIn(request: Request) {
+  const session = await getSession(request.headers.get("Cookie"));
+  return session.has("idToken");
+}
