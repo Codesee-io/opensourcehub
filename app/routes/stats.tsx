@@ -15,20 +15,32 @@ export const loader: LoaderFunction = async () => {
 
   const { allLanguages, allTags, allSeeking } = getProjectsMetadata();
 
-  const data: LoaderValue = { allProjects, allLanguages, allTags, allSeeking };
+  const allMaintainers = Array.from(
+    new Set(allProjects.map((project) => project.attributes.maintainer))
+  );
+
+  const data: LoaderData = {
+    allProjects,
+    allLanguages,
+    allTags,
+    allSeeking,
+    allMaintainers,
+  };
 
   return json(data);
 };
 
-type LoaderValue = {
+type LoaderData = {
   allProjects: Project[];
   allLanguages: ProjectCategory[];
   allTags: ProjectCategory[];
   allSeeking: ProjectCategory[];
+  allMaintainers: string[];
 };
 
 const StatsPage: FC = () => {
-  const { allLanguages, allTags, allProjects } = useLoaderData<LoaderValue>();
+  const { allLanguages, allTags, allProjects, allMaintainers } =
+    useLoaderData<LoaderData>();
   const firstTimerFriendlyTag = allTags.find(
     (tag) => tag.fieldValue === "First Timer Friendly"
   );
@@ -58,7 +70,9 @@ const StatsPage: FC = () => {
         Raw project stats
       </h2>
       <ul className="list-disc list-inside mb-12">
-        <li>{numProjects} projects listed</li>
+        <li>
+          {numProjects} projects listed by {allMaintainers.length} maintainers
+        </li>
         <li>{numFirstTimerFriendlyIssues} 'First Timer Friendly' projects</li>
         <li>{numLanguages} languages and frameworks represented</li>
         <li>
