@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -12,6 +12,9 @@ import {
 
 import tailwindStyles from "./styles/index.css";
 import gradientStyles from "~/styles/gradient.css";
+import { getCurrentUserInfo } from "./session.server";
+import RootLayout from "./components/RootLayout";
+import { UserInfo } from "~/types";
 
 export function links() {
   return [
@@ -54,14 +57,21 @@ export const meta: MetaFunction = () => ({
   // "twitter:image:alt": "TODO",
 });
 
-export async function loader() {
-  return json({
+export const loader: LoaderFunction = async ({ request }) => {
+  const payload: LoaderData = {
     fathomSiteId: process.env.FATHOM_SITE_ID,
-  });
-}
+    userInfo: await getCurrentUserInfo(request),
+  };
+  return json(payload);
+};
+
+type LoaderData = {
+  fathomSiteId?: string;
+  userInfo: UserInfo;
+};
 
 export default function App() {
-  const { fathomSiteId } = useLoaderData<{ fathomSiteId?: string }>();
+  const { fathomSiteId, userInfo } = useLoaderData<LoaderData>();
 
   return (
     <html lang="en">
@@ -70,7 +80,9 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-light-background-shaded">
-        <Outlet />
+        <RootLayout userInfo={userInfo}>
+          <Outlet />
+        </RootLayout>
         {fathomSiteId && (
           <script
             src="https://cdn.usefathom.com/script.js"

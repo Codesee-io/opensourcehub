@@ -113,6 +113,8 @@ export type User = {
   pictureUrl?: string;
 };
 
+export type UserInfo = Pick<User, "githubLogin" | "displayName" | "pictureUrl">;
+
 export type UserProfile = {
   userId: string;
   displayName: string;

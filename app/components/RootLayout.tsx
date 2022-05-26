@@ -1,11 +1,16 @@
 import type { FC } from "react";
+import { UserInfo } from "~/types";
 import Footer from "./Footer";
 import Header from "./Header";
 
-const RootLayout: FC = ({ children }) => {
+type Props = {
+  userInfo: UserInfo;
+};
+
+const RootLayout: FC<Props> = ({ children, userInfo }) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <Header userInfo={userInfo} />
       <main className="flex-grow">{children}</main>
       <Footer />
     </div>

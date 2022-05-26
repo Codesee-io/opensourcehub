@@ -25,7 +25,7 @@ const BlogCard: FunctionComponent<Props> = ({ blogPost }) => {
             style={{
               width: 400,
               boxShadow:
-                "0 6px 10px 0 rgb(0 0 0 / 12%), 0 1px 18px 0 rgb(0 0 0 / 10%), 0 3px 5px 0 rgb(0 0 0 / 15%);",
+                "0 6px 10px 0 rgb(0 0 0 / 12%), 0 1px 18px 0 rgb(0 0 0 / 10%), 0 3px 5px 0 rgb(0 0 0 / 15%)",
             }}
           />
         </a>

@@ -1,5 +1,4 @@
 import type { MetaFunction } from "@remix-run/node";
-import RootLayout from "../components/RootLayout";
 import CallToAction from "../components/CallToAction";
 import ExternalLink from "../components/ExternalLink";
 import { HOW_TO_LIST_PROJECT_LINK } from "../utils/constants";
@@ -10,7 +9,7 @@ export const meta: MetaFunction = () => ({
 
 const About = () => {
   return (
-    <RootLayout>
+    <>
       <header className="mx-auto max-w-2xl px-4 mb-8 pt-12 text-center">
         <h1 className="text-2xl my-3 text-center">Let's onboard better.</h1>
         <p className="text-center max-w-sm mx-auto mb-6">
@@ -52,7 +51,7 @@ const About = () => {
           </p>
         </div>
       </main>
-    </RootLayout>
+    </>
   );
 };
 

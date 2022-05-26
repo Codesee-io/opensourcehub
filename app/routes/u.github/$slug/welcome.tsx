@@ -23,7 +23,11 @@ export function links() {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const currentUser = await getCurrentUserOrRedirect(request);
-  return json({ user: currentUser });
+  return json({ user: currentUser } as LoaderData);
+};
+
+type LoaderData = {
+  user: User;
 };
 
 type TagsState = {
@@ -33,7 +37,7 @@ type TagsState = {
 };
 
 const Welcome: FC = () => {
-  const { user } = useLoaderData<{ user: User }>();
+  const { user } = useLoaderData<LoaderData>();
 
   const [tags, setTags] = useState<TagsState>({
     techInterests: [],
