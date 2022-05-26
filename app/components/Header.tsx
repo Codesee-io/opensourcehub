@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Link } from "@remix-run/react";
 import { RESOURCES_LINK, ABOUT_LINK, DISCORD_LINK } from "../utils/constants";
-// import CallToAction from "./CallToAction";
 import NavLink from "./NavLink";
 import logo from "~/images/logo.png";
 import DiscordIcon from "./icons/DiscordIcon";
@@ -37,12 +36,12 @@ const Header: FC<Props> = ({ userInfo }) => {
               </div>
             </NavLink>
           </div>
-          {/* Hide the Log in/out buttons for now  */}
+          {/* Hide the Log in/out buttons for now  
           {userInfo ? (
             <HeaderDropdown userInfo={userInfo} />
           ) : (
             <NavLink to="/login">Log in</NavLink>
-          )}
+          )}*/}
         </div>
       </div>
     </header>

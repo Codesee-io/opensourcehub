@@ -2,6 +2,7 @@ import { Form, Link } from "@remix-run/react";
 import cx from "classnames";
 import { FC, useEffect, useRef, useState } from "react";
 import { UserInfo } from "~/types";
+import UserIcon from "./icons/UserIcon";
 
 type Props = {
   userInfo: UserInfo;
@@ -12,10 +13,7 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
+  useEffect(function closeOnClickOutside() {
     function handleClickOutside(event: Event) {
       if (
         containerRef.current &&
@@ -25,23 +23,22 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
         setMenuIsOpen(false);
       }
     }
-    // Bind the event listener
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
 
-  // TODO close the dropdown when an item is clicked
-
   return (
     <div className="relative flex ml-6" ref={containerRef}>
       <button
-        className="bg-light-interactive-fill rounded-full w-8 h-8"
+        className="p-1 supports-hover:hover:text-yellow-300 rounded-full"
         type="button"
         onClick={() => setMenuIsOpen((prev) => !prev)}
-      ></button>
+      >
+        <UserIcon className="w-6 h-6" />
+      </button>
       <div
         className={cx(
           "bg-white top-full mt-2 rounded-lg py-2 -right-2 w-56 flex flex-col shadow-2",
@@ -52,26 +49,36 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
         )}
       >
         <span className="bottom-full right-4 border-8 border-transparent border-b-white absolute w-0 h-0" />
-        <div className="flex gap-4">
+        <div className="flex gap-2 px-4 py-2 border-b mb-2">
           {userInfo.pictureUrl && (
             <img
               src={userInfo.pictureUrl}
-              className="w-5 h-5 rounded-full"
+              className="w-10 h-10 rounded-full"
               alt="Your avatar"
             />
           )}
           <div>
-            <p>{userInfo.displayName}</p>
-            <p>{userInfo.githubLogin}</p>
+            <p className="text-sm text-light-type font-semibold">
+              {userInfo.displayName}
+            </p>
+            <p className="text-xs text-light-type-medium">
+              {userInfo.githubLogin}
+            </p>
           </div>
         </div>
         <Link
           to="/profile"
           className="text-sm text-light-type hover:text-light-interactive hover:bg-light-interactive-fill px-4 py-2"
+          onClick={() => setMenuIsOpen((prev) => !prev)}
         >
           Profile
         </Link>
-        <Form method="post" action="/logout" className="w-full">
+        <Form
+          method="post"
+          action="/logout"
+          className="w-full"
+          onSubmit={() => setMenuIsOpen((prev) => !prev)}
+        >
           <button className="text-sm w-full text-left text-brand-warm hover:bg-light-interactive-fill px-4 py-2">
             Log out
           </button>
