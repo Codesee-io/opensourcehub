@@ -55,13 +55,13 @@ const Edit: FC = () => {
   const { profileRoute, profile } = useLoaderData<LoaderData>();
 
   const [tags, setTags] = useState<TagsState>({
-    techInterests: profile.techInterests
+    techInterests: (profile.techInterests ?? [])
       .map((i) => getTag("techInterests", i))
       .map((t) => ({ label: t.label, value: t.id })),
-    roleInterests: profile.roleInterests
+    roleInterests: (profile.roleInterests ?? [])
       .map((i) => getTag("roleInterests", i))
       .map((t) => ({ label: t.label, value: t.id })),
-    subjectInterests: profile.subjectInterests
+    subjectInterests: (profile.subjectInterests ?? [])
       .map((i) => getTag("subjectInterests", i))
       .map((t) => ({ label: t.label, value: t.id })),
   });

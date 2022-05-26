@@ -123,9 +123,9 @@ export type UserProfile = {
   githubUrl?: string;
   pictureUrl?: string;
   intro?: string;
-  techInterests: string[];
-  subjectInterests: string[];
-  roleInterests: string[];
+  techInterests?: string[];
+  subjectInterests?: string[];
+  roleInterests?: string[];
 };
 
 export type Tag = {

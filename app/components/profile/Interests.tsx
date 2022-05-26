@@ -4,13 +4,13 @@ import { getTag } from "~/utils/tags";
 import Tag from "../Tag";
 
 const Interests: FC<UserProfile> = (props) => {
-  const techInterests = props.techInterests.map((interest) =>
+  const techInterests = (props.techInterests ?? []).map((interest) =>
     getTag("techInterests", interest)
   );
-  const subjectInterests = props.subjectInterests.map((interest) =>
+  const subjectInterests = (props.subjectInterests ?? []).map((interest) =>
     getTag("subjectInterests", interest)
   );
-  const roleInterests = props.roleInterests.map((interest) =>
+  const roleInterests = (props.roleInterests ?? []).map((interest) =>
     getTag("roleInterests", interest)
   );
 
