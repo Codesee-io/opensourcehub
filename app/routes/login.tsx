@@ -1,5 +1,9 @@
 import type { FC } from "react";
-import type { LoaderFunction, ActionFunction } from "@remix-run/node";
+import type {
+  LoaderFunction,
+  ActionFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useSubmit } from "@remix-run/react";
@@ -13,6 +17,10 @@ import {
   createUser,
   getUserProfileBySlug,
 } from "~/database.server";
+
+export const meta: MetaFunction = () => ({
+  title: "Log in to Open-Source Hub",
+});
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));

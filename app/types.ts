@@ -28,6 +28,7 @@ export type ProjectAttributes = {
     title?: string;
     url?: string;
   }[];
+  maintainer: string;
 };
 
 export type ProjectCategory = {
