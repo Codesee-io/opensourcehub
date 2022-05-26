@@ -3,7 +3,7 @@ import { createCookieSessionStorage, redirect, Session } from "@remix-run/node";
 import { DecodedIdToken } from "firebase-admin/auth";
 import { getUserByUid } from "./database.server";
 import { auth } from "./firebase.server";
-import { User } from "./types";
+import { User, UserInfo } from "./types";
 
 /**
  * The fake access token fabricated by the Firebase auth emulator.
@@ -140,4 +140,19 @@ export async function getCurrentUserOrRedirect(
 export async function isLoggedIn(request: Request) {
   const session = await getSession(request.headers.get("Cookie"));
   return session.has("idToken");
+}
+
+export async function getCurrentUserInfo(request: Request) {
+  const session = await getSession(request.headers.get("Cookie"));
+  const user = await getCurrentUser(session);
+  if (!user) {
+    return null;
+  }
+
+  const userInfo: UserInfo = {
+    displayName: user.displayName,
+    githubLogin: user.githubLogin,
+    pictureUrl: user.pictureUrl,
+  };
+  return userInfo;
 }

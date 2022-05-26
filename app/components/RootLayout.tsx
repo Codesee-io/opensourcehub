@@ -1,15 +1,16 @@
 import type { FC } from "react";
+import { UserInfo } from "~/types";
 import Footer from "./Footer";
 import Header from "./Header";
 
 type Props = {
-  isLoggedIn: boolean;
+  userInfo: UserInfo;
 };
 
-const RootLayout: FC<Props> = ({ children, isLoggedIn }) => {
+const RootLayout: FC<Props> = ({ children, userInfo }) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header isLoggedIn={isLoggedIn} />
+      <Header userInfo={userInfo} />
       <main className="flex-grow">{children}</main>
       <Footer />
     </div>

@@ -6,12 +6,13 @@ import NavLink from "./NavLink";
 import logo from "~/images/logo.png";
 import DiscordIcon from "./icons/DiscordIcon";
 import HeaderDropdown from "./HeaderDropdown";
+import { UserInfo } from "~/types";
 
 type Props = {
-  isLoggedIn: boolean;
+  userInfo: UserInfo;
 };
 
-const Header: FC<Props> = ({ isLoggedIn }) => {
+const Header: FC<Props> = ({ userInfo }) => {
   return (
     <header className="bg-indigo-850 sm:sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
@@ -36,12 +37,12 @@ const Header: FC<Props> = ({ isLoggedIn }) => {
               </div>
             </NavLink>
           </div>
-          {/* Hide the Log in/out buttons for now 
-          {isLoggedIn ? (
-            <HeaderDropdown />
+          {/* Hide the Log in/out buttons for now  */}
+          {userInfo ? (
+            <HeaderDropdown userInfo={userInfo} />
           ) : (
             <NavLink to="/login">Log in</NavLink>
-          )}*/}
+          )}
         </div>
       </div>
     </header>

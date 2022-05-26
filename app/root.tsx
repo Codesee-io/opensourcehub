@@ -12,8 +12,9 @@ import {
 
 import tailwindStyles from "./styles/index.css";
 import gradientStyles from "~/styles/gradient.css";
-import { isLoggedIn } from "./session.server";
+import { getCurrentUserInfo } from "./session.server";
 import RootLayout from "./components/RootLayout";
+import { UserInfo } from "~/types";
 
 export function links() {
   return [
@@ -57,19 +58,20 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
-  return json({
+  const payload: LoaderData = {
     fathomSiteId: process.env.FATHOM_SITE_ID,
-    isLoggedIn: await isLoggedIn(request),
-  });
+    userInfo: await getCurrentUserInfo(request),
+  };
+  return json(payload);
 };
 
 type LoaderData = {
   fathomSiteId?: string;
-  isLoggedIn: boolean;
+  userInfo: UserInfo;
 };
 
 export default function App() {
-  const { fathomSiteId, isLoggedIn } = useLoaderData<LoaderData>();
+  const { fathomSiteId, userInfo } = useLoaderData<LoaderData>();
 
   return (
     <html lang="en">
@@ -78,7 +80,7 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-light-background-shaded">
-        <RootLayout isLoggedIn={isLoggedIn}>
+        <RootLayout userInfo={userInfo}>
           <Outlet />
         </RootLayout>
         {fathomSiteId && (

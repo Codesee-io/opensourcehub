@@ -1,8 +1,13 @@
 import { Form, Link } from "@remix-run/react";
 import cx from "classnames";
 import { FC, useEffect, useRef, useState } from "react";
+import { UserInfo } from "~/types";
 
-const HeaderDropdown: FC = () => {
+type Props = {
+  userInfo: UserInfo;
+};
+
+const HeaderDropdown: FC<Props> = ({ userInfo }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,19 +38,33 @@ const HeaderDropdown: FC = () => {
   return (
     <div className="relative flex ml-6" ref={containerRef}>
       <button
-        className="bg-light-interactive-fill rounded-full w-6 h-6"
+        className="bg-light-interactive-fill rounded-full w-8 h-8"
         type="button"
         onClick={() => setMenuIsOpen((prev) => !prev)}
       ></button>
       <div
         className={cx(
-          "bg-white top-full rounded-lg py-2 right-0 w-56 flex flex-col shadow-2",
+          "bg-white top-full mt-2 rounded-lg py-2 -right-2 w-56 flex flex-col shadow-2",
           {
             hidden: !menuIsOpen,
             absolute: menuIsOpen,
           }
         )}
       >
+        <span className="bottom-full right-4 border-8 border-transparent border-b-white absolute w-0 h-0" />
+        <div className="flex gap-4">
+          {userInfo.pictureUrl && (
+            <img
+              src={userInfo.pictureUrl}
+              className="w-5 h-5 rounded-full"
+              alt="Your avatar"
+            />
+          )}
+          <div>
+            <p>{userInfo.displayName}</p>
+            <p>{userInfo.githubLogin}</p>
+          </div>
+        </div>
         <Link
           to="/profile"
           className="text-sm text-light-type hover:text-light-interactive hover:bg-light-interactive-fill px-4 py-2"
