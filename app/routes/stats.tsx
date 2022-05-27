@@ -1,5 +1,9 @@
 import type { FC } from "react";
-import type { MetaFunction, LoaderFunction } from "@remix-run/node";
+import type {
+  MetaFunction,
+  LoaderFunction,
+  HeadersFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
@@ -9,6 +13,13 @@ import type { Project, ProjectCategory } from "../types";
 export const meta: MetaFunction = () => ({
   title: "Stats | Open-Source Hub",
 });
+
+export const headers: HeadersFunction = () => {
+  return {
+    // We don't want search engines to index this page
+    "X-Robots-Tag": "noindex",
+  };
+};
 
 export const loader: LoaderFunction = async () => {
   const allProjects = getProjects();
