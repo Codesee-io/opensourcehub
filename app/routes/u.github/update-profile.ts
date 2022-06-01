@@ -1,6 +1,6 @@
 import { ActionFunction, redirect } from "@remix-run/node";
 import { updateProfileForUser } from "~/database.server";
-import { getCurrentUser, getSession } from "~/session.server";
+import { getCurrentUser } from "~/session.server";
 import { UserProfile } from "~/types";
 import { getProfileRouteForUser } from "~/utils/routes";
 
@@ -10,8 +10,7 @@ function arrayFromString(value?: string): string[] {
 }
 
 export const action: ActionFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const currentUser = await getCurrentUser(session);
+  const currentUser = await getCurrentUser(request);
 
   if (!currentUser) {
     throw new Error("You must be logged in to save your profile");

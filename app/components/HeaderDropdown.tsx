@@ -57,11 +57,17 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
               alt="Your avatar"
             />
           )}
-          <div>
-            <p className="text-sm text-light-type font-semibold">
+          <div className="overflow-hidden">
+            <p
+              className="text-sm text-light-type font-semibold truncate"
+              title={userInfo.displayName}
+            >
               {userInfo.displayName}
             </p>
-            <p className="text-xs text-light-type-medium">
+            <p
+              className="text-xs text-light-type-medium truncate"
+              title={userInfo.githubLogin}
+            >
               {userInfo.githubLogin}
             </p>
           </div>
