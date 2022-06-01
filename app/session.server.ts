@@ -115,20 +115,6 @@ export async function getCurrentSession(request: Request) {
   }
 }
 
-export async function getVerifiedUserToken(request: Request) {
-  const cookieSession = await storage.getSession(request.headers.get("Cookie"));
-  const token = cookieSession.get("token");
-  if (!token) return null;
-
-  try {
-    const tokenUser = await auth.verifySessionCookie(token, true);
-    return tokenUser;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
-
 export async function destroyUserSession(request: Request, redirectTo = "/") {
   const session = await storage.getSession(request.headers.get("Cookie"));
   const newCookie = await storage.destroySession(session);
@@ -170,30 +156,13 @@ export async function getGitHubUserDataFromClaims(
   }
 }
 
-export async function getClaimsFromSession(request: Request) {
-  const cookieSession = await storage.getSession(request.headers.get("Cookie"));
-  const token = cookieSession.get("token");
-
-  let decodedClaims: DecodedIdToken | undefined;
-
-  try {
-    // https://firebase.google.com/docs/auth/admin/verify-id-tokens
-    decodedClaims = await auth.verifySessionCookie(token);
-  } catch (err) {
-    // The session isn't valid anymore so return undefined
-    return null;
-  }
-
-  return decodedClaims;
-}
-
 /**
  * Returns the user that's currently logged in, or null if there is none.
  *
  * @see https://firebase.google.com/docs/auth/admin/verify-id-tokens#web
  */
 export async function getCurrentUser(request: Request): Promise<User | null> {
-  const claims = await getClaimsFromSession(request);
+  const claims = await getCurrentSession(request);
 
   if (!claims) {
     return null;
