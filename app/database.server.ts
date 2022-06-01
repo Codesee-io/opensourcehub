@@ -1,9 +1,6 @@
-import { Session } from "@remix-run/node";
+import { DecodedIdToken } from "firebase-admin/auth";
 import { db } from "./firebase.server";
-import {
-  getClaimsFromSession,
-  getGitHubUserDataFromClaims,
-} from "./session.server";
+import { getGitHubUserDataFromClaims } from "./session.server";
 import { User, UserProfile } from "./types";
 import { deleteEmptyFields } from "./utils/delete-empty-fields";
 
@@ -26,29 +23,25 @@ function getProfileKeyForSlug(slug: string) {
  * Create a new user in Firestore and return it. This makes a call to the GitHub
  * API with the user's access token to access and store their `login`.
  */
-export async function createUser(session: Session) {
-  // We need to make an API call to GitHub to get the user's login
-  const claims = await getClaimsFromSession(session);
-
-  if (!claims) {
-    throw new Error("Unable to decode claims before creating user");
-  }
-
+export async function createUser(
+  decodedToken: DecodedIdToken,
+  accessToken: string
+) {
   const githubUserData = await getGitHubUserDataFromClaims(
-    session.get("accessToken"),
-    claims
+    accessToken,
+    decodedToken
   );
 
-  const uid = claims.uid;
+  const uid = decodedToken.uid;
 
   const user: User = {
     uid,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     githubLogin: githubUserData.login,
-    displayName: claims.name || githubUserData.login, // There isn't always a name in the claims!
-    pictureUrl: claims.picture || githubUserData.picture,
-    email: claims.email || githubUserData.email,
+    displayName: decodedToken.name || githubUserData.login, // There isn't always a name in the claims!
+    pictureUrl: decodedToken.picture || githubUserData.picture,
+    email: decodedToken.email || githubUserData.email,
   };
 
   // The create() method fails if the user already exists

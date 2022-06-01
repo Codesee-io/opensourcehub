@@ -1,21 +1,11 @@
-import { json, LoaderFunction, redirect } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { useSubmit } from "@remix-run/react";
 import { FC, useEffect } from "react";
-import {
-  destroySession,
-  getCurrentUserOrRedirect,
-  getSession,
-} from "~/session.server";
+import { destroyUserSession, getCurrentUserOrRedirect } from "~/session.server";
 
 export const action: ActionFunction = async ({ request }) => {
-  let session = await getSession(request.headers.get("Cookie"));
-  session.unset("idToken");
-  session.unset("accessToken");
-
-  return redirect("/", {
-    headers: { "Set-Cookie": await destroySession(session) },
-  });
+  return await destroyUserSession(request);
 };
 
 export const loader: LoaderFunction = async ({ request }) => {

@@ -7,36 +7,26 @@ import type {
 import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useSubmit } from "@remix-run/react";
-import { commitSession, getCurrentUser, getSession } from "~/session.server";
+import { createUserSession, isLoggedIn } from "~/session.server";
 import Button from "~/components/Button";
 import { getFirebaseClientConfig } from "~/firebase.server";
 import { initFirebaseClient } from "~/firebase.client";
-import {
-  createProfileForUser,
-  createUser,
-  getUserProfileBySlug,
-} from "~/database.server";
 
 export const meta: MetaFunction = () => ({
   title: "Log in to Open-Source Hub",
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-
-  if (session.has("idToken")) {
+  if (await isLoggedIn(request)) {
     // Redirect to the profile page if we're already signed in
     return redirect("/profile");
   }
 
   const data = {
-    error: session.get("error"),
     firebaseClientConfig: getFirebaseClientConfig(),
   };
 
-  return json(data, {
-    headers: { "Set-Cookie": await commitSession(session) },
-  });
+  return json(data);
 };
 
 /**
@@ -46,48 +36,14 @@ export const loader: LoaderFunction = async ({ request }) => {
  */
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const idToken = formData.get("idToken");
-  const accessToken = formData.get("accessToken");
+  const idToken = formData.get("idToken")?.toString();
+  const accessToken = formData.get("accessToken")?.toString();
 
-  // Save the session in a cookie with the user's tokens
-  let session = await getSession(request.headers.get("Cookie"));
-  session.set("idToken", idToken);
-  session.set("accessToken", accessToken);
-
-  // Get or create a user for this person
-  let user = await getCurrentUser(session);
-  if (!user) {
-    // The user needs to be created
-    user = await createUser(session);
+  if (!idToken || !accessToken) {
+    throw new Error("Missing idToken or accessToken when attempting to log in");
   }
 
-  if (!user) {
-    throw new Error(
-      "Unable to create a profile, please refresh the page and try again"
-    );
-  }
-
-  // Check whether the user has a profile page. If not, ask them to create one.
-  let redirectPath: string;
-  const profile = await getUserProfileBySlug(user.githubLogin);
-
-  if (profile) {
-    // If the user already has a profile, we redirect to it
-    redirectPath = `/u/github/${user.githubLogin}`;
-  } else {
-    // If the user doesn't have a profile yet, we create one and send them to
-    // the Welcome page to enter some information
-    await createProfileForUser(user);
-
-    redirectPath = `/u/github/${user.githubLogin}/welcome`;
-  }
-
-  // Send the user to the main page after login
-  return redirect(redirectPath, {
-    headers: {
-      "Set-Cookie": await commitSession(session),
-    },
-  });
+  return await createUserSession(idToken, accessToken);
 };
 
 const Login: FC = () => {

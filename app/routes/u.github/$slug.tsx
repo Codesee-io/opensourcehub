@@ -9,14 +9,13 @@ import LinkedInIcon from "~/components/icons/LinkedInIcon";
 import TwitterIcon from "~/components/icons/TwitterIcon";
 import Interests from "~/components/profile/Interests";
 import { getUserProfileBySlug } from "~/database.server";
-import { getCurrentUser, getSession } from "~/session.server";
+import { getCurrentUser } from "~/session.server";
 import { UserProfile } from "~/types";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const slug = params.slug as string; // This can't be undefined or we wouldn't be here
 
-  const session = await getSession(request.headers.get("Cookie"));
-  const user = await getCurrentUser(session);
+  const user = await getCurrentUser(request);
   const profile = await getUserProfileBySlug(slug);
 
   if (!profile) {
