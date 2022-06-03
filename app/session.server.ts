@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import { createCookieSessionStorage, redirect, Session } from "@remix-run/node";
+import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import { DecodedIdToken } from "firebase-admin/auth";
 import {
   createProfileForUser,
@@ -179,20 +179,10 @@ export async function getCurrentUserOrRedirect(
   request: Request,
   redirectTo = "/login"
 ) {
-  const session = await storage.getSession(request.headers.get("Cookie"));
   const user = await getCurrentUser(request);
 
   if (!user) {
-    session.unset("idToken");
-    session.unset("accessToken");
-    throw redirect(redirectTo, {
-      headers: {
-        // It's possible that there is no current user but that the session still
-        // exists. So to avoid infinite redirects, we destroy the session before
-        // redirecting.
-        "Set-Cookie": await storage.destroySession(session),
-      },
-    });
+    return destroyUserSession(request, redirectTo);
   }
 
   return user;

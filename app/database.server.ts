@@ -1,13 +1,21 @@
 import { DecodedIdToken } from "firebase-admin/auth";
+import { nanoid } from "nanoid";
 import { db } from "./firebase.server";
 import { getGitHubUserDataFromClaims } from "./session.server";
-import { User, UserProfile } from "./types";
+import {
+  CreatePortfolioItemPayload,
+  PortfolioItem,
+  UpdatePortfolioItemPayload,
+  User,
+  UserProfile,
+} from "./types";
 import { deleteEmptyFields } from "./utils/delete-empty-fields";
 
 // The names of collections in Firestore. Don't change these unless you're
 // absolutely sure of what you're doing!
 const USER_PROFILES_COLLECTION = "profiles";
 const USERS_COLLECTION = "users";
+const PORTFOLIO_ITEMS_COLLECTION = "portfolioItems";
 
 const GITHUB_PROFILE_PREFIX = "github_";
 
@@ -153,4 +161,67 @@ export async function getUserProfileBySlug(
   } catch (_) {
     return null;
   }
+}
+
+export async function createPortfolioItem(item: CreatePortfolioItemPayload) {
+  const portfolioItem: PortfolioItem = {
+    ...item,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    id: nanoid(),
+  };
+
+  try {
+    await db
+      .collection(PORTFOLIO_ITEMS_COLLECTION)
+      .doc(portfolioItem.id)
+      .create(portfolioItem);
+
+    return portfolioItem;
+  } catch (_) {
+    return null;
+  }
+}
+
+export async function updatePortfolioItem(
+  id: string,
+  item: UpdatePortfolioItemPayload
+) {
+  const portfolioItem: Partial<PortfolioItem> = {
+    ...item,
+    updatedAt: new Date().toISOString(),
+  };
+
+  await db
+    .collection(PORTFOLIO_ITEMS_COLLECTION)
+    .doc(id)
+    .set(portfolioItem, { merge: true });
+}
+
+export async function getPortfolioItemById(id: string) {
+  const itemOrNull = await db
+    .collection(PORTFOLIO_ITEMS_COLLECTION)
+    .doc(id)
+    .get();
+
+  try {
+    return itemOrNull.data() as PortfolioItem;
+  } catch (_) {
+    return null;
+  }
+}
+
+export async function getPortfolioItemsForUserId(userId: string) {
+  const snapshot = await db
+    .collection(PORTFOLIO_ITEMS_COLLECTION)
+    .where("userId", "==", userId)
+    .get();
+
+  const items: PortfolioItem[] = [];
+
+  snapshot.forEach((doc) => {
+    items.push(doc.data() as PortfolioItem);
+  });
+
+  return items;
 }

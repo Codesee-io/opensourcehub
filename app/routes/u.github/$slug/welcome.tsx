@@ -1,4 +1,4 @@
-import { json, LoaderFunction, redirect } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import { FC, useState } from "react";
 import TextField from "~/components/TextField";
@@ -193,7 +193,7 @@ const Welcome: FC = () => {
                 >
                   Cancel
                 </Link>
-                <Button type="submit" style={{ width: 250 }} className="h-12">
+                <Button style={{ width: 250 }} className="h-12">
                   Save
                 </Button>
               </div>

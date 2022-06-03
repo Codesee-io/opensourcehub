@@ -1,13 +1,15 @@
-import { ButtonHTMLAttributes, FunctionComponent } from "react";
+import { Link } from "@remix-run/react";
+import { RemixLinkProps } from "@remix-run/react/components";
 import cx from "classnames";
+import { FC } from "react";
 import { linkStyle } from "~/utils/linkStyle";
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+type Props = RemixLinkProps & {
   format?: string;
   inverse?: boolean;
 };
 
-const Button: FunctionComponent<Props> = ({
+const ButtonLink: FC<Props> = ({
   children,
   className,
   format,
@@ -15,17 +17,17 @@ const Button: FunctionComponent<Props> = ({
   ...otherProps
 }) => {
   return (
-    <button
+    <Link
+      {...otherProps}
       className={cx(
         "inline-flex rounded-lg px-8 py-1 font-semibold",
         linkStyle({ format, inverse }),
         className
       )}
-      {...otherProps}
     >
       {children}
-    </button>
+    </Link>
   );
 };
 
-export default Button;
+export default ButtonLink;

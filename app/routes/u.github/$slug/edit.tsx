@@ -185,7 +185,7 @@ const Edit: FC = () => {
                 >
                   Cancel
                 </Link>
-                <Button type="submit">Update</Button>
+                <Button>Save changes</Button>
               </div>
             </Form>
           </div>

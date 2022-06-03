@@ -128,10 +128,59 @@ export type UserProfile = {
   techInterests?: string[];
   subjectInterests?: string[];
   roleInterests?: string[];
+  portfolioItems?: string[];
 };
 
 export type Tag = {
   id: string;
   label: string;
   color: string;
+};
+
+export type PortfolioItem = {
+  id: string;
+  title: string;
+  description: string;
+  pullRequestUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  /**
+   * An ISO 8601 date like YYYY-MM-DD. Does not include time
+   */
+  dateCompleted: string;
+  reviewMapImageUrl?: string;
+  userId: string;
+};
+
+export type CreatePortfolioItemPayload = Pick<
+  PortfolioItem,
+  | "title"
+  | "description"
+  | "pullRequestUrl"
+  | "dateCompleted"
+  | "reviewMapImageUrl"
+  | "userId"
+>;
+
+export type UpdatePortfolioItemPayload = Pick<
+  PortfolioItem,
+  "title" | "description" | "dateCompleted"
+>;
+
+export type PullRequestDetails = {
+  title: string;
+  author: {
+    login: string;
+    url: string;
+  };
+  url: string;
+  number: number;
+  merged: boolean;
+  participants: {
+    nodes: Array<{ login: string }>;
+  };
+  repository: {
+    nameWithOwner: string;
+    url: string;
+  };
 };
