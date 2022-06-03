@@ -31,17 +31,23 @@ module.exports = {
           blurple: "#5865F2",
         },
         light: {
+          // TODO I don't like theses names because token names shouldn't
+          // dictate how they're used, and it's difficult to figure out the
+          // relative values each value
           type: "rgba(0, 0, 0, .87)",
           "type-medium": "rgba(0, 0, 0, .61)",
           "type-low": "rgba(0, 0, 0, .43)",
           "type-disabled": "rgba(0, 0, 0, .23)",
+          "type-disabled-solid": "#bdbdbd",
           "type-negative": "rgba(255, 255, 255, .87)",
           interactive: "#5f4de7",
           "interactive-fill": "#eceaff",
+          "interactive-2-background": "#fafbff",
           "background-shaded": "#f7f7f7",
-          border: "rgba(0, 0, 0, .11)", // TODO I don't like this name because token names shouldn't dictate how they're used
+          border: "rgba(0, 0, 0, .11)",
         },
         brand: {
+          primary: "#352B90",
           warm: "#E07862",
         },
         black: {

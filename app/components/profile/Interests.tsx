@@ -15,7 +15,7 @@ const Interests: FC<UserProfile> = (props) => {
   );
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col md:flex-row gap-4">
       {techInterests.length > 0 && (
         <div className="flex-1">
           <div className="text-lg text-light-type mb-2">Tech interests</div>

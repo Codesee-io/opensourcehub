@@ -8,15 +8,37 @@ import EditIcon from "~/components/icons/EditIcon";
 import LinkedInIcon from "~/components/icons/LinkedInIcon";
 import TwitterIcon from "~/components/icons/TwitterIcon";
 import Interests from "~/components/profile/Interests";
-import { getUserProfileBySlug } from "~/database.server";
+import {
+  getPortfolioItemsForUserId,
+  getUserProfileBySlug,
+} from "~/database.server";
 import { getCurrentUser } from "~/session.server";
-import { UserProfile } from "~/types";
+import { getProjectByRepoUrl } from "~/projects.server";
+import { PortfolioItem, Project, UserProfile } from "~/types";
+import { parseMarkdown } from "~/utils/markdown";
+import markdownStyles from "~/styles/markdown.css";
+import DocumentPinIcon from "~/components/icons/DocumentPinIcon";
+import ButtonLink from "~/components/ButtonLink";
+import { getPortfolioItemEditRoute } from "~/utils/routes";
+import PortfolioItemCard from "~/components/PortfolioItemCard";
+
+export function links() {
+  return [{ rel: "stylesheet", href: markdownStyles }];
+}
+
+type PortfolioItemWithExtras = PortfolioItem & {
+  project?: Project;
+  editRoute?: string;
+};
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const slug = params.slug as string; // This can't be undefined or we wouldn't be here
 
-  const user = await getCurrentUser(request);
-  const profile = await getUserProfileBySlug(slug);
+  // Grab the user and the matching profile in parallel
+  const [user, profile] = await Promise.all([
+    getCurrentUser(request),
+    getUserProfileBySlug(slug),
+  ]);
 
   if (!profile) {
     throw new Response("Not Found", {
@@ -24,10 +46,21 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     });
   }
 
+  const portfolioItems = await getPortfolioItemsForUserId(profile?.userId);
+
+  const portfolioItemsWithProjects: PortfolioItemWithExtras[] =
+    portfolioItems.map((item) => ({
+      ...item,
+      description: parseMarkdown(item.description),
+      project: getProjectByRepoUrl(item.pullRequestUrl),
+      editRoute: user ? getPortfolioItemEditRoute(user, item) : undefined,
+    }));
+
   const payload: LoaderData = {
     profile,
     canEdit: profile.userId === user?.uid,
     hasVerifiedDiscord: typeof user?.discordUserId === "string",
+    portfolioItems: portfolioItemsWithProjects,
   };
 
   return json(payload);
@@ -37,6 +70,7 @@ type LoaderData = {
   profile: UserProfile;
   canEdit: boolean;
   hasVerifiedDiscord: boolean;
+  portfolioItems: PortfolioItemWithExtras[];
 };
 
 export function CatchBoundary() {
@@ -85,13 +119,14 @@ export function CatchBoundary() {
 }
 
 const ProfilePage: FC = () => {
-  const { profile, canEdit, hasVerifiedDiscord } = useLoaderData<LoaderData>();
+  const { profile, canEdit, hasVerifiedDiscord, portfolioItems } =
+    useLoaderData<LoaderData>();
 
   return (
     <>
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="bg-white border border-light-border p-6 rounded-lg">
-          <div className="flex gap-6 mb-4 relative">
+          <div className="flex flex-col md:flex-row gap-6 mb-4 relative">
             <div className="flex-shrink-0">
               {profile.pictureUrl && (
                 <img
@@ -185,6 +220,45 @@ const ProfilePage: FC = () => {
             </Form>
           )}
         </div>
+        <section className="mx-auto max-w-6xl my-8">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-light-type text-xl font-semibold">Portfolio</h2>
+            {canEdit && (
+              <Link
+                to="contribution"
+                className="font-semibold text-light-interactive supports-hover:hover:underline"
+              >
+                + Add contribution
+              </Link>
+            )}
+          </div>
+          {canEdit && portfolioItems.length === 0 && (
+            <div className="text-center space-y-4 p-6 border-2 border-dashed border-light-type-disabled rounded-lg">
+              <span className="inline-flex text-light-type-medium">
+                <DocumentPinIcon />
+              </span>
+              <p className="max-w-lg mx-auto">
+                List your favorite contributions on your profile! Your portfolio
+                will be visible by anyone who visits Open-Source Hub, so it's
+                your chance to shine ✨
+              </p>
+              <ButtonLink to="contribution" className="inline-block">
+                Add contribution
+              </ButtonLink>
+            </div>
+          )}
+          <div className="space-y-8 max-w-4xl">
+            {portfolioItems.map((item) => (
+              <PortfolioItemCard
+                key={item.id}
+                canEdit={canEdit}
+                portfolioItem={item}
+                editRoute={item.editRoute}
+                project={item.project}
+              />
+            ))}
+          </div>
+        </section>
       </main>
       <Outlet />
     </>

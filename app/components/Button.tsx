@@ -9,7 +9,6 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const Button: FunctionComponent<Props> = ({
   children,
-  type = "button",
   className,
   format,
   inverse,
@@ -18,11 +17,10 @@ const Button: FunctionComponent<Props> = ({
   return (
     <button
       className={cx(
-        "rounded-lg px-8 py-1 font-semibold",
+        "inline-flex items-center justify-center rounded-lg px-8 py-1 font-semibold",
         linkStyle({ format, inverse }),
         className
       )}
-      type={type}
       {...otherProps}
     >
       {children}

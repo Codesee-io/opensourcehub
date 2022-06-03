@@ -4,17 +4,8 @@ import parseFrontMatter from "front-matter";
 import invariant from "tiny-invariant";
 import type { Project } from "../types";
 import { getGitHubDataForProjects } from "./github-data";
-
-// Configure our markdown parser
-const md = require("markdown-it")({
-  html: true, // Allows HTML in the markdown
-  breaks: true, // Outputs new lines a <br/> tags
-  linkify: true, // Outputs link-like text as links
-});
-
-// Add support for Slack-style emojis :tada:
-const emoji = require("markdown-it-emoji");
-md.use(emoji);
+import { getRepoOwnerAndName, getSlugFromRepoUrl } from "./repo-url";
+import { parseMarkdown } from "./markdown";
 
 function postHasValidAttributes(attributes: any) {
   return (
@@ -36,30 +27,6 @@ async function getAllMdxFiles(dirName: string, files: string[]) {
   return files;
 }
 
-function getRepoOwnerAndName(repoUrl: string) {
-  const github = "https://github.com/";
-  const gitlab = "https://gitlab.com/";
-
-  if (repoUrl.startsWith(github)) {
-    const [owner, name] = repoUrl.slice(github.length).split("/");
-    return { owner, name };
-  }
-
-  if (repoUrl.startsWith(gitlab)) {
-    const [owner, name] = repoUrl.slice(gitlab.length).split("/");
-    return { owner, name };
-  }
-
-  throw new Error(
-    `Only GitHub and GitLab repositories are permitted at this time`
-  );
-}
-
-function getSlugFromRepoUrl(repoUrl: string) {
-  const { owner, name } = getRepoOwnerAndName(repoUrl);
-  return `${owner}/${name}`.toLowerCase();
-}
-
 const CONTRIBUTING_TAGS = ["<Contributing>", "</Contributing>"];
 const OVERVIEW_TAGS = ["<Overview>", "</Overview>"];
 
@@ -74,10 +41,6 @@ function extractSectionFromContent(
     return content.slice(from, to).trim();
   }
   return "";
-}
-
-function parseMarkdown(content: string) {
-  return md.render(content);
 }
 
 async function exportProjectsToJson() {
