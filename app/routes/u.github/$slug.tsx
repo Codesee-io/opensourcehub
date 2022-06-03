@@ -48,13 +48,19 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
   const portfolioItems = await getPortfolioItemsForUserId(profile?.userId);
 
-  const portfolioItemsWithProjects: PortfolioItemWithExtras[] =
-    portfolioItems.map((item) => ({
+  const portfolioItemsWithProjects: PortfolioItemWithExtras[] = portfolioItems
+    .map((item) => ({
       ...item,
       description: parseMarkdown(item.description),
       project: getProjectByRepoUrl(item.pullRequestUrl),
       editRoute: user ? getPortfolioItemEditRoute(user, item) : undefined,
-    }));
+    }))
+    .sort((a, b) => {
+      return (
+        new Date(b.dateCompleted).getTime() -
+        new Date(a.dateCompleted).getTime()
+      );
+    });
 
   const payload: LoaderData = {
     profile,
