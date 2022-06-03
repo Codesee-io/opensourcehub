@@ -126,10 +126,10 @@ const Contribution: FC = () => {
               />
             </div>
             <div className="flex items-center justify-end gap-4 pt-6">
-              <ButtonLink to={profileUrl} inverse>
+              <ButtonLink to={profileUrl} variant="secondary">
                 Cancel
               </ButtonLink>
-              <Button>Save</Button>
+              <Button variant="brand">Save</Button>
             </div>
           </Form>
         </div>

@@ -64,9 +64,7 @@ const PullRequestChecker: FC<Props> = (props) => {
               disabled={fetcher.state === "submitting"}
             />
           </div>
-          <Button format="secondary" disabled={fetcher.state === "submitting"}>
-            Check URL
-          </Button>
+          <Button disabled={fetcher.state === "submitting"}>Check URL</Button>
         </div>
       )}
     </fetcher.Form>

@@ -1,18 +1,14 @@
 import type { FC } from "react";
 import { Link } from "@remix-run/react";
-import CallToAction from "~/components/CallToAction";
 import {
   HOW_TO_LIST_PROJECT_LINK,
   DISCORD_LINK,
-  REPO_LINK,
   RESOURCES_LINK,
-  // SIGNIN_LINK,
-  // SIGNUP_LINK,
-  LINK_FORMATS,
   ABOUT_LINK,
 } from "~/utils/constants";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
 import logo from "~/images/logo.png";
+import { buttonStyle } from "~/utils/linkStyle";
 
 const Footer: FC = () => (
   <footer className="bg-gradient text-black-400 px-4 py-10">
@@ -20,33 +16,14 @@ const Footer: FC = () => (
       <img src={logo} alt="" className="my-2 mx-auto" style={{ height: 35 }} />
     </Link>
     <div className="flex items-center justify-center text-center px-2 mt-7">
-      <CallToAction
+      <a
         href={HOW_TO_LIST_PROJECT_LINK}
-        rel="noopener"
+        rel="noopener noreferrer"
         target="_blank"
-        format={LINK_FORMATS.primary}
-        inverse={true}
+        className={buttonStyle("primary")}
       >
         List Your Project
-      </CallToAction>
-      {/* Temporarily hide */}
-      {/* <CallToAction
-        href={isLoggedIn ? HOW_TO_LIST_PROJECT_LINK : SIGNUP_LINK}
-        rel="noopener"
-        target="_blank"
-        format={LINK_FORMATS.secondary}
-        inverse={true}
-        className="ml-5"
-      >
-        Contribute to a project
-      </CallToAction>
-      <CallToAction
-        href={SIGNIN_LINK}
-        format={LINK_FORMATS.custom}
-        className="bg-yellow-300 text-black-500 ml-5"
-      >
-        Sign In
-      </CallToAction> */}
+      </a>
     </div>
     <div className="text-sm text-white text-center font-semibold flex gap-6 justify-center mt-5 mb-12">
       <a

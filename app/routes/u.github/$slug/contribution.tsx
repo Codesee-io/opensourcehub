@@ -141,10 +141,8 @@ const Contribution: FC = () => {
               />
             </div>
             <div className="pt-6 flex items-center justify-end gap-4">
-              <ButtonLink to={profileUrl} inverse>
-                Cancel
-              </ButtonLink>
-              <Button disabled={pullRequestUrl == null}>
+              <ButtonLink to={profileUrl}>Cancel</ButtonLink>
+              <Button disabled={pullRequestUrl == null} variant="brand">
                 Save contribution
               </Button>
             </div>

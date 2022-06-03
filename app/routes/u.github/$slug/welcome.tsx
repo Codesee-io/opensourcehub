@@ -16,6 +16,7 @@ import {
 } from "~/utils/tags";
 import TwitterIcon from "~/components/icons/TwitterIcon";
 import LinkedInIcon from "~/components/icons/LinkedInIcon";
+import ButtonLink from "~/components/ButtonLink";
 
 export function links() {
   return [{ rel: "stylesheet", href: formStyles }];
@@ -186,16 +187,10 @@ const Welcome: FC = () => {
                 </div>
               </div>
               <div className="mt-16 flex justify-end gap-6">
-                <Link
-                  to={getProfileRouteForUser(user)}
-                  style={{ width: 200 }}
-                  className="h-12 text-light-interactive hover:bg-light-interactive-fill rounded-lg font-semibold flex items-center justify-center"
-                >
+                <ButtonLink to={getProfileRouteForUser(user)}>
                   Cancel
-                </Link>
-                <Button style={{ width: 250 }} className="h-12">
-                  Save
-                </Button>
+                </ButtonLink>
+                <Button variant="brand">Save</Button>
               </div>
             </Form>
           </div>
