@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import CallToAction from "../components/CallToAction";
+import cx from "classnames";
+import { buttonStyle } from "~/utils/linkStyle";
 import ExternalLink from "../components/ExternalLink";
 import { HOW_TO_LIST_PROJECT_LINK } from "../utils/constants";
 
@@ -16,12 +17,12 @@ const About = () => {
           Helping contributors and maintainers eliminate the barriers to taking
           on a new codebase.
         </p>
-        <CallToAction
+        <a
           href={HOW_TO_LIST_PROJECT_LINK}
-          className="mt-6 bg-yellow-200"
+          className={cx(buttonStyle("accent"), "mt-6")}
         >
           List Your Project
-        </CallToAction>
+        </a>
       </header>
       <main className="mx-auto max-w-2xl px-4 mb-20">
         <h1 className="text-2xl font-bold pt-20 pb-4">About Open-Source Hub</h1>

@@ -5,11 +5,7 @@ import { useMemo, useState } from "react";
 import GhostContentAPI, { PostOrPage } from "@tryghost/content-api";
 
 import type { GitHubData, Project, ProjectCategory } from "~/types";
-import {
-  HOW_TO_LIST_PROJECT_LINK,
-  LINK_FORMATS,
-  // SIGNUP_LINK,
-} from "../utils/constants";
+import { HOW_TO_LIST_PROJECT_LINK } from "../utils/constants";
 import {
   generateSearchIndex,
   getProjects,
@@ -23,13 +19,13 @@ import SearchInput from "~/components/local-search/SearchInput";
 import SidebarWithFilters from "~/components/SidebarWithFilters";
 import ToggleFiltersButton from "~/components/ToggleFiltersButton";
 import ProjectSort from "~/components/ProjectSort";
-import CallToAction from "~/components/CallToAction";
 import Wave from "~/images/Wave";
 
 import selectStyles from "~/styles/select.css";
 import gradientStyles from "~/styles/gradient.css";
 import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
+import { buttonStyle } from "~/utils/linkStyle";
 
 export function links() {
   return [
@@ -138,26 +134,14 @@ export default function Index() {
         </p>
 
         <div className="flex items-center justify-center text-center px-2 mt-3">
-          <CallToAction
+          <a
             href={HOW_TO_LIST_PROJECT_LINK}
-            rel="noopener"
+            rel="noopener noreferrer"
             target="_blank"
-            format={LINK_FORMATS.primary}
-            inverse={true}
+            className={buttonStyle("primary")}
           >
             List Your Project
-          </CallToAction>
-          {/* Temporarily hide */}
-          {/* <CallToAction
-            href={isLoggedIn ? HOW_TO_LIST_PROJECT_LINK : SIGNUP_LINK}
-            rel="noopener"
-            target="_blank"
-            format={LINK_FORMATS.secondary}
-            inverse={true}
-            className="ml-5"
-          >
-            Contribute to a project
-          </CallToAction> */}
+          </a>
         </div>
 
         <div className="header-wave mt-12">

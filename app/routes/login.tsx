@@ -80,7 +80,7 @@ const Login: FC = () => {
       <p className="text-black-400">
         Use your GitHub account to log in and manage your profile.
       </p>
-      <Button type="button" onClick={signIn}>
+      <Button variant="brand" type="button" onClick={signIn}>
         Log in with GitHub
       </Button>
     </main>

@@ -4,6 +4,7 @@ import HowToListYourProject from "../resources/HowToListYourProject.mdx";
 import mdxElements from "../components/markdown/mdxElements";
 import CallToAction from "../components/CallToAction";
 import markdownStyles from "../styles/markdown.css";
+import { buttonStyle } from "~/utils/linkStyle";
 
 export const meta: MetaFunction = () => ({
   title: "Resources for Open-Source Hub",
@@ -55,13 +56,14 @@ const Resources = () => (
             <h2 className="text-4xl mb-8 font-semibold leading-large text-white">
               Looking for more helpful and inspiring developer resources?
             </h2>
-            <CallToAction
+            <a
               href="https://learn.codesee.io"
-              rel="noopener"
+              rel="noopener noreferrer"
               target="_blank"
+              className={buttonStyle("accent")}
             >
               Visit Our Blog
-            </CallToAction>
+            </a>
           </div>
         </div>
       </div>

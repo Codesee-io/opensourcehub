@@ -1,25 +1,22 @@
-import { LINK_FORMATS } from "./constants";
+export type ButtonVariant =
+  | "brand"
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "inverted";
 
-export function linkStyle({
-  format = LINK_FORMATS.primary,
-  inverse = false,
-}: {
-  format?: string;
-  inverse?: boolean;
-}) {
-  let classByFormatInverse = "";
-  if (format === LINK_FORMATS.primary) {
-    classByFormatInverse = !inverse
-      ? "bg-indigo-500 text-white supports-hover:hover:bg-indigo-400"
-      : "bg-violet-200 text-indigo-500 supports-hover:hover:bg-indigo-50";
-  } else if (format === LINK_FORMATS.secondary) {
-    classByFormatInverse = !inverse
-      ? "bg-transparent border-2 border-indigo-500 text-indigo-500 supports-hover:hover:border-indigo-400 supports-hover:hover:text-indigo-400"
-      : "bg-transparent border-2 border-white text-white supports-hover:hover:border-indigo-50 supports-hover:hover:text-indigo-50";
-  } else {
-    classByFormatInverse =
-      "bg-yellow-200 text-black-500 supports-hover:hover:bg-yellow-300";
-  }
+const baseClasses =
+  "border-2 inline-flex items-center justify-center rounded-lg px-8 py-1 font-semibold hover:opacity-80 disabled:opacity-50";
 
-  return classByFormatInverse;
+const classesByVariant = {
+  brand: "bg-light-interactive border-light-interactive text-white",
+  primary:
+    "bg-light-interactive-fill border-light-interactive-fill text-indigo-500",
+  secondary: "bg-transparent border-indigo-500 text-indigo-500",
+  accent: "bg-brand-highlight border-brand-highlight text-black-500",
+  inverted: "bg-transparent border-white text-white",
+};
+
+export function buttonStyle(variant: ButtonVariant) {
+  return baseClasses + " " + classesByVariant[variant];
 }

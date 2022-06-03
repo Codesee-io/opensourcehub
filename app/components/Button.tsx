@@ -1,28 +1,19 @@
 import { ButtonHTMLAttributes, FunctionComponent } from "react";
 import cx from "classnames";
-import { linkStyle } from "~/utils/linkStyle";
+import { buttonStyle, ButtonVariant } from "~/utils/linkStyle";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  format?: string;
-  inverse?: boolean;
+  variant?: ButtonVariant;
 };
 
 const Button: FunctionComponent<Props> = ({
   children,
   className,
-  format,
-  inverse,
+  variant = "primary",
   ...otherProps
 }) => {
   return (
-    <button
-      className={cx(
-        "inline-flex items-center justify-center rounded-lg px-8 py-1 font-semibold",
-        linkStyle({ format, inverse }),
-        className
-      )}
-      {...otherProps}
-    >
+    <button className={cx(buttonStyle(variant), className)} {...otherProps}>
       {children}
     </button>
   );

@@ -47,6 +47,7 @@ module.exports = {
           border: "rgba(0, 0, 0, .11)",
         },
         brand: {
+          highlight: "#EDDA54",
           primary: "#352B90",
           warm: "#E07862",
         },

@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   const code = url.searchParams.get("code");
 
   if (!code) {
-    throw new Error("No code");
+    throw redirect("/profile");
   }
 
   const accessToken = await getDiscordAccessToken(code);
