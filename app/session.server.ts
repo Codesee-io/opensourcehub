@@ -182,7 +182,7 @@ export async function getCurrentUserOrRedirect(
   const user = await getCurrentUser(request);
 
   if (!user) {
-    return destroyUserSession(request, redirectTo);
+    throw redirect(redirectTo);
   }
 
   return user;

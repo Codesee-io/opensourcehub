@@ -17,7 +17,7 @@ const Button: FunctionComponent<Props> = ({
   return (
     <button
       className={cx(
-        "inline-flex rounded-lg px-8 py-1 font-semibold",
+        "inline-flex items-center justify-center rounded-lg px-8 py-1 font-semibold",
         linkStyle({ format, inverse }),
         className
       )}
