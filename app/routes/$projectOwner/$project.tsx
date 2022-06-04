@@ -154,7 +154,7 @@ const ProjectPage: FC = () => {
           />
         </div>
       </div>
-      <div className="flex gap-4 mb-6">
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="flex-1 bg-white border border-light-border p-4 rounded-lg">
           <p className="text-sm uppercase text-light-type-medium mb-2">
             Project type
