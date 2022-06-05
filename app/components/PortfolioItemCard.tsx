@@ -2,7 +2,6 @@ import { Link } from "@remix-run/react";
 import dayjs from "dayjs";
 import { FC } from "react";
 import { PortfolioItem, Project } from "~/types";
-import { HOW_TO_LIST_PROJECT_LINK } from "~/utils/constants";
 import EditIcon from "./icons/EditIcon";
 import Tag from "./Tag";
 
@@ -120,14 +119,12 @@ const PortfolioItemCard: FC<Props> = (props) => {
             <p>
               If you are one of the maintainers, consider listing your project
               on{" "}
-              <a
-                href={HOW_TO_LIST_PROJECT_LINK}
-                className="text-light-interactive supports-hover:hover:underline"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                to="/contribute"
+                className="font-semibold text-light-interactive supports-hover:hover:underline"
               >
                 Open-Source Hub!
-              </a>
+              </Link>
             </p>
           </div>
         )}

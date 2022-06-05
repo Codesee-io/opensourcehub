@@ -1,7 +1,7 @@
 import { SelectOption } from "~/types";
 
 export const HOW_TO_LIST_PROJECT_LINK =
-  "https://github.com/codesee-io/opensourcehub";
+  "https://github.com/codesee-io/opensourcehub#how-to-list-your-project";
 
 export const DISCORD_LINK = "https://discord.gg/JbAChX3a3a";
 export const ABOUT_LINK = "/about";

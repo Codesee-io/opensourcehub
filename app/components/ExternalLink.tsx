@@ -1,11 +1,15 @@
 import { AnchorHTMLAttributes, FunctionComponent } from "react";
+import cx from "classnames";
 
 const ExternalLink: FunctionComponent<AnchorHTMLAttributes<HTMLAnchorElement>> =
-  ({ children, ...props }) => (
+  ({ children, className, ...props }) => (
     <a
       target="_blank"
       rel="noopener"
-      className="font-medium text-blue-500 supports-hover:hover:text-blue-700 supports-hover:hover:underline"
+      className={cx(
+        "text-light-interactive font-semibold supports-hover:hover:underline",
+        className
+      )}
       {...props}
     >
       {children}

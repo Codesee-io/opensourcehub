@@ -1,8 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import cx from "classnames";
-import { buttonStyle } from "~/utils/linkStyle";
+import ButtonLink from "~/components/ButtonLink";
 import ExternalLink from "../components/ExternalLink";
-import { HOW_TO_LIST_PROJECT_LINK } from "../utils/constants";
 
 export const meta: MetaFunction = () => ({
   title: "About Open-Source Hub",
@@ -11,22 +9,21 @@ export const meta: MetaFunction = () => ({
 const About = () => {
   return (
     <>
-      <header className="mx-auto max-w-2xl px-4 mb-8 pt-12 text-center">
-        <h1 className="text-2xl my-3 text-center">Let's onboard better.</h1>
+      <header className="mx-auto max-w-2xl px-4 mb-12 pt-12 text-center">
+        <h1 className="text-3xl my-3 font-semibold text-center">
+          Let's onboard better.
+        </h1>
         <p className="text-center max-w-sm mx-auto mb-6">
           Helping contributors and maintainers eliminate the barriers to taking
           on a new codebase.
         </p>
-        <a
-          href={HOW_TO_LIST_PROJECT_LINK}
-          className={cx(buttonStyle("accent"), "mt-6")}
-        >
-          List Your Project
-        </a>
+        <ButtonLink to="/contribute">List Your Project</ButtonLink>
       </header>
       <main className="mx-auto max-w-2xl px-4 mb-20">
-        <h1 className="text-2xl font-bold pt-20 pb-4">About Open-Source Hub</h1>
-        <div className="space-y-4">
+        <h2 className="text-2xl font-semibold mb-4 px-6">
+          About Open-Source Hub
+        </h2>
+        <div className="space-y-4 p-6 bg-white rounded-lg border border-light-border">
           <p>
             Open-Source Hub was created to connect projects to people and ease
             codebase onboarding.

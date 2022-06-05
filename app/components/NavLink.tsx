@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from "react";
+import { FC } from "react";
 import { Link } from "@remix-run/react";
 import cx from "classnames";
-import ExternalLink from "../components/ExternalLink";
 
 type Props = {
   to: string;
@@ -12,18 +11,20 @@ function isExternalLink(url: string) {
   return url.startsWith("http");
 }
 
-const NavLink: FunctionComponent<Props> = ({ children, to, className }) => {
+const NavLink: FC<Props> = ({ children, to, className }) => {
   if (isExternalLink(to)) {
     return (
-      <ExternalLink
+      <a
         href={to}
         className={cx(
           "px-3 py-1 supports-hover:hover:text-yellow-300 inline-block rounded",
           className
         )}
+        rel="noreferrer"
+        target="_blank"
       >
         {children}
-      </ExternalLink>
+      </a>
     );
   }
 

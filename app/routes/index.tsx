@@ -5,7 +5,6 @@ import { useMemo, useState } from "react";
 import GhostContentAPI, { PostOrPage } from "@tryghost/content-api";
 
 import type { GitHubData, Project, ProjectCategory } from "~/types";
-import { HOW_TO_LIST_PROJECT_LINK } from "../utils/constants";
 import {
   generateSearchIndex,
   getProjects,
@@ -25,7 +24,7 @@ import selectStyles from "~/styles/select.css";
 import gradientStyles from "~/styles/gradient.css";
 import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
-import { buttonStyle } from "~/utils/linkStyle";
+import ButtonLink from "~/components/ButtonLink";
 
 export function links() {
   return [
@@ -134,14 +133,7 @@ export default function Index() {
         </p>
 
         <div className="flex items-center justify-center text-center px-2 mt-3">
-          <a
-            href={HOW_TO_LIST_PROJECT_LINK}
-            rel="noopener noreferrer"
-            target="_blank"
-            className={buttonStyle("primary")}
-          >
-            List Your Project
-          </a>
+          <ButtonLink to="/contribute">List Your Project</ButtonLink>
         </div>
 
         <div className="header-wave mt-12">
