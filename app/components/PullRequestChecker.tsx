@@ -50,21 +50,27 @@ const PullRequestChecker: FC<Props> = (props) => {
           </div>
         </div>
       )}
-      {fetcher.data?.isValid === false && (
-        <p>This is not a valid pull request URL</p>
-      )}
       {(fetcher.data == null || fetcher.data.isValid == false) && (
         <div>
           <div className="mb-4">
             <TextField
               id="url"
               label="Pull request URL"
+              description="Please provide the URL to the pull request in GitHub"
               type="url"
               required
               disabled={fetcher.state === "submitting"}
+              autoComplete="off"
             />
           </div>
-          <Button disabled={fetcher.state === "submitting"}>Check URL</Button>
+          <div className="flex gap-4 items-center">
+            <Button disabled={fetcher.state === "submitting"}>Check URL</Button>
+            {fetcher.data?.isValid === false && (
+              <span className="text-sm text-warning-dark">
+                This is not a valid pull request URL
+              </span>
+            )}
+          </div>
         </div>
       )}
     </fetcher.Form>

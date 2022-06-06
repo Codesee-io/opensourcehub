@@ -1,5 +1,5 @@
 import { Form, useLoaderData } from "@remix-run/react";
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import {
   ActionFunction,
   json,
@@ -96,6 +96,15 @@ const Contribution: FC = () => {
   const { slug, profileUrl } = useLoaderData<LoaderData>();
   const [pullRequestUrl, setPullRequestUrl] = useState<string | null>(null);
 
+  const descriptionRef = useRef<HTMLInputElement>(null);
+
+  const onUpdatePullRequestUrl = (url: string) => {
+    setPullRequestUrl(url);
+
+    // Focus on the next input field
+    descriptionRef.current?.focus();
+  };
+
   return (
     <section className="fixed inset-0 z-50 bg-light-background-shaded bg-opacity-75 overflow-auto">
       <div className="py-8 px-4 flex items-center justify-center min-h-screen">
@@ -107,8 +116,8 @@ const Contribution: FC = () => {
             Your contributions will appear on your public profile.
           </p>
           <PullRequestChecker
-            onInvalidPullRequest={() => setPullRequestUrl("")}
-            onValidPullRequest={(url) => setPullRequestUrl(url)}
+            onInvalidPullRequest={() => setPullRequestUrl(null)}
+            onValidPullRequest={onUpdatePullRequestUrl}
           />
           <Form
             method="post"
@@ -122,7 +131,12 @@ const Contribution: FC = () => {
               required
             />
             <div>
-              <TextField id="title" label="Title" />
+              <TextField
+                id="title"
+                label="Title"
+                disabled={pullRequestUrl == null}
+                ref={descriptionRef}
+              />
             </div>
             <div>
               <TextArea
@@ -130,6 +144,7 @@ const Contribution: FC = () => {
                 label="Description"
                 placeholder="What makes this contribution special to you?"
                 style={{ minHeight: 100 }}
+                disabled={pullRequestUrl == null}
               />
             </div>
             <div>
@@ -138,6 +153,7 @@ const Contribution: FC = () => {
                 label="Date completed"
                 type="date"
                 defaultValue={getCurrentDate()}
+                disabled={pullRequestUrl == null}
               />
             </div>
             <div className="pt-6 flex items-center justify-end gap-4">

@@ -1,19 +1,37 @@
-import { FC, InputHTMLAttributes, ReactNode } from "react";
+import {
+  ForwardedRef,
+  forwardRef,
+  InputHTMLAttributes,
+  ReactNode,
+} from "react";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
-  label: ReactNode;
+  description?: string;
   id: string;
+  label: ReactNode;
 };
 
-const TextField: FC<Props> = ({ label, id, ...otherProps }) => {
+const TextField = (props: Props, ref: ForwardedRef<HTMLInputElement>) => {
+  const { label, id, description, ...otherProps } = props;
+
   return (
     <>
       <label className="input-label" htmlFor={id}>
         {label}
       </label>
-      <input className="input" type="text" id={id} name={id} {...otherProps} />
+      {description && (
+        <p className="text-light-type-medium text-sm mb-2">{description}</p>
+      )}
+      <input
+        className="input"
+        type="text"
+        id={id}
+        name={id}
+        {...otherProps}
+        ref={ref}
+      />
     </>
   );
 };
 
-export default TextField;
+export default forwardRef<HTMLInputElement, Props>(TextField);

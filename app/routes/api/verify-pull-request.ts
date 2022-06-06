@@ -11,13 +11,10 @@ type ErrorResponse = {
   isValid: false;
 };
 
-const errorResponse = new Response(
-  JSON.stringify({ isValid: false } as ErrorResponse),
-  {
-    status: 400,
-    statusText: "Malformed request",
-  }
-);
+const errorResponse = json({ isValid: false } as ErrorResponse, {
+  status: 400,
+  statusText: "Malformed request",
+});
 
 export type VerifyPullRequestResponse = SuccessResponse | ErrorResponse;
 
