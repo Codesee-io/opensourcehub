@@ -53,7 +53,7 @@ module.exports = {
         },
         warning: {
           light: "#FDECEC",
-          dark: "#800E0E",
+          dark: "#A01212",
         },
         success: {
           light: "#E9F7F6",
