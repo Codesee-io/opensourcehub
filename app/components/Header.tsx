@@ -8,7 +8,7 @@ import HeaderDropdown from "./HeaderDropdown";
 import { UserInfo } from "~/types";
 
 type Props = {
-  userInfo: UserInfo;
+  userInfo?: UserInfo | null;
 };
 
 const Header: FC<Props> = ({ userInfo }) => {

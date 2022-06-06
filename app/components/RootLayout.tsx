@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 type Props = {
-  userInfo: UserInfo;
+  userInfo: UserInfo | null;
 };
 
 const RootLayout: FC<Props> = ({ children, userInfo }) => {

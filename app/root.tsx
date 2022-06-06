@@ -67,7 +67,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 type LoaderData = {
   fathomSiteId?: string;
-  userInfo: UserInfo;
+  userInfo: UserInfo | null;
 };
 
 export default function App() {
