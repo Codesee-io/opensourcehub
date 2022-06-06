@@ -6,13 +6,21 @@ require("dotenv").config();
 
 export async function getGitHubDataForProjects(projects: Project[]) {
   let githubAPI;
-  if (process.env.GITHUB_PERSONAL_ACCESS_TOKEN) {
+  if (
+    process.env.GITHUB_PERSONAL_ACCESS_TOKEN &&
+    process.env.NODE_ENV === "production"
+  ) {
     githubAPI = github.defaults({
       headers: {
         authorization: `token ${process.env.GITHUB_PERSONAL_ACCESS_TOKEN}`,
       },
     });
-  } else {
+  } else if (process.env.NODE_ENV !== "production") {
+    console.log(
+      "Not fetching data from GitHub because we're not on production"
+    );
+    return {};
+  } else if (!process.env.GITHUB_PERSONAL_ACCESS_TOKEN) {
     console.log("No GitHub API Token set, GitHub data will not be available.");
     return {};
   }
