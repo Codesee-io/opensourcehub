@@ -225,3 +225,7 @@ export async function getPortfolioItemsForUserId(userId: string) {
 
   return items;
 }
+
+export async function deletePortfolioItem(id: string) {
+  return await db.collection(PORTFOLIO_ITEMS_COLLECTION).doc(id).delete();
+}

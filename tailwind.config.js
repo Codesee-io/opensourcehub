@@ -51,6 +51,14 @@ module.exports = {
           primary: "#352B90",
           warm: "#E07862",
         },
+        warning: {
+          light: "#FDECEC",
+          dark: "#800E0E",
+        },
+        success: {
+          light: "#E9F7F6",
+          dark: "#005062",
+        },
         black: {
           30: "#fafafb",
           50: "#f0f2f6",

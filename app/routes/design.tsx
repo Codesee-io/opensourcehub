@@ -1,5 +1,6 @@
 import { HeadersFunction, MetaFunction } from "@remix-run/node";
 import { FC } from "react";
+import BannerMessage from "~/components/BannerMessage";
 import Button from "~/components/Button";
 import ButtonLink from "~/components/ButtonLink";
 import tagColors from "~/data/tagColors";
@@ -64,7 +65,7 @@ const Design: FC = () => {
         </table>
       </section>
 
-      <section>
+      <section className="mb-8">
         <h2 className="text-xl font-semibold text-light-type leading-loose">
           Buttons
         </h2>
@@ -125,6 +126,20 @@ const Design: FC = () => {
             </tr>
           </tbody>
         </table>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-light-type leading-loose">
+          Flash messages
+        </h2>
+        <div className="space-y-4">
+          <BannerMessage kind="success">
+            Your profile was successfully created
+          </BannerMessage>
+          <BannerMessage kind="error">
+            Your portfolio item was deleted
+          </BannerMessage>
+        </div>
       </section>
     </main>
   );

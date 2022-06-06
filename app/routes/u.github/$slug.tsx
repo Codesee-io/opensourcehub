@@ -12,7 +12,11 @@ import {
   getPortfolioItemsForUserId,
   getUserProfileBySlug,
 } from "~/database.server";
-import { getCurrentUser } from "~/session.server";
+import {
+  commitSession,
+  getCurrentSession,
+  getCurrentUser,
+} from "~/session.server";
 import { getProjectByRepoUrl } from "~/projects.server";
 import { PortfolioItem, Project, UserProfile } from "~/types";
 import { parseMarkdown } from "~/utils/markdown";
@@ -21,6 +25,7 @@ import DocumentPinIcon from "~/components/icons/DocumentPinIcon";
 import ButtonLink from "~/components/ButtonLink";
 import { getPortfolioItemEditRoute } from "~/utils/routes";
 import PortfolioItemCard from "~/components/PortfolioItemCard";
+import FlashMessage from "~/components/FlashMessage";
 
 export function links() {
   return [{ rel: "stylesheet", href: markdownStyles }];
@@ -35,9 +40,10 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   const slug = params.slug as string; // This can't be undefined or we wouldn't be here
 
   // Grab the user and the matching profile in parallel
-  const [user, profile] = await Promise.all([
+  const [user, profile, session] = await Promise.all([
     getCurrentUser(request),
     getUserProfileBySlug(slug),
+    getCurrentSession(request),
   ]);
 
   if (!profile) {
@@ -62,17 +68,26 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       );
     });
 
+  const message = (session.get("globalMessage") as string) || null;
+
   const payload: LoaderData = {
     profile,
     canEdit: profile.userId === user?.uid,
     hasVerifiedDiscord: typeof user?.discordUserId === "string",
     portfolioItems: portfolioItemsWithProjects,
+    message,
   };
 
-  return json(payload);
+  // We must commit the session to clear the flash message
+  return json(payload, {
+    headers: {
+      "Set-Cookie": await commitSession(session),
+    },
+  });
 };
 
 type LoaderData = {
+  message: string | null;
   profile: UserProfile;
   canEdit: boolean;
   hasVerifiedDiscord: boolean;
@@ -125,13 +140,18 @@ export function CatchBoundary() {
 }
 
 const ProfilePage: FC = () => {
-  const { profile, canEdit, hasVerifiedDiscord, portfolioItems } =
+  const { profile, canEdit, hasVerifiedDiscord, portfolioItems, message } =
     useLoaderData<LoaderData>();
 
   return (
     <>
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="bg-white border border-light-border p-6 rounded-lg">
+          {message && (
+            <div className="fixed bottom-8 right-8 z-50">
+              <FlashMessage kind="success">{message}</FlashMessage>
+            </div>
+          )}
           <div className="flex flex-col md:flex-row gap-6 mb-4 relative">
             <div className="flex-shrink-0">
               {profile.pictureUrl && (
@@ -228,7 +248,11 @@ const ProfilePage: FC = () => {
         </div>
         <section className="mx-auto max-w-6xl my-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-light-type text-xl font-semibold">Portfolio</h2>
+            {(portfolioItems.length > 0 || canEdit) && (
+              <h2 className="text-light-type text-xl font-semibold">
+                Portfolio
+              </h2>
+            )}
             {canEdit && (
               <Link
                 to="contribution"
