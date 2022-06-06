@@ -31,7 +31,7 @@ export const action: ActionFunction = async ({ request }) => {
     });
   }
 
-  await deletePortfolioItem(id);
+  await deletePortfolioItem(currentUser, id);
 
   // Redirect to the profile page and flash a confirmation message
   const session = await getCurrentSession(request);

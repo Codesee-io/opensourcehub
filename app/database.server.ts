@@ -226,6 +226,13 @@ export async function getPortfolioItemsForUserId(userId: string) {
   return items;
 }
 
-export async function deletePortfolioItem(id: string) {
-  return await db.collection(PORTFOLIO_ITEMS_COLLECTION).doc(id).delete();
+export async function deletePortfolioItem(user: User, id: string) {
+  const item = await getPortfolioItemById(id);
+
+  // Enforce that only the owner of a portfolio item can delete it
+  if (item && item.userId === user.uid) {
+    return await db.collection(PORTFOLIO_ITEMS_COLLECTION).doc(id).delete();
+  }
+
+  throw new Error("Not authorized to delete this portfolio item");
 }
