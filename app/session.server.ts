@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import { createCookieSessionStorage, redirect } from "@remix-run/node";
+import { createCookieSessionStorage, redirect, Session } from "@remix-run/node";
 import { DecodedIdToken } from "firebase-admin/auth";
 import {
   createProfileForUser,
@@ -102,7 +102,33 @@ export async function createUserSession(idToken: string, accessToken: string) {
   });
 }
 
+/**
+ * Stores the new session and returns the value of the Set-Cookie header to be
+ * used in the response.
+ */
+export async function commitSession(session: Session) {
+  return storage.commitSession(session);
+}
+
+export async function redirectAndCommitSession(
+  session: Session,
+  redirectTo: string
+) {
+  return redirect(redirectTo, {
+    headers: {
+      "Set-Cookie": await storage.commitSession(session),
+    },
+  });
+}
+
+/**
+ * Returns the current session from the request
+ */
 export async function getCurrentSession(request: Request) {
+  return await storage.getSession(request.headers.get("Cookie"));
+}
+
+export async function getDecodedToken(request: Request) {
   const cookieSession = await storage.getSession(request.headers.get("Cookie"));
   const token = cookieSession.get("token");
   if (!token) return null;
@@ -162,7 +188,7 @@ export async function getGitHubUserDataFromClaims(
  * @see https://firebase.google.com/docs/auth/admin/verify-id-tokens#web
  */
 export async function getCurrentUser(request: Request): Promise<User | null> {
-  const claims = await getCurrentSession(request);
+  const claims = await getDecodedToken(request);
 
   if (!claims) {
     return null;

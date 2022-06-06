@@ -14,6 +14,7 @@ import { getProfileRouteForUser } from "~/utils/routes";
 import TextArea from "~/components/TextArea";
 import ButtonLink from "~/components/ButtonLink";
 import Button from "~/components/Button";
+import DeletePortfolioItemForm from "~/components/DeletePortfolioItemForm";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const slug = params.slug as string; // This can't be undefined or we wouldn't be here
@@ -126,10 +127,11 @@ const Contribution: FC = () => {
               />
             </div>
             <div className="flex items-center justify-end gap-4 pt-6">
-              <ButtonLink to={profileUrl} variant="secondary">
+              <DeletePortfolioItemForm id={portfolioItem.id} />
+              <ButtonLink className="ml-auto" to={profileUrl}>
                 Cancel
               </ButtonLink>
-              <Button variant="brand">Save</Button>
+              <Button variant="brand">Save changes</Button>
             </div>
           </Form>
         </div>
