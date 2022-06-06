@@ -1,6 +1,6 @@
 import { json, LoaderFunction } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
-import { FC, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 import TextField from "~/components/TextField";
 import { getCurrentUserOrRedirect } from "~/session.server";
 import { User } from "~/types";
@@ -17,6 +17,7 @@ import {
 import TwitterIcon from "~/components/icons/TwitterIcon";
 import LinkedInIcon from "~/components/icons/LinkedInIcon";
 import ButtonLink from "~/components/ButtonLink";
+import { DISCORD_LINK } from "~/utils/constants";
 
 export function links() {
   return [{ rel: "stylesheet", href: formStyles }];
@@ -51,6 +52,16 @@ const Welcome: FC = () => {
     (updatedTags: MultiValue<{ label: string; value: string }>) => {
       setTags({ ...tags, [key]: updatedTags });
     };
+
+  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    // If the user checked the "Join Discord" checkbox, we open Discord in a new tab
+    const formData = new FormData(event.currentTarget);
+    if (formData.get("joinDiscord")) {
+      window.open(DISCORD_LINK);
+    }
+
+    // And then Remix handles the actual submission!
+  };
 
   return (
     <section className="fixed inset-0 z-50 bg-light-background-shaded bg-opacity-75 overflow-auto">
@@ -87,7 +98,11 @@ const Welcome: FC = () => {
             <p className="font-medium mb-4 text-light-type">
               Tell us more about yourself
             </p>
-            <Form method="post" action="/u/github/update-profile">
+            <Form
+              method="post"
+              action="/u/github/update-profile"
+              onSubmit={onFormSubmit}
+            >
               <div className="lg:flex gap-8">
                 <div className="w-full lg:w-1/2 space-y-4">
                   <div className="h-20">
@@ -176,11 +191,8 @@ const Welcome: FC = () => {
                     />
                   </div>
                   <div className="pt-10">
-                    <label
-                      className="text-sm flex gap-2 text-light-type-medium"
-                      id="joinDiscord"
-                    >
-                      <input type="checkbox" />
+                    <label className="text-sm flex gap-2 text-light-type-medium">
+                      <input type="checkbox" name="joinDiscord" />
                       Join the Open-Source Hub Discord server
                     </label>
                   </div>

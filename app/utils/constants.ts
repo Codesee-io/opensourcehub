@@ -3,7 +3,7 @@ import { SelectOption } from "~/types";
 export const HOW_TO_LIST_PROJECT_LINK =
   "https://github.com/codesee-io/opensourcehub#how-to-list-your-project";
 
-export const DISCORD_LINK = "https://discord.gg/JbAChX3a3a";
+export const DISCORD_LINK = "https://discord.gg/opensource";
 export const ABOUT_LINK = "/about";
 export const RESOURCES_LINK = "/resources";
 export const REPO_LINK = "https://github.com/Codesee-io/opensourcehub";
