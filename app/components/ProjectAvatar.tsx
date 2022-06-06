@@ -23,6 +23,7 @@ const ProjectAvatar: FC<Props> = ({ alt, avatar, size }) => {
           width: size,
           height: size,
         }}
+        loading="lazy"
       />
     );
   }

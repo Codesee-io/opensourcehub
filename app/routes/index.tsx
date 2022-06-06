@@ -137,14 +137,14 @@ export default function Index() {
         </div>
 
         <div className="header-wave mt-12">
-          <Wave />
+          <Wave role="img" />
         </div>
       </div>
 
       {blogPosts.length > 0 && (
         <div className="mx-auto mb-20" style={{ maxWidth: 1600 }}>
           <div className="filters-wrapper">
-            <h1 className="w-full font-bold text-left">Blog Posts</h1>
+            <h2 className="w-full font-bold text-left">Blog Posts</h2>
           </div>
           <BlogList blogPosts={blogPosts} />
         </div>
@@ -156,7 +156,7 @@ export default function Index() {
         </div>
         <div className="filters-wrapper">
           <div className="flex items-center">
-            <h1 className="font-bold mr-2">All Projects</h1>
+            <h2 className="font-bold mr-2">All Projects</h2>
             <ToggleFiltersButton onClick={() => setShowSidebar(true)} />
           </div>
           <div className="w-full md:w-56 mt-3 md:mt-0">

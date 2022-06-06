@@ -15,7 +15,7 @@ const Header: FC<Props> = ({ userInfo }) => {
   return (
     <header className="bg-indigo-850 sm:sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-        <Link to="/" className="block">
+        <Link to="/" className="block" aria-label="Home">
           <img src={logo} alt="" className="my-2" style={{ height: 35 }} />
         </Link>
         <div className="flex items-center justify-center text-white whitespace-nowrap">
@@ -32,7 +32,7 @@ const Header: FC<Props> = ({ userInfo }) => {
             <NavLink to={DISCORD_LINK}>
               <div className="flex items-center gap-1">
                 <span>Discord</span>
-                <DiscordIcon className="w-5 h-5" />
+                <DiscordIcon role="img" className="w-5 h-5" />
               </div>
             </NavLink>
           </div>

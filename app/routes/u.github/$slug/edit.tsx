@@ -75,7 +75,7 @@ const Edit: FC = () => {
   return (
     <section className="fixed inset-0 z-50 bg-light-background-shaded bg-opacity-75 overflow-auto">
       <div className="py-8 px-4 flex items-center justify-center min-h-screen">
-        <div className="bg-white max-w-2xl mx-auto rounded-lg border p-8 w-full relative">
+        <div className="bg-white max-w-2xl mx-auto rounded-lg border p-4 lg:p-8 w-full relative">
           <h1 className="font-semibold text-2xl mb-4 text-light-type">
             Edit your profile
           </h1>

@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from "react";
+import { FC } from "react";
+import Button from "../Button";
 import SlidersIcon from "../icons/SlidersIcon";
 
 type Props = {
@@ -6,12 +7,12 @@ type Props = {
   numFilters: number;
 };
 
-const SidebarButton: FunctionComponent<Props> = ({ onClick, numFilters }) => (
-  <button
+const SidebarButton: FC<Props> = ({ onClick, numFilters }) => (
+  <Button
+    type="button"
     onClick={onClick}
-    style={{ minWidth: "3rem" }}
-    name="Show the filters"
-    className="bg-aqua-500 flex items-center justify-center shadow-menu text-white md:px-6 h-12 rounded-full fixed bottom-6 md:bottom-10 right-6 z-20 supports-hover:hover:bg-aqua-700"
+    aria-label="Show the filters"
+    className="shadow-lg fixed bottom-6 md:bottom-10 right-6 z-20"
   >
     <span className="hidden md:inline-block tracking-wide mr-4 font-semibold">
       Filters
@@ -25,7 +26,7 @@ const SidebarButton: FunctionComponent<Props> = ({ onClick, numFilters }) => (
         {numFilters}
       </span>
     )}
-  </button>
+  </Button>
 );
 
 export default SidebarButton;

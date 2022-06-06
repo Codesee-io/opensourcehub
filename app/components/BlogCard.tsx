@@ -31,9 +31,9 @@ const BlogCard: FunctionComponent<Props> = ({ blogPost }) => {
         </a>
         <div className="mt-6">
           <a href={blogPost.url} target="_blank" rel="noreferrer">
-            <h1 className="text-lg font-semibold text-light-type">
+            <h3 className="text-lg font-semibold text-light-type">
               {blogPost.title}
-            </h1>
+            </h3>
           </a>
           {blogPost.custom_excerpt && (
             <a href={blogPost.url} target="_blank" rel="noreferrer">

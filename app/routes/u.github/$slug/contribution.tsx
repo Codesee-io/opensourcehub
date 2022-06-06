@@ -99,7 +99,7 @@ const Contribution: FC = () => {
   return (
     <section className="fixed inset-0 z-50 bg-light-background-shaded bg-opacity-75 overflow-auto">
       <div className="py-8 px-4 flex items-center justify-center min-h-screen">
-        <div className="bg-white max-w-2xl mx-auto rounded-lg border p-8 w-full relative overflow-hidden">
+        <div className="bg-white max-w-2xl mx-auto rounded-lg border p-4 lg:p-8 w-full relative overflow-hidden">
           <h2 className="text-xl font-semibold text-light-type mb-2">
             Add a new contribution
           </h2>
@@ -143,7 +143,7 @@ const Contribution: FC = () => {
             <div className="pt-6 flex items-center justify-end gap-4">
               <ButtonLink to={profileUrl}>Cancel</ButtonLink>
               <Button disabled={pullRequestUrl == null} variant="brand">
-                Save contribution
+                Save
               </Button>
             </div>
           </Form>

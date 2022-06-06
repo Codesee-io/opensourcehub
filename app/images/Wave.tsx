@@ -1,6 +1,6 @@
-import { FunctionComponent, SVGProps } from "react";
+import { FC, SVGProps } from "react";
 
-const CodeSeeWordmark: FunctionComponent<SVGProps<SVGSVGElement>> = (props) => {
+const Wave: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       className="waves"
@@ -9,6 +9,7 @@ const CodeSeeWordmark: FunctionComponent<SVGProps<SVGSVGElement>> = (props) => {
       viewBox="0 24 150 28"
       preserveAspectRatio="none"
       shapeRendering="auto"
+      {...props}
     >
       <defs>
         <path
@@ -41,4 +42,4 @@ const CodeSeeWordmark: FunctionComponent<SVGProps<SVGSVGElement>> = (props) => {
   );
 };
 
-export default CodeSeeWordmark;
+export default Wave;

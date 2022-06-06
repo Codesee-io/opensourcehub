@@ -83,7 +83,7 @@ const Contribution: FC = () => {
   return (
     <section className="fixed inset-0 z-50 bg-light-background-shaded bg-opacity-75 overflow-auto">
       <div className="py-8 px-4 flex items-center justify-center min-h-screen">
-        <div className="bg-white max-w-2xl mx-auto rounded-lg border p-8 w-full relative overflow-hidden">
+        <div className="bg-white max-w-2xl mx-auto rounded-lg border p-4 lg:p-8 w-full relative overflow-hidden">
           <h2 className="text-xl font-semibold text-light-type mb-2">
             Edit your contribution
           </h2>
@@ -126,12 +126,12 @@ const Contribution: FC = () => {
                 defaultValue={portfolioItem.dateCompleted}
               />
             </div>
-            <div className="flex items-center justify-end gap-4 pt-6">
+            <div className="flex flex-col sm:flex-row items-center sm:justify-end gap-4 pt-6">
               <DeletePortfolioItemForm id={portfolioItem.id} />
-              <ButtonLink className="ml-auto" to={profileUrl}>
-                Cancel
-              </ButtonLink>
-              <Button variant="brand">Save changes</Button>
+              <div className="ml-auto flex gap-2">
+                <ButtonLink to={profileUrl}>Cancel</ButtonLink>
+                <Button variant="brand">Save changes</Button>
+              </div>
             </div>
           </Form>
         </div>
