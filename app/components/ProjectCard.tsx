@@ -1,11 +1,8 @@
 import { FC } from "react";
 import { Link } from "@remix-run/react";
-import { MarkGithubIcon, LinkIcon } from "@primer/octicons-react";
 import Tag from "./Tag";
 import { GitHubData, Project } from "~/types";
-import TwitterIcon from "./icons/TwitterIcon";
 import ProjectAvatar from "./ProjectAvatar";
-import MapIcon from "./icons/MapIcon";
 import ProjectCardStats from "./ProjectCardStats";
 
 type Props = {
@@ -26,7 +23,7 @@ const ProjectCard: FC<Props> = ({ project, githubData, activeTags = [] }) => {
       so that the GitHub stats are vertically-aligned in a row even when the
       number of tag varies between projects. */}
       <div className="flex-grow">
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           {!!attributes.avatar && (
             <ProjectAvatar
               avatar={attributes.avatar}
@@ -34,60 +31,15 @@ const ProjectCard: FC<Props> = ({ project, githubData, activeTags = [] }) => {
               size={48}
             />
           )}
-          <div>
-            <h3 className="font-semibold text-light-type text-xl">
-              <Link
-                to={"/" + slug}
-                className="supports-hover:hover:text-light-interactive"
-              >
-                {attributes.name}
-              </Link>
-            </h3>
-            <div className="flex space-x-2">
-              <a
-                href={attributes.repoUrl}
-                target="_blank"
-                title="Visit this repository"
-                rel="noreferrer"
-                className="flex text-light-type-medium supports-hover:hover:text-light-interactive p-1"
-              >
-                <MarkGithubIcon size={20} />
-              </a>
-              {attributes.featuredMap?.url && (
-                <a
-                  href={attributes.featuredMap.url}
-                  target="_blank"
-                  title={"View this project's CodeSee map"}
-                  rel="noreferrer"
-                  className="flex text-light-type-medium supports-hover:hover:text-light-interactive p-1"
-                >
-                  <MapIcon width={20} />
-                </a>
-              )}
-              {attributes.websiteUrl && (
-                <a
-                  href={attributes.websiteUrl}
-                  target="_blank"
-                  title="Visit this project's website"
-                  rel="noreferrer"
-                  className="flex text-light-type-medium supports-hover:hover:text-light-interactive p-1"
-                >
-                  <LinkIcon size={20} />
-                </a>
-              )}
-              {attributes.twitterUrl && (
-                <a
-                  href={attributes.twitterUrl}
-                  target="_blank"
-                  title="Visit this project's Twitter feed"
-                  rel="noreferrer"
-                  className="flex text-light-type-medium supports-hover:hover:text-light-interactive p-1"
-                >
-                  <TwitterIcon className="w-5 h-5" />
-                </a>
-              )}
-            </div>
-          </div>
+
+          <h3 className="font-semibold text-light-type text-xl">
+            <Link
+              to={"/" + slug}
+              className="supports-hover:hover:text-light-interactive"
+            >
+              {attributes.name}
+            </Link>
+          </h3>
         </div>
         {attributes.description && (
           <p
