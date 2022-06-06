@@ -21,8 +21,9 @@ const BlogCard: FunctionComponent<Props> = ({ blogPost }) => {
           <img
             src={blogPost.og_image || ""}
             alt="Read this article on CodeSee Learn"
-            className="post-image rounded-lg mb-6"
+            className="post-image rounded-lg mb-6 object-cover"
             style={{
+              height: 225,
               width: 400,
               boxShadow:
                 "0 6px 10px 0 rgb(0 0 0 / 12%), 0 1px 18px 0 rgb(0 0 0 / 10%), 0 3px 5px 0 rgb(0 0 0 / 15%)",

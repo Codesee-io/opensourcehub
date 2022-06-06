@@ -13,10 +13,15 @@ type Props = {
 
 const Header: FC<Props> = ({ userInfo }) => {
   return (
-    <header className="bg-indigo-850 sm:sticky top-0 z-40">
+    <header className="bg-indigo-850 sm:sticky top-0 z-40 h-12">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
         <Link to="/" className="block" aria-label="Home">
-          <img src={logo} alt="" className="my-2" style={{ height: 35 }} />
+          <img
+            src={logo}
+            alt=""
+            className="my-2"
+            style={{ height: 30, width: 180 }}
+          />
         </Link>
         <div className="flex items-center justify-center text-white whitespace-nowrap">
           <div className="hidden sm:block">

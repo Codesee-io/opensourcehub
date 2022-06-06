@@ -1,10 +1,14 @@
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import type {
+  HeadersFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import GhostContentAPI, { PostOrPage } from "@tryghost/content-api";
 
-import type { GitHubData, Project, ProjectCategory } from "~/types";
+import type { GitHubData, Project } from "~/types";
 import {
   generateSearchIndex,
   getProjects,
@@ -38,6 +42,12 @@ export function links() {
 export const meta: MetaFunction = () => ({
   title: "Open-Source Hub | Find open-source projects",
 });
+
+export let headers: HeadersFunction = () => {
+  return {
+    "Cache-Control": "public, s-maxage=60",
+  };
+};
 
 export const loader: LoaderFunction = async () => {
   const projects = getProjects();
@@ -77,23 +87,27 @@ export const loader: LoaderFunction = async () => {
     projects,
     searchIndex,
     helpfulness,
-    allLanguages,
-    allTags,
-    allSeeking,
+    allLanguages: allLanguages.map((lang) => lang.fieldValue).sort(),
+    allTags: allTags.map((lang) => lang.fieldValue).sort(),
+    allSeeking: allSeeking.map((lang) => lang.fieldValue).sort(),
     githubData,
     blogPosts,
   };
 
-  return json(payload);
+  return json(payload, {
+    headers: {
+      "Cache-Control": "public, s-maxage=60",
+    },
+  });
 };
 
 type LoaderData = {
   projects: Project[];
   searchIndex: any;
   helpfulness: any;
-  allLanguages: ProjectCategory[];
-  allTags: ProjectCategory[];
-  allSeeking: ProjectCategory[];
+  allLanguages: string[];
+  allTags: string[];
+  allSeeking: string[];
   githubData: { [key: string]: GitHubData };
   blogPosts: PostOrPage[];
 };
@@ -110,16 +124,7 @@ export default function Index() {
     blogPosts,
   } = useLoaderData<LoaderData>();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-
-  const tags = useMemo(() => {
-    return {
-      allLanguages: allLanguages.map((lang) => lang.fieldValue).sort(),
-      allTags: allTags.map((lang) => lang.fieldValue).sort(),
-      allSeeking: allSeeking.map((lang) => lang.fieldValue).sort(),
-    };
-  }, [allLanguages, allSeeking, allTags]);
 
   return (
     <>
@@ -172,9 +177,9 @@ export default function Index() {
           <SidebarWithFilters
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}
-            allLanguages={tags.allLanguages}
-            allTags={tags.allTags}
-            allSeeking={tags.allSeeking}
+            allLanguages={allLanguages}
+            allTags={allTags}
+            allSeeking={allSeeking}
           />
         </div>
       </SearchWrapper>

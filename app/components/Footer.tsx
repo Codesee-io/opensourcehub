@@ -7,8 +7,13 @@ import ButtonLink from "./ButtonLink";
 
 const Footer: FC = () => (
   <footer className="bg-gradient text-black-400 px-4 py-10">
-    <Link to="/" className="block">
-      <img src={logo} alt="" className="my-2 mx-auto" style={{ height: 35 }} />
+    <Link to="/" className="block" aria-label="Home">
+      <img
+        src={logo}
+        alt=""
+        className="my-2 mx-auto"
+        style={{ height: 30, width: 180 }}
+      />
     </Link>
     <div className="flex items-center justify-center text-center px-2 mt-7">
       <ButtonLink to="/contribute">List Your Project</ButtonLink>

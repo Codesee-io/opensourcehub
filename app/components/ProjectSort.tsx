@@ -21,6 +21,7 @@ const ProjectSort: FunctionComponent = () => {
 
   return (
     <Select
+      aria-label="Sort projects"
       id="sort-projects-select"
       instanceId="sort-projects-select"
       className="react-select"

@@ -74,7 +74,11 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
             </>
           )}
 
-          <button onClick={() => setShowSidebar(false)}>
+          <button
+            onClick={() => setShowSidebar(false)}
+            type="button"
+            aria-label="Close the filters"
+          >
             <CloseIcon className="w-6 h-6" />
           </button>
         </div>
