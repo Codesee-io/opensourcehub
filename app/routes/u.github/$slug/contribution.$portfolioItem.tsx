@@ -92,7 +92,7 @@ const Contribution: FC = () => {
           </p>
           <Form
             method="post"
-            action={`/u/github/${slug}/contribution`}
+            action={`/u/github/${slug}/contribution/${portfolioItem.id}`}
             className="space-y-4"
           >
             <div>
