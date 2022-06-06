@@ -26,7 +26,6 @@ const DeletePortfolioItemForm: FC<Props> = ({ id }) => {
 
   return (
     <div onSubmit={confirmDelete}>
-      <input type="hidden" value={id} name="id" />
       <button
         type="button"
         onClick={confirmDelete}

@@ -8,8 +8,8 @@ import {
 import { getProfileRouteForUser } from "~/utils/routes";
 
 /**
- * Generates an OAuth URL to authenticate with Discord, and then redirects to
- * it. Once a user authenticates, we send them back to this website.
+ * Deletes a portfolio item from the database, then redirects to the current
+ * user's profile.
  */
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
