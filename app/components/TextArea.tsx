@@ -1,4 +1,5 @@
 import { FC, InputHTMLAttributes, ReactNode } from "react";
+import RequiredMarker from "./RequiredMarker";
 
 type Props = InputHTMLAttributes<HTMLTextAreaElement> & {
   label: ReactNode;
@@ -10,6 +11,7 @@ const TextArea: FC<Props> = ({ label, id, ...otherProps }) => {
     <>
       <label className="input-label" htmlFor={id}>
         {label}
+        {otherProps.required && <RequiredMarker />}
       </label>
       <textarea className="input" id={id} name={id} {...otherProps} />
     </>

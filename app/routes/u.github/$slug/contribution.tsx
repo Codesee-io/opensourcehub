@@ -1,4 +1,4 @@
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { FC, useRef, useState } from "react";
 import {
   ActionFunction,
@@ -18,6 +18,8 @@ import TextArea from "~/components/TextArea";
 import Button from "~/components/Button";
 import ButtonLink from "~/components/ButtonLink";
 import { zeroPad } from "~/utils/strings";
+import FieldError from "~/components/FieldError";
+import { validateDateString, validateString } from "~/utils/validation";
 
 // ISO 8601 format: YYYY-MM-DD
 function getCurrentDate() {
@@ -59,25 +61,31 @@ export const action: ActionFunction = async ({ request }) => {
   const title = formData.get("title")?.toString();
   const reviewMapImageUrl = formData.get("reviewMapImageUrl")?.toString();
 
-  if (
-    typeof dateCompleted !== "string" ||
-    typeof description !== "string" ||
-    typeof pullRequestUrl !== "string" ||
-    typeof title !== "string"
-  ) {
-    throw new Error("Invalid parameters");
+  // Validate the required fields, and return an object of validation errors if
+  // necessary
+  const validationErrors = {
+    dateCompleted: validateDateString(dateCompleted),
+    description: validateString(description, { minLength: 10 }),
+    title: validateString(title, { minLength: 5 }),
+    pullRequestUrl: isValidPullRequestUrl(pullRequestUrl)
+      ? null
+      : "Please provide a valid pull request URL",
+  };
+
+  if (Object.values(validationErrors).some(Boolean)) {
+    return { validationErrors };
   }
 
-  if (isValidPullRequestUrl(pullRequestUrl) === false) {
-    throw new Error("Invalid pull request URL");
-  }
-
+  // We're all validated! Let's create a portfolio item. It's gross that we're
+  // casting most fields as strings to keep TypeScript happy, but it's not smart
+  // enough to know what we validated those fields. There's probably a way to
+  // improve that :thinking_face:
   const newPortfolioItem: CreatePortfolioItemPayload = {
     userId: currentUser.uid,
-    dateCompleted,
-    description,
-    pullRequestUrl,
-    title,
+    dateCompleted: dateCompleted as string,
+    description: description as string,
+    pullRequestUrl: pullRequestUrl as string,
+    title: title as string,
   };
 
   if (
@@ -93,6 +101,8 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 const Contribution: FC = () => {
+  const actionData = useActionData();
+
   const { slug, profileUrl } = useLoaderData<LoaderData>();
   const [pullRequestUrl, setPullRequestUrl] = useState<string | null>(null);
 
@@ -136,16 +146,21 @@ const Contribution: FC = () => {
                 label="Title"
                 disabled={pullRequestUrl == null}
                 ref={descriptionRef}
+                required
+                placeholder="Summarize your contribution (required)"
               />
+              <FieldError error={actionData?.validationErrors?.title} />
             </div>
             <div>
               <TextArea
                 id="description"
                 label="Description"
-                placeholder="What makes this contribution special to you?"
+                placeholder="What makes this contribution special to you? (required)"
                 style={{ minHeight: 100 }}
+                required
                 disabled={pullRequestUrl == null}
               />
+              <FieldError error={actionData?.validationErrors?.description} />
             </div>
             <div>
               <TextField
@@ -154,7 +169,9 @@ const Contribution: FC = () => {
                 type="date"
                 defaultValue={getCurrentDate()}
                 disabled={pullRequestUrl == null}
+                required
               />
+              <FieldError error={actionData?.validationErrors?.dateCompleted} />
             </div>
             <div className="pt-6 flex items-center justify-end gap-4">
               <ButtonLink to={profileUrl}>Cancel</ButtonLink>
