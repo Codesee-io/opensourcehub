@@ -1,16 +1,22 @@
-import type { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import type {
   LoaderFunction,
   ActionFunction,
   MetaFunction,
 } from "@remix-run/node";
-import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  Auth,
+  GithubAuthProvider,
+  signInWithPopup,
+  UserCredential,
+} from "firebase/auth";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useSubmit } from "@remix-run/react";
 import { createUserSession, isLoggedIn } from "~/session.server";
 import Button from "~/components/Button";
 import { getFirebaseClientConfig } from "~/firebase.server";
 import { initFirebaseClient } from "~/firebase.client";
+import { MarkGithubIcon } from "@primer/octicons-react";
 
 export const meta: MetaFunction = () => ({
   title: "Log in to Open-Source Hub",
@@ -46,24 +52,49 @@ export const action: ActionFunction = async ({ request }) => {
   return await createUserSession(idToken, accessToken);
 };
 
+enum FormState {
+  Idle,
+  Authenticating,
+  Redirecting,
+  Failed,
+}
+
 const Login: FC = () => {
+  const [formState, setFormState] = useState(FormState.Idle);
   const { firebaseClientConfig } = useLoaderData();
+  const firebaseClientAuth = useRef<Auth>();
+
+  useEffect(() => {
+    // This can only be initialized once, so we store it in a ref
+    firebaseClientAuth.current = initFirebaseClient(firebaseClientConfig);
+  }, [firebaseClientConfig]);
 
   const submit = useSubmit();
 
   const signIn = async () => {
-    const firebaseClientAuth = initFirebaseClient(firebaseClientConfig);
+    if (!firebaseClientAuth.current) return;
+
+    setFormState(FormState.Authenticating);
 
     const githubAuth = new GithubAuthProvider();
     githubAuth.addScope("read:user");
 
-    const result = await signInWithPopup(firebaseClientAuth, githubAuth);
+    let result: UserCredential;
+    try {
+      result = await signInWithPopup(firebaseClientAuth.current, githubAuth);
+    } catch (err) {
+      setFormState(FormState.Failed);
+      return;
+    }
+
     const idToken = await result.user.getIdToken();
 
     const credential = GithubAuthProvider.credentialFromResult(result);
     const accessToken = credential?.accessToken;
 
     if (idToken && accessToken) {
+      setFormState(FormState.Redirecting);
+
       // Once we're logged in, we need to store the session on the server. We do
       // this by POSTing to this page, which is handled by the action function.
       const formData = new FormData();
@@ -71,19 +102,48 @@ const Login: FC = () => {
       formData.append("accessToken", accessToken);
       submit(formData, { method: "post", action: "/login" });
     } else {
-      alert("Sign-in failed, please try again");
+      setFormState(FormState.Failed);
     }
   };
 
   return (
-    <main className="px-4 py-12 max-w-2xl text-center mx-auto space-y-4">
-      <p className="text-black-400">
-        Use your GitHub account to log in and manage your profile.
-      </p>
-      <Button variant="brand" type="button" onClick={signIn}>
-        Log in with GitHub
-      </Button>
-    </main>
+    <div className="px-4">
+      <main className="bg-white border border-light-border rounded-lg my-8 px-4 py-12 max-w-xl text-center mx-auto space-y-4">
+        <h1 className="text-light-type text-2xl font-semibold">
+          Log in to Open-Source Hub
+        </h1>
+        <p className="text-light-type">
+          Use your GitHub account to create and manage your profile.
+        </p>
+        <Button
+          variant="brand"
+          type="button"
+          onClick={signIn}
+          disabled={[FormState.Authenticating, FormState.Redirecting].includes(
+            formState
+          )}
+        >
+          <span className="mr-2">Log in with GitHub</span>
+          <MarkGithubIcon />
+        </Button>
+        {formState === FormState.Authenticating && (
+          <p>Authenticating with GitHub...</p>
+        )}
+        {formState === FormState.Redirecting && (
+          <p>Pulling up your profile...</p>
+        )}
+        {formState === FormState.Failed && (
+          <p>Unable to log you in, please try again</p>
+        )}
+      </main>
+      <div className="text-light-type text-sm max-w-xl mx-auto px-4">
+        <p>
+          By logging in to Open-Source Hub, you will claim your public profile
+          page where you can list your interests, connect your Discord account,
+          and show off the open-source contributions you're most proud of.
+        </p>
+      </div>
+    </div>
   );
 };
 
