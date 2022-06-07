@@ -120,6 +120,8 @@ const Contribution: FC = () => {
                 id="title"
                 label="Title"
                 defaultValue={portfolioItem.title}
+                required
+                placeholder="Summarize your contribution (required)"
               />
               <FieldError error={actionData?.validationErrors?.title} />
             </div>
@@ -127,8 +129,9 @@ const Contribution: FC = () => {
               <TextArea
                 id="description"
                 label="Description"
-                placeholder="What makes this contribution special to you?"
+                placeholder="What makes this contribution special to you? (required)"
                 style={{ minHeight: 100 }}
+                required
                 defaultValue={portfolioItem.description}
               />
               <FieldError error={actionData?.validationErrors?.description} />
