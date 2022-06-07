@@ -29,7 +29,11 @@ export function getSlugFromRepoUrl(repoUrl: string) {
  * @example urlIsPullRequest("https://github.com/Codesee-io/opensourcehub/pull/20") // true
  * @example urlIsPullRequest("https://gitlab.com/gitlab-org/gitlab-foss/-/merge_requests/3305") // true
  */
-export function isValidPullRequestUrl(url: string) {
+export function isValidPullRequestUrl(url?: string) {
+  if (typeof url !== "string") {
+    return false;
+  }
+
   if (url.startsWith(GITHUB_HOST)) {
     // A merge request URL in GitHub looks like this:
     // https://github.com/Codesee-io/opensourcehub/pull/20

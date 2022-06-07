@@ -19,6 +19,7 @@ import { getUserProfileBySlug } from "~/database.server";
 import TwitterIcon from "~/components/icons/TwitterIcon";
 import LinkedInIcon from "~/components/icons/LinkedInIcon";
 import TextArea from "~/components/TextArea";
+import ButtonLink from "~/components/ButtonLink";
 
 export function links() {
   return [{ rel: "stylesheet", href: formStyles }];
@@ -179,12 +180,7 @@ const Edit: FC = () => {
                 </div>
               </div>
               <div className="mt-16 flex justify-end gap-6">
-                <Link
-                  to={profileRoute}
-                  className="px-6 text-light-interactive hover:bg-light-interactive-fill rounded-lg font-semibold flex items-center justify-center"
-                >
-                  Cancel
-                </Link>
+                <ButtonLink to={profileRoute}>Cancel</ButtonLink>
                 <Button variant="brand">Save changes</Button>
               </div>
             </Form>

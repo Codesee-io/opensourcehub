@@ -4,6 +4,7 @@ import {
   InputHTMLAttributes,
   ReactNode,
 } from "react";
+import RequiredMarker from "./RequiredMarker";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   description?: string;
@@ -12,12 +13,13 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const TextField = (props: Props, ref: ForwardedRef<HTMLInputElement>) => {
-  const { label, id, description, ...otherProps } = props;
+  const { label, description, ...otherProps } = props;
 
   return (
     <>
-      <label className="input-label" htmlFor={id}>
+      <label className="input-label" htmlFor={otherProps.id}>
         {label}
+        {otherProps.required && <RequiredMarker />}
       </label>
       {description && (
         <p className="text-light-type-medium text-sm mb-2">{description}</p>
@@ -25,8 +27,7 @@ const TextField = (props: Props, ref: ForwardedRef<HTMLInputElement>) => {
       <input
         className="input"
         type="text"
-        id={id}
-        name={id}
+        name={otherProps.id}
         {...otherProps}
         ref={ref}
       />

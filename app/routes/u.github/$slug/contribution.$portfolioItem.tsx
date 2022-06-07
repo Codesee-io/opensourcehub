@@ -1,4 +1,4 @@
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { FC } from "react";
 import {
   ActionFunction,
@@ -15,6 +15,8 @@ import TextArea from "~/components/TextArea";
 import ButtonLink from "~/components/ButtonLink";
 import Button from "~/components/Button";
 import DeletePortfolioItemForm from "~/components/DeletePortfolioItemForm";
+import FieldError from "~/components/FieldError";
+import { validateDateString, validateString } from "~/utils/validation";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const slug = params.slug as string; // This can't be undefined or we wouldn't be here
@@ -58,18 +60,26 @@ export const action: ActionFunction = async ({ request, params }) => {
   const description = formData.get("description")?.toString();
   const title = formData.get("title")?.toString();
 
-  if (
-    typeof dateCompleted !== "string" ||
-    typeof description !== "string" ||
-    typeof title !== "string"
-  ) {
-    throw new Error("Invalid parameters");
+  // Validate the required fields, and return an object of validation errors if
+  // necessary
+  const validationErrors = {
+    dateCompleted: validateDateString(dateCompleted),
+    description: validateString(description, { minLength: 10 }),
+    title: validateString(title, { minLength: 5 }),
+  };
+
+  if (Object.values(validationErrors).some(Boolean)) {
+    return { validationErrors };
   }
 
+  // We're all validated! Let's update the portfolio item. It's gross that we're
+  // casting most fields as strings to keep TypeScript happy, but it's not smart
+  // enough to know what we validated those fields. There's probably a way to
+  // improve that :thinking_face:
   const updatedPortfolioItem: UpdatePortfolioItemPayload = {
-    dateCompleted,
-    description,
-    title,
+    dateCompleted: dateCompleted as string,
+    description: description as string,
+    title: title as string,
   };
 
   await updatePortfolioItem(portfolioItemId, updatedPortfolioItem);
@@ -78,6 +88,8 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 const Contribution: FC = () => {
+  const actionData = useActionData();
+
   const { slug, profileUrl, portfolioItem } = useLoaderData<LoaderData>();
 
   return (
@@ -108,16 +120,21 @@ const Contribution: FC = () => {
                 id="title"
                 label="Title"
                 defaultValue={portfolioItem.title}
+                required
+                placeholder="Summarize your contribution (required)"
               />
+              <FieldError error={actionData?.validationErrors?.title} />
             </div>
             <div>
               <TextArea
                 id="description"
                 label="Description"
-                placeholder="What makes this contribution special to you?"
+                placeholder="What makes this contribution special to you? (required)"
                 style={{ minHeight: 100 }}
+                required
                 defaultValue={portfolioItem.description}
               />
+              <FieldError error={actionData?.validationErrors?.description} />
             </div>
             <div>
               <TextField
@@ -125,6 +142,7 @@ const Contribution: FC = () => {
                 label="Date completed"
                 defaultValue={portfolioItem.dateCompleted}
               />
+              <FieldError error={actionData?.validationErrors?.dateCompleted} />
             </div>
             <div className="flex flex-col sm:flex-row items-center sm:justify-end gap-4 pt-6">
               <DeletePortfolioItemForm id={portfolioItem.id} />

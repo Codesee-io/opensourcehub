@@ -61,6 +61,7 @@ const PullRequestChecker: FC<Props> = (props) => {
               required
               disabled={fetcher.state === "submitting"}
               autoComplete="off"
+              placeholder="https://github.com/freeCodeCamp/freeCodeCamp/pull/123 (required)"
             />
           </div>
           <div className="flex gap-4 items-center">
