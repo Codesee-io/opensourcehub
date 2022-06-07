@@ -37,7 +37,7 @@
     "concurrently": "^7.2.1",
     "dayjs": "^1.11.2",
     "discord-oauth2": "^2.10.0",
-    "dotenv": "10.0.0",
+    "dotenv": "16.0.1",
     "firebase": "^9.8.1",
     "firebase-admin": "^10.2.0",
     "front-matter": "^4.0.2",
