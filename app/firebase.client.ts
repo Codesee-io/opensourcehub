@@ -1,18 +1,39 @@
-import { initializeApp } from "firebase/app";
-import { connectAuthEmulator, getAuth } from "firebase/auth";
+import { FirebaseApp, initializeApp } from "firebase/app";
+import {
+  Auth,
+  connectAuthEmulator,
+  getAuth,
+  GithubAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { FirebaseClientConfig } from "./types";
 
 const AUTH_EMULATOR_URL = "http://localhost:9099";
 
+let firebaseClientApp: FirebaseApp;
+let firebaseClientAuth: Auth;
+
 export function initFirebaseClient(config: FirebaseClientConfig) {
-  const app = initializeApp(config);
-  const auth = getAuth(app);
+  if (firebaseClientAuth) {
+    return firebaseClientAuth;
+  }
+
+  firebaseClientApp = initializeApp(config);
+  firebaseClientAuth = getAuth(firebaseClientApp);
 
   // If we're running locally, we connect the auth emulator
   if (location.host.startsWith("localhost")) {
     console.log("Connecting to the auth emulator");
-    connectAuthEmulator(auth, AUTH_EMULATOR_URL);
+    connectAuthEmulator(firebaseClientAuth, AUTH_EMULATOR_URL);
   }
 
-  return auth;
+  return firebaseClientAuth;
+}
+
+export async function signInWithGitHubPopup(config: FirebaseClientConfig) {
+  const auth = initFirebaseClient(config);
+  const githubAuth = new GithubAuthProvider();
+  githubAuth.addScope("read:user");
+
+  return await signInWithPopup(auth, githubAuth);
 }

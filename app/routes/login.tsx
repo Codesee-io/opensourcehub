@@ -1,22 +1,17 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { MarkGithubIcon } from "@primer/octicons-react";
 import type {
-  LoaderFunction,
   ActionFunction,
+  LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
-import {
-  Auth,
-  GithubAuthProvider,
-  signInWithPopup,
-  UserCredential,
-} from "firebase/auth";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData, useSubmit } from "@remix-run/react";
-import { createUserSession, isLoggedIn } from "~/session.server";
+import { GithubAuthProvider, UserCredential } from "firebase/auth";
+import { FC, useState } from "react";
 import Button from "~/components/Button";
+import { signInWithGitHubPopup } from "~/firebase.client";
 import { getFirebaseClientConfig } from "~/firebase.server";
-import { initFirebaseClient } from "~/firebase.client";
-import { MarkGithubIcon } from "@primer/octicons-react";
+import { createUserSession, isLoggedIn } from "~/session.server";
 
 export const meta: MetaFunction = () => ({
   title: "Log in to Open-Source Hub",
@@ -62,26 +57,15 @@ enum FormState {
 const Login: FC = () => {
   const [formState, setFormState] = useState(FormState.Idle);
   const { firebaseClientConfig } = useLoaderData();
-  const firebaseClientAuth = useRef<Auth>();
-
-  useEffect(() => {
-    // This can only be initialized once, so we store it in a ref
-    firebaseClientAuth.current = initFirebaseClient(firebaseClientConfig);
-  }, [firebaseClientConfig]);
 
   const submit = useSubmit();
 
   const signIn = async () => {
-    if (!firebaseClientAuth.current) return;
-
     setFormState(FormState.Authenticating);
-
-    const githubAuth = new GithubAuthProvider();
-    githubAuth.addScope("read:user");
 
     let result: UserCredential;
     try {
-      result = await signInWithPopup(firebaseClientAuth.current, githubAuth);
+      result = await signInWithGitHubPopup(firebaseClientConfig);
     } catch (err) {
       setFormState(FormState.Failed);
       return;
