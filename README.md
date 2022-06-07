@@ -42,9 +42,9 @@ For more information on the Github.dev editor, please [see their docs](https://d
    1. Add a new `.mdx` file to that folder, and give it the name of your public repo. For example,
       - if your project URl is: `https://github.com/Codesee-io/opensourcehub`
       - you would create: `/public/projects/Codesee-io/opensourcehub.mdx`.
-   1. Copy/paste the contents of [`/app/projects/_template.mdx`](https://raw.githubusercontent.com/Codesee-io/opensourcehub/main/app/projects/_template.mdx) into that file
+   1. Copy/paste the contents of [`/public/projects/_template.mdx`](https://raw.githubusercontent.com/Codesee-io/opensourcehub/main/public/projects/_template.mdx) into that file
 1. Fill out the information — most of it is optional, but extremely helpful for potential contributors. If you opt not to include the optional content, delete it from your template.
-1. Add a 200x200 image for your organization to your folder, for example, `./app/projects/distributeaid/da.png`
+1. Add a 200x200 image for your organization to your folder, for example, `./public/projects/distributeaid/da.png`
 1. Preview your changes by running `yarn dev`
 1. When you're ready, open a PR!
 
