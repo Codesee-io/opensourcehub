@@ -135,6 +135,7 @@ async function exportProjectsToJson() {
 
     // Write to the file system unless the data is empty and the file exists
     if (!(dataIsEmpty && fileExists)) {
+      console.log(`Writing to ${outputGithubPath}`);
       await fs.writeFile(outputGithubPath, JSON.stringify(githubData, null, 2));
     }
   }

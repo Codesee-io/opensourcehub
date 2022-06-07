@@ -19,6 +19,10 @@ const ProjectList: FunctionComponent<Props> = ({
   allProjects,
   githubDataSet,
 }) => {
+  // The githubDataSet can be empty when users don't fetch data from GitHub, so
+  // we guard against that scenario here.
+  const dataSetIsEmpty = Object.keys(githubDataSet).length === 0;
+
   const { filteredProjectIds, allActiveTags, sortOption } = useSearch();
 
   if (filteredProjectIds.length === 0) {
@@ -38,7 +42,7 @@ const ProjectList: FunctionComponent<Props> = ({
     filteredProjectIds.includes(project.slug)
   );
 
-  if (sortOption === OPTION_MOST_OPEN_ISSUES) {
+  if (!dataSetIsEmpty && sortOption === OPTION_MOST_OPEN_ISSUES) {
     // Sort projects by most open issues (highest count of opened issues)
     filteredProjects.sort((projectA, projectB) => {
       return (
@@ -46,7 +50,7 @@ const ProjectList: FunctionComponent<Props> = ({
         githubDataSet[projectA.slug].totalOpenIssues
       );
     });
-  } else if (sortOption === OPTION_MOST_ACTIVE) {
+  } else if (!dataSetIsEmpty && sortOption === OPTION_MOST_ACTIVE) {
     // Sort projects by most active (highest count of recently-closed PRs)
     filteredProjects.sort((projectA, projectB) => {
       return (
@@ -54,7 +58,7 @@ const ProjectList: FunctionComponent<Props> = ({
         githubDataSet[projectA.slug].prsMerged.count
       );
     });
-  } else if (sortOption === OPTION_MOST_POPULARITY) {
+  } else if (!dataSetIsEmpty && sortOption === OPTION_MOST_POPULARITY) {
     // Sort projects by most popularity (highest number of contributors)
     filteredProjects.sort((projectA, projectB) => {
       return (

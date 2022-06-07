@@ -123,6 +123,9 @@ export default function Index() {
   } = useLoaderData<LoaderData>();
 
   const [showSidebar, setShowSidebar] = useState(false);
+  // The githubDataSet can be empty when users don't fetch data from GitHub, so
+  // we guard against that scenario here.
+  const githubDataIsEmpty = Object.keys(githubData).length === 0;
 
   return (
     <>
@@ -162,9 +165,18 @@ export default function Index() {
             <h2 className="font-bold mr-2">All Projects</h2>
             <ToggleFiltersButton onClick={() => setShowSidebar(true)} />
           </div>
-          <div className="w-full md:w-56 mt-3 md:mt-0">
-            <ProjectSort />
-          </div>
+          {githubDataIsEmpty ? (
+            <span
+              className="text-light-type-medium text-sm"
+              title="Unable to sort projects because no GitHub data is available"
+            >
+              Sorting disabled
+            </span>
+          ) : (
+            <div className="w-full md:w-56 mt-3 md:mt-0">
+              <ProjectSort />
+            </div>
+          )}
         </div>
         <div className="mx-auto mb-32" style={{ maxWidth: 1600 }}>
           <ProjectList
