@@ -1,7 +1,7 @@
-import fetch from "node-fetch";
 import type { graphql } from "@octokit/graphql/dist-types/types";
-import { getInfoFromGitHubUrl } from "./getInfoFromGitHubUrl";
+import axios from "axios";
 import type { GitHubData, GitHubIssueData } from "../types";
+import { getInfoFromGitHubUrl } from "./getInfoFromGitHubUrl";
 
 type QueryReturnValue = {
   repository: {
@@ -202,9 +202,10 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
 
     // When we use pagination, we get some information in the Response Header about the total amount of pages according to how many items per page we are requesting (using the "per_page" parameter)
     // So a trick could be requesting the list of contributors with one item per page:
-    const contributors = await fetch(
+    const contributors = await axios(
       `https://api.github.com/repos/${owner}/${repoName}/contributors?per_page=1`,
       {
+        method: "GET",
         headers: {
           accept: "application/vnd.github.v3+json",
           authorization: `token ${process.env.GITHUB_PERSONAL_ACCESS_TOKEN}`,
@@ -214,7 +215,7 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
     // Doing this in our Response Header there will be a Link property with the following content:
     // The below is an example format of Link property
     // link: '<https://api.github.com/repositories/100050317/contributors?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/100050317/contributors?per_page=1&page=13>; rel="last"'
-    const linkHeader = contributors.headers.get("link");
+    const linkHeader = contributors.headers["link"];
     const totalContributors = linkHeader
       ? Number(
           (linkHeader || "")
