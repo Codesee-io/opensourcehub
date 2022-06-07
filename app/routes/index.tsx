@@ -24,7 +24,6 @@ import ToggleFiltersButton from "~/components/ToggleFiltersButton";
 import ProjectSort from "~/components/ProjectSort";
 import Wave from "~/images/Wave";
 
-import selectStyles from "~/styles/select.css";
 import gradientStyles from "~/styles/gradient.css";
 import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
@@ -32,7 +31,6 @@ import ButtonLink from "~/components/ButtonLink";
 
 export function links() {
   return [
-    { rel: "stylesheet", href: selectStyles },
     { rel: "stylesheet", href: gradientStyles },
     { rel: "stylesheet", href: headerStyles },
     { rel: "stylesheet", href: projectsStyles },

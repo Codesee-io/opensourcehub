@@ -38,7 +38,7 @@ const ProjectList: FunctionComponent<Props> = ({
     filteredProjectIds.includes(project.slug)
   );
 
-  if (sortOption.value === OPTION_MOST_OPEN_ISSUES) {
+  if (sortOption === OPTION_MOST_OPEN_ISSUES) {
     // Sort projects by most open issues (highest count of opened issues)
     filteredProjects.sort((projectA, projectB) => {
       return (
@@ -46,7 +46,7 @@ const ProjectList: FunctionComponent<Props> = ({
         githubDataSet[projectA.slug].totalOpenIssues
       );
     });
-  } else if (sortOption.value === OPTION_MOST_ACTIVE) {
+  } else if (sortOption === OPTION_MOST_ACTIVE) {
     // Sort projects by most active (highest count of recently-closed PRs)
     filteredProjects.sort((projectA, projectB) => {
       return (
@@ -54,7 +54,7 @@ const ProjectList: FunctionComponent<Props> = ({
         githubDataSet[projectA.slug].prsMerged.count
       );
     });
-  } else if (sortOption.value === OPTION_MOST_POPULARITY) {
+  } else if (sortOption === OPTION_MOST_POPULARITY) {
     // Sort projects by most popularity (highest number of contributors)
     filteredProjects.sort((projectA, projectB) => {
       return (
