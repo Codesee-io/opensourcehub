@@ -1,0 +1,87 @@
+---
+name: Multy
+repoUrl: https://github.com/multycloud/multy
+description: Multy - Easily deploy multi cloud infrastructure. Write cloud-agnostic config deployed across multiple clouds.
+languages: # A list of programming languages used in this project
+  - Go
+tags: # A list of keywords relevant to the contributors for this project
+  - Tools
+  - Cloud
+  - Infrastructure as Code
+  - DevOps
+  - Multi-cloud
+  - First Timer Friendly
+avatar: multy.jpg
+websiteUrl: https://multy.dev
+twitterUrl: https://twitter.com/multycloud
+currentlySeeking: # (optional) These fields are searchable and very helpful for contributors to match well with your project
+  - Backend Developers
+  - Developers
+  - DevOps
+  - Testers
+contributionOverview: # (optional) Provide additional context to help contributors match well with your project
+  mainLocation: Europe
+  isMentorshipAvailable: true
+learnLinks: # (optional) A list of links to support new contributors in learning about your project and tech stack and culture / community
+  - title: Multy introduction
+    url: https://docs.multy.dev/introduction
+  - title: Contribution guidelines
+    url: https://github.com/multycloud/multy/blob/main/CONTRIBUTING.md
+  - title: Multy blog
+    url: https://docs.multy.dev/blog
+
+maintainer: goncalo-rodrigues
+---
+
+<!-- Divide your content into sections using our handy shortcodes. Each section is optional -->
+
+<Overview>
+# What is Multy?
+
+**Multy** is an open-source tool that makes your infrastructure portable using a cloud-agnostic API. You write your cloud-agnostic configuration once and Multy deploys it to the clouds you choose.
+
+Multy is available as a Terraform provider and can deploy to AWS, Azure, with GCP coming soon. The provider is also open-sourced at [multycloud/terraform-provider-multy](https://github.com/multycloud/terraform-provider-multy).
+
+An example of an `object storage` deployment in Multy through Terraform:
+
+```
+resource "multy_object_storage" "obj_storage" {
+  name       = "test-storage-123-multy"
+  cloud      = "aws"
+  location   = "us_east_1"
+  versioning = true
+}
+
+resource "multy_object_storage_object" "public_obj_storage" {
+  name              = "hello_world"
+  object_storage_id = multy_object_storage.obj_storage.id
+  content           = "<h1>hello world from ${each.key}</h1>"
+  content_type      = "text/html"
+  acl               = "public_read"
+}
+```
+
+Changing clouds is as easy as changing the `cloud` parameter! With Multy, **you write once, and deploy anywhere**.
+
+
+</Overview>
+
+<Contributing>
+
+If you're interested in contributing, take a look at our [Issues](https://github.com/multycloud/multy/issues) and join our [Discord](https://multy.dev/discord) channel!
+
+Ways you can contribute:
+
+- Suggest and vote for features on our [Roadmap](https://github.com/orgs/multycloud/projects/4)
+- Engage in discussions in the [Discord](https://multy.dev/discord) channel
+- Report bugs
+- Contribute code
+
+Don't be afraid to:
+
+- Talk to us on Discord
+- Tell us how you use Multy
+- Tell us what you would do differently
+- Suggest any features you find interesting!
+
+</Contributing>
