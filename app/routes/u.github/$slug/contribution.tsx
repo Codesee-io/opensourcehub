@@ -117,9 +117,9 @@ const Contribution: FC = () => {
       // Focus on the next input field
       descriptionRef.current?.focus();
 
+      // In the background, check whether the PR URL has a Review Map
       const data = new FormData();
       data.set("url", url);
-      console.log("submitting");
       fetcher.submit(data, {
         action: "/api/check-review-map-image",
         method: "post",
