@@ -1,4 +1,9 @@
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import {
+  Form,
+  useActionData,
+  useFetcher,
+  useLoaderData,
+} from "@remix-run/react";
 import { FC, useRef, useState } from "react";
 import {
   ActionFunction,
@@ -11,7 +16,6 @@ import TextField from "~/components/TextField";
 import { createPortfolioItem } from "~/database.server";
 import { getCurrentUser } from "~/session.server";
 import { CreatePortfolioItemPayload } from "~/types";
-import { isValidReviewMapUrl } from "~/utils/codesee";
 import { isValidPullRequestUrl } from "~/utils/repo-url";
 import { getProfileRouteForUser } from "~/utils/routes";
 import TextArea from "~/components/TextArea";
@@ -88,10 +92,7 @@ export const action: ActionFunction = async ({ request }) => {
     title: title as string,
   };
 
-  if (
-    typeof reviewMapImageUrl === "string" &&
-    isValidReviewMapUrl(reviewMapImageUrl)
-  ) {
+  if (typeof reviewMapImageUrl === "string") {
     newPortfolioItem.reviewMapImageUrl = reviewMapImageUrl;
   }
 
@@ -108,11 +109,22 @@ const Contribution: FC = () => {
 
   const descriptionRef = useRef<HTMLInputElement>(null);
 
+  const fetcher = useFetcher();
   const onUpdatePullRequestUrl = (url: string) => {
-    setPullRequestUrl(url);
+    if (pullRequestUrl !== url) {
+      setPullRequestUrl(url);
 
-    // Focus on the next input field
-    descriptionRef.current?.focus();
+      // Focus on the next input field
+      descriptionRef.current?.focus();
+
+      // In the background, check whether the PR URL has a Review Map
+      const data = new FormData();
+      data.set("url", url);
+      fetcher.submit(data, {
+        action: "/api/check-review-map-image",
+        method: "post",
+      });
+    }
   };
 
   return (
@@ -134,6 +146,11 @@ const Contribution: FC = () => {
             action={`/u/github/${slug}/contribution`}
             className="space-y-4"
           >
+            <input
+              type="hidden"
+              name="reviewMapImageUrl"
+              value={fetcher?.data?.imageUrl}
+            />
             <input
               type="hidden"
               value={pullRequestUrl || ""}

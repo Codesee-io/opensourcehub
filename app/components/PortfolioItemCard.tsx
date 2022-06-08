@@ -36,8 +36,8 @@ const PortfolioItemCard: FC<Props> = (props) => {
             <img
               src={props.portfolioItem.reviewMapImageUrl}
               alt=""
-              className="hidden md:block object-cover flex-shrink-0 border-r border-light-border rounded-tl-lg"
-              style={{ height: 200, aspectRatio: "16 / 9" }}
+              className="hidden sm:block object-cover flex-shrink-0 border-r border-light-border rounded-tl-lg"
+              style={{ height: 200, aspectRatio: "4 / 3" }}
             />
           )}
           <div>
