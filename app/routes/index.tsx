@@ -64,7 +64,7 @@ export const loader: LoaderFunction = async () => {
     const api = new GhostContentAPI({
       url: process.env.GHOST_API_URL,
       key: process.env.GHOST_API_KEY,
-      version: "v5.0", // v5.0 is correct, but Ghost borked their own versions
+      version: "v5.0",
     });
 
     // By default, the Ghost Content API returns posts in reverse chronological
