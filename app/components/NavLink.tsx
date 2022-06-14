@@ -17,7 +17,7 @@ const NavLink: FC<Props> = ({ children, to, className }) => {
       <a
         href={to}
         className={cx(
-          "px-3 py-1 supports-hover:hover:text-yellow-300 inline-block rounded",
+          "px-3 py-1 supports-hover:hover:text-yellow-300 flex items-center",
           className
         )}
         rel="noreferrer"
@@ -32,7 +32,7 @@ const NavLink: FC<Props> = ({ children, to, className }) => {
     <Link
       to={to}
       className={cx(
-        "px-3 py-1 supports-hover:hover:text-yellow-300 inline-block rounded",
+        "px-3 py-1 supports-hover:hover:text-yellow-300 flex items-center",
         className
       )}
     >

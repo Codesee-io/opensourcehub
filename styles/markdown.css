@@ -2,40 +2,40 @@
 .markdown-content h1 {
   @apply text-light-type;
   font-weight: 700;
-  font-size: 21px;
-  line-height: 28px;
-  margin-bottom: 18px;
+  font-size: 1.3125rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
 }
 
 .markdown-content h2 {
   @apply text-light-type;
   font-weight: 600;
-  font-size: 18px;
-  line-height: 22px;
-  margin-bottom: 14px;
+  font-size: 1.125rem;
+  line-height: 1.375;
+  margin-bottom: 1rem;
 }
 
 .markdown-content h3 {
   @apply text-light-type;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 18px;
-  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.125;
+  margin-bottom: 0.75rem;
 }
 
 .markdown-content h4 {
   @apply text-light-type;
   font-weight: 500;
-  font-size: 15px;
-  line-height: 18px;
-  margin-bottom: 8px;
+  font-size: 0.875rem;
+  line-height: 1.125;
+  margin-bottom: 0.5rem;
 }
 
 .markdown-content p,
 .markdown-content ul,
 .markdown-content ol {
   @apply text-light-type-medium;
-  font-size: 14px;
+  font-size: 0.875rem;
   margin-bottom: 1rem;
 }
 
@@ -78,7 +78,7 @@
 }
 
 .markdown-content img {
-  margin-bottom: 18px;
+  margin-bottom: 1rem;
 }
 
 .markdown-content code {
@@ -95,6 +95,7 @@
   font-size: 85%;
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
+  overflow: auto;
 }
 
 /* Use this class on the direct parent of an anchor to display it on hover */
