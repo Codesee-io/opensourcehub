@@ -29,6 +29,7 @@ import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
 import ButtonLink from "~/components/ButtonLink";
 import BackToTopButton from "~/components/BackToTopButton";
+import { ROUTES, SHOW_PROFILE_LINK } from "~/utils/constants";
 
 export function links() {
   return [
@@ -131,7 +132,7 @@ export default function Index() {
   return (
     <>
       <div className="bg-gradient mx-auto pt-12 md:pt-24 mb-12">
-        <h1 className="text-yellow-300 font-semibold text-3xl lg:text-4xl text-center mb-4">
+        <h1 className="text-yellow-300 font-semibold text-3xl px-2 lg:text-4xl text-center mb-4">
           Connecting People and Projects
         </h1>
         <p className="text-white text-center max-w-xl mx-auto mb-6 mt-2 px-2">
@@ -139,8 +140,13 @@ export default function Index() {
           across the globe, contribute to open source, and learn something new.
         </p>
 
-        <div className="flex items-center justify-center text-center px-2 mt-3">
-          <ButtonLink to="/contribute">List Your Project</ButtonLink>
+        <div className="flex flex-col md:flex-row items-center justify-center text-center px-2 mt-3 gap-4">
+          <ButtonLink to={ROUTES.CONTRIBUTE}>List your project</ButtonLink>
+          {SHOW_PROFILE_LINK && (
+            <ButtonLink to={ROUTES.LOGIN} variant="accent">
+              Build your profile
+            </ButtonLink>
+          )}
         </div>
 
         <div className="header-wave mt-12">

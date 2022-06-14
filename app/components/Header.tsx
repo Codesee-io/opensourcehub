@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "@remix-run/react";
-import { ROUTES, DISCORD_LINK } from "../utils/constants";
+import { ROUTES, DISCORD_LINK, SHOW_PROFILE_LINK } from "../utils/constants";
 import NavLink from "./NavLink";
 import logo from "~/images/logo.png";
 import DiscordIcon from "./icons/DiscordIcon";
 import { UserInfo } from "~/types";
 import MenuIcon from "./icons/MenuIcon";
 import MobileNavigation from "./MobileNavigation";
+import HeaderDropdown from "./HeaderDropdown";
 
 type Props = {
   userInfo?: UserInfo | null;
@@ -93,12 +94,12 @@ const Header: FC<Props> = ({ userInfo }) => {
               <NavLink to={link.to}>{link.text}</NavLink>
             </div>
           ))}
-          {/* Hide the Log in/out buttons for now  
-          {userInfo ? (
+          {SHOW_PROFILE_LINK && userInfo && (
             <HeaderDropdown userInfo={userInfo} />
-          ) : (
+          )}
+          {SHOW_PROFILE_LINK && userInfo == null && (
             <NavLink to={ROUTES.LOGIN}>Log in</NavLink>
-          )}*/}
+          )}
         </div>
       </div>
       <MobileNavigation

@@ -4,6 +4,8 @@ import cx from "classnames";
 import { UserInfo } from "~/types";
 import { NAV_LINKS } from "./Header";
 import CloseIcon from "./icons/CloseIcon";
+import { ROUTES, SHOW_PROFILE_LINK } from "~/utils/constants";
+import ButtonLink from "./ButtonLink";
 
 type Props = {
   userInfo?: UserInfo | null;
@@ -28,11 +30,12 @@ const MobileNavigation: FC<Props> = ({ userInfo, isOpen, onRequestClose }) => (
     >
       <CloseIcon />
     </button>
-    {userInfo == null ? null : (
-      // Hide the Log in/out buttons for now
-      // <ButtonLink to={ROUTES.LOGIN} className="mb-8">
-      //   Log in
-      // </ButtonLink>
+    {SHOW_PROFILE_LINK && userInfo == null && (
+      <ButtonLink to={ROUTES.LOGIN} className="mb-8">
+        Log in
+      </ButtonLink>
+    )}
+    {userInfo != null && (
       <div
         className={cx("mb-8 transition-transform delay-75", {
           "-translate-y-4": !isOpen,
