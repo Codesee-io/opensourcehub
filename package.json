@@ -22,7 +22,6 @@
     "typecheck": "npx tsc --project ./tsconfig.json"
   },
   "dependencies": {
-    "@mdx-js/react": "1.6.22",
     "@octokit/graphql": "4.8.0",
     "@octokit/rest": "^18.12.0",
     "@primer/octicons-react": "17.3.0",

@@ -1,13 +1,13 @@
 import type { FC } from "react";
 import { Link } from "@remix-run/react";
-import { DISCORD_LINK, RESOURCES_LINK, ABOUT_LINK } from "~/utils/constants";
+import { DISCORD_LINK, RESOURCES_LINK, ROUTES } from "~/utils/constants";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
 import logo from "~/images/logo.png";
 import ButtonLink from "./ButtonLink";
 
 const Footer: FC = () => (
   <footer className="bg-gradient text-black-400 px-4 py-10">
-    <Link to="/" className="block" aria-label="Home">
+    <Link to={ROUTES.HOME} className="block" aria-label="Home">
       <img
         src={logo}
         alt=""
@@ -16,13 +16,13 @@ const Footer: FC = () => (
       />
     </Link>
     <div className="flex items-center justify-center text-center px-2 mt-7">
-      <ButtonLink to="/contribute">List Your Project</ButtonLink>
+      <ButtonLink to={ROUTES.CONTRIBUTE}>List Your Project</ButtonLink>
     </div>
     <div className="text-sm text-white text-center font-semibold flex gap-6 justify-center mt-5 mb-12">
-      <Link className="supports-hover:hover:text-yellow-300" to="/">
+      <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.HOME}>
         Projects
       </Link>
-      <Link className="supports-hover:hover:text-yellow-300" to={ABOUT_LINK}>
+      <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.ABOUT}>
         About
       </Link>
       <Link
