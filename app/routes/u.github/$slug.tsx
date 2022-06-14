@@ -269,7 +269,7 @@ const ProfilePage: FC = () => {
               </span>
               <p className="max-w-lg mx-auto">
                 List your favorite contributions on your profile! Your portfolio
-                will be visible by anyone who visits Open-Source Hub, so it's
+                will be visible by anyone who visits Open Source Hub, so it's
                 your chance to shine ✨
               </p>
               <ButtonLink to="contribution" className="inline-block">

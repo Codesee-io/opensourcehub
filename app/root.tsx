@@ -31,13 +31,13 @@ export function links() {
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   viewport: "width=device-width,initial-scale=1",
-  title: "Open-Source Hub",
+  title: "Open Source Hub",
   description:
-    "Find your next open-source project! On Open-Source Hub, maintainers advertise their projects for free and make it easy to onboard new contributors",
+    "Find your next open-source project! On Open Source Hub, maintainers advertise their projects for free and make it easy to onboard new contributors",
   // Facebook open graph tags
   "og:url": "https://opensourcehub.io",
   "og:type": "website",
-  "og:title": "Onboard open-source contributors on Open-Source Hub",
+  "og:title": "Onboard open-source contributors on Open Source Hub",
   "og:description":
     "Contribute, maintain, and impact the open-source communities you care about.",
   // TODO add social previews when we have them
@@ -49,7 +49,7 @@ export const meta: MetaFunction = () => ({
   // Twitter open graph tags
   "twitter:card": "summary_large_image",
   "twitter:site": "@Codeseeio",
-  "twitter:title": "Onboard open-source contributors on Open-Source Hub",
+  "twitter:title": "Onboard open-source contributors on Open Source Hub",
   "twitter:description":
     "Contribute, maintain, and impact the open-source communities you care about.",
   // TODO add social previews when we have them

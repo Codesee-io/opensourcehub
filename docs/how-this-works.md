@@ -2,7 +2,7 @@
 
 ## Architecture
 
-Open-Source Hub is built with [Remix](https://remix.run), a server-side framework for [React](https://reactjs.org/) applications.
+Open Source Hub is built with [Remix](https://remix.run), a server-side framework for [React](https://reactjs.org/) applications.
 
 | Directory         | Description                                                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -27,7 +27,7 @@ Open-Source Hub is built with [Remix](https://remix.run), a server-side framewor
 
 ### Deployment
 
-Open-Source Hub is auto-deployed to Vercel when code is merged to the `main` branch. Build previews will be posted to pull requests in GitHub.
+Open Source Hub is auto-deployed to Vercel when code is merged to the `main` branch. Build previews will be posted to pull requests in GitHub.
 
 ### Styling
 
@@ -108,7 +108,7 @@ Each project can display a featured CodeSee Map using the `featuredMap` field in
 
 ```yaml
 ---
-name: Open-Source Hub
+name: Open Source Hub
 repoUrl: https://github.com/Codesee-io/opensourcehub
 featuredMap:
   url: https://app.codesee.io/maps/public/848e3630-1650-11ec-8bc1-7d4a4822cc27

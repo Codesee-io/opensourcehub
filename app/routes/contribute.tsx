@@ -46,7 +46,7 @@ const Contribute: FC = () => {
       </h1>
       <div className="bg-white p-6 rounded-lg space-y-2 border border-light-border">
         <p>
-          Open-Source Hub is a website where the maintainers of open-source
+          Open Source Hub is a website where the maintainers of open-source
           projects can list their repositories and get the attention of
           potential contributors.
         </p>

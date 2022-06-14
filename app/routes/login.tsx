@@ -14,7 +14,7 @@ import { getFirebaseClientConfig } from "~/firebase.server";
 import { createUserSession, isLoggedIn } from "~/session.server";
 
 export const meta: MetaFunction = () => ({
-  title: "Log in to Open-Source Hub",
+  title: "Log in to Open Source Hub",
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -94,7 +94,7 @@ const Login: FC = () => {
     <div className="px-4">
       <main className="bg-white border border-light-border rounded-lg my-8 px-4 py-12 max-w-xl text-center mx-auto space-y-4">
         <h1 className="text-light-type text-2xl font-semibold">
-          Log in to Open-Source Hub
+          Log in to Open Source Hub
         </h1>
         <p className="text-light-type">
           Use your GitHub account to create and manage your profile.
@@ -122,7 +122,7 @@ const Login: FC = () => {
       </main>
       <div className="text-light-type text-sm max-w-xl mx-auto px-4 mb-12">
         <p>
-          By logging in to Open-Source Hub, you will claim your public profile
+          By logging in to Open Source Hub, you will claim your public profile
           page where you can list your interests, connect your Discord account,
           and show off the open-source contributions you're most proud of.
         </p>

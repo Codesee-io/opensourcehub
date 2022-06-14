@@ -3,7 +3,7 @@ import ButtonLink from "~/components/ButtonLink";
 import ExternalLink from "../components/ExternalLink";
 
 export const meta: MetaFunction = () => ({
-  title: "About Open-Source Hub",
+  title: "About Open Source Hub",
 });
 
 const About = () => {
@@ -21,11 +21,11 @@ const About = () => {
       </header>
       <main className="mx-auto max-w-2xl px-4 mb-20">
         <h2 className="text-2xl font-semibold mb-4 px-6">
-          About Open-Source Hub
+          About Open Source Hub
         </h2>
         <div className="space-y-4 p-6 bg-white rounded-lg border border-light-border">
           <p>
-            Open-Source Hub was created to connect projects to people and ease
+            Open Source Hub was created to connect projects to people and ease
             codebase onboarding.
           </p>
           <p>
@@ -34,7 +34,7 @@ const About = () => {
             onboard to the projects that matter most to them.
           </p>
           <p>
-            Open-Source Hub allows maintainers to provide contribution best
+            Open Source Hub allows maintainers to provide contribution best
             practices, support guidance, and interactive visual walkthroughs of
             their codebase using CodeSee Maps.
           </p>

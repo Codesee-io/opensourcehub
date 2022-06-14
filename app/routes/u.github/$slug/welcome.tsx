@@ -86,7 +86,7 @@ const Welcome: FC = () => {
               </h1>
               <p className="max-w-md text-light-type-low text-sm">
                 You're almost done creating your profile on{" "}
-                <strong>Open-Source Hub</strong> using your GitHub account (
+                <strong>Open Source Hub</strong> using your GitHub account (
                 {user.githubLogin})
               </p>
             </div>
@@ -195,7 +195,7 @@ const Welcome: FC = () => {
                   <div className="pt-10">
                     <label className="text-sm flex gap-2 text-light-type-medium">
                       <input type="checkbox" name="joinDiscord" />
-                      Join the Open-Source Hub Discord server
+                      Join the Open Source Hub Discord server
                     </label>
                   </div>
                 </div>

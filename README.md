@@ -1,6 +1,6 @@
-# Open-Source Hub
+# Open Source Hub
 
-Welcome to Open-Source Hub! This website and community connects open source maintainers and collaborators. Please join [our Discord channel](https://discord.gg/opensource) if you have any questions or just want to chat!
+Welcome to Open Source Hub! This website and community connects open source maintainers and collaborators. Please join [our Discord channel](https://discord.gg/opensource) if you have any questions or just want to chat!
 
 ## Project setup
 
@@ -98,11 +98,11 @@ Then, the best way to get started is to [create an issue](https://github.com/Cod
 
 ### Tag policy
 
-Final tags are up to the maintainers of Open-Source Hub. Your tags may be modified for the benefit of the community and to improve discoverability.
+Final tags are up to the maintainers of Open Source Hub. Your tags may be modified for the benefit of the community and to improve discoverability.
 
 We use title-casing for tags. For example: "First-Timer Friendly, Social Activism, C#, JavaScript".
 
-### How to remove your project from Open-Source Hub
+### How to remove your project from Open Source Hub
 
 Open a PR to remove your project folder from this repository.
 

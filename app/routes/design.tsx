@@ -6,7 +6,7 @@ import ButtonLink from "~/components/ButtonLink";
 import tagColors from "~/data/tagColors";
 
 export const meta: MetaFunction = () => ({
-  title: "Design | Open-Source Hub",
+  title: "Design | Open Source Hub",
 });
 
 export const headers: HeadersFunction = () => {
@@ -20,7 +20,7 @@ const Design: FC = () => {
   return (
     <main className="py-12 md:py-20 px-6 max-w-xl mx-auto">
       <h1 className="text-3xl font-semibold leading-relaxed text-center mt-4 mb-8">
-        Open-Source Hub Design
+        Open Source Hub Design
       </h1>
 
       <section className="mb-8">

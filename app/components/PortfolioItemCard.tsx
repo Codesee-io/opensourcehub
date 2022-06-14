@@ -115,7 +115,7 @@ const PortfolioItemCard: FC<Props> = (props) => {
           </div>
         ) : (
           <div className="pt-4 px-4 pb-4 border-t border-light-border text-light-type-medium text-sm space-y-2">
-            <p>This project is listed not on Open-Source Hub yet.</p>
+            <p>This project is listed not on Open Source Hub yet.</p>
             <p>
               If you are one of the maintainers, consider listing your project
               on{" "}
@@ -123,7 +123,7 @@ const PortfolioItemCard: FC<Props> = (props) => {
                 to="/contribute"
                 className="font-semibold text-light-interactive supports-hover:hover:underline"
               >
-                Open-Source Hub!
+                Open Source Hub!
               </Link>
             </p>
           </div>

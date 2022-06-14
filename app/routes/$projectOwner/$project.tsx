@@ -55,14 +55,14 @@ export const meta: MetaFunction = ({ data }) => {
   if (data?.project?.attributes?.name) {
     const project = data.project as Project;
     return {
-      title: `Open-Source Hub | ${project.attributes.name}`,
+      title: `Open Source Hub | ${project.attributes.name}`,
       "og:title": project.attributes.name,
       "og:description": project.attributes.description,
     };
   }
 
   return {
-    title: `Open-Source Hub | 404`,
+    title: `Open Source Hub | 404`,
   };
 };
 

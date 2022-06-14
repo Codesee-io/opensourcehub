@@ -39,7 +39,7 @@ export function links() {
 }
 
 export const meta: MetaFunction = () => ({
-  title: "Open-Source Hub | Find open-source projects",
+  title: "Open Source Hub | Find open-source projects",
 });
 
 export let headers: HeadersFunction = () => {

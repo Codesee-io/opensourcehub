@@ -11,7 +11,7 @@ import { getProjects, getProjectsMetadata } from "../projects.server";
 import type { Project, ProjectCategory } from "../types";
 
 export const meta: MetaFunction = () => ({
-  title: "Stats | Open-Source Hub",
+  title: "Stats | Open Source Hub",
 });
 
 export const headers: HeadersFunction = () => {
