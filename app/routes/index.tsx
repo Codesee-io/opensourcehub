@@ -28,6 +28,7 @@ import gradientStyles from "~/styles/gradient.css";
 import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
 import ButtonLink from "~/components/ButtonLink";
+import BackToTopButton from "~/components/BackToTopButton";
 
 export function links() {
   return [
@@ -193,6 +194,7 @@ export default function Index() {
           />
         </div>
       </SearchWrapper>
+      <BackToTopButton />
     </>
   );
 }
