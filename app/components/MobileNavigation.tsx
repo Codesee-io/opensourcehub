@@ -2,7 +2,6 @@ import { Link } from "@remix-run/react";
 import { FC } from "react";
 import cx from "classnames";
 import { UserInfo } from "~/types";
-import ButtonLink from "./ButtonLink";
 import { NAV_LINKS } from "./Header";
 import CloseIcon from "./icons/CloseIcon";
 
@@ -31,7 +30,7 @@ const MobileNavigation: FC<Props> = ({ userInfo, isOpen, onRequestClose }) => (
     </button>
     {userInfo == null ? null : (
       // Hide the Log in/out buttons for now
-      // <ButtonLink to="/login" className="mb-8">
+      // <ButtonLink to={ROUTES.LOGIN} className="mb-8">
       //   Log in
       // </ButtonLink>
       <div

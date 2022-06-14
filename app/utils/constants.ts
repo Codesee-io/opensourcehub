@@ -4,13 +4,15 @@ export const HOW_TO_LIST_PROJECT_LINK =
   "https://github.com/codesee-io/opensourcehub#how-to-list-your-project";
 
 export const DISCORD_LINK = "https://discord.gg/opensource";
-export const ABOUT_LINK = "/about";
-export const RESOURCES_LINK = "/resources";
+export const RESOURCES_LINK = "https://resources.opensourcehub.io";
 export const REPO_LINK = "https://github.com/Codesee-io/opensourcehub";
-
-// Auth Link
-export const SIGNIN_LINK = "/login";
-export const SIGNUP_LINK = "/signup";
+export const ROUTES = {
+  HOME: "/",
+  ABOUT: "/about",
+  CONTRIBUTE: "/contribute",
+  LOGIN: "/login",
+  LOGOUT: "/logout",
+};
 
 // Button, Link Types
 export const LINK_FORMATS = {

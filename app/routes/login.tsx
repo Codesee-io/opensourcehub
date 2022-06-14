@@ -120,7 +120,7 @@ const Login: FC = () => {
           <p>Unable to log you in, please try again</p>
         )}
       </main>
-      <div className="text-light-type text-sm max-w-xl mx-auto px-4">
+      <div className="text-light-type text-sm max-w-xl mx-auto px-4 mb-12">
         <p>
           By logging in to Open-Source Hub, you will claim your public profile
           page where you can list your interests, connect your Discord account,

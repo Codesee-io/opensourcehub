@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link } from "@remix-run/react";
-import { DISCORD_LINK, RESOURCES_LINK, ABOUT_LINK } from "~/utils/constants";
+import { DISCORD_LINK, RESOURCES_LINK, ROUTES } from "~/utils/constants";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
 import logo from "~/images/logo.png";
 import ButtonLink from "./ButtonLink";
@@ -22,7 +22,7 @@ const Footer: FC = () => (
       <Link className="supports-hover:hover:text-yellow-300" to="/">
         Projects
       </Link>
-      <Link className="supports-hover:hover:text-yellow-300" to={ABOUT_LINK}>
+      <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.ABOUT}>
         About
       </Link>
       <Link

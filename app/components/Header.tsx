@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "@remix-run/react";
-import { RESOURCES_LINK, ABOUT_LINK, DISCORD_LINK } from "../utils/constants";
+import { ROUTES, DISCORD_LINK } from "../utils/constants";
 import NavLink from "./NavLink";
 import logo from "~/images/logo.png";
 import DiscordIcon from "./icons/DiscordIcon";
@@ -14,17 +14,22 @@ type Props = {
 
 export const NAV_LINKS = [
   {
-    to: "/",
+    to: ROUTES.HOME,
     text: "Projects",
   },
   {
-    to: RESOURCES_LINK,
-    text: "Learn",
+    to: ROUTES.CONTRIBUTE,
+    text: "Contribute",
   },
   {
-    to: ABOUT_LINK,
+    to: ROUTES.ABOUT,
     text: "About",
   },
+  // Hide the resources page until the content is ready
+  // {
+  //   to: RESOURCES_LINK,
+  //   text: "Resources",
+  // },
   {
     to: DISCORD_LINK,
     text: (
@@ -92,7 +97,7 @@ const Header: FC<Props> = ({ userInfo }) => {
           {userInfo ? (
             <HeaderDropdown userInfo={userInfo} />
           ) : (
-            <NavLink to="/login">Log in</NavLink>
+            <NavLink to={ROUTES.LOGIN}>Log in</NavLink>
           )}*/}
         </div>
       </div>
