@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { Link } from "@remix-run/react";
+import { FC, useEffect, useState } from "react";
+import { Link, useLocation } from "@remix-run/react";
 import { RESOURCES_LINK, ABOUT_LINK, DISCORD_LINK } from "../utils/constants";
 import NavLink from "./NavLink";
 import logo from "~/images/logo.png";
@@ -36,8 +36,32 @@ export const NAV_LINKS = [
   },
 ];
 
+function bodyScrollLock(enable: boolean) {
+  if (enable) {
+    document.body.classList.add("overflow-hidden");
+  } else {
+    document.body.classList.remove("overflow-hidden");
+  }
+}
+
 const Header: FC<Props> = ({ userInfo }) => {
-  const [showMobileNav, setShowMobileNav] = useState(false);
+  const [isMobileNavVisible, setShowMobileNav] = useState(false);
+
+  // Hide the mobile nav when we navigate around
+  const { pathname } = useLocation();
+  useEffect(() => {
+    hideMobileNav();
+  }, [pathname]);
+
+  const hideMobileNav = () => {
+    setShowMobileNav(false);
+    bodyScrollLock(false);
+  };
+
+  const showMobileNav = () => {
+    setShowMobileNav(true);
+    bodyScrollLock(true);
+  };
 
   return (
     <header className="bg-indigo-850 sticky top-0 z-40 h-12 flex items-center">
@@ -53,7 +77,7 @@ const Header: FC<Props> = ({ userInfo }) => {
         <button
           type="button"
           className="p-2 text-white md:hidden"
-          onClick={() => setShowMobileNav(true)}
+          onClick={showMobileNav}
           aria-label="Show the mobile navigation menu"
         >
           <MenuIcon />
@@ -73,9 +97,9 @@ const Header: FC<Props> = ({ userInfo }) => {
         </div>
       </div>
       <MobileNavigation
-        isOpen={showMobileNav}
+        isOpen={isMobileNavVisible}
         userInfo={userInfo}
-        onRequestClose={() => setShowMobileNav(false)}
+        onRequestClose={hideMobileNav}
       />
     </header>
   );
