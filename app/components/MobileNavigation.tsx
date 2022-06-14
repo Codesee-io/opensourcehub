@@ -29,11 +29,11 @@ const MobileNavigation: FC<Props> = ({ userInfo, isOpen, onRequestClose }) => (
     >
       <CloseIcon />
     </button>
-    {userInfo == null ? (
-      <ButtonLink to="/login" className="mb-8">
-        Log in
-      </ButtonLink>
-    ) : (
+    {userInfo == null ? null : (
+      // Hide the Log in/out buttons for now
+      // <ButtonLink to="/login" className="mb-8">
+      //   Log in
+      // </ButtonLink>
       <div
         className={cx("mb-8 transition-transform delay-75", {
           "-translate-y-4": !isOpen,
