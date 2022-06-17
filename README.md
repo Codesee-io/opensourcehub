@@ -61,7 +61,7 @@ To add a Map to your project:
 
 ```
 featuredMap:
-  url: https://app.codesee.io/maps/public/848e3630-1650-11ec-8bc1-7d4a4822cc27
+  url: https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59
   description: Get a quick overview of the major areas of our repo
 ```
 
@@ -69,10 +69,10 @@ If you would like to display multiple maps you can add an entry called "maps"
 
 ```
 maps:
-  - url: https://app.codesee.io/maps/public/848e3630-1650-11ec-8bc1-7d4a4822cc27
+  - url: https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59
     description: Get a quick visual overview of the major areas of our repo!
     subTitle: devdocs
-  - url: https://app.codesee.io/maps/public/848e3630-1650-11ec-8bc1-7d4a4822cc27
+  - url: https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59
     description: Another map!
     subTitle: testMap
 ```
@@ -81,7 +81,7 @@ That's it!
 
 The CodeSee Map below is a good way to get familiar with the codebase:
 
-[<img alt="CodeSee Map preview" src="docs/codebase-map.png" width="500">](https://app.codesee.io/maps/public/848e3630-1650-11ec-8bc1-7d4a4822cc27)
+[<img alt="CodeSee Map preview" src="docs/codebase-map.png" width="500">](https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59)
 
 ## Contributing
 

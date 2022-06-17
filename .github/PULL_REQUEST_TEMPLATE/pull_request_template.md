@@ -21,6 +21,6 @@ To add a Map to your project:
 
 ```
 featuredMap:
-  url: https://app.codesee.io/maps/public/848e3630-1650-11ec-8bc1-7d4a4822cc27
-  description: Get a quick overview of the major areas of our repo
+  url: https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59
+  description: Onboard to our repository using a CodeSee Map!
 ```

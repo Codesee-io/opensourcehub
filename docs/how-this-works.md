@@ -111,7 +111,7 @@ Each project can display a featured CodeSee Map using the `featuredMap` field in
 name: Open Source Hub
 repoUrl: https://github.com/Codesee-io/opensourcehub
 featuredMap:
-  url: https://app.codesee.io/maps/public/848e3630-1650-11ec-8bc1-7d4a4822cc27
+  url: https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59
   description: Get a quick visual overview of the major areas of our repo!
 ---
 ```
