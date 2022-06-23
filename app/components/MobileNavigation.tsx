@@ -1,4 +1,3 @@
-import { Link } from "@remix-run/react";
 import { FC } from "react";
 import cx from "classnames";
 import { UserInfo } from "~/types";
@@ -6,6 +5,7 @@ import { NAV_LINKS } from "./Header";
 import CloseIcon from "./icons/CloseIcon";
 import { ROUTES, SHOW_PROFILE_LINK } from "~/utils/constants";
 import ButtonLink from "./ButtonLink";
+import NavLink from "./NavLink";
 
 type Props = {
   userInfo?: UserInfo | null;
@@ -70,13 +70,13 @@ const MobileNavigation: FC<Props> = ({ userInfo, isOpen, onRequestClose }) => (
       onClick={onRequestClose}
     >
       {NAV_LINKS.map((link, i) => (
-        <Link
+        <NavLink
           to={link.to}
           key={`mobile-link-${i}`}
           className="flex items-center justify-center"
         >
           {link.text}
-        </Link>
+        </NavLink>
       ))}
     </div>
   </div>

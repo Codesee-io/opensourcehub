@@ -25,12 +25,14 @@ const Footer: FC = () => (
       <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.ABOUT}>
         About
       </Link>
-      <Link
+      <a
         className="supports-hover:hover:text-yellow-300"
-        to={RESOURCES_LINK}
+        href={RESOURCES_LINK}
+        target="_blank"
+        rel="noreferrer"
       >
         Resources
-      </Link>
+      </a>
       <a
         className="supports-hover:hover:text-yellow-300"
         href={DISCORD_LINK}
