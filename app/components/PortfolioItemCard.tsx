@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import dayjs from "dayjs";
 import { FC } from "react";
 import { PortfolioItem, Project } from "~/types";
+import { getReviewMapUrlFromPullRequestUrl } from "~/utils/codesee";
 import EditIcon from "./icons/EditIcon";
 import Tag from "./Tag";
 
@@ -13,6 +14,9 @@ type Props = {
 };
 
 const PortfolioItemCard: FC<Props> = (props) => {
+  const reviewMapUrl = getReviewMapUrlFromPullRequestUrl(
+    props.portfolioItem.pullRequestUrl
+  );
   return (
     <article className="flex gap-4 w-full">
       <div className="hidden lg:block text-sm font-semibold text-light-type mt-4 flex-shrink-0 w-36">
@@ -32,13 +36,15 @@ const PortfolioItemCard: FC<Props> = (props) => {
           </Link>
         )}
         <div className="flex">
-          {props.portfolioItem.reviewMapImageUrl && (
-            <img
-              src={props.portfolioItem.reviewMapImageUrl}
-              alt=""
-              className="hidden sm:block object-cover flex-shrink-0 border-r border-light-border rounded-tl-lg"
-              style={{ height: 200, aspectRatio: "4 / 3" }}
-            />
+          {props.portfolioItem.reviewMapImageUrl && reviewMapUrl && (
+            <a href={reviewMapUrl} target="_blank" rel="noreferrer">
+              <img
+                src={props.portfolioItem.reviewMapImageUrl}
+                alt=""
+                className="hidden sm:block object-cover flex-shrink-0 border-r border-light-border rounded-tl-lg"
+                style={{ height: 200, aspectRatio: "4 / 3" }}
+              />
+            </a>
           )}
           <div>
             <h3 className="px-4 mt-4 mb-2 mr-8">
