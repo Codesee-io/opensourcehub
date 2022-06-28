@@ -12,6 +12,8 @@ export const ROUTES = {
   CONTRIBUTE: "/contribute",
   LOGIN: "/login",
   LOGOUT: "/logout",
+  PRIVACY: "/privacy",
+  TERMS_CONDITIONS: "/terms-conditions",
 };
 
 // Button, Link Types
