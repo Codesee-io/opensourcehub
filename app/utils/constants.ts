@@ -33,4 +33,4 @@ export const SORT_OPTIONS: SelectOption[] = [
   { label: "Sort by: Most popularity", value: OPTION_MOST_POPULARITY },
 ];
 
-export const SHOW_PROFILE_LINK = false;
+export const SHOW_PROFILE_LINK = true;
