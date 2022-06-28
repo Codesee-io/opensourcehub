@@ -27,6 +27,7 @@ const MobileNavigation: FC<Props> = ({ userInfo, isOpen, onRequestClose }) => (
       type="button"
       className="p-2 absolute top-4 right-4"
       onClick={onRequestClose}
+      name="Close the mobile navigation menu"
     >
       <CloseIcon />
     </button>
