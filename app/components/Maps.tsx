@@ -3,11 +3,10 @@ import type { Project } from "~/types";
 import FormattedLink from "./markdown/FormattedLink";
 
 type Props = {
-  mapsMetadata: any;
   maps: Project["attributes"]["maps"];
 };
 
-const Maps: FC<Props> = ({ mapsMetadata, maps = [] }) => {
+const Maps: FC<Props> = ({ maps = [] }) => {
   if (!maps.length) return null;
 
   return (
@@ -18,32 +17,20 @@ const Maps: FC<Props> = ({ mapsMetadata, maps = [] }) => {
           {maps.map(({ url, description, subTitle }, i) => (
             <li
               key={`map-${i}`}
-              className="p-4 bg-white mb-2"
+              className="p-4 bg-black-30 rounded"
               style={{
                 width: 300,
               }}
             >
               <div className="flex justify-center">
                 <FormattedLink href={url}>
-                  {mapsMetadata[i] ? (
-                    <img
-                      src={
-                        mapsMetadata[i].thumbnail ||
-                        "https://app.codesee.io/sample_map.svg"
-                      }
-                      width="260"
-                      height="150"
-                      className="object-cover rounded"
-                      alt="Preview of a CodeSee Map"
-                    />
-                  ) : (
-                    <div
-                      className="bg-gray-50 rounded flex items-center justify-center text-sm text-center"
-                      style={{ height: 150, width: 260 }}
-                    >
-                      [placeholder will be filled in production]
-                    </div>
-                  )}
+                  <img
+                    src="https://app.codesee.io/sample_map.svg"
+                    width="260"
+                    height="150"
+                    className="object-cover rounded"
+                    alt="Preview of a CodeSee Map"
+                  />
                 </FormattedLink>
               </div>
               <h3 className="text-black-500 font-bold mt-4">{description}</h3>
