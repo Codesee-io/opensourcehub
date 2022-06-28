@@ -5,13 +5,14 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useLoaderData, useSubmit } from "@remix-run/react";
+import { Link, useLoaderData, useSubmit } from "@remix-run/react";
 import { GithubAuthProvider, UserCredential } from "firebase/auth";
 import { FC, useState } from "react";
 import Button from "~/components/Button";
 import { signInWithGitHubPopup } from "~/firebase.client";
 import { getFirebaseClientConfig } from "~/firebase.server";
 import { createUserSession, isLoggedIn } from "~/session.server";
+import { ROUTES } from "~/utils/constants";
 
 export const meta: MetaFunction = () => ({
   title: "Log in to Open Source Hub",
@@ -120,11 +121,21 @@ const Login: FC = () => {
           <p>Unable to log you in, please try again</p>
         )}
       </main>
-      <div className="text-light-type text-sm max-w-xl mx-auto px-4 mb-12">
+      <div className="text-light-type text-sm max-w-xl mx-auto px-4 mb-12 space-y-2">
         <p>
-          By logging in to Open Source Hub, you will claim your public profile
+          By logging in to Open Source Hub, you can claim your public profile
           page where you can list your interests, connect your Discord account,
           and show off the open-source contributions you're most proud of.
+        </p>
+        <p>
+          Usage of Open Source Hub is subject to our{" "}
+          <Link
+            to={ROUTES.TERMS_CONDITIONS}
+            className="text-light-interactive font-semibold hover:underline"
+          >
+            terms of use
+          </Link>
+          .
         </p>
       </div>
     </div>
