@@ -223,7 +223,7 @@ const ProjectPage: FC = () => {
               githubData={githubData}
               repoUrl={project.attributes.repoUrl}
             />
-            <Maps maps={project.attributes.maps} mapsMetadata={{}} />
+            <Maps maps={project.attributes.maps} />
           </div>
         </div>
         <LearnSection learnLinks={project.attributes.learnLinks} />
