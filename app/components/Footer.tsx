@@ -18,12 +18,24 @@ const Footer: FC = () => (
     <div className="flex items-center justify-center text-center px-2 mt-7">
       <ButtonLink to={ROUTES.CONTRIBUTE}>List Your Project</ButtonLink>
     </div>
-    <div className="text-sm text-white text-center font-semibold flex gap-6 justify-center mt-5 mb-12">
+    <div className="text-sm text-white text-center font-semibold flex flex-col md:flex-row gap-2 md:gap-6 justify-center mt-5 mb-12">
       <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.HOME}>
         Projects
       </Link>
       <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.ABOUT}>
         About
+      </Link>
+      <Link
+        className="supports-hover:hover:text-yellow-300"
+        to={ROUTES.PRIVACY}
+      >
+        Privacy
+      </Link>
+      <Link
+        className="supports-hover:hover:text-yellow-300"
+        to={ROUTES.TERMS_CONDITIONS}
+      >
+        Terms &amp; conditions
       </Link>
       <a
         className="supports-hover:hover:text-yellow-300"
@@ -39,7 +51,7 @@ const Footer: FC = () => (
         target="_blank"
         rel="noreferrer"
       >
-        Join Us
+        Join us
       </a>
     </div>
     <p className="text-sm text-center text-white flex items-center justify-center">
