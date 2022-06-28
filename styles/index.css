@@ -19,6 +19,17 @@ html {
   }
 }
 
+/* Global link styling */
+.link {
+  @apply text-light-interactive font-semibold;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    @apply underline;
+  }
+}
+
 /* Global styles for forms */
 .input[type="text"],
 .input[type="url"],

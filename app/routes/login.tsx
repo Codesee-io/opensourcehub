@@ -129,10 +129,7 @@ const Login: FC = () => {
         </p>
         <p>
           Usage of Open Source Hub is subject to our{" "}
-          <Link
-            to={ROUTES.TERMS_CONDITIONS}
-            className="text-light-interactive font-semibold hover:underline"
-          >
+          <Link to={ROUTES.TERMS_CONDITIONS} className="link">
             terms of use
           </Link>
           .
