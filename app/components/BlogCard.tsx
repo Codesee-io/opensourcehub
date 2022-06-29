@@ -19,7 +19,7 @@ const BlogCard: FunctionComponent<Props> = ({ blogPost }) => {
           rel="noreferrer"
         >
           <img
-            src={blogPost.og_image || ""}
+            src={blogPost.feature_image || ""}
             alt="Read this article on CodeSee Learn"
             className="post-image rounded-lg mb-6 object-cover"
             style={{
