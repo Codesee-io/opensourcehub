@@ -21,7 +21,7 @@ const Interests: FC<UserProfile> = (props) => {
           <div className="text-lg text-light-type mb-2">Tech interests</div>
           <div className="flex gap-2 align-top flex-wrap">
             {techInterests.map((item) => (
-              <Tag tag={item.label} key={item.id} color={item.color} />
+              <Tag tag={item.label} key={item.id} />
             ))}
           </div>
         </div>
@@ -33,7 +33,7 @@ const Interests: FC<UserProfile> = (props) => {
           </div>
           <div className="flex gap-2 align-top flex-wrap">
             {subjectInterests.map((item) => (
-              <Tag filled tag={item.label} key={item.id} color={item.color} />
+              <Tag tag={item.label} key={item.id} />
             ))}
           </div>
         </div>
@@ -45,7 +45,7 @@ const Interests: FC<UserProfile> = (props) => {
           </div>
           <div className="flex gap-2 align-top flex-wrap">
             {roleInterests.map((item) => (
-              <Tag filled tag={item.label} key={item.id} color={item.color} />
+              <Tag tag={item.label} key={item.id} />
             ))}
           </div>
         </div>
