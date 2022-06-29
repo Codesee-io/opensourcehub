@@ -53,7 +53,7 @@ const IssueList: FC<Props> = ({ issues, repoUrl, title, label }) => {
             href={getLabelUrl(repoUrl, label)}
             target="_blank"
             rel="noreferrer"
-            className="text-sm font-semibold text-light-interactive hover:underline"
+            className="text-sm link"
           >
             View all
           </a>

@@ -86,7 +86,7 @@ export function CatchBoundary() {
           down. There are plenty more projects to check out, though!
         </p>
         <p>
-          <Link to="/" className="text-blue-500 font-bold hover:underline">
+          <Link to="/" className="link">
             Go home
           </Link>
         </p>
@@ -101,7 +101,7 @@ export function CatchBoundary() {
       </h2>
       <p className="text-black-400 mb-4">Something went terribly wrong</p>
       <p>
-        <Link to="/" className="text-blue-500 font-bold hover:underline">
+        <Link to="/" className="link">
           Go home
         </Link>
       </p>

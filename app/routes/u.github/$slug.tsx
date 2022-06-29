@@ -108,10 +108,7 @@ export function CatchBoundary() {
           their profile.
         </p>
         <p>
-          <Link
-            to="/"
-            className="text-light-interactive font-semibold hover:underline"
-          >
+          <Link to="/" className="link">
             Go home
           </Link>
         </p>
@@ -128,10 +125,7 @@ export function CatchBoundary() {
         Something went terribly wrong
       </p>
       <p>
-        <Link
-          to="/"
-          className="text-light-interactive font-semibold hover:underline"
-        >
+        <Link to="/" className="link">
           Go home
         </Link>
       </p>

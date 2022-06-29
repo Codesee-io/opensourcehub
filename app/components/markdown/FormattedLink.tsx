@@ -5,12 +5,7 @@ type Props = {
 };
 
 const FormattedLink: FC<Props> = ({ href, children }) => (
-  <a
-    href={href}
-    className="text-light-interactive font-semibold hover:underline"
-    target="_blank"
-    rel="noreferrer"
-  >
+  <a href={href} className="link" target="_blank" rel="noreferrer">
     {children}
   </a>
 );

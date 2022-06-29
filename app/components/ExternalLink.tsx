@@ -6,10 +6,7 @@ const ExternalLink: FunctionComponent<AnchorHTMLAttributes<HTMLAnchorElement>> =
     <a
       target="_blank"
       rel="noopener"
-      className={cx(
-        "text-light-interactive font-semibold supports-hover:hover:underline",
-        className
-      )}
+      className={cx("link", className)}
       {...props}
     >
       {children}

@@ -26,7 +26,7 @@ const Tag: FC<Props> = ({ tag, className, color, filled }) => {
         "inline-flex rounded-full px-2 py-0.5 text-xs border font-semibold lowercase whitespace-nowrap",
         className,
         {
-          "text-light-type-medium border-light-type-medium":
+          "text-light-type-medium border-light-type-disabled":
             color == null && !filled,
           "bg-light-type-medium text-white": color == null && filled,
         }
