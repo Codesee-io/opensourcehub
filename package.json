@@ -27,7 +27,7 @@
     "@primer/octicons-react": "17.3.0",
     "@remix-run/node": "^1.5.1",
     "@remix-run/react": "^1.5.1",
-    "@remix-run/vercel": "^1.5.1",
+    "@remix-run/vercel": "^1.6.0",
     "@tryghost/content-api": "^1.11.0",
     "@vercel/node": "^1.15.4",
     "autoprefixer": "^10.4.7",
