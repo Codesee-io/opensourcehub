@@ -1727,6 +1727,21 @@
     source-map-support "^0.5.21"
     stream-slice "^0.1.2"
 
+"@remix-run/node@1.6.3":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@remix-run/node/-/node-1.6.3.tgz#b427ece4ff7c73d4a1cf274189fb55ffd24ee888"
+  integrity sha512-Lo25O0ioyDddLKNNtbyO+dmlMYwhele6qc0MePYls5AS5VEW+VX4A1GfNC5Y7M+psNt/mE3iNzc6/QgutqTCiQ==
+  dependencies:
+    "@remix-run/server-runtime" "1.6.3"
+    "@remix-run/web-fetch" "^4.1.3"
+    "@remix-run/web-file" "^3.0.2"
+    "@remix-run/web-stream" "^1.0.3"
+    "@web3-storage/multipart-parser" "^1.0.0"
+    abort-controller "^3.0.0"
+    cookie-signature "^1.1.0"
+    source-map-support "^0.5.21"
+    stream-slice "^0.1.2"
+
 "@remix-run/react@^1.5.1":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@remix-run/react/-/react-1.5.1.tgz#372e5e80f3f10a638b0567c4e03307dfb0a28dc0"
@@ -1758,12 +1773,25 @@
     set-cookie-parser "^2.4.8"
     source-map "^0.7.3"
 
-"@remix-run/vercel@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/vercel/-/vercel-1.5.1.tgz#24662dcdc208d62d1254d64d873c0f01ba581a99"
-  integrity sha512-g8+dTGeeUtt7CclH6/bdB6BRETfo8yIPz2wQUzzerFFUJj82D571rWiGNhOiEydmMUfg9Gjd7PwIbjF1I5FezA==
+"@remix-run/server-runtime@1.6.3":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@remix-run/server-runtime/-/server-runtime-1.6.3.tgz#c3b2af52a5e3c6c3cee2c4885f6649ff7ce46eec"
+  integrity sha512-B4M0msXmWWceP73Iw5EPJxPo9pT/oHwUqksX8sCmwQ+WftH5Y5eVXREp1IaaY72nEStdKSuBTfFMJETX/zUBvw==
   dependencies:
-    "@remix-run/node" "1.5.1"
+    "@types/cookie" "^0.4.0"
+    "@web3-storage/multipart-parser" "^1.0.0"
+    cookie "^0.4.1"
+    jsesc "^3.0.1"
+    react-router-dom "^6.2.2"
+    set-cookie-parser "^2.4.8"
+    source-map "^0.7.3"
+
+"@remix-run/vercel@^1.6.0":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@remix-run/vercel/-/vercel-1.6.3.tgz#afcc1ae48bd5c701978047fce1f2cec9f1fad986"
+  integrity sha512-YhjhYlwK7gAfXFscuRRERV0JPk8Wdi59riYHAUPBhQyShs/IMMbKuja9fdUMe8jw0uYu2vt3LB8pI9cNLd3L8Q==
+  dependencies:
+    "@remix-run/node" "1.6.3"
 
 "@remix-run/web-blob@^3.0.3", "@remix-run/web-blob@^3.0.4":
   version "3.0.4"
