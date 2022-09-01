@@ -9,7 +9,9 @@ import { parseMarkdown } from "./markdown";
 
 function postHasValidAttributes(attributes: any) {
   return (
-    attributes.hasOwnProperty("name") && attributes.hasOwnProperty("repoUrl")
+    attributes.hasOwnProperty("name") &&
+    attributes.hasOwnProperty("repoUrl") &&
+    attributes.hasOwnProperty("created")
   );
 }
 
@@ -68,6 +70,7 @@ async function exportProjectsToJson() {
         repoUrl: string;
         name: string;
         maintainer: string;
+        created: string;
         [key: string]: any;
       }>(file.toString());
 

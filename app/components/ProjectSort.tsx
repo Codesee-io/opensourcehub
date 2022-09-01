@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import useSearch from "~/components/local-search/useSearch";
-import { SORT_OPTIONS } from "../utils/constants";
+import { ProjectSortOrder, SORT_OPTIONS } from "../utils/constants";
 
 const ProjectSort: FunctionComponent = () => {
   const { sortOption, setSortOption } = useSearch();
@@ -8,7 +8,7 @@ const ProjectSort: FunctionComponent = () => {
   return (
     <select
       aria-label="Sort projects"
-      onChange={(e) => setSortOption(e.currentTarget.value)}
+      onChange={(e) => setSortOption(e.currentTarget.value as ProjectSortOrder)}
       value={sortOption}
       className="input-select"
     >
