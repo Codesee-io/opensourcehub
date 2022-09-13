@@ -1,14 +1,14 @@
 import { createContext } from "react";
-import { SORT_OPTIONS } from "~/utils/constants";
+import { ProjectSortOrder, SORT_OPTIONS } from "~/utils/constants";
 
 type SearchContext = {
   filteredProjectIds: string[];
   allActiveTags: string[];
-  sortOption: string;
+  sortOption: ProjectSortOrder;
   clearAllTags: () => void;
   filterByTag: (tag: string) => void;
   searchByText: (search: string) => void;
-  setSortOption: (option: string) => void;
+  setSortOption: (option: ProjectSortOrder) => void;
 };
 
 const SearchResultsContext = createContext<SearchContext>({

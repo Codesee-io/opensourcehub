@@ -3,11 +3,7 @@ import { Project, GitHubData } from "../types";
 import ProjectListWrapper from "./local-search/ProjectListWrapper";
 import useSearch from "./local-search/useSearch";
 import ProjectCard from "./ProjectCard";
-import {
-  OPTION_MOST_ACTIVE,
-  OPTION_MOST_OPEN_ISSUES,
-  OPTION_MOST_POPULARITY,
-} from "~/utils/constants";
+import { ProjectSortOrder } from "~/utils/constants";
 
 type Props = {
   allProjects: Project[];
@@ -42,7 +38,7 @@ const ProjectList: FunctionComponent<Props> = ({
     filteredProjectIds.includes(project.slug)
   );
 
-  if (!dataSetIsEmpty && sortOption === OPTION_MOST_OPEN_ISSUES) {
+  if (!dataSetIsEmpty && sortOption === ProjectSortOrder.MostOpenIssues) {
     // Sort projects by most open issues (highest count of opened issues)
     filteredProjects.sort((projectA, projectB) => {
       return (
@@ -50,7 +46,7 @@ const ProjectList: FunctionComponent<Props> = ({
         githubDataSet[projectA.slug].totalOpenIssues
       );
     });
-  } else if (!dataSetIsEmpty && sortOption === OPTION_MOST_ACTIVE) {
+  } else if (!dataSetIsEmpty && sortOption === ProjectSortOrder.MostActive) {
     // Sort projects by most active (highest count of recently-closed PRs)
     filteredProjects.sort((projectA, projectB) => {
       return (
@@ -58,12 +54,23 @@ const ProjectList: FunctionComponent<Props> = ({
         githubDataSet[projectA.slug].prsMerged.count
       );
     });
-  } else if (!dataSetIsEmpty && sortOption === OPTION_MOST_POPULARITY) {
+  } else if (!dataSetIsEmpty && sortOption === ProjectSortOrder.MostPopular) {
     // Sort projects by most popularity (highest number of contributors)
     filteredProjects.sort((projectA, projectB) => {
       return (
         githubDataSet[projectB.slug].totalContributors -
         githubDataSet[projectA.slug].totalContributors
+      );
+    });
+  } else if (
+    !dataSetIsEmpty &&
+    sortOption === ProjectSortOrder.MostRecentlyAdded
+  ) {
+    // Sort projects by most popularity (highest number of contributors)
+    filteredProjects.sort((projectA, projectB) => {
+      return (
+        new Date(projectB.attributes.created).getTime() -
+        new Date(projectA.attributes.created).getTime()
       );
     });
   }

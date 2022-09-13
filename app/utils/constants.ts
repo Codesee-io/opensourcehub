@@ -24,13 +24,24 @@ export const LINK_FORMATS = {
 };
 
 // Project sort options
-export const OPTION_MOST_OPEN_ISSUES = "most_open_issues";
-export const OPTION_MOST_ACTIVE = "most_active";
-export const OPTION_MOST_POPULARITY = "most_popularity";
+export enum ProjectSortOrder {
+  MostOpenIssues = "most open issues",
+  MostActive = "most active",
+  MostPopular = "most popular",
+  MostRecentlyAdded = "most recently added",
+}
+
 export const SORT_OPTIONS: SelectOption[] = [
-  { label: "Sort by: Most open issues", value: OPTION_MOST_OPEN_ISSUES },
-  { label: "Sort by: Most active", value: OPTION_MOST_ACTIVE },
-  { label: "Sort by: Most popularity", value: OPTION_MOST_POPULARITY },
+  {
+    label: "Sort by: Recently added",
+    value: ProjectSortOrder.MostRecentlyAdded,
+  },
+  {
+    label: "Sort by: Most open issues",
+    value: ProjectSortOrder.MostOpenIssues,
+  },
+  { label: "Sort by: Most active", value: ProjectSortOrder.MostActive },
+  { label: "Sort by: Most popular", value: ProjectSortOrder.MostPopular },
 ];
 
 export const SHOW_PROFILE_LINK = true;

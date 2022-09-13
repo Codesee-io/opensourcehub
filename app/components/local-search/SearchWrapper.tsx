@@ -2,7 +2,7 @@ import { Search } from "js-search";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SearchResultsProvider } from "./SearchResultsContext";
 import { SelectOption, Project } from "../../types";
-import { SORT_OPTIONS } from "~/utils/constants";
+import { ProjectSortOrder, SORT_OPTIONS } from "~/utils/constants";
 
 export type SearchIndexItem = {
   id: string;
@@ -73,11 +73,14 @@ const SearchWrapper: FunctionComponent<Props> = ({
     updateSearchResults(filters.search, []);
   };
 
-  const setSortOption = (sortOption: SelectOption) => {
-    setFilters({
-      ...filters,
-      sortOption,
-    });
+  const setSortOption = (sortOrder: ProjectSortOrder) => {
+    const sortOption = SORT_OPTIONS.find((o) => o.value === sortOrder);
+    if (sortOption) {
+      setFilters({
+        ...filters,
+        sortOption,
+      });
+    }
   };
 
   /**
@@ -132,7 +135,7 @@ const SearchWrapper: FunctionComponent<Props> = ({
       value={{
         searchByText: performSearch,
         filterByTag,
-        sortOption: filters.sortOption,
+        sortOption: filters.sortOption.value,
         filteredProjectIds: filteredProjectSlugs,
         allActiveTags: filters.tags,
         clearAllTags,

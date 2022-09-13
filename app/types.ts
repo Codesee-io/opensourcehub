@@ -1,3 +1,5 @@
+import { ProjectSortOrder } from "./utils/constants";
+
 export type ProjectAttributes = {
   description?: string;
   repoUrl: string;
@@ -29,6 +31,7 @@ export type ProjectAttributes = {
     url?: string;
   }[];
   maintainer: string;
+  created: string;
 };
 
 export type ProjectCategory = {
@@ -94,7 +97,7 @@ export type CodeSeeMapMetadata = {
   thumbnail: string;
 };
 
-export type SelectOption = { label: string; value: string };
+export type SelectOption = { label: string; value: ProjectSortOrder };
 
 export type FirebaseClientConfig = {
   apiKey: string;
