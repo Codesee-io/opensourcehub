@@ -12,7 +12,7 @@ import {
   REPO_LINK,
 } from "~/utils/constants";
 
-const EXAMPLE_PROJECTS = ["thamara/time-to-leave", "devtron-labs/devtron"];
+const EXAMPLE_PROJECTS = ["thamara/time-to-leave", "akshat157/meditate-app"];
 
 export const loader: LoaderFunction = async () => {
   const exampleProjects = EXAMPLE_PROJECTS.map((slug) =>
