@@ -1,0 +1,92 @@
+---
+name: Matano
+repoUrl: https://github.com/matanolabs/matano
+description: The open source security lake platform for AWS
+languages:
+  - Rust
+  - Kotlin
+  - TypeScript
+tags:
+  - Infosec
+  - Tools
+avatar: default.png
+websiteUrl: https://www.matano.dev
+twitterUrl: https://twitter.com/matanolabs
+currentlySeeking:
+  - Testers
+  - Developers
+contributionOverview:
+  isMentorshipAvailable: true
+  automatedDevEnvironment: https://www.gitpod.io/
+learnLinks: # (optional) A list of links to support new contributors in learning about your project and tech stack and culture / community
+  - title: Contributing
+    url: https://github.com/matanolabs/matano/blob/main/CONTRIBUTING.md
+maintainer: matanolabs
+---
+
+<!-- Divide your content into sections using our handy shortcodes. Each section is optional -->
+
+<Overview>
+
+Matano is an open source security lake platform for AWS. It lets you ingest petabytes of security and log data from various sources, store and query them in an open Apache Iceberg data lake, and create Python detections as code for realtime alerting. Matano is fully serverless and designed specifically for AWS and focuses on enabling high scale, low cost, and zero-ops. Matano deploys fully into your AWS account.
+
+## Features
+
+#### Collect data from all your sources
+Matano lets you collect log data from sources using [S3](#) or SQS based ingestion.
+
+#### Ingest, transform, normalize log data
+Matano normalizes and transforms your data using [Vector Remap Language (VRL)](https://vector.dev/docs/reference/vrl/). Matano works with the [Elastic Common Schema (ECS)](https://www.elastic.co/guide/en/ecs/current/index.html) by default and you can define your own schema. 
+
+#### Store data in S3 object storage
+Log data is always stored in S3 object storage, for cost effective, long term, durable storage.
+
+#### Apache Iceberg Data lake
+All data is ingested into an Apache Iceberg based data lake, allowing you to perform ACID transactions, time travel, and more on all your log data. Apache Iceberg is an open table format, so you always **own your own data**, with no vendor lock-in.
+
+#### Serverless
+Matano is a fully serverless platform, designed for zero-ops and unlimited elastic horizontal scaling.
+
+#### Detections as code
+Write Python detections to implement realtime alerting on your log data.
+
+</Overview>
+
+<Contributing>
+
+[View our full guide to contributing here.](https://github.com/matanolabs/matano/blob/main/CONTRIBUTING.md).
+
+:+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
+
+We love to receive contributions from our community! There are many ways to contribute, from writing tutorials, improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into Matano itself.
+
+## Reporting bugs
+
+Did you find a bug?
+
+- Do not open up a GitHub issue if the bug is a security vulnerability and instead to refer to our [security policy][1].
+- Ensure the bug was not already reported by searching on GitHub under [Issues][2].
+- If you're unable to find an open issue addressing the problem, open a new one. Be sure to include a **title and clear description**, as much relevant information as possible demonstrating the expected behavior that is not occurring.
+
+## Suggesting features/enhancements
+
+Feature requests are welcome.
+
+If you find yourself wishing for a feature that doesn't exist in Matano, you are probably not alone. There are bound to be others out there with similar needs.
+Open an issue on our [issues list on GitHub][2] which describes the feature you would like to see, why you need it, and how it should work.
+
+## Pull requests
+
+We welcome code changes and pull requests from the community. Good pull requests - patches, improvements, new features - are a fantastic help.
+
+Please ask (feel free to open an issue or send a message in the #dev channel) before embarking on any significant pull request (e.g. implementing features, refactoring code), otherwise you risk spending a lot of time working on something that the project's developers might not want to merge into the project.
+
+## Community
+
+You can interact with the core team and community on [our Discord channel][3].
+
+[1]: https://github.com/matanolabs/matano/blob/main/SECURITY.md
+[2]: https://github.com/matanolabs/matano/issues
+[3]: https://discord.gg/YSYfHMbfZQ
+
+</Contributing>
