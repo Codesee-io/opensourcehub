@@ -1841,10 +1841,10 @@
   resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
   integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
 
-"@primer/octicons-react@17.3.0":
-  version "17.3.0"
-  resolved "https://registry.yarnpkg.com/@primer/octicons-react/-/octicons-react-17.3.0.tgz#a9b868db9520e48114fd402e56600e99bcb7e8b7"
-  integrity sha512-72K4SeDj3WmehiQqVeOS+icvcO5+JHXK12ee3AqbZGqNqgCKdU4zJRKeC7EGMV4lQhoJXbj8OEdppBLa3qFDhw==
+"@primer/octicons-react@17.4.1":
+  version "17.4.1"
+  resolved "https://registry.yarnpkg.com/@primer/octicons-react/-/octicons-react-17.4.1.tgz#022c13c2695119f5e2e5fc3e2edeed08164171c1"
+  integrity sha512-xTtpfgpyFyKlfNhvPOfCNVRwkoDBRKzZFwygpr4+Pwzs+selrL1phPLt2z6abeIY8cTEw1XRBGi00tylSaBJyQ==
 
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
