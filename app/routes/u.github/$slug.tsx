@@ -239,6 +239,9 @@ const ProfilePage: FC = () => {
               <Button type="submit">Verify on Discord</Button>
             </Form>
           )}
+          {canEdit && (
+            <ButtonLink to={"/list-project"}>List a project</ButtonLink>
+          )}
         </div>
         <section className="mx-auto max-w-6xl my-8">
           <div className="flex justify-between items-center mb-4">

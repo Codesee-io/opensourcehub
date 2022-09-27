@@ -59,6 +59,8 @@ FIRESTORE_EMULATOR_HOST
 FIREBASE_AUTH_EMULATOR_HOST
 ```
 
+And disable the local env check in `firebase.server.ts`.
+
 ## Architecture
 
 We use the following packages:

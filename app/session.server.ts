@@ -71,6 +71,7 @@ export async function createUserSession(idToken: string, accessToken: string) {
   });
   const session = await storage.getSession();
   session.set("token", token);
+  session.set("accessToken", accessToken);
 
   // Check that we have a matching user for this token. If not, create one.
   const decodedToken = await auth.verifySessionCookie(token, true);
@@ -217,6 +218,11 @@ export async function getCurrentUserOrRedirect(
 export async function isLoggedIn(request: Request) {
   const session = await storage.getSession(request.headers.get("Cookie"));
   return session.has("idToken");
+}
+
+export async function getAccessToken(request: Request) {
+  const session = await storage.getSession(request.headers.get("Cookie"));
+  return session.get("accessToken");
 }
 
 export async function getCurrentUserInfo(request: Request) {
