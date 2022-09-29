@@ -103,10 +103,14 @@ type TagsState = {
   tags: MultiValue<{ label: string; value: string }>;
 };
 
+/**
+ * This (massive) form allows users to list their projects on Open Source Hub.
+ */
 const ListProject: FC = () => {
   const transition = useTransition();
   const actionData = useActionData();
 
+  // The 3 tag dropdowns are controlled components and we keep track of their state here
   const [tags, setTags] = useState<TagsState>({
     languages: [],
     currentlySeeking: [],
@@ -120,7 +124,11 @@ const ListProject: FC = () => {
     };
 
   const formRef = useRef<HTMLFormElement>(null);
+
+  // Store a Project that can be used to preview the form
   const [projectPreview, setProjectPreview] = useState<Project>();
+
+  // Show/hide the preview modal
   const [showPreview, setShowPreview] = useState(false);
 
   // Display a preview of the new project
@@ -186,6 +194,7 @@ const ListProject: FC = () => {
           size: formatFileSize(file.size),
         });
       } else {
+        event.currentTarget.value = "";
         setAvatarSrc({
           src: "",
           error: `Please choose a file smaller than ${formatFileSize(
