@@ -231,7 +231,7 @@ const ListProject: FC = () => {
                         repository
                       </>
                     }
-                    defaultValue="https://github.com/Codesee-io/opensourcehub"
+                    placeholder="https://github.com/Codesee-io/opensourcehub"
                     required
                   />
                   <FieldError error={actionData?.validationErrors?.repoUrl} />
@@ -308,6 +308,7 @@ const ListProject: FC = () => {
                       </>
                     }
                     id="websiteUrl"
+                    placeholder="https://your-website.com"
                   />
                 </div>
                 <div className="grow">
@@ -319,6 +320,7 @@ const ListProject: FC = () => {
                       </>
                     }
                     id="twitterUrl"
+                    placeholder="https://twitter.com/username"
                   />
                 </div>
               </div>
