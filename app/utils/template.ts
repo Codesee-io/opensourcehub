@@ -49,7 +49,7 @@ export type ProjectTemplateFields = {
   overview?: string;
 };
 
-export async function getTemplateContent(fields: ProjectTemplateFields) {
+export function getTemplateContent(fields: ProjectTemplateFields) {
   let filledOutTemplate = `---
 name: ${fields.name}
 repoUrl: ${fields.repoUrl}
@@ -162,7 +162,5 @@ created: ${fields.created}`;
     filledOutTemplate += "\n\n</Contributing>\n";
   }
 
-  console.log(filledOutTemplate);
-
-  return Buffer.from(filledOutTemplate).toString("base64");
+  return filledOutTemplate;
 }
