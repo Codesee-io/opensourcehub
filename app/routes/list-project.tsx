@@ -38,6 +38,11 @@ export function links() {
   ];
 }
 
+/**
+ * This method is called when the form is submitted. It performs data validation
+ * and uploads files to GitHub before creating a PR. If all goes well, it
+ * redirects to a success page.
+ */
 export const action: ActionFunction = async ({ request }) => {
   const currentUser = await getCurrentUser(request);
   const accessToken = await getAccessToken(request);
@@ -54,6 +59,7 @@ export const action: ActionFunction = async ({ request }) => {
     currentUser
   );
 
+  // If there are any validation errors, return early
   if (validationErrors) {
     return json({ validationErrors });
   }
@@ -62,8 +68,8 @@ export const action: ActionFunction = async ({ request }) => {
     throw new Error("Missing repo URL in new project form");
   }
 
+  // Create a new pull request with the content of the form
   const { owner: repoOwner, name: repoName } = getRepoOwnerAndName(repoUrl);
-
   const { pullRequestUrl } = await createNewPullRequest(
     accessToken,
     files,
@@ -100,6 +106,7 @@ const ListProject: FC = () => {
   const [projectPreview, setProjectPreview] = useState<Project>();
   const [showPreview, setShowPreview] = useState(false);
 
+  // Display a preview of the new project
   const displayPreview = () => {
     if (!formRef.current) return;
 
@@ -144,12 +151,14 @@ const ListProject: FC = () => {
     setShowPreview(true);
   };
 
+  // Keep track of data related to the avatar
   const [avatarSrc, setAvatarSrc] = useState({
     src: "",
     size: "",
     error: "",
   });
 
+  // Preview the avatar when the user uploads one
   const updateAvatarPreview = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files && event.currentTarget.files.length > 0) {
       const file = event.currentTarget.files[0];

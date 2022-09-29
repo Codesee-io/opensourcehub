@@ -90,7 +90,7 @@ export type FileToUpload = {
  * Create a new branch with a new commit that contains one or more files, and
  * then open a pull request as the current user.
  *
- * I want to thank the GitHub API for making this extremely difficult.
+ * I want to thank the GitHub API for making this needlessly difficult.
  */
 export async function createNewPullRequest(
   accessToken: string,

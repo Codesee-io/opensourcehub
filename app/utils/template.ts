@@ -1,3 +1,11 @@
+/**
+ * Returns a YAML field if the values provided are not empty.
+ *
+ * @example stringArrayToYAMLField("field", ["a", "b"])
+ * // field:
+ * //   - a
+ * //   - b
+ */
 export function stringArrayToYAMLField(
   fieldName: string,
   fieldValues: string[],
@@ -49,6 +57,10 @@ export type ProjectTemplateFields = {
   overview?: string;
 };
 
+/**
+ * Generates a MDX-compliant string in the format similar to _template.mdx. This
+ * is essentially the model of our projects.
+ */
 export function getTemplateContent(fields: ProjectTemplateFields) {
   let filledOutTemplate = `---
 name: ${fields.name}

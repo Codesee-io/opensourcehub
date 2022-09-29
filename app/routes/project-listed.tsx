@@ -3,6 +3,12 @@ import { FC } from "react";
 import ButtonLink from "~/components/ButtonLink";
 import ExternalLink from "~/components/ExternalLink";
 
+/**
+ * Renders a success page. We redirect here after successfully listing a new
+ * project.
+ *
+ * @see list-project.tsx
+ */
 const ProjectListedPage: FC = () => {
   const [params] = useSearchParams();
 

@@ -11,6 +11,12 @@ const Modal: FC = ({ children }) => (
   </div>
 );
 
+/**
+ * Renders a modal if the provided state is "loading" or "submitting". Use this
+ * when submitting the "new project" form because the submisson can be slow.
+ *
+ * @see list-projects.tsx
+ */
 const ProjectSubmissionSpinner: FC<Props> = ({ state }) => {
   if (state === "loading") {
     return (

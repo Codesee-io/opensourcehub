@@ -10,6 +10,12 @@ type Props = {
   closePreview: () => void;
 };
 
+/**
+ * Renders a modal that contains a ProjectTemplate. Use this component to
+ * preview what a new project will look like.
+ *
+ * @see list-project.tsx
+ */
 const ProjectPreview: FC<Props> = ({ isOpen, project, closePreview }) => {
   return (
     <div
