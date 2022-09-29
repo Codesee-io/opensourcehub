@@ -5,7 +5,7 @@ import {
 import { FileToUpload } from "~/github.server";
 import { User } from "~/types";
 import { maybeStringToArray } from "~/utils/formatting";
-import { getRepoOwnerAndName } from "~/utils/repo-url";
+import { getRepoOwnerAndName, isValidGitHubRepoUrl } from "~/utils/repo-url";
 import { getTemplateContent, ProjectTemplateFields } from "~/utils/template";
 
 export const MAX_AVATAR_SIZE_BYTES = 1024 * 1024 * 0.1; // 0.1 MB
@@ -36,9 +36,10 @@ export async function parseListProjectForm(
   const maintainer = currentUser.githubLogin;
   const repoUrl = formData.get("repoUrl")?.toString();
 
+  const validationErrors: { [key: string]: string } = {};
+
   // Validate the required fields and return an object if there's any issue
   if (!name || !description || !repoUrl) {
-    const validationErrors: { [key: string]: string } = {};
     if (!name) {
       validationErrors.name = "Please give your project a name";
     }
@@ -53,10 +54,13 @@ export async function parseListProjectForm(
     return { validationErrors, files: [] };
   }
 
-  const { name: repoName } = getRepoOwnerAndName(repoUrl);
+  // Exit early if the repoUrl is invalid
+  if (!isValidGitHubRepoUrl(repoUrl)) {
+    validationErrors.repoUrl = "Please provide a valid GitHub repository URL";
+    return { validationErrors, files: [] };
+  }
 
-  // Validate all the other fields
-  const validationErrors: { [key: string]: string } = {};
+  const { name: repoName } = getRepoOwnerAndName(repoUrl);
 
   // Format a bunch of data from the form
   const contributionOverview: ProjectTemplateFields["contributionOverview"] = {
