@@ -22,8 +22,17 @@ import ExternalLink from "~/components/ExternalLink";
 import mapThumbnailSrc from "~/images/map_thumbnail.png";
 import { formatFileSize, maybeStringToArray } from "~/utils/formatting";
 import FieldError from "~/components/FieldError";
-import { ActionFunction, json, redirect } from "@remix-run/node";
-import { getAccessToken, getCurrentUser } from "~/session.server";
+import {
+  ActionFunction,
+  json,
+  LoaderFunction,
+  redirect,
+} from "@remix-run/node";
+import {
+  getAccessToken,
+  getCurrentUser,
+  getCurrentUserOrRedirect,
+} from "~/session.server";
 import {
   MAX_AVATAR_SIZE_BYTES,
   parseListProjectForm,
@@ -37,6 +46,14 @@ export function links() {
     { rel: "stylesheet", href: markdownStyles },
   ];
 }
+
+/**
+ * Check that the user is logged in or redirect to the /login page
+ */
+export const loader: LoaderFunction = async ({ request }) => {
+  await getCurrentUserOrRedirect(request);
+  return json({});
+};
 
 /**
  * This method is called when the form is submitted. It performs data validation
