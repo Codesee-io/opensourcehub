@@ -79,6 +79,13 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
         >
           Profile
         </Link>
+        <Link
+          to="/list-project"
+          className="text-sm text-light-type hover:text-light-interactive hover:bg-light-interactive-fill px-4 py-2"
+          onClick={() => setMenuIsOpen((prev) => !prev)}
+        >
+          List a project
+        </Link>
         <Form
           method="post"
           action="/logout"
