@@ -2,18 +2,13 @@ import type { FC } from "react";
 import { Link } from "@remix-run/react";
 import { DISCORD_LINK, RESOURCES_LINK, ROUTES } from "~/utils/constants";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
-import logo from "~/images/logo.png";
+import logoPoweredBy from "~/images/powered_by_codesee.png";
 import ButtonLink from "./ButtonLink";
 
 const Footer: FC = () => (
   <footer className="bg-gradient text-black-400 px-4 py-10">
     <Link to={ROUTES.HOME} className="block" aria-label="Home">
-      <img
-        src={logo}
-        alt=""
-        className="my-2 mx-auto"
-        style={{ height: 30, width: 180 }}
-      />
+      <img src={logoPoweredBy} alt="" className="my-2 mx-auto" width="200" />
     </Link>
     <div className="flex items-center justify-center text-center px-2 mt-7">
       <ButtonLink to={ROUTES.CONTRIBUTE}>List Your Project</ButtonLink>
