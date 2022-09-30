@@ -10,6 +10,7 @@ import MenuIcon from "./icons/MenuIcon";
 import MobileNavigation from "./MobileNavigation";
 import HeaderDropdown from "./HeaderDropdown";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
+import ExternalLink from "./ExternalLink";
 
 type Props = {
   userInfo?: UserInfo | null;
@@ -74,21 +75,23 @@ const Header: FC<Props> = ({ userInfo }) => {
   return (
     <header className="bg-indigo-850 sticky top-0 z-40 h-12 flex items-center">
       <div className="max-w-7xl mx-auto flex px-4 items-center justify-between w-full">
-        <Link to="/" className="flex items-center" aria-label="Home">
-          <img
-            src={logo}
-            alt=""
-            className="my-2"
-            style={{ height: 30, width: 180 }}
-          />
-          <img
-            src={poweredBy}
-            alt=""
-            width="60"
-            className="hidden lg:block ml-4 mr-1 mt-1"
-          />
-          <CodeSeeWordmark width="80" className="hidden lg:block" />
-        </Link>
+        <div className="flex items-center">
+          <Link to="/" className="flex items-center" aria-label="Home">
+            <img
+              src={logo}
+              alt=""
+              className="my-2"
+              style={{ height: 30, width: 180 }}
+            />
+          </Link>
+          <ExternalLink
+            href="https://www.codesee.io"
+            className="hidden lg:flex ml-4 items-center gap-1 py-2 opacity-80 hover:opacity-100"
+          >
+            <img src={poweredBy} alt="" width="60" className="mt-1" />
+            <CodeSeeWordmark width="80" />
+          </ExternalLink>
+        </div>
         <button
           type="button"
           className="p-2 text-white md:hidden"
