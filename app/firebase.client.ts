@@ -34,6 +34,8 @@ export async function signInWithGitHubPopup(config: FirebaseClientConfig) {
   const auth = initFirebaseClient(config);
   const githubAuth = new GithubAuthProvider();
   githubAuth.addScope("read:user");
+  // We need the public_repo scope to create pull requests on behalf of users
+  githubAuth.addScope("public_repo");
 
   return await signInWithPopup(auth, githubAuth);
 }

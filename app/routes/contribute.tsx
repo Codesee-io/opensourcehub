@@ -1,5 +1,5 @@
 import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { FC } from "react";
 import ExternalLink from "~/components/ExternalLink";
 import ProjectCard from "~/components/ProjectCard";
@@ -51,13 +51,13 @@ const Contribute: FC = () => {
           potential contributors.
         </p>
         <p>
-          To list your project, please{" "}
-          <ExternalLink href={HOW_TO_LIST_PROJECT_LINK}>
-            follow the steps in the README
-          </ExternalLink>
-          , and feel free to ask questions in{" "}
+          To list your project,{" "}
+          <Link className="link" to="/list-project">
+            fill out this form
+          </Link>
+          . Feel free to ask questions on{" "}
           <ExternalLink href={REPO_LINK}>GitHub</ExternalLink> or our{" "}
-          <ExternalLink href={DISCORD_LINK}>Discord server</ExternalLink>.
+          <ExternalLink href={DISCORD_LINK}>Discord server</ExternalLink>!
         </p>
       </div>
       <h2 className="mt-8 text-xl font-semibold leading-large mb-4">

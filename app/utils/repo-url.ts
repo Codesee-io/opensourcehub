@@ -22,6 +22,18 @@ export function getSlugFromRepoUrl(repoUrl: string) {
   return `${owner}/${name}`.toLowerCase();
 }
 
+export function isValidGitHubRepoUrl(repoUrl: string) {
+  if (!repoUrl.startsWith(GITHUB_HOST)) {
+    return false;
+  }
+
+  if (repoUrl.slice(GITHUB_HOST.length).split("/").length !== 2) {
+    return false;
+  }
+
+  return true;
+}
+
 /**
  * Returns details about the pull/merge request from a URL, or `false` if the
  * URL isn't a valid pull/merge request.

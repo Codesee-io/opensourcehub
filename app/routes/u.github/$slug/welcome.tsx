@@ -118,9 +118,9 @@ const Welcome: FC = () => {
                     <TextField
                       type="url"
                       label={
-                        <span className="flex items-center gap-1">
-                          <TwitterIcon className="w-4 h-4" /> Twitter
-                        </span>
+                        <>
+                          <TwitterIcon className="w-4 h-4 mr-1" /> Twitter
+                        </>
                       }
                       id="twitter"
                     />
@@ -129,9 +129,9 @@ const Welcome: FC = () => {
                     <TextField
                       type="url"
                       label={
-                        <span className="flex items-center gap-1">
-                          <LinkedInIcon className="w-4 h-4" /> LinkedIn
-                        </span>
+                        <>
+                          <LinkedInIcon className="w-4 h-4 mr-1" /> LinkedIn
+                        </>
                       }
                       id="linkedin"
                     />

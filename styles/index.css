@@ -63,7 +63,9 @@ textarea.input:read-only {
 }
 
 .input-label {
+  align-items: center;
   color: theme("colors.light.type-medium");
+  display: flex;
   font-size: 0.875rem;
   font-weight: 600;
 }
