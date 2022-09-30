@@ -7,6 +7,7 @@ import {
 import { ChangeEvent, FC, useRef, useState } from "react";
 import ReactSelect, { MultiValue } from "react-select";
 import cx from "classnames";
+import { parseMarkdown } from "~/utils/markdown";
 import Button from "~/components/Button";
 import TextArea from "~/components/TextArea";
 import TextField from "~/components/TextField";
@@ -167,6 +168,11 @@ const ListProject: FC = () => {
       };
     }
 
+    const overview = parseMarkdown(formData.get("overview")?.toString() || "");
+    const contributing = parseMarkdown(
+      formData.get("contributing")?.toString() || ""
+    );
+
     const project: Project = {
       attributes: {
         created: new Date().toISOString(),
@@ -183,8 +189,8 @@ const ListProject: FC = () => {
         featuredMap,
       },
       body: {
-        contributing: formData.get("contributing")?.toString() || "",
-        overview: formData.get("overview")?.toString() || "",
+        contributing,
+        overview,
       },
       organization: "preview",
       slug: "preview",
