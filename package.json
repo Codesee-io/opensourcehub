@@ -24,7 +24,7 @@
   "dependencies": {
     "@octokit/graphql": "4.8.0",
     "@octokit/rest": "^18.12.0",
-    "@primer/octicons-react": "17.4.1",
+    "@primer/octicons-react": "17.5.0",
     "@remix-run/node": "^1.7.2",
     "@remix-run/react": "^1.7.2",
     "@remix-run/vercel": "^1.7.2",
