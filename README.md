@@ -36,6 +36,10 @@ For more information on the Github.dev editor, please [see their docs](https://d
 
 ## How to list your project
 
+We recommend [listing your project through the website](https://opensourcehub.io/list-project) by using your GitHub account to log in to Open Source Hub.
+
+If you'd prefer to create a pull request manually, you can follow these steps instead:
+
 1. Get the project up and running first
 1. Create your project's `.mdx` file:
    1. Create a new folder inside `/public/projects/` and name it the same as your GitHub handle or organization
