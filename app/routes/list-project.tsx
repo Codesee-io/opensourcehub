@@ -440,6 +440,7 @@ const ListProject: FC = () => {
                 name="reviewMapUrls"
                 maxFields={5}
                 placeholder="https://app.codesee.io/maps/review/github/codesee-io/opensourcehub/pr/110"
+                type="url"
               />
             </div>
           </div>

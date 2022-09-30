@@ -7,6 +7,7 @@ type Props = {
   maxFields?: number;
   label: ReactNode;
   name: string;
+  type?: string;
 };
 
 /**
@@ -21,6 +22,7 @@ const RepeatableTextFields: FC<Props> = ({
   label,
   name,
   maxFields = 10,
+  type = "text",
 }) => {
   // Give each field a unique id so that we can delete them properly
   const [fields, setFields] = useState([nanoid()]);
@@ -43,7 +45,7 @@ const RepeatableTextFields: FC<Props> = ({
         <div key={fieldId} className="flex gap-4">
           <input
             className="input"
-            type="text"
+            type={type}
             placeholder={placeholder}
             name={`${name}_${index}`}
           />
