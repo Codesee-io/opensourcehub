@@ -6,11 +6,7 @@ import ProjectCard from "~/components/ProjectCard";
 import { getGitHubDataForProject } from "~/github.server";
 import { getProject } from "~/projects.server";
 import { GitHubData, Project } from "~/types";
-import {
-  DISCORD_LINK,
-  HOW_TO_LIST_PROJECT_LINK,
-  REPO_LINK,
-} from "~/utils/constants";
+import { DISCORD_LINK, REPO_LINK, ROUTES } from "~/utils/constants";
 
 const EXAMPLE_PROJECTS = ["thamara/time-to-leave", "akshat157/meditate-app"];
 
@@ -52,7 +48,7 @@ const Contribute: FC = () => {
         </p>
         <p>
           To list your project,{" "}
-          <Link className="link" to="/list-project">
+          <Link className="link" to={ROUTES.LIST_PROJECT}>
             fill out this form
           </Link>
           . Feel free to ask questions on{" "}

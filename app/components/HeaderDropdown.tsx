@@ -2,6 +2,7 @@ import { Form, Link } from "@remix-run/react";
 import cx from "classnames";
 import { FC, useEffect, useRef, useState } from "react";
 import { UserInfo } from "~/types";
+import { ROUTES } from "~/utils/constants";
 import UserIcon from "./icons/UserIcon";
 
 type Props = {
@@ -80,7 +81,7 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
           Profile
         </Link>
         <Link
-          to="/list-project"
+          to={ROUTES.LIST_PROJECT}
           className="text-sm text-light-type hover:text-light-interactive hover:bg-light-interactive-fill px-4 py-2"
           onClick={() => setMenuIsOpen((prev) => !prev)}
         >

@@ -141,7 +141,7 @@ export default function Index() {
         </p>
 
         <div className="flex flex-col md:flex-row items-center justify-center text-center px-2 mt-3 gap-4">
-          <ButtonLink to={ROUTES.CONTRIBUTE}>List your project</ButtonLink>
+          <ButtonLink to={ROUTES.LIST_PROJECT}>List your project</ButtonLink>
           {SHOW_PROFILE_LINK && (
             <ButtonLink to={ROUTES.LOGIN} variant="accent">
               Build your profile
