@@ -39,6 +39,7 @@ import {
 } from "~/utils/project-submission";
 import { createNewPullRequest } from "~/github.server";
 import { getRepoOwnerAndName } from "~/utils/repo-url";
+import { getProjectByRepoUrl } from "~/projects.server";
 
 export function links() {
   return [
@@ -83,6 +84,16 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (!repoUrl) {
     throw new Error("Missing repo URL in new project form");
+  }
+
+  // Verify that we don't already have a project for this repository
+  const matchingProject = getProjectByRepoUrl(repoUrl);
+  if (matchingProject) {
+    return json({
+      validationErrors: {
+        repoUrl: "This project is already listed on Open Source Hub",
+      },
+    });
   }
 
   // Create a new pull request with the content of the form
