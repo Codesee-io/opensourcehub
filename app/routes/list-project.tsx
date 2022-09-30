@@ -76,8 +76,6 @@ export const action: ActionFunction = async ({ request }) => {
     throw new Error("You must be logged in to save your profile");
   }
 
-  // TODO check whether we already have a project for this repository
-
   // Parse the form
   const { validationErrors, files, repoUrl } = await parseListProjectForm(
     request,

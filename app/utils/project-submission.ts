@@ -74,7 +74,7 @@ export async function parseListProjectForm(
 
   const avatarFile = formData.get("avatar") as File | null;
   let avatarFileName;
-  if (avatarFile) {
+  if (avatarFile?.size) {
     const extension = avatarFile.name.split(".").pop();
     avatarFileName = `${repoName}.${extension}`;
   }
@@ -154,6 +154,7 @@ export async function parseListProjectForm(
 
   // If there's an avatar, upload it as a base-64 string so that GitHub knows
   // what to do
+  console.log({ avatarFile, avatarFileName });
   if (avatarFile && avatarFileName) {
     const avatarBuffer = await avatarFile.arrayBuffer();
     files.push({
