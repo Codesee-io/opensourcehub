@@ -1,4 +1,5 @@
 import { FC } from "react";
+import ModalWrapper from "./ModalWrapper";
 import Spinner from "./Spinner";
 
 type Props = {
@@ -11,9 +12,9 @@ type Props = {
  * @see list-projects.tsx
  */
 const ProjectSubmissionSpinner: FC<Props> = ({ state }) => {
-  if (state === "submitting") {
-    return (
-      <div className="fixed inset-0 bg-black-900/75 z-50 flex items-center justify-center p-4">
+  return (
+    <ModalWrapper isOpen={state === "submitting"}>
+      <div className="h-full flex items-center justify-center p-4">
         <div className="bg-white rounded-lg p-6 shadow-lg">
           <h2 className="text-lg font-semibold text-light-type mb-2 flex items-center">
             <Spinner className="mr-2 h-5 w-5" /> Submitting your project...
@@ -25,10 +26,8 @@ const ProjectSubmissionSpinner: FC<Props> = ({ state }) => {
           </ul>
         </div>
       </div>
-    );
-  }
-
-  return null;
+    </ModalWrapper>
+  );
 };
 
 export default ProjectSubmissionSpinner;

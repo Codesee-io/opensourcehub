@@ -1,4 +1,9 @@
-import { Form, useActionData, useTransition } from "@remix-run/react";
+import {
+  Form,
+  useActionData,
+  useSubmit,
+  useTransition,
+} from "@remix-run/react";
 import { ChangeEvent, FC, useRef, useState } from "react";
 import ReactSelect, { MultiValue } from "react-select";
 import cx from "classnames";
@@ -40,6 +45,7 @@ import {
 import { createNewPullRequest } from "~/github.server";
 import { getRepoOwnerAndName } from "~/utils/repo-url";
 import { getProjectByRepoUrl } from "~/projects.server";
+import ProjectSubmissionConfirmation from "~/components/ProjectSubmissionConfirmation";
 
 export function links() {
   return [
@@ -120,6 +126,7 @@ type TagsState = {
 const ListProject: FC = () => {
   const transition = useTransition();
   const actionData = useActionData();
+  const submit = useSubmit();
 
   // The 3 tag dropdowns are controlled components and we keep track of their state here
   const [tags, setTags] = useState<TagsState>({
@@ -217,12 +224,24 @@ const ListProject: FC = () => {
     }
   };
 
+  // Show a confirmation modal before submitting the form
+  const [confirmation, setConfirmation] = useState(false);
+  const submitForm = () => {
+    setConfirmation(false);
+    submit(formRef.current);
+  };
+
   return (
     <div>
       <ProjectPreview
         isOpen={showPreview}
         project={projectPreview}
         closePreview={() => setShowPreview(false)}
+      />
+      <ProjectSubmissionConfirmation
+        isOpen={confirmation}
+        onCancel={() => setConfirmation(false)}
+        onConfirm={submitForm}
       />
       <ProjectSubmissionSpinner state={transition.state} />
       <main className="max-w-4xl mx-auto pt-12 px-2 pb-24">
@@ -346,12 +365,11 @@ const ListProject: FC = () => {
               </div>
             </div>
           </div>
-
           <div className="md:flex gap-6 bg-white border border-light-border p-4 rounded-lg mb-8">
             <div className="mb-6 md:mb-0 flex-auto md:w-2/3">
               <h2 className="font-bold text-lg mb-4">Project tags</h2>
               <div className="space-y-4">
-                <div className="h-20">
+                <div>
                   <label className="input-label">
                     Tech focus <RequiredMarker />
                   </label>
@@ -370,7 +388,7 @@ const ListProject: FC = () => {
                   />
                   <FieldError error={actionData?.validationErrors?.languages} />
                 </div>
-                <div className="h-20">
+                <div>
                   <label className="input-label">
                     Contributor roles <RequiredMarker />
                   </label>
@@ -391,7 +409,7 @@ const ListProject: FC = () => {
                     error={actionData?.validationErrors?.currentlySeeking}
                   />
                 </div>
-                <div className="h-20">
+                <div>
                   <label className="input-label">
                     Subjects <RequiredMarker />
                   </label>
@@ -415,21 +433,21 @@ const ListProject: FC = () => {
             <div className="flex-auto md:w-1/3">
               <h2 className="font-bold text-lg mb-4">Contribution overview</h2>
               <div className="space-y-4">
-                <div className="h-20">
+                <div>
                   <TextField
                     id="automatedDevEnvironment"
                     label="Automated dev environment"
                     placeholder="gitpod.io"
                   />
                 </div>
-                <div className="h-20">
+                <div>
                   <TextField
                     id="mainLocation"
                     label="Maintainer location"
                     placeholder="Africa"
                   />
                 </div>
-                <div className="h-20">
+                <div>
                   <TextField
                     id="idealEffort"
                     label="Ideal contributor effort"
@@ -449,7 +467,6 @@ const ListProject: FC = () => {
               </div>
             </div>
           </div>
-
           <div className="bg-white border border-light-border p-4 rounded-lg mb-6">
             <h2 className="font-bold text-lg mb-4">Content</h2>
             <div className="mb-4">
@@ -473,7 +490,6 @@ const ListProject: FC = () => {
               <FieldError error={actionData?.validationErrors?.contributing} />
             </div>
           </div>
-
           <div className="bg-white border border-light-border p-4 rounded-lg mb-20">
             <h2 className="font-bold text-lg mb-4">CodeSee Map</h2>
             <p>
@@ -525,7 +541,13 @@ const ListProject: FC = () => {
           </div>
 
           <div className="sticky bottom-4 bg-white border border-light-border p-4 rounded-lg flex gap-4 items-center shadow-lg">
-            <Button variant="brand">Submit</Button>
+            <Button
+              type="button"
+              onClick={() => setConfirmation(true)}
+              variant="brand"
+            >
+              Submit
+            </Button>
             <Button type="button" onClick={displayPreview}>
               Preview
             </Button>
