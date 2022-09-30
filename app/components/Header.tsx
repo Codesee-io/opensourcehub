@@ -3,11 +3,13 @@ import { Link, useLocation } from "@remix-run/react";
 import { ROUTES, DISCORD_LINK, SHOW_PROFILE_LINK } from "../utils/constants";
 import NavLink from "./NavLink";
 import logo from "~/images/logo.png";
+import poweredBy from "~/images/powered_by.svg";
 import DiscordIcon from "./icons/DiscordIcon";
 import { UserInfo } from "~/types";
 import MenuIcon from "./icons/MenuIcon";
 import MobileNavigation from "./MobileNavigation";
 import HeaderDropdown from "./HeaderDropdown";
+import CodeSeeWordmark from "~/images/CodeSeeWordmark";
 
 type Props = {
   userInfo?: UserInfo | null;
@@ -72,13 +74,20 @@ const Header: FC<Props> = ({ userInfo }) => {
   return (
     <header className="bg-indigo-850 sticky top-0 z-40 h-12 flex items-center">
       <div className="max-w-7xl mx-auto flex px-4 items-center justify-between w-full">
-        <Link to="/" className="block" aria-label="Home">
+        <Link to="/" className="flex items-center" aria-label="Home">
           <img
             src={logo}
             alt=""
             className="my-2"
             style={{ height: 30, width: 180 }}
           />
+          <img
+            src={poweredBy}
+            alt=""
+            width="60"
+            className="hidden lg:block ml-4 mr-1 mt-1"
+          />
+          <CodeSeeWordmark width="80" className="hidden lg:block" />
         </Link>
         <button
           type="button"
