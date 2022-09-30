@@ -55,6 +55,7 @@ export type ProjectTemplateFields = {
   learnLinks?: { title: string; url: string }[];
   contributing?: string;
   overview?: string;
+  reviewMapUrls?: string[];
 };
 
 /**
@@ -149,6 +150,13 @@ created: ${fields.created}`;
         filledOutTemplate += "\n    subTitle: " + map.subTitle;
       }
     });
+  }
+
+  if (fields.reviewMapUrls) {
+    filledOutTemplate += stringArrayToYAMLField(
+      "reviewMapUrls",
+      fields.reviewMapUrls
+    );
   }
 
   if (fields.learnLinks) {
