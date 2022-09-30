@@ -73,7 +73,8 @@ export const action: ActionFunction = async ({ request }) => {
   const accessToken = await getAccessToken(request);
 
   if (!currentUser || !accessToken) {
-    throw new Error("You must be logged in to save your profile");
+    // You must be logged in to save your profile!
+    return redirect("/login");
   }
 
   // Parse the form
