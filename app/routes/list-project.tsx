@@ -382,7 +382,7 @@ const ListProject: FC = () => {
                   <input
                     type="hidden"
                     name="languages"
-                    value={tags.languages.map((t) => t.value).join(",")}
+                    value={tags.languages.map((t) => t.label).join(",")}
                   />
                   <ReactSelect
                     classNamePrefix="custom-react-select"
@@ -401,7 +401,7 @@ const ListProject: FC = () => {
                   <input
                     type="hidden"
                     name="currentlySeeking"
-                    value={tags.currentlySeeking.map((t) => t.value).join(",")}
+                    value={tags.currentlySeeking.map((t) => t.label).join(",")}
                   />
                   <ReactSelect
                     classNamePrefix="custom-react-select"
@@ -422,7 +422,7 @@ const ListProject: FC = () => {
                   <input
                     type="hidden"
                     name="tags"
-                    value={tags.tags.map((t) => t.value).join(",")}
+                    value={tags.tags.map((t) => t.label).join(",")}
                   />
                   <ReactSelect
                     classNamePrefix="custom-react-select"
