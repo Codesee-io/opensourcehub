@@ -7,6 +7,7 @@ import { User } from "~/types";
 import { maybeStringToArray } from "~/utils/formatting";
 import { getRepoOwnerAndName, isValidGitHubRepoUrl } from "~/utils/repo-url";
 import { getTemplateContent, ProjectTemplateFields } from "~/utils/template";
+import { getRepeatableFieldValues } from "./forms";
 
 export const MAX_AVATAR_SIZE_BYTES = 1024 * 1024 * 0.1; // 0.1 MB
 
@@ -79,6 +80,8 @@ export async function parseListProjectForm(
     avatarFileName = `${repoName}.${extension}`;
   }
 
+  const reviewMapUrls = getRepeatableFieldValues("reviewMapUrls", formData);
+
   let featuredMap: ProjectTemplateFields["featuredMap"];
   const featuredMapUrl = formData.get("featuredMapUrl")?.toString();
   const featuredMapDescription = formData
@@ -140,6 +143,7 @@ export async function parseListProjectForm(
     languages: maybeStringToArray(formData.get("languages")?.toString()),
     tags: maybeStringToArray(formData.get("tags")?.toString()),
     featuredMap,
+    reviewMapUrls,
     twitterUrl: formData.get("twitterUrl")?.toString(),
     websiteUrl: formData.get("websiteUrl")?.toString(),
   });
@@ -154,7 +158,6 @@ export async function parseListProjectForm(
 
   // If there's an avatar, upload it as a base-64 string so that GitHub knows
   // what to do
-  console.log({ avatarFile, avatarFileName });
   if (avatarFile && avatarFileName) {
     const avatarBuffer = await avatarFile.arrayBuffer();
     files.push({

@@ -30,6 +30,7 @@ export type ProjectAttributes = {
     title?: string;
     url?: string;
   }[];
+  reviewMapUrls?: string[];
   maintainer: string;
   created: string;
 };

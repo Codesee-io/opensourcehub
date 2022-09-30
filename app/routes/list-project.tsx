@@ -47,6 +47,8 @@ import { createNewPullRequest } from "~/github.server";
 import { getRepoOwnerAndName } from "~/utils/repo-url";
 import { getProjectByRepoUrl } from "~/projects.server";
 import ProjectSubmissionConfirmation from "~/components/ProjectSubmissionConfirmation";
+import { getRepeatableFieldValues } from "~/utils/forms";
+import RepeatableTextFields from "~/components/RepeatableTextFields";
 
 export function links() {
   return [
@@ -186,6 +188,7 @@ const ListProject: FC = () => {
         languages: maybeStringToArray(formData.get("languages")?.toString()),
         avatar: avatarSrc.src,
         featuredMap,
+        reviewMapUrls: getRepeatableFieldValues("reviewMapUrls", formData),
       },
       body: {
         contributing,
@@ -370,6 +373,77 @@ const ListProject: FC = () => {
               </div>
             </div>
           </div>
+
+          <div className="bg-white border border-light-border p-4 rounded-lg mb-8">
+            <h2 className="font-bold text-lg mb-4">CodeSee Map</h2>
+            <p>
+              We recommend providing a CodeSee Map to help onboard newcomers to
+              your project. It's free!{" "}
+              <ExternalLink href="https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59">
+                View an example map.
+              </ExternalLink>
+            </p>
+            <div className="flex mt-6 gap-8">
+              <div className="space-y-4 w-2/3">
+                <div>
+                  <TextField
+                    label="Public Map URL"
+                    type="url"
+                    id="featuredMapUrl"
+                    placeholder="https://app.codesee.io/maps/public/example-map"
+                  />
+                  <FieldError
+                    error={actionData?.validationErrors?.featuredMapUrl}
+                  />
+                </div>
+                <div>
+                  <TextField
+                    label="Map description"
+                    id="featuredMapDescription"
+                    placeholder="Overview of our codebase"
+                  />
+                </div>
+              </div>
+              <div className="w-1/3 relative">
+                <img
+                  src={mapThumbnailSrc}
+                  width="362"
+                  height="211"
+                  alt=""
+                  className="absolute w-full h-full object-cover opacity-50 rounded-lg"
+                />
+                <div className="absolute inset-0 z-10 flex items-center justify-center">
+                  <ExternalLink
+                    href="https://app.codesee.io/maps"
+                    className="bg-light-interactive-fill px-4 py-2 rounded-lg"
+                  >
+                    Create a Map
+                  </ExternalLink>
+                </div>
+              </div>
+            </div>
+            <div className="mt-8">
+              <h2 className="font-bold text-lg mb-4">Review Maps</h2>
+              <p className="mb-4">
+                Show off some of the most impactful{" "}
+                <ExternalLink href="https://www.codesee.io/code-reviews">
+                  Review Maps
+                </ExternalLink>{" "}
+                in your repository. For example, here's{" "}
+                <ExternalLink href="https://app.codesee.io/maps/review/github/codesee-io/opensourcehub/pr/110">
+                  an important Open Source Hub PR
+                </ExternalLink>
+                .
+              </p>
+              <RepeatableTextFields
+                label="Review Maps"
+                name="reviewMapUrls"
+                maxFields={5}
+                placeholder="https://app.codesee.io/maps/review/github/codesee-io/opensourcehub/pr/110"
+              />
+            </div>
+          </div>
+
           <div className="md:flex gap-6 bg-white border border-light-border p-4 rounded-lg mb-8">
             <div className="mb-6 md:mb-0 flex-auto md:w-2/3">
               <h2 className="font-bold text-lg mb-4">Project tags</h2>
@@ -472,7 +546,8 @@ const ListProject: FC = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white border border-light-border p-4 rounded-lg mb-6">
+
+          <div className="bg-white border border-light-border p-4 rounded-lg mb-20">
             <h2 className="font-bold text-lg mb-4">Content</h2>
             <div className="mb-4">
               <TextArea
@@ -493,55 +568,6 @@ const ListProject: FC = () => {
                 placeholder="How can potential contributors onboard efficiently?"
               />
               <FieldError error={actionData?.validationErrors?.contributing} />
-            </div>
-          </div>
-          <div className="bg-white border border-light-border p-4 rounded-lg mb-20">
-            <h2 className="font-bold text-lg mb-4">CodeSee Map</h2>
-            <p>
-              We recommend providing a CodeSee Map to help onboard newcomers to
-              your project. It's free!{" "}
-              <ExternalLink href="https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59">
-                View an example map.
-              </ExternalLink>
-            </p>
-            <div className="flex mt-6 gap-8">
-              <div className="space-y-4 w-2/3">
-                <div>
-                  <TextField
-                    label="Public Map URL"
-                    type="url"
-                    id="featuredMapUrl"
-                    placeholder="https://app.codesee.io/maps/public/example-map"
-                  />
-                  <FieldError
-                    error={actionData?.validationErrors?.featuredMapUrl}
-                  />
-                </div>
-                <div>
-                  <TextField
-                    label="Map description"
-                    id="featuredMapDescription"
-                    placeholder="Overview of our codebase"
-                  />
-                </div>
-              </div>
-              <div className="w-1/3 relative">
-                <img
-                  src={mapThumbnailSrc}
-                  width="362"
-                  height="211"
-                  alt=""
-                  className="absolute w-full h-full object-cover opacity-50 rounded-lg"
-                />
-                <div className="absolute inset-0 z-10 flex items-center justify-center">
-                  <ExternalLink
-                    href="https://app.codesee.io/maps"
-                    className="bg-light-interactive-fill px-4 py-2 rounded-lg"
-                  >
-                    Create a Map
-                  </ExternalLink>
-                </div>
-              </div>
             </div>
           </div>
 

@@ -13,6 +13,7 @@ import HelpWanted from "~/components/markdown/HelpWanted";
 import HacktoberfestIssues from "~/components/markdown/HacktoberfestIssues";
 import FeaturedCodeSeeMap from "~/components/markdown/FeaturedCodeSeeMap";
 import Maps from "~/components/Maps";
+import ReviewMaps from "./ReviewMaps";
 
 type Props = {
   project: Project;
@@ -139,6 +140,7 @@ const ProjectTemplate: FC<Props> = ({
               githubData={githubData}
               repoUrl={project.attributes.repoUrl}
             />
+            <ReviewMaps reviewMaps={project.attributes.reviewMapUrls} />
             <Maps maps={project.attributes.maps} />
           </div>
         </div>
