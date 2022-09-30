@@ -7,7 +7,6 @@ type Props = {
 };
 
 const ReviewMaps: FC<Props> = ({ reviewMaps = [] }) => {
-  console.log(reviewMaps);
   if (reviewMaps.length === 0) return null;
 
   return (
