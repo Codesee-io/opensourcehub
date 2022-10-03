@@ -4,6 +4,7 @@ import Tag from "./Tag";
 import { GitHubData, Project } from "~/types";
 import ProjectAvatar from "./ProjectAvatar";
 import ProjectCardStats from "./ProjectCardStats";
+import MapIcon from "./icons/MapIcon";
 
 type Props = {
   project: Project;
@@ -55,6 +56,12 @@ const ProjectCard: FC<Props> = ({ project, githubData, activeTags = [] }) => {
             }}
           >
             {attributes.description}
+          </p>
+        )}
+        {attributes.featuredMap && (
+          <p className="flex gap-1 items-center text-sm text-light-type mt-2">
+            <MapIcon className="w-4 h-4 text-light-interactive" />
+            <span>Features a CodeSee Map</span>
           </p>
         )}
         <ProjectCardStats className="mt-4" stats={githubData} />
