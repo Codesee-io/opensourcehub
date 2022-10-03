@@ -5,7 +5,7 @@ import { Filters } from "./SearchWrapper";
 type SearchContext = {
   filteredProjectIds: string[];
   filters: Filters;
-  clearAllTags: () => void;
+  clearAllFilters: () => void;
   filterByTag: (tag: string) => void;
   filterByHasCodeSeeMap: (hasMap: boolean) => void;
   searchByText: (search: string) => void;
@@ -24,7 +24,7 @@ export function getDefaultFilters(): Filters {
 const SearchResultsContext = createContext<SearchContext>({
   filters: getDefaultFilters(),
   filteredProjectIds: [],
-  clearAllTags: () => {},
+  clearAllFilters: () => {},
   filterByTag: () => {},
   filterByHasCodeSeeMap: () => {},
   searchByText: () => {},

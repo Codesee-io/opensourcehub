@@ -32,7 +32,7 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
     filters,
     filterByTag,
     filteredProjectIds,
-    clearAllTags,
+    clearAllFilters,
     filterByHasCodeSeeMap,
   } = useSearch();
 
@@ -76,7 +76,7 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
                 {filteredProjectIds.length}{" "}
                 {pluralize(filteredProjectIds.length, "result", "results")}
               </span>
-              <SecondaryButton onClick={clearAllTags} className="mr-6">
+              <SecondaryButton onClick={clearAllFilters} className="mr-6">
                 Clear
               </SecondaryButton>
             </>

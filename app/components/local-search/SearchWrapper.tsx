@@ -77,8 +77,8 @@ const SearchWrapper: FunctionComponent<Props> = ({
     updateSearchResults(filters.search, newTagList, filters.hasCodeSeeMap);
   };
 
-  const clearAllTags = () => {
-    updateSearchResults(filters.search, [], filters.hasCodeSeeMap);
+  const clearAllFilters = () => {
+    updateSearchResults(filters.search, [], false);
   };
 
   const setSortOption = (sortOrder: ProjectSortOrder) => {
@@ -157,7 +157,7 @@ const SearchWrapper: FunctionComponent<Props> = ({
         filterByHasCodeSeeMap,
         searchByText: performSearch,
         filteredProjectIds: filteredProjectSlugs,
-        clearAllTags,
+        clearAllFilters,
         setSortOption,
       }}
     >
