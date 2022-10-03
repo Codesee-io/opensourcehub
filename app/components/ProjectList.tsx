@@ -19,7 +19,10 @@ const ProjectList: FunctionComponent<Props> = ({
   // we guard against that scenario here.
   const dataSetIsEmpty = Object.keys(githubDataSet).length === 0;
 
-  const { filteredProjectIds, allActiveTags, sortOption } = useSearch();
+  const {
+    filteredProjectIds,
+    filters: { tags, sortOption },
+  } = useSearch();
 
   if (filteredProjectIds.length === 0) {
     return (
@@ -82,7 +85,7 @@ const ProjectList: FunctionComponent<Props> = ({
           key={project.slug}
           project={project}
           githubData={githubDataSet[project.slug]}
-          activeTags={allActiveTags}
+          activeTags={tags}
         />
       ))}
     </ProjectListWrapper>

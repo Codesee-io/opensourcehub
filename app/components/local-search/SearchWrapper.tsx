@@ -1,7 +1,10 @@
 import { Search } from "js-search";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { SearchResultsProvider } from "./SearchResultsContext";
-import { SelectOption, Project } from "../../types";
+import {
+  getDefaultFilters,
+  SearchResultsProvider,
+} from "./SearchResultsContext";
+import { Project } from "../../types";
 import { ProjectSortOrder, SORT_OPTIONS } from "~/utils/constants";
 
 export type SearchIndexItem = {
@@ -16,10 +19,11 @@ type Props = {
   allProjects: Project[];
 };
 
-type Filters = {
+export type Filters = {
   search: string;
   tags: string[];
-  sortOption: SelectOption;
+  sortOption: ProjectSortOrder;
+  hasCodeSeeMap: boolean;
 };
 
 const SearchWrapper: FunctionComponent<Props> = ({
@@ -27,11 +31,7 @@ const SearchWrapper: FunctionComponent<Props> = ({
   allProjects,
   children,
 }) => {
-  const [filters, setFilters] = useState<Filters>({
-    search: "",
-    tags: [],
-    sortOption: SORT_OPTIONS[0],
-  });
+  const [filters, setFilters] = useState<Filters>(getDefaultFilters());
 
   const projectSearch = useRef<Search>();
   const [filteredProjectSlugs, setFilteredProjectSlugs] = useState(
@@ -54,7 +54,15 @@ const SearchWrapper: FunctionComponent<Props> = ({
   );
 
   const performSearch = (searchValue: string) => {
-    updateSearchResults(searchValue.trim(), filters.tags);
+    updateSearchResults(
+      searchValue.trim(),
+      filters.tags,
+      filters.hasCodeSeeMap
+    );
+  };
+
+  const filterByHasCodeSeeMap = (hasMap: boolean) => {
+    updateSearchResults(filters.search, filters.tags, hasMap);
   };
 
   const filterByTag = (tag: string) => {
@@ -66,19 +74,19 @@ const SearchWrapper: FunctionComponent<Props> = ({
     }
 
     // Toggle tags in our list
-    updateSearchResults(filters.search, newTagList);
+    updateSearchResults(filters.search, newTagList, filters.hasCodeSeeMap);
   };
 
   const clearAllTags = () => {
-    updateSearchResults(filters.search, []);
+    updateSearchResults(filters.search, [], filters.hasCodeSeeMap);
   };
 
   const setSortOption = (sortOrder: ProjectSortOrder) => {
     const sortOption = SORT_OPTIONS.find((o) => o.value === sortOrder);
-    if (sortOption) {
+    if (sortOption?.value) {
       setFilters({
         ...filters,
-        sortOption,
+        sortOption: sortOption.value,
       });
     }
   };
@@ -86,12 +94,22 @@ const SearchWrapper: FunctionComponent<Props> = ({
   /**
    * Perform the search and cache the results
    */
-  const updateSearchResults = (newSearchValue: string, newTags: string[]) => {
+  const updateSearchResults = (
+    newSearchValue: string,
+    newTags: string[],
+    hasCodeSeeMap: boolean
+  ) => {
     // Filter projects
     let filteredProjects = [...allProjects];
 
+    if (hasCodeSeeMap) {
+      filteredProjects = filteredProjects.filter(
+        (p) => p.attributes.featuredMap != null
+      );
+    }
+
     if (newTags.length > 0) {
-      filteredProjects = allProjects.filter((project) => {
+      filteredProjects = filteredProjects.filter((project) => {
         // Only show projects that include ALL the tags
         const projectLangs = project.attributes.languages || [];
         const projectTags = project.attributes.tags || [];
@@ -127,17 +145,18 @@ const SearchWrapper: FunctionComponent<Props> = ({
       search: newSearchValue,
       tags: newTags,
       sortOption: filters.sortOption,
+      hasCodeSeeMap,
     });
   };
 
   return (
     <SearchResultsProvider
       value={{
-        searchByText: performSearch,
+        filters,
         filterByTag,
-        sortOption: filters.sortOption.value,
+        filterByHasCodeSeeMap,
+        searchByText: performSearch,
         filteredProjectIds: filteredProjectSlugs,
-        allActiveTags: filters.tags,
         clearAllTags,
         setSortOption,
       }}
