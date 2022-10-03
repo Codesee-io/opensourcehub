@@ -1,4 +1,4 @@
-import React, {
+import {
   ChangeEvent,
   Dispatch,
   FunctionComponent,
@@ -28,12 +28,18 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
   showSidebar,
   setShowSidebar,
 }) => {
-  const { filterByTag, allActiveTags, filteredProjectIds, clearAllTags } =
-    useSearch();
+  const {
+    filters,
+    filterByTag,
+    filteredProjectIds,
+    clearAllFilters,
+    filterByHasCodeSeeMap,
+  } = useSearch();
 
   useEffect(
     function preventBodyScroll() {
       if (showSidebar) {
+        // TODO use this for the modals because it has padding
         document.body.classList.add("prevent-mobile-scroll");
       } else {
         document.body.classList.remove("prevent-mobile-scroll");
@@ -47,6 +53,8 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
     filterByTag(value);
   };
 
+  const hasFilters = filters.tags.length > 0 || filters.hasCodeSeeMap;
+
   return (
     <>
       <div
@@ -56,19 +64,19 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
       />
       <aside
         data-qa="sidebar"
-        className={cx("sidebar flex-shrink-0 flex flex-col bg-black-30", {
+        className={cx("sidebar shrink-0 flex flex-col bg-black-30", {
           active: showSidebar,
         })}
       >
-        <div className="text-black-500 shadow-menu p-4 md:px-8 flex items-center justify-between">
+        <div className="text-black-500 shadow-menu p-4 md:px-8 h-16 shrink-0 flex items-center justify-between">
           <h3 className="text-xl font-semibold">Filters</h3>
-          {allActiveTags.length > 0 && (
+          {hasFilters && (
             <>
-              <span className="flex-grow text-black-300 ml-4">
+              <span className="grow text-black-300 ml-4">
                 {filteredProjectIds.length}{" "}
                 {pluralize(filteredProjectIds.length, "result", "results")}
               </span>
-              <SecondaryButton onClick={clearAllTags} className="mr-6">
+              <SecondaryButton onClick={clearAllFilters} className="mr-6">
                 Clear
               </SecondaryButton>
             </>
@@ -84,12 +92,19 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
         </div>
 
         <div className="p-4 md:px-8 text-black-500 max-h-full overflow-auto pb-12">
-          <h4 className="font-semibold mb-3">Language</h4>
+          <h4 className="font-semibold mb-3">Features</h4>
+          <Checkbox
+            onChange={(e) => filterByHasCodeSeeMap(e.target.checked)}
+            checked={filters.hasCodeSeeMap}
+          >
+            Has a CodeSee Map
+          </Checkbox>
+          <h4 className="font-semibold mb-3 mt-6">Language</h4>
           {allLanguages.map((language) => (
             <Checkbox
               onChange={onCheckboxChange}
               value={language}
-              checked={allActiveTags.includes(language)}
+              checked={filters.tags.includes(language)}
               key={language}
               labelProps={{ className: "mb-1" }}
             >
@@ -101,7 +116,7 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
             <Checkbox
               onChange={onCheckboxChange}
               value={tag}
-              checked={allActiveTags.includes(tag)}
+              checked={filters.tags.includes(tag)}
               key={tag}
               labelProps={{ className: "mb-1" }}
             >
@@ -113,7 +128,7 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
             <Checkbox
               onChange={onCheckboxChange}
               value={seeking}
-              checked={allActiveTags.includes(seeking)}
+              checked={filters.tags.includes(seeking)}
               key={seeking}
               labelProps={{ className: "mb-1" }}
             >
@@ -124,7 +139,7 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
       </aside>
       <SidebarButton
         onClick={() => setShowSidebar(true)}
-        numFilters={allActiveTags.length}
+        numFilters={filters.tags.length}
       />
     </>
   );

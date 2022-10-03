@@ -1,22 +1,32 @@
 import { createContext } from "react";
 import { ProjectSortOrder, SORT_OPTIONS } from "~/utils/constants";
+import { Filters } from "./SearchWrapper";
 
 type SearchContext = {
   filteredProjectIds: string[];
-  allActiveTags: string[];
-  sortOption: ProjectSortOrder;
-  clearAllTags: () => void;
+  filters: Filters;
+  clearAllFilters: () => void;
   filterByTag: (tag: string) => void;
+  filterByHasCodeSeeMap: (hasMap: boolean) => void;
   searchByText: (search: string) => void;
   setSortOption: (option: ProjectSortOrder) => void;
 };
 
+export function getDefaultFilters(): Filters {
+  return {
+    hasCodeSeeMap: false,
+    search: "",
+    sortOption: SORT_OPTIONS[0].value,
+    tags: [],
+  };
+}
+
 const SearchResultsContext = createContext<SearchContext>({
+  filters: getDefaultFilters(),
   filteredProjectIds: [],
-  allActiveTags: [],
-  sortOption: SORT_OPTIONS[0].value,
-  clearAllTags: () => {},
+  clearAllFilters: () => {},
   filterByTag: () => {},
+  filterByHasCodeSeeMap: () => {},
   searchByText: () => {},
   setSortOption: () => {},
 });
