@@ -567,7 +567,7 @@ const ListProject: FC = () => {
             </div>
           </div>
 
-          <div className="sticky bottom-4 bg-white border border-light-border p-4 rounded-lg flex gap-4 items-center shadow-lg">
+          <div className="sticky bottom-4 z-20 bg-white border border-light-border p-4 rounded-lg flex gap-4 items-center shadow-lg">
             <Button
               type="button"
               onClick={() => setConfirmation(true)}
