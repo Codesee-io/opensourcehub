@@ -34,11 +34,7 @@ import {
   LoaderFunction,
   redirect,
 } from "@remix-run/node";
-import {
-  getAccessToken,
-  getCurrentUser,
-  getCurrentUserOrRedirect,
-} from "~/session.server";
+import { getCurrentUser, getCurrentUserOrRedirect } from "~/session.server";
 import {
   MAX_AVATAR_SIZE_BYTES,
   parseListProjectForm,
@@ -72,9 +68,8 @@ export const loader: LoaderFunction = async ({ request }) => {
  */
 export const action: ActionFunction = async ({ request }) => {
   const currentUser = await getCurrentUser(request);
-  const accessToken = await getAccessToken(request);
 
-  if (!currentUser || !accessToken) {
+  if (!currentUser) {
     // You must be logged in to save your profile!
     return redirect("/login");
   }
@@ -107,7 +102,7 @@ export const action: ActionFunction = async ({ request }) => {
   // Create a new pull request with the content of the form
   const { owner: repoOwner, name: repoName } = getRepoOwnerAndName(repoUrl);
   const { pullRequestUrl } = await createNewPullRequest(
-    accessToken,
+    currentUser,
     files,
     repoOwner,
     repoName
