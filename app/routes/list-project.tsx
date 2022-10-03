@@ -425,7 +425,7 @@ const ListProject: FC = () => {
                   Review Maps
                 </ExternalLink>{" "}
                 in your repository. For example, here's{" "}
-                <ExternalLink href="https://app.codesee.io/maps/review/github/codesee-io/opensourcehub/pr/110">
+                <ExternalLink href="https://app.codesee.io/maps/review/github/Codesee-io/opensourcehub/pr/110">
                   an important Open Source Hub PR
                 </ExternalLink>
                 .
@@ -434,7 +434,7 @@ const ListProject: FC = () => {
                 label="Review Maps"
                 name="reviewMapUrls"
                 maxFields={5}
-                placeholder="https://app.codesee.io/maps/review/github/codesee-io/opensourcehub/pr/110"
+                placeholder="https://app.codesee.io/maps/review/github/Codesee-io/opensourcehub/pr/110"
                 type="url"
               />
             </div>
