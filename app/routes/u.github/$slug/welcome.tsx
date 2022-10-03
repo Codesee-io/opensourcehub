@@ -192,13 +192,17 @@ const Welcome: FC = () => {
                       onChange={updateTags("roleInterests")}
                     />
                   </div>
-                  <div className="pt-10">
-                    <label className="text-sm flex gap-2 text-light-type-medium">
-                      <input type="checkbox" name="joinDiscord" />
-                      Join the Open Source Hub Discord server
-                    </label>
-                  </div>
                 </div>
+              </div>
+              <div className="pt-10">
+                <label className="text-sm flex gap-2 font-semibold text-light-type-medium mb-4 cursor-pointer">
+                  <input type="checkbox" name="isProjectMaintainer" />I am an
+                  open-source project maintainer
+                </label>
+                <label className="text-sm flex gap-2 font-semibold text-light-type-medium  cursor-pointer">
+                  <input type="checkbox" name="joinDiscord" />
+                  Join the Open Source Hub Discord server
+                </label>
               </div>
               <div className="mt-16 flex justify-end gap-6">
                 <ButtonLink to={getProfileRouteForUser(user)}>

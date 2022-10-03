@@ -133,6 +133,7 @@ export type UserProfile = {
   subjectInterests?: string[];
   roleInterests?: string[];
   portfolioItems?: string[];
+  isProjectMaintainer?: boolean;
 };
 
 export type Tag = {
