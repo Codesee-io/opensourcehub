@@ -14,6 +14,7 @@ import HacktoberfestIssues from "~/components/markdown/HacktoberfestIssues";
 import FeaturedCodeSeeMap from "~/components/markdown/FeaturedCodeSeeMap";
 import Maps from "~/components/Maps";
 import ReviewMaps from "./ReviewMaps";
+import { formatCreatedDate } from "~/utils/formatting";
 
 type Props = {
   project: Project;
@@ -145,6 +146,13 @@ const ProjectTemplate: FC<Props> = ({
           </div>
         </div>
         <LearnSection learnLinks={project.attributes.learnLinks} />
+      </div>
+      <div className="px-4 py-8 text-center text-sm text-light-type-medium">
+        {project.attributes.created && (
+          <span>
+            Project listed on {formatCreatedDate(project.attributes.created)}
+          </span>
+        )}
       </div>
     </div>
   );

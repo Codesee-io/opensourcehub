@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export function pluralize(amount: number, singular: string, plural: string) {
   return amount === 1 ? singular : plural;
 }
@@ -18,4 +20,8 @@ export function formatFileSize(size: number) {
   } else {
     return `${(size / 1048576).toFixed(1)} MB`;
   }
+}
+
+export function formatCreatedDate(date: string) {
+  return dayjs(date).format("MMMM DD, YYYY");
 }
