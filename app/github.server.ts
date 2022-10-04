@@ -265,7 +265,7 @@ Repository: https://github.com/${projectDirectory}/${projectName}
         owner: TARGET_OWNER,
         repo: TARGET_REPO,
         issue_number: createPRData.number,
-        labels: ["new-project"],
+        labels: ["new project"],
       }
     );
   } catch (_) {}
