@@ -257,6 +257,19 @@ Repository: https://github.com/${projectDirectory}/${projectName}
     }
   );
 
+  // Add the "new-project" label (don't really care if it fails)
+  try {
+    await appOctokit.request(
+      "PUT /repos/{owner}/{repo}/issues/{issue_number}/labels",
+      {
+        owner: TARGET_OWNER,
+        repo: TARGET_REPO,
+        issue_number: createPRData.number,
+        labels: ["new-project"],
+      }
+    );
+  } catch (_) {}
+
   // Return the URL of the new pull request
   return {
     pullRequestUrl: createPRData.html_url,
