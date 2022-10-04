@@ -152,6 +152,11 @@ const languages: Tag[] = [
     id: "bash",
     color: tagColors.teal,
   },
+  {
+    label: "Haskell",
+    id: "haskell",
+    color: tagColors.lavender,
+  },
 ];
 
 export default languages;
