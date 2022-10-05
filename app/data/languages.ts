@@ -124,7 +124,6 @@ const languages: Tag[] = [
   {
     label: "Haskell",
     id: "haskell",
-    color: tagColors.lavender,
   },
 ];
 
