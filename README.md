@@ -34,7 +34,7 @@ Now you're in the github.dev editor! Feel free to hop ahead to [our contributing
 
 For more information on the Github.dev editor, please [see their docs](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor).
 
-## How to list your project
+### How to list your project
 
 We recommend [listing your project through the website](https://opensourcehub.io/list-project) by using your GitHub account to log in to Open Source Hub.
 
@@ -100,11 +100,21 @@ Then, the best way to get started is to [create an issue](https://github.com/Cod
 
 ## Content
 
+### Moderation policy
+
+Our main goal is to promote meaningful projects to potential contributors, so quality is an important factor in determining which projects are accepted. We do not accept low-quality or spammy contributions. We review repositories and their previous contributions to make our decision. Here are some examples of low-quality submissions:
+
+- Repositories that are only active during events like Hacktoberfest. For example, we will probably reject a repository if all the issues/tasks were created at the start of October.
+- Repositories that encourage low-quality contributions, such as arbitrarily curating content or building technology that isn’t intended to be used for anything
+- Repositories that offer little to value to the potential contributors. For example, we will probably reject someone’s portfolio website.
+
+These guidelines are subject to change as we tweak our acceptance criteria.
+
 ### Tag policy
 
 Final tags are up to the maintainers of Open Source Hub. Your tags may be modified for the benefit of the community and to improve discoverability.
 
-We use title-casing for tags. For example: "First-Timer Friendly, Social Activism, C#, JavaScript".
+We use title-casing for tags. For example: "First Timer Friendly, Social Activism, C#, JavaScript".
 
 ### How to remove your project from Open Source Hub
 
