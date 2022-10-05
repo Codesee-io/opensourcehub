@@ -21,7 +21,6 @@ export function getTag(category: TagCategory, key: string) {
   }
 
   const fallback: Tag = {
-    color: "#555",
     id: key,
     label: key,
   };

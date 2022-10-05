@@ -139,7 +139,6 @@ export type UserProfile = {
 export type Tag = {
   id: string;
   label: string;
-  color: string;
 };
 
 export type PortfolioItem = {
