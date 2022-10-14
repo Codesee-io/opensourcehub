@@ -1,5 +1,7 @@
 import { FC } from "react";
 import { Link } from "@remix-run/react";
+import cx from "classnames";
+import { VerifiedIcon } from "@primer/octicons-react";
 import Tag from "./Tag";
 import { GitHubData, Project } from "~/types";
 import ProjectAvatar from "./ProjectAvatar";
@@ -17,8 +19,12 @@ const ProjectCard: FC<Props> = ({ project, githubData, activeTags = [] }) => {
 
   return (
     <div
-      className="p-4 bg-white flex flex-col w-full rounded-lg"
-      style={{ maxWidth: 400, border: "1px solid #d8d8d8" }}
+      className={cx("p-4 bg-white flex flex-col w-full rounded-lg border", {
+        "border-light-interactive outline outline-4 outline-light-interactive-fill":
+          attributes.verified,
+        "border-light-type-disabled": !attributes.verified,
+      })}
+      style={{ maxWidth: 400 }}
     >
       {/* The container below should take up as much vertical space as possible
       so that the GitHub stats are vertically-aligned in a row even when the
@@ -33,13 +39,18 @@ const ProjectCard: FC<Props> = ({ project, githubData, activeTags = [] }) => {
             />
           )}
 
-          <h3 className="font-semibold text-light-type text-xl">
+          <h3 className="font-semibold text-light-type text-xl flex items-center gap-2">
             <Link
               to={"/" + slug}
               className="supports-hover:hover:text-light-interactive"
             >
               {attributes.name}
             </Link>
+            {attributes.verified && (
+              <span className="w-4 h-4 flex mt-0.5" title="Verified project">
+                <VerifiedIcon className="text-light-interactive" />
+              </span>
+            )}
           </h3>
         </div>
         {attributes.description && (
@@ -67,7 +78,7 @@ const ProjectCard: FC<Props> = ({ project, githubData, activeTags = [] }) => {
         <ProjectCardStats className="mt-4" stats={githubData} />
       </div>
       <div>
-        <hr className="-ml-4 -mr-4 mt-2" style={{ borderColor: "#d8d8d8" }} />
+        <hr className="-ml-4 -mr-4 mt-2 border-light-type-disabled" />
         <div className="mt-4">
           <div>
             <span className="uppercase text-light-type-medium text-xs mr-6">
