@@ -33,6 +33,7 @@ export type ProjectAttributes = {
   reviewMapUrls?: string[];
   maintainer: string;
   created: string;
+  verified?: boolean;
 };
 
 export type ProjectCategory = {

@@ -1,4 +1,6 @@
 import { FC } from "react";
+import cx from "classnames";
+import { VerifiedIcon } from "@primer/octicons-react";
 
 import type { CodeSeeMapMetadata, GitHubData, Project } from "~/types";
 import ProjectAvatar from "~/components/ProjectAvatar";
@@ -49,8 +51,21 @@ const ProjectTemplate: FC<Props> = ({
             />
           </div>
         )}
-        <h1 className="mt-2 mb-4 text-light-type font-semibold text-4xl">
-          {project.attributes.name}
+        <h1 className="mt-2 mb-4 font-semibold text-4xl flex items-center gap-3">
+          <span
+            className={cx({
+              "text-transparent bg-clip-text bg-gradient-to-br from-light-interactive to-indigo-850":
+                project.attributes.verified,
+              "text-light-type": !project.attributes.verified,
+            })}
+          >
+            {project.attributes.name}
+          </span>
+          {project.attributes.verified && (
+            <span className="w-5 h-5 flex mt-1" title="Verified project">
+              <VerifiedIcon className="text-light-interactive w-5 h-5" />
+            </span>
+          )}
         </h1>
         {project.attributes.featuredMap && (
           <a
