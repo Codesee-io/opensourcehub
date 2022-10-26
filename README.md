@@ -2,6 +2,8 @@
 
 Welcome to Open Source Hub! This website and community connects open source maintainers and collaborators. Please join [our Discord channel](https://discord.gg/opensource) if you have any questions or just want to chat!
 
+[![CodeSee](https://codesee-docs.s3.amazonaws.com/badge.svg?)](https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59)
+
 ## Project setup
 
 **Requirements:**
