@@ -20,13 +20,16 @@ const Footer: FC = () => (
       <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.ABOUT}>
         About
       </Link>
+      <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.CONTRIBUTE}>
+        Contribute
+      </Link>
       <a
         className="supports-hover:hover:text-yellow-300"
         href={DISCORD_LINK}
         target="_blank"
         rel="noreferrer"
       >
-        Join us
+        Discord
       </a>
     </div>
     <div className="flex gap-2 md:gap-6 flex-col md:flex-row text-sm text-white text-center justify-center mb-10">
