@@ -38,7 +38,7 @@
     "dayjs": "^1.11.5",
     "discord-oauth2": "^2.10.0",
     "dotenv": "16.0.3",
-    "firebase": "^9.8.2",
+    "firebase": "^9.13.0",
     "firebase-admin": "^10.3.0",
     "front-matter": "^4.0.2",
     "js-search": "2.0.0",
