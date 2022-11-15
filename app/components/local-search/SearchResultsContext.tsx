@@ -8,6 +8,7 @@ type SearchContext = {
   clearAllFilters: () => void;
   filterByTag: (tag: string) => void;
   filterByHasCodeSeeMap: (hasMap: boolean) => void;
+  filterByVerified: (isVerified: boolean) => void;
   searchByText: (search: string) => void;
   setSortOption: (option: ProjectSortOrder) => void;
 };
@@ -18,6 +19,7 @@ export function getDefaultFilters(): Filters {
     search: "",
     sortOption: SORT_OPTIONS[0].value,
     tags: [],
+    isVerified: false,
   };
 }
 
@@ -27,6 +29,7 @@ const SearchResultsContext = createContext<SearchContext>({
   clearAllFilters: () => {},
   filterByTag: () => {},
   filterByHasCodeSeeMap: () => {},
+  filterByVerified: () => {},
   searchByText: () => {},
   setSortOption: () => {},
 });

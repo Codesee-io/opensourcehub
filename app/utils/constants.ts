@@ -47,3 +47,5 @@ export const SORT_OPTIONS: SelectOption[] = [
 ];
 
 export const SHOW_PROFILE_LINK = true;
+
+export const ALL_PROJECTS_HEADER_ID = "all-projects-header";
