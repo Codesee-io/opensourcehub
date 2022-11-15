@@ -1,5 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 import ButtonLink from "~/components/ButtonLink";
+import { ROUTES } from "~/utils/constants";
 import ExternalLink from "../components/ExternalLink";
 
 export const meta: MetaFunction = () => ({
@@ -29,9 +31,14 @@ const About = () => {
             codebase onboarding.
           </p>
           <p>
-            Maintainers can tag their projects to topics like ‘education’ and
-            ‘social good’, so contributors can search, select, and quickly
-            onboard to the projects that matter most to them.
+            Maintainers can tag their projects to topics like 'education' and
+            'social good', so contributors can search, select, and quickly
+            onboard to the projects that matter most to them. OSH also offers a{" "}
+            <Link to={ROUTES.VERIFIED} className="link">
+              Verified Program
+            </Link>{" "}
+            for maintainers to have their projects highlighted on the website
+            and within OSH's communities.
           </p>
           <p>
             Open Source Hub allows maintainers to provide contribution best

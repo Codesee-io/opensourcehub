@@ -15,6 +15,7 @@ export const ROUTES = {
   PRIVACY: "/privacy",
   TERMS_CONDITIONS: "/terms-conditions",
   LIST_PROJECT: "/list-project",
+  VERIFIED: "/verified",
 };
 
 // Button, Link Types
