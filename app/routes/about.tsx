@@ -19,7 +19,10 @@ const About = () => {
           Helping contributors and maintainers eliminate the barriers to taking
           on a new codebase.
         </p>
-        <ButtonLink to="/contribute">List Your Project</ButtonLink>
+        <div className="flex gap-4 justify-center">
+          <ButtonLink to="/contribute">List your project</ButtonLink>
+          <ButtonLink to="/verified">Get verified</ButtonLink>
+        </div>
       </header>
       <main className="mx-auto max-w-2xl px-4 mb-20">
         <h2 className="text-2xl font-semibold mb-4 px-6">

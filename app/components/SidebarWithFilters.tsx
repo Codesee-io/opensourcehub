@@ -34,6 +34,7 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
     filteredProjectIds,
     clearAllFilters,
     filterByHasCodeSeeMap,
+    filterByVerified,
   } = useSearch();
 
   useEffect(
@@ -53,7 +54,8 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
     filterByTag(value);
   };
 
-  const hasFilters = filters.tags.length > 0 || filters.hasCodeSeeMap;
+  const hasFilters =
+    filters.tags.length > 0 || filters.hasCodeSeeMap || filters.isVerified;
 
   return (
     <>
@@ -93,12 +95,20 @@ const SidebarWithFilters: FunctionComponent<Props> = ({
 
         <div className="p-4 md:px-8 text-black-500 max-h-full overflow-auto pb-12">
           <h4 className="font-semibold mb-3">Features</h4>
-          <Checkbox
-            onChange={(e) => filterByHasCodeSeeMap(e.target.checked)}
-            checked={filters.hasCodeSeeMap}
-          >
-            Has a CodeSee Map
-          </Checkbox>
+          <div className="space-y-1">
+            <Checkbox
+              onChange={(e) => filterByHasCodeSeeMap(e.target.checked)}
+              checked={filters.hasCodeSeeMap}
+            >
+              Has a CodeSee Map
+            </Checkbox>
+            <Checkbox
+              onChange={(e) => filterByVerified(e.target.checked)}
+              checked={filters.isVerified}
+            >
+              Is verified
+            </Checkbox>
+          </div>
           <h4 className="font-semibold mb-3 mt-6">Language</h4>
           {allLanguages.map((language) => (
             <Checkbox

@@ -14,6 +14,9 @@ const ToggleFiltersButton: FC<Props> = (props) => {
   if (filters.hasCodeSeeMap) {
     numFilters++;
   }
+  if (filters.isVerified) {
+    numFilters++;
+  }
 
   return (
     <SecondaryButton {...props} className="inline-flex items-center space-x-2">

@@ -24,6 +24,7 @@ export type Filters = {
   tags: string[];
   sortOption: ProjectSortOrder;
   hasCodeSeeMap: boolean;
+  isVerified: boolean;
 };
 
 const SearchWrapper: FunctionComponent<Props> = ({
@@ -57,12 +58,27 @@ const SearchWrapper: FunctionComponent<Props> = ({
     updateSearchResults(
       searchValue.trim(),
       filters.tags,
-      filters.hasCodeSeeMap
+      filters.hasCodeSeeMap,
+      filters.isVerified
     );
   };
 
   const filterByHasCodeSeeMap = (hasMap: boolean) => {
-    updateSearchResults(filters.search, filters.tags, hasMap);
+    updateSearchResults(
+      filters.search,
+      filters.tags,
+      hasMap,
+      filters.isVerified
+    );
+  };
+
+  const filterByVerified = (isVerified: boolean) => {
+    updateSearchResults(
+      filters.search,
+      filters.tags,
+      filters.hasCodeSeeMap,
+      isVerified
+    );
   };
 
   const filterByTag = (tag: string) => {
@@ -74,11 +90,16 @@ const SearchWrapper: FunctionComponent<Props> = ({
     }
 
     // Toggle tags in our list
-    updateSearchResults(filters.search, newTagList, filters.hasCodeSeeMap);
+    updateSearchResults(
+      filters.search,
+      newTagList,
+      filters.hasCodeSeeMap,
+      filters.isVerified
+    );
   };
 
   const clearAllFilters = () => {
-    updateSearchResults(filters.search, [], false);
+    updateSearchResults(filters.search, [], false, false);
   };
 
   const setSortOption = (sortOrder: ProjectSortOrder) => {
@@ -97,7 +118,8 @@ const SearchWrapper: FunctionComponent<Props> = ({
   const updateSearchResults = (
     newSearchValue: string,
     newTags: string[],
-    hasCodeSeeMap: boolean
+    hasCodeSeeMap: boolean,
+    isVerified: boolean
   ) => {
     // Filter projects
     let filteredProjects = [...allProjects];
@@ -105,6 +127,12 @@ const SearchWrapper: FunctionComponent<Props> = ({
     if (hasCodeSeeMap) {
       filteredProjects = filteredProjects.filter(
         (p) => p.attributes.featuredMap != null
+      );
+    }
+
+    if (isVerified) {
+      filteredProjects = filteredProjects.filter(
+        (p) => p.attributes.verified === true
       );
     }
 
@@ -146,6 +174,7 @@ const SearchWrapper: FunctionComponent<Props> = ({
       tags: newTags,
       sortOption: filters.sortOption,
       hasCodeSeeMap,
+      isVerified,
     });
   };
 
@@ -155,6 +184,7 @@ const SearchWrapper: FunctionComponent<Props> = ({
         filters,
         filterByTag,
         filterByHasCodeSeeMap,
+        filterByVerified,
         searchByText: performSearch,
         filteredProjectIds: filteredProjectSlugs,
         clearAllFilters,

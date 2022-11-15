@@ -29,7 +29,12 @@ import headerStyles from "~/styles/header.css";
 import projectsStyles from "~/styles/projects-list.css";
 import ButtonLink from "~/components/ButtonLink";
 import BackToTopButton from "~/components/BackToTopButton";
-import { ROUTES, SHOW_PROFILE_LINK } from "~/utils/constants";
+import {
+  ROUTES,
+  SHOW_PROFILE_LINK,
+  ALL_PROJECTS_HEADER_ID,
+} from "~/utils/constants";
+import VerifiedProjectsButton from "~/components/VerifiedProjectsButton";
 
 export function links() {
   return [
@@ -92,6 +97,7 @@ export const loader: LoaderFunction = async () => {
     allSeeking: allSeeking.map((lang) => lang.fieldValue).sort(),
     githubData,
     blogPosts,
+    numVerifiedProjects: projects.filter((p) => p.attributes.verified).length,
   };
 
   return json(payload, {
@@ -110,6 +116,7 @@ type LoaderData = {
   allSeeking: string[];
   githubData: { [key: string]: GitHubData };
   blogPosts: PostOrPage[];
+  numVerifiedProjects: number;
 };
 
 export default function Index() {
@@ -122,6 +129,7 @@ export default function Index() {
     allSeeking,
     githubData,
     blogPosts,
+    numVerifiedProjects,
   } = useLoaderData<LoaderData>();
 
   const [showSidebar, setShowSidebar] = useState(false);
@@ -131,45 +139,49 @@ export default function Index() {
 
   return (
     <>
-      <div className="bg-gradient mx-auto pt-12 md:pt-24 mb-12">
-        <h1 className="text-yellow-300 font-semibold text-3xl px-2 lg:text-4xl text-center mb-4">
-          Connecting People and Projects
-        </h1>
-        <p className="text-white text-center max-w-xl mx-auto mb-6 mt-2 px-2">
-          Your next project is waiting to be discovered. Connect with devs
-          across the globe, contribute to open source, and learn something new.
-        </p>
-
-        <div className="flex flex-col md:flex-row items-center justify-center text-center px-2 mt-3 gap-4">
-          <ButtonLink to={ROUTES.LIST_PROJECT}>List your project</ButtonLink>
-          {SHOW_PROFILE_LINK && (
-            <ButtonLink to={ROUTES.LOGIN} variant="accent">
-              Build your profile
-            </ButtonLink>
-          )}
-        </div>
-
-        <div className="header-wave mt-12">
-          <Wave role="img" />
-        </div>
-      </div>
-
-      {blogPosts.length > 0 && (
-        <div className="mx-auto mb-20" style={{ maxWidth: 1600 }}>
-          <div className="filters-wrapper">
-            <h2 className="w-full font-bold text-left">Blog Posts</h2>
-          </div>
-          <BlogList blogPosts={blogPosts} />
-        </div>
-      )}
-
       <SearchWrapper searchIndex={searchIndex} allProjects={projects}>
+        <div className="bg-gradient mx-auto pt-12 md:pt-24 mb-12">
+          <h1 className="text-yellow-300 font-semibold text-3xl px-2 lg:text-4xl text-center mb-4">
+            Connecting People and Projects
+          </h1>
+          <p className="text-white text-center max-w-xl mx-auto mb-6 mt-2 px-2">
+            Your next project is waiting to be discovered. Connect with devs
+            across the globe, contribute to open source, and learn something
+            new.
+          </p>
+
+          <div className="flex flex-col md:flex-row items-center justify-center text-center px-2 mt-3 gap-4">
+            <ButtonLink to={ROUTES.LIST_PROJECT}>List your project</ButtonLink>
+            {numVerifiedProjects > 0 && <VerifiedProjectsButton />}
+            {SHOW_PROFILE_LINK && (
+              <ButtonLink to={ROUTES.LOGIN} variant="accent">
+                Build your profile
+              </ButtonLink>
+            )}
+          </div>
+
+          <div className="header-wave mt-12">
+            <Wave role="img" />
+          </div>
+        </div>
+
+        {blogPosts.length > 0 && (
+          <div className="mx-auto mb-20" style={{ maxWidth: 1600 }}>
+            <div className="filters-wrapper">
+              <h2 className="w-full font-bold text-left">Blog Posts</h2>
+            </div>
+            <BlogList blogPosts={blogPosts} />
+          </div>
+        )}
+
         <div className="max-w-5xl space-x-4 flex justify-center mx-auto px-2 mb-4">
           <SearchInput />
         </div>
         <div className="filters-wrapper">
           <div className="flex items-center">
-            <h2 className="font-bold mr-2">All Projects</h2>
+            <h2 className="font-bold mr-2" id={ALL_PROJECTS_HEADER_ID}>
+              All Projects
+            </h2>
             <ToggleFiltersButton onClick={() => setShowSidebar(true)} />
           </div>
           {githubDataIsEmpty ? (
