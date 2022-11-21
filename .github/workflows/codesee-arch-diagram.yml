@@ -1,3 +1,5 @@
+# This workflow was added by CodeSee. Learn more at https://codesee.io/
+# This is v2.0 of this workflow file
 on:
   push:
     branches:
@@ -7,6 +9,8 @@ on:
 
 name: CodeSee Map
 
+permissions: read-all
+
 jobs:
   test_map_action:
     runs-on: ubuntu-latest
@@ -15,7 +19,7 @@ jobs:
     steps:
       - name: checkout
         id: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
@@ -27,7 +31,7 @@ jobs:
         uses: Codesee-io/codesee-detect-languages-action@latest
 
       - name: Configure JDK 16
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         if: ${{ fromJSON(steps.detect-languages.outputs.languages).java }}
         with:
           java-version: '16'
@@ -35,17 +39,17 @@ jobs:
 
       # CodeSee Maps Go support uses a static binary so there's no setup step required.
 
-      - name: Configure Node.js 14
-        uses: actions/setup-node@v2
+      - name: Configure Node.js 16
+        uses: actions/setup-node@v3
         if: ${{ fromJSON(steps.detect-languages.outputs.languages).javascript }}
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Configure Python 3.x
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         if: ${{ fromJSON(steps.detect-languages.outputs.languages).python }}
         with:
-          python-version: '3.10'
+          python-version: '3.x'
           architecture: 'x64'
 
       - name: Configure Ruby '3.x'
@@ -57,7 +61,7 @@ jobs:
       # We need the rust toolchain because it uses rustc and cargo to inspect the package
       - name: Configure Rust 1.x stable
         uses: actions-rs/toolchain@v1
-        if: ${{ fromJSON(steps.detect-languages.outputs.languages).rust }} 
+        if: ${{ fromJSON(steps.detect-languages.outputs.languages).rust }}
         with:
           toolchain: stable
 
