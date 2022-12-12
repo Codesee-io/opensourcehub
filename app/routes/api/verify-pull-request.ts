@@ -9,12 +9,8 @@ type SuccessResponse = PullRequestDetails & {
 
 type ErrorResponse = {
   isValid: false;
+  reason: string;
 };
-
-const errorResponse = json({ isValid: false } as ErrorResponse, {
-  status: 400,
-  statusText: "Malformed request",
-});
 
 export type VerifyPullRequestResponse = SuccessResponse | ErrorResponse;
 
@@ -24,17 +20,21 @@ export type VerifyPullRequestResponse = SuccessResponse | ErrorResponse;
  */
 export const action: ActionFunction = async ({ request }) => {
   // Check that we have a valid url in the payload
-  const data = await request.formData();
+  const clonedRequest = request.clone();
+  const data = await clonedRequest.formData();
   const url = data.get("url")?.toString();
-
-  if (typeof url !== "string") {
-    return errorResponse;
-  }
 
   const pullRequestDetails = isValidPullRequestUrl(url);
 
-  if (pullRequestDetails == false) {
-    return errorResponse;
+  if (pullRequestDetails === false) {
+    const error: ErrorResponse = {
+      isValid: false,
+      reason: "Pull request URL formatted incorrectly",
+    };
+    return json(error, {
+      status: 400,
+      statusText: "Malformed request",
+    });
   }
 
   // Make an API call to GitHub
@@ -52,6 +52,13 @@ export const action: ActionFunction = async ({ request }) => {
 
     return json(successResponse);
   } catch (err: any) {
-    return errorResponse;
+    const error: ErrorResponse = {
+      isValid: false,
+      reason: "Pull request not found",
+    };
+    return json(error, {
+      status: 404,
+      statusText: "Not found",
+    });
   }
 };
