@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import cx from "classnames";
 
-const ADJECTIVES = ["understandable", "actionable", "visible"];
+const WORDS = ["understandable", "actionable", "visible"];
 
 enum AnimState {
   Idle = "idle",
@@ -18,7 +18,7 @@ type State = {
 const useTypewriter = () => {
   const [state, setState] = useState<State>({
     animState: AnimState.Idle,
-    charIndex: ADJECTIVES[0].length,
+    charIndex: WORDS[0].length,
     wordIndex: 0,
   });
 
@@ -28,7 +28,7 @@ const useTypewriter = () => {
     const startDeleting = () => {
       setState((prev) => ({
         animState: AnimState.Deleting,
-        charIndex: ADJECTIVES[prev.wordIndex].length - 1,
+        charIndex: WORDS[prev.wordIndex].length - 1,
         wordIndex: prev.wordIndex,
       }));
 
@@ -50,13 +50,13 @@ const useTypewriter = () => {
     const startTyping = () => {
       setState((prev) => ({
         animState: AnimState.Typing,
-        wordIndex: (prev.wordIndex + 1) % ADJECTIVES.length,
+        wordIndex: (prev.wordIndex + 1) % WORDS.length,
         charIndex: 1,
       }));
 
       interval.current = window.setInterval(() => {
         setState((prev) => {
-          if (prev.charIndex < ADJECTIVES[prev.wordIndex].length - 1) {
+          if (prev.charIndex < WORDS[prev.wordIndex].length - 1) {
             return {
               ...prev,
               charIndex: prev.charIndex + 1,
@@ -68,7 +68,7 @@ const useTypewriter = () => {
 
             return {
               ...prev,
-              charIndex: ADJECTIVES[prev.wordIndex].length,
+              charIndex: WORDS[prev.wordIndex].length,
             };
           }
         });
@@ -90,7 +90,7 @@ const useTypewriter = () => {
   }, []);
 
   return {
-    currentText: ADJECTIVES[state.wordIndex].substring(0, state.charIndex),
+    currentText: WORDS[state.wordIndex].substring(0, state.charIndex),
     isAnimating:
       state.animState === AnimState.Typing ||
       state.animState === AnimState.Deleting,
