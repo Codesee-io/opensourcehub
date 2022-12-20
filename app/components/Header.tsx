@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { Link, useLocation } from "@remix-run/react";
 import {
   ROUTES,
   DISCORD_LINK,
   SHOW_PROFILE_LINK,
   HOW_CODESEE_WORKS_LINK,
+  RESOURCES_LINK,
 } from "../utils/constants";
 import NavLink from "./NavLink";
 import wordmark from "~/images/osh_wordmark.svg";
@@ -14,12 +15,13 @@ import MenuIcon from "./icons/MenuIcon";
 import MobileNavigation from "./MobileNavigation";
 import HeaderDropdown from "./HeaderDropdown";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
+import NavDropdown from "./NavDropdown";
 
 type Props = {
   userInfo?: UserInfo | null;
 };
 
-export const NAV_LINKS = [
+export const NAV_LINKS: NavLinkData[] = [
   {
     to: ROUTES.HOME,
     text: "Projects",
@@ -29,18 +31,12 @@ export const NAV_LINKS = [
     text: "Contribute",
   },
   {
-    to: ROUTES.ABOUT,
-    text: "About",
-  },
-  {
     to: HOW_CODESEE_WORKS_LINK,
     text: "CodeSee ❤️ Open Source",
   },
-  // Hide the resources page until the content is ready
-  // {
-  //   to: RESOURCES_LINK,
-  //   text: "Resources",
-  // },
+];
+
+export const COMMUNITY_LINKS: NavLinkData[] = [
   {
     to: DISCORD_LINK,
     text: (
@@ -50,7 +46,20 @@ export const NAV_LINKS = [
       </>
     ),
   },
+  {
+    to: ROUTES.ABOUT,
+    text: "About",
+  },
+  {
+    to: RESOURCES_LINK,
+    text: "Resources",
+  },
 ];
+
+export type NavLinkData = {
+  to: string;
+  text: ReactNode;
+};
 
 function bodyScrollLock(enable: boolean) {
   if (enable) {
@@ -62,6 +71,7 @@ function bodyScrollLock(enable: boolean) {
 
 const Header: FC<Props> = ({ userInfo }) => {
   const [isMobileNavVisible, setShowMobileNav] = useState(false);
+  const [showCommunityDropdown, setShowCommunityDropdown] = useState(false);
 
   // Hide the mobile nav when we navigate around
   const { pathname } = useLocation();
@@ -104,18 +114,19 @@ const Header: FC<Props> = ({ userInfo }) => {
         </div>
         <button
           type="button"
-          className="p-2 text-white xl:hidden"
+          className="p-2 text-white lg:hidden"
           onClick={showMobileNav}
           aria-label="Show the mobile navigation menu"
         >
           <MenuIcon />
         </button>
-        <div className="hidden xl:flex items-center justify-center text-white whitespace-nowrap">
+        <div className="hidden lg:flex items-center justify-center text-white whitespace-nowrap">
           {NAV_LINKS.map((link, index) => (
             <div className="hidden sm:block" key={`link-${index}`}>
               <NavLink to={link.to}>{link.text}</NavLink>
             </div>
           ))}
+          <NavDropdown links={COMMUNITY_LINKS} />
           {SHOW_PROFILE_LINK && userInfo && (
             <HeaderDropdown userInfo={userInfo} />
           )}

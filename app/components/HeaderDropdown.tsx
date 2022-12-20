@@ -1,8 +1,8 @@
 import { Form, Link } from "@remix-run/react";
-import cx from "classnames";
 import { FC, useEffect, useRef, useState } from "react";
 import { UserInfo } from "~/types";
 import { ROUTES } from "~/utils/constants";
+import Dropdown from "./Dropdown";
 import UserIcon from "./icons/UserIcon";
 
 type Props = {
@@ -40,15 +40,7 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
       >
         <UserIcon className="w-6 h-6" />
       </button>
-      <div
-        className={cx(
-          "bg-white top-full mt-2 rounded-lg py-2 -right-2 w-56 flex flex-col shadow-2",
-          {
-            hidden: !menuIsOpen,
-            absolute: menuIsOpen,
-          }
-        )}
-      >
+      <Dropdown isOpen={menuIsOpen} style={{ width: 224 }}>
         <span className="bottom-full right-4 border-8 border-transparent border-b-white absolute w-0 h-0" />
         <div className="flex gap-2 px-4 py-2 border-b mb-2">
           {userInfo.pictureUrl && (
@@ -75,14 +67,14 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
         </div>
         <Link
           to="/profile"
-          className="text-sm text-light-type hover:text-light-interactive hover:bg-light-interactive-fill px-4 py-2"
+          className="dropdown-item"
           onClick={() => setMenuIsOpen((prev) => !prev)}
         >
           Profile
         </Link>
         <Link
           to={ROUTES.LIST_PROJECT}
-          className="text-sm text-light-type hover:text-light-interactive hover:bg-light-interactive-fill px-4 py-2"
+          className="dropdown-item"
           onClick={() => setMenuIsOpen((prev) => !prev)}
         >
           List a project
@@ -97,7 +89,7 @@ const HeaderDropdown: FC<Props> = ({ userInfo }) => {
             Log out
           </button>
         </Form>
-      </div>
+      </Dropdown>
     </div>
   );
 };

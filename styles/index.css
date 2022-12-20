@@ -97,3 +97,11 @@ textarea.input:read-only {
     opacity: 1;
   }
 }
+
+.dropdown-item {
+  @apply text-sm text-light-type px-4 py-2 flex items-center gap-2;
+}
+
+.dropdown-item:hover {
+  @apply text-light-interactive bg-light-interactive-fill;
+}
