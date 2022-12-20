@@ -35,6 +35,7 @@ import {
   ALL_PROJECTS_HEADER_ID,
 } from "~/utils/constants";
 import VerifiedProjectsButton from "~/components/VerifiedProjectsButton";
+import AnimatedTitle from "~/components/AnimatedTitle";
 
 export function links() {
   return [
@@ -141,13 +142,14 @@ export default function Index() {
     <>
       <SearchWrapper searchIndex={searchIndex} allProjects={projects}>
         <div className="bg-gradient mx-auto pt-12 md:pt-24 mb-12">
-          <h1 className="text-yellow-300 font-semibold text-3xl px-2 lg:text-4xl text-center mb-4">
-            Connecting People and Projects
-          </h1>
-          <p className="text-white text-center max-w-xl mx-auto mb-6 mt-2 px-2">
-            Your next project is waiting to be discovered. Connect with devs
-            across the globe, contribute to open source, and learn something
-            new.
+          <AnimatedTitle />
+          <p className="text-white text-center text-lg max-w-2xl mx-auto mb-2 px-2">
+            Open Source Hub showcases Open Source projects powered by CodeSee.
+          </p>
+          <p className="text-white text-center max-w-2xl mx-auto mb-6 mt-2 px-2">
+            CodeSee helps contributors onboard to projects in no time, and helps
+            maintainers automate and review changes faster &mdash; so that we
+            can all focus on making an impact.
           </p>
 
           <div className="flex flex-col md:flex-row items-center justify-center text-center px-2 mt-3 gap-4">

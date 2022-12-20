@@ -95,7 +95,7 @@ const Login: FC = () => {
     <div className="px-4">
       <main className="bg-white border border-light-border rounded-lg my-8 px-4 py-12 max-w-xl text-center mx-auto space-y-4">
         <h1 className="text-light-type text-2xl font-semibold">
-          Log in to Open Source Hub
+          Contribute to Open Source Hub
         </h1>
         <p className="text-light-type">
           Use your GitHub account to create and manage your profile.

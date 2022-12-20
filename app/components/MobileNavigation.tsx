@@ -16,7 +16,7 @@ type Props = {
 const MobileNavigation: FC<Props> = ({ userInfo, isOpen, onRequestClose }) => (
   <div
     className={cx(
-      "md:hidden fixed inset-0 transition-all bg-indigo-850 text-white p-8 flex flex-col items-center justify-center",
+      "xl:hidden fixed inset-0 transition-all bg-indigo-850 text-white p-8 flex flex-col items-center justify-center",
       {
         "translate-x-0 opacity-100": isOpen,
         "translate-x-full opacity-0": !isOpen,
@@ -32,9 +32,12 @@ const MobileNavigation: FC<Props> = ({ userInfo, isOpen, onRequestClose }) => (
       <CloseIcon />
     </button>
     {SHOW_PROFILE_LINK && userInfo == null && (
-      <ButtonLink to={ROUTES.LOGIN} className="mb-8">
-        Log in
-      </ButtonLink>
+      <div className="flex gap-4 mb-8">
+        <ButtonLink to={ROUTES.LOGIN}>Log in</ButtonLink>
+        <ButtonLink to={ROUTES.LOGIN} variant="accent">
+          Sign up
+        </ButtonLink>
+      </div>
     )}
     {userInfo != null && (
       <div
