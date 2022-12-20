@@ -1,13 +1,17 @@
 import type { FC } from "react";
 import { Link } from "@remix-run/react";
-import { DISCORD_LINK, ROUTES } from "~/utils/constants";
+import {
+  DISCORD_LINK,
+  HOW_CODESEE_WORKS_LINK,
+  ROUTES,
+} from "~/utils/constants";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
 import logoPoweredBy from "~/images/powered_by_codesee.png";
 import ButtonLink from "./ButtonLink";
 
 const Footer: FC = () => (
   <footer className="bg-gradient text-black-400 px-4 py-10">
-    <Link to={ROUTES.HOME} className="block" aria-label="Home">
+    <Link to={HOW_CODESEE_WORKS_LINK} className="block" aria-label="Home">
       <img src={logoPoweredBy} alt="" className="my-2 mx-auto" width="200" />
     </Link>
     <div className="flex items-center justify-center text-center px-2 mt-7">
@@ -20,7 +24,10 @@ const Footer: FC = () => (
       <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.ABOUT}>
         About
       </Link>
-      <Link className="supports-hover:hover:text-yellow-300" to={ROUTES.CONTRIBUTE}>
+      <Link
+        className="supports-hover:hover:text-yellow-300"
+        to={ROUTES.CONTRIBUTE}
+      >
         Contribute
       </Link>
       <a
