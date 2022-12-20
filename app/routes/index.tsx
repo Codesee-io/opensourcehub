@@ -146,7 +146,7 @@ export default function Index() {
           <p className="text-white text-center text-lg max-w-2xl mx-auto mb-2 px-2">
             Open Source Hub showcases Open Source projects powered by CodeSee.
           </p>
-          <p className="text-white text-center max-w-2xl mx-auto mb-6 mt-2 px-2">
+          <p className="text-white text-center max-w-3xl mx-auto mb-6 mt-2 px-2">
             CodeSee helps contributors onboard to projects in no time, and helps
             maintainers automate and review changes faster &mdash; so that we
             can all focus on making an impact.
