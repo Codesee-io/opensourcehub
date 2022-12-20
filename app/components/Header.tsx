@@ -1,22 +1,27 @@
-import { FC, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { Link, useLocation } from "@remix-run/react";
-import { ROUTES, DISCORD_LINK, SHOW_PROFILE_LINK } from "../utils/constants";
+import {
+  ROUTES,
+  DISCORD_LINK,
+  SHOW_PROFILE_LINK,
+  HOW_CODESEE_WORKS_LINK,
+  RESOURCES_LINK,
+} from "../utils/constants";
 import NavLink from "./NavLink";
-import logo from "~/images/logo.png";
-import poweredBy from "~/images/powered_by.svg";
+import wordmark from "~/images/osh_wordmark.svg";
 import DiscordIcon from "./icons/DiscordIcon";
 import { UserInfo } from "~/types";
 import MenuIcon from "./icons/MenuIcon";
 import MobileNavigation from "./MobileNavigation";
 import HeaderDropdown from "./HeaderDropdown";
 import CodeSeeWordmark from "~/images/CodeSeeWordmark";
-import ExternalLink from "./ExternalLink";
+import NavDropdown from "./NavDropdown";
 
 type Props = {
   userInfo?: UserInfo | null;
 };
 
-export const NAV_LINKS = [
+export const NAV_LINKS: NavLinkData[] = [
   {
     to: ROUTES.HOME,
     text: "Projects",
@@ -26,14 +31,12 @@ export const NAV_LINKS = [
     text: "Contribute",
   },
   {
-    to: ROUTES.ABOUT,
-    text: "About",
+    to: HOW_CODESEE_WORKS_LINK,
+    text: "CodeSee ❤️ Open Source",
   },
-  // Hide the resources page until the content is ready
-  // {
-  //   to: RESOURCES_LINK,
-  //   text: "Resources",
-  // },
+];
+
+export const COMMUNITY_LINKS: NavLinkData[] = [
   {
     to: DISCORD_LINK,
     text: (
@@ -43,7 +46,20 @@ export const NAV_LINKS = [
       </>
     ),
   },
+  {
+    to: ROUTES.ABOUT,
+    text: "About",
+  },
+  {
+    to: RESOURCES_LINK,
+    text: "Resources",
+  },
 ];
+
+export type NavLinkData = {
+  to: string;
+  text: ReactNode;
+};
 
 function bodyScrollLock(enable: boolean) {
   if (enable) {
@@ -55,6 +71,7 @@ function bodyScrollLock(enable: boolean) {
 
 const Header: FC<Props> = ({ userInfo }) => {
   const [isMobileNavVisible, setShowMobileNav] = useState(false);
+  const [showCommunityDropdown, setShowCommunityDropdown] = useState(false);
 
   // Hide the mobile nav when we navigate around
   const { pathname } = useLocation();
@@ -76,41 +93,53 @@ const Header: FC<Props> = ({ userInfo }) => {
     <header className="bg-indigo-850 sticky top-0 z-40 h-12 flex items-center">
       <div className="max-w-7xl mx-auto flex px-4 items-center justify-between w-full">
         <div className="flex items-center">
+          <a
+            className="opacity-100 supports-hover:hover:opacity-75 ml-1"
+            href={HOW_CODESEE_WORKS_LINK}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="CodeSee"
+          >
+            <CodeSeeWordmark width="100" className="h-4" />
+          </a>
+          <span className="inline-block mx-4 rotate-12 w-px bg-white opacity-50 h-6" />
           <Link to="/" className="flex items-center" aria-label="Home">
             <img
-              src={logo}
+              src={wordmark}
               alt=""
               className="my-2"
-              style={{ height: 30, width: 180 }}
+              style={{ height: 21, width: 216 }}
             />
           </Link>
-          <ExternalLink
-            href="https://www.codesee.io"
-            className="hidden lg:flex ml-4 items-center gap-1 py-2 opacity-80 hover:opacity-100"
-          >
-            <img src={poweredBy} alt="" width="60" className="mt-1" />
-            <CodeSeeWordmark width="80" />
-          </ExternalLink>
         </div>
         <button
           type="button"
-          className="p-2 text-white md:hidden"
+          className="p-2 text-white lg:hidden"
           onClick={showMobileNav}
           aria-label="Show the mobile navigation menu"
         >
           <MenuIcon />
         </button>
-        <div className="hidden md:flex items-center justify-center text-white whitespace-nowrap">
+        <div className="hidden lg:flex items-center justify-center text-white whitespace-nowrap">
           {NAV_LINKS.map((link, index) => (
             <div className="hidden sm:block" key={`link-${index}`}>
               <NavLink to={link.to}>{link.text}</NavLink>
             </div>
           ))}
+          <NavDropdown links={COMMUNITY_LINKS} />
           {SHOW_PROFILE_LINK && userInfo && (
             <HeaderDropdown userInfo={userInfo} />
           )}
           {SHOW_PROFILE_LINK && userInfo == null && (
-            <NavLink to={ROUTES.LOGIN}>Log in</NavLink>
+            <>
+              <NavLink to={ROUTES.LOGIN}>Log in</NavLink>
+              <Link
+                className="bg-brand-highlight text-black-500 rounded-full px-4 py-1 ml-4 font-medium hover:opacity-80"
+                to={ROUTES.LOGIN}
+              >
+                Sign up
+              </Link>
+            </>
           )}
         </div>
       </div>
