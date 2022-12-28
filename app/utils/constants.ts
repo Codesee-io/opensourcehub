@@ -5,7 +5,7 @@ export const HOW_TO_LIST_PROJECT_LINK =
 
 export const DISCORD_LINK = "https://discord.gg/opensource";
 export const HOW_CODESEE_WORKS_LINK =
-  "https://www.codesee.io/how-codesee-works";
+  "https://www.codesee.io/open-source-hub";
 export const RESOURCES_LINK = "https://learn.codesee.io/tag/community/";
 export const REPO_LINK = "https://github.com/Codesee-io/opensourcehub";
 export const ROUTES = {
