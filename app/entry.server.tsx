@@ -14,6 +14,9 @@ export default function handleRequest(
 
   responseHeaders.set("Content-Type", "text/html");
 
+  // We can only be iframed if all ancestor frames match our origin
+  responseHeaders.set("X-Frame-Options", "SAMEORIGIN");
+
   return new Response("<!DOCTYPE html>" + markup, {
     status: responseStatusCode,
     headers: responseHeaders,
