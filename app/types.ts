@@ -135,6 +135,7 @@ export type UserProfile = {
   roleInterests?: string[];
   portfolioItems?: string[];
   isProjectMaintainer?: boolean;
+  joinNewsletter?: boolean;
 };
 
 export type Tag = {
