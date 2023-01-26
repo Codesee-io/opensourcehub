@@ -391,13 +391,17 @@ const ListProject: FC = () => {
           <div className="bg-white border border-light-border p-4 rounded-lg mb-8">
             <h2 className="font-bold text-lg mb-4">CodeSee Map</h2>
             <p>
-              We recommend providing a CodeSee Map to help onboard newcomers to
-              your project. It's free!{" "}
+              We recommend{" "}
+              <ExternalLink href="https://app.codesee.io/maps">
+                creating a map of your codebase
+              </ExternalLink>{" "}
+              to make it easier for contributors in our community to
+              participate. It's free!{" "}
               <ExternalLink href="https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59">
                 View an example map.
               </ExternalLink>
             </p>
-            <p>
+            <p className="mt-1">
               Before you share it, please ensure that{" "}
               <ExternalLink href={HOW_TO_SHARE_MAP_LINK}>
                 the map is public
