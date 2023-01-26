@@ -4,8 +4,7 @@ export const HOW_TO_LIST_PROJECT_LINK =
   "https://github.com/codesee-io/opensourcehub#how-to-list-your-project";
 
 export const DISCORD_LINK = "https://discord.gg/opensource";
-export const HOW_CODESEE_WORKS_LINK =
-  "https://www.codesee.io/open-source-hub";
+export const HOW_CODESEE_WORKS_LINK = "https://www.codesee.io/open-source-hub";
 export const RESOURCES_LINK = "https://learn.codesee.io/tag/community/";
 export const REPO_LINK = "https://github.com/Codesee-io/opensourcehub";
 export const ROUTES = {
@@ -19,6 +18,9 @@ export const ROUTES = {
   LIST_PROJECT: "/list-project",
   VERIFIED: "/verified",
 };
+export const CALENDAR_LINK = "https://calendly.com/anamogul/ossprojects";
+export const HOW_TO_SHARE_MAP_LINK =
+  "https://docs.codesee.io/docs/share-your-map#sharing-with-groups";
 
 // Button, Link Types
 export const LINK_FORMATS = {
