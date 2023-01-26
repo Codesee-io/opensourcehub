@@ -4,7 +4,7 @@ import {
   useSubmit,
   useTransition,
 } from "@remix-run/react";
-import { ChangeEvent, FC, useRef, useState } from "react";
+import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import ReactSelect, { MultiValue } from "react-select";
 import cx from "classnames";
 import { parseMarkdown } from "~/utils/markdown";
@@ -45,6 +45,7 @@ import { getProjectByRepoUrl } from "~/projects.server";
 import ProjectSubmissionConfirmation from "~/components/ProjectSubmissionConfirmation";
 import { getRepeatableFieldValues } from "~/utils/forms";
 import RepeatableTextFields from "~/components/RepeatableTextFields";
+import { CALENDAR_LINK, HOW_TO_SHARE_MAP_LINK } from "~/utils/constants";
 
 export function links() {
   return [
@@ -137,6 +138,18 @@ const ListProject: FC = () => {
     (updatedTags: MultiValue<{ label: string; value: string }>) => {
       setTags({ ...tags, [key]: updatedTags });
     };
+
+  useEffect(() => {
+    // Scroll to the top of the page when we receive validation errors
+    if (actionData != null) {
+      const errorKeys = Object.keys(actionData.validationErrors);
+      if (errorKeys.length > 0) {
+        window.scrollTo(0, 0);
+      }
+    }
+  }, [actionData]);
+
+  const featuredMapRef = useRef<HTMLInputElement>(null);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -242,12 +255,18 @@ const ListProject: FC = () => {
         closePreview={() => setShowPreview(false)}
       />
       <ProjectSubmissionConfirmation
+        hasMap={featuredMapRef.current?.value !== ""}
         isOpen={confirmation}
         onCancel={() => setConfirmation(false)}
         onConfirm={submitForm}
       />
       <ProjectSubmissionSpinner state={transition.state} />
       <main className="max-w-4xl mx-auto pt-12 px-2 pb-24">
+        {actionData?.validationErrors != null && (
+          <div className="text-warning-dark bg-warning-light p-4 rounded mb-4">
+            Please address the issues highlighted below 👇
+          </div>
+        )}
         <h1 className="text-light-type text-2xl font-semibold mb-8">
           List your project
         </h1>
@@ -372,11 +391,27 @@ const ListProject: FC = () => {
           <div className="bg-white border border-light-border p-4 rounded-lg mb-8">
             <h2 className="font-bold text-lg mb-4">CodeSee Map</h2>
             <p>
-              We recommend providing a CodeSee Map to help onboard newcomers to
-              your project. It's free!{" "}
+              We recommend{" "}
+              <ExternalLink href="https://app.codesee.io/maps">
+                creating a map of your codebase
+              </ExternalLink>{" "}
+              to make it easier for contributors in our community to
+              participate. It's free!{" "}
               <ExternalLink href="https://app.codesee.io/maps/public/f5dcb920-ee8f-11ec-a5b3-bb55880b8b59">
                 View an example map.
               </ExternalLink>
+            </p>
+            <p className="mt-1">
+              Before you share it, please ensure that{" "}
+              <ExternalLink href={HOW_TO_SHARE_MAP_LINK}>
+                the map is public
+              </ExternalLink>
+              . Generating a new map takes less than 2 minutes and makes
+              onboarding much easier for your new contributors.{" "}
+              <ExternalLink href={CALENDAR_LINK}>
+                We're happy to help
+              </ExternalLink>{" "}
+              if you'd like some guidance!
             </p>
             <div className="flex mt-6 gap-8">
               <div className="space-y-4 w-2/3">
@@ -386,6 +421,7 @@ const ListProject: FC = () => {
                     type="url"
                     id="featuredMapUrl"
                     placeholder="https://app.codesee.io/maps/public/example-map"
+                    ref={featuredMapRef}
                   />
                   <FieldError
                     error={actionData?.validationErrors?.featuredMapUrl}
@@ -427,6 +463,10 @@ const ListProject: FC = () => {
                 in your repository. For example, here's{" "}
                 <ExternalLink href="https://app.codesee.io/maps/review/github/Codesee-io/opensourcehub/pr/110">
                   an important Open Source Hub PR
+                </ExternalLink>
+                . Review Maps are automatically generated once you've installed{" "}
+                <ExternalLink href="https://app.codesee.io">
+                  CodeSee
                 </ExternalLink>
                 .
               </p>

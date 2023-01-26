@@ -7,6 +7,7 @@ import { User } from "~/types";
 import { maybeStringToArray } from "~/utils/formatting";
 import { getRepoOwnerAndName, isValidGitHubRepoUrl } from "~/utils/repo-url";
 import { getTemplateContent, ProjectTemplateFields } from "~/utils/template";
+import { isValidPublicCodebaseMapUrl } from "./codesee";
 import { getRepeatableFieldValues } from "./forms";
 
 export const MAX_AVATAR_SIZE_BYTES = 1024 * 1024 * 0.1; // 0.1 MB
@@ -88,10 +89,15 @@ export async function parseListProjectForm(
     .get("featuredMapDescription")
     ?.toString();
   if (featuredMapUrl) {
-    featuredMap = {
-      url: featuredMapUrl,
-      description: featuredMapDescription,
-    };
+    // Validate the codebase map url
+    if (isValidPublicCodebaseMapUrl(featuredMapUrl)) {
+      featuredMap = {
+        url: featuredMapUrl,
+        description: featuredMapDescription,
+      };
+    } else {
+      validationErrors.featuredMapUrl = "Please provide a valid public map URL";
+    }
   }
 
   const contributing = formData.get("contributing")?.toString();

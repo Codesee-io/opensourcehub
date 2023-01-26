@@ -12,6 +12,10 @@ export function isValidReviewMapUrl(url: string) {
   return CODESEE_REVIEW_MAP_PREFIXES.some((prefix) => url.startsWith(prefix));
 }
 
+export function isValidPublicCodebaseMapUrl(url: string) {
+  return url.startsWith("https://app.codesee.io/maps/public/");
+}
+
 /**
  * @example getReviewMapImageUrlFromPullRequest("https://github.com/distributeaid/shipment-tracker/pull/819")
  * // https://s3.us-east-2.amazonaws.com/maps.codesee.io/images/github/distributeaid/shipment-tracker/819/latest.svg
