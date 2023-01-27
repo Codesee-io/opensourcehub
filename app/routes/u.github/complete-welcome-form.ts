@@ -35,6 +35,9 @@ export const action: ActionFunction = async ({ request }) => {
     formData.get("roleInterests")?.toString()
   );
 
+  const isProjectMaintainer = !!formData.get("isProjectMaintainer");
+  const joinNewsletter = !!formData.get("joinNewsletter");
+
   const updatedProfile: Partial<UserProfile> = {
     userId: currentUser.uid,
     pictureUrl: currentUser.pictureUrl,
@@ -44,6 +47,8 @@ export const action: ActionFunction = async ({ request }) => {
     subjectInterests,
     roleInterests,
     intro,
+    isProjectMaintainer,
+    joinNewsletter,
   };
 
   if (typeof displayName === "string" && displayName.length > 0) {

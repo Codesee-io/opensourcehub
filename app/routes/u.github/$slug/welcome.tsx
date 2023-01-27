@@ -100,7 +100,7 @@ const Welcome: FC = () => {
             </p>
             <Form
               method="post"
-              action="/u/github/update-profile"
+              action="/u/github/complete-welcome-form"
               onSubmit={onFormSubmit}
             >
               <div className="lg:flex gap-8">
@@ -194,14 +194,18 @@ const Welcome: FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="pt-10">
-                <label className="text-sm flex gap-2 font-semibold text-light-type-medium mb-4 cursor-pointer">
+              <div className="pt-10 space-y-4">
+                <label className="text-sm flex gap-2 font-semibold text-light-type-medium cursor-pointer">
                   <input type="checkbox" name="isProjectMaintainer" />I am an
                   open-source project maintainer
                 </label>
-                <label className="text-sm flex gap-2 font-semibold text-light-type-medium  cursor-pointer">
+                <label className="text-sm flex gap-2 font-semibold text-light-type-medium cursor-pointer">
                   <input type="checkbox" name="joinDiscord" />
                   Join the Open Source Hub Discord server
+                </label>
+                <label className="text-sm flex gap-2 font-semibold text-light-type-medium cursor-pointer">
+                  <input type="checkbox" name="joinNewsletter" defaultChecked />
+                  Subscribe to our newsletter to follow the latest OSS news
                 </label>
               </div>
               <div className="mt-16 flex justify-end gap-6">
