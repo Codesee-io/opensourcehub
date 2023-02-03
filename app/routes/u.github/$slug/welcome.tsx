@@ -205,7 +205,7 @@ const Welcome: FC = () => {
                 </label>
                 <label className="text-sm flex gap-2 font-semibold text-light-type-medium cursor-pointer">
                   <input type="checkbox" name="joinNewsletter" defaultChecked />
-                  Subscribe to our newsletter to follow the latest OSS news
+                  Subscribe to our newsletter called, "Console by CodeSee.io", to follow the latest OSS news
                 </label>
               </div>
               <div className="mt-16 flex justify-end gap-6">
