@@ -38,6 +38,12 @@ const Footer: FC = () => (
       >
         Discord
       </a>
+      <Link
+        className="supports-hover:hover:text-yellow-300"
+        to={ROUTES.VERIFIED}
+      >
+        Get verified
+      </Link>
     </div>
     <div className="flex gap-2 md:gap-6 flex-col md:flex-row text-sm text-white text-center justify-center mb-10">
       <Link
