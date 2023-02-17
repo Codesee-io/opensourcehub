@@ -141,7 +141,7 @@ const ListProject: FC = () => {
 
   useEffect(() => {
     // Scroll to the top of the page when we receive validation errors
-    if (actionData != null) {
+    if (actionData?.validationErrors != null) {
       const errorKeys = Object.keys(actionData.validationErrors);
       if (errorKeys.length > 0) {
         window.scrollTo(0, 0);
