@@ -66,7 +66,8 @@ export function getTemplateContent(fields: ProjectTemplateFields) {
   let filledOutTemplate = `---
 name: ${fields.name}
 repoUrl: ${fields.repoUrl}
-description: ${fields.description}
+description: >
+  ${fields.description}
 maintainer: ${fields.maintainer}
 created: ${fields.created}`;
 
