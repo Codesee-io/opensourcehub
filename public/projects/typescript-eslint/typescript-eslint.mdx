@@ -1,0 +1,44 @@
+---
+name: typescript-eslint
+repoUrl: https://github.com/typescript-eslint/typescript-eslint
+description: >
+  The tooling that enables ESLint and Prettier to support TypeScript.
+maintainer: JoshuaKGoldberg
+created: 2023-03-20T00:11:06.781Z
+languages:
+  - TypeScript
+tags:
+  - Code Framework
+currentlySeeking:
+  - Developers
+  - Designers
+websiteUrl: https://typescript-eslint.io
+twitterUrl: https://twitter.com/tseslint
+avatar: typescript-eslint.png
+contributionOverview:
+  mainLocation: Worldwide
+  isMentorshipAvailable: true
+---
+
+<Overview>
+
+typescript-eslint enables ESLint to run on TypeScript code. It brings in the best of both tools to help you write the best JavaScript or TypeScript code you possibly can.
+
+ESLint and TypeScript represent code differently internally. ESLint's default JavaScript parser cannot natively read in TypeScript-specific syntax and its rules don't natively have access to TypeScript's type information.
+
+typescript-eslint:
+* allows ESLint to parse TypeScript syntax
+* creates a set of tools for ESLint rules to be able to use TypeScript's type information
+* provides a large list of lint rules that are specific to TypeScript and/or use that type information
+
+
+</Overview>
+
+<Contributing>
+
+We've got three main areas of work:
+* The documentation website at typescript-eslint.io: a React app built with Docusaurus. Much of this work requires little to no knowledge of ASTs or other static analysis terms.
+* Lint rules: our >100 custom ESLint rules that analyze code, many with TypeScript's type information
+* Core parsing & type information: the plumbing that makes the project work
+
+</Contributing>
