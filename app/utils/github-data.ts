@@ -1,10 +1,17 @@
-import type { Project } from "../types";
+import type { GitHubData, Project } from "../types";
 import { calculateGithubData } from "./calculateGithubData";
 const { graphql: github } = require("@octokit/graphql");
 const cliProgress = require("cli-progress");
 require("dotenv").config();
 
-export async function getGitHubDataForProjects(projects: Project[]) {
+type ReturnType = {
+  githubDataSet: { [key: string]: GitHubData };
+  invalidProjectSlugs: string[];
+};
+
+export async function getGitHubDataForProjects(
+  projects: Project[]
+): Promise<ReturnType> {
   let githubAPI;
   if (
     process.env.GITHUB_PERSONAL_ACCESS_TOKEN &&
@@ -19,13 +26,19 @@ export async function getGitHubDataForProjects(projects: Project[]) {
     console.log(
       "Not fetching data from GitHub because we're not on production"
     );
-    return {};
+    return {
+      githubDataSet: {},
+      invalidProjectSlugs: [],
+    };
   } else if (!process.env.GITHUB_PERSONAL_ACCESS_TOKEN) {
     console.log("No GitHub API Token set, GitHub data will not be available.");
-    return {};
+    return {
+      githubDataSet: {},
+      invalidProjectSlugs: [],
+    };
   }
 
-  const githubDataSet: { [key: string]: any } = {};
+  const githubDataSet: { [key: string]: GitHubData } = {};
 
   const progressBar = new cliProgress.SingleBar(
     {},
@@ -34,6 +47,8 @@ export async function getGitHubDataForProjects(projects: Project[]) {
 
   console.log(`Fetching project data from GitHub`);
   progressBar.start(projects.length, 0);
+
+  const invalidProjectUrls: string[] = [];
 
   for (const project of projects) {
     const repoUrl = project.attributes.repoUrl;
@@ -52,11 +67,19 @@ export async function getGitHubDataForProjects(projects: Project[]) {
           helpIssues: githubData.helpIssues,
           hacktoberfestIssues: githubData.hacktoberfestIssues,
         };
+      } else {
+        // We were unable to fetch data from GitHub for this project. This
+        // usually means it was archived, so we don't want to list it on the
+        // site.
+        console.warn(
+          `Unable to fetch data for "${repoUrl}" so we're removing it from the list`
+        );
+        invalidProjectUrls.push(project.slug);
       }
     }
   }
 
   progressBar.stop();
 
-  return githubDataSet;
+  return { githubDataSet, invalidProjectSlugs: invalidProjectUrls };
 }

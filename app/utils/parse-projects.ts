@@ -121,9 +121,11 @@ async function exportProjectsToJson() {
   const outputGithubPath = path.join(outputDirectory, "github.json");
 
   // Grab a bunch of information from GitHub if we have the right env vars
-  const githubData = await getGitHubDataForProjects(projectsData);
+  const { githubDataSet, invalidProjectSlugs } = await getGitHubDataForProjects(
+    projectsData
+  );
 
-  if (githubData != null) {
+  if (githubDataSet != null) {
     // Check whether the file already exists
     let fileExists: boolean;
     try {
@@ -134,19 +136,31 @@ async function exportProjectsToJson() {
     }
 
     // Check whether the data we want to store is an empty object
-    const dataIsEmpty = Object.keys(githubData).length === 0;
+    const dataIsEmpty = Object.keys(githubDataSet).length === 0;
 
     // Write to the file system unless the data is empty and the file exists
     if (!(dataIsEmpty && fileExists)) {
       console.log(`Writing to ${outputGithubPath}`);
-      await fs.writeFile(outputGithubPath, JSON.stringify(githubData, null, 2));
+      await fs.writeFile(
+        outputGithubPath,
+        JSON.stringify(githubDataSet, null, 2)
+      );
     }
   }
 
-  console.log(
-    `Writing ${projectsData.length} projects to ${outputProjectsPath}`
+  // Remove the invalid projects
+  const validProjects = projectsData.filter(
+    (project) => !invalidProjectSlugs.includes(project.slug)
   );
-  await fs.writeFile(outputProjectsPath, JSON.stringify(projectsData, null, 2));
+
+  console.log(
+    `Writing ${validProjects.length} projects to ${outputProjectsPath}`
+  );
+
+  await fs.writeFile(
+    outputProjectsPath,
+    JSON.stringify(validProjects, null, 2)
+  );
 }
 
 exportProjectsToJson();

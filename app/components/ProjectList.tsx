@@ -41,41 +41,45 @@ const ProjectList: FunctionComponent<Props> = ({
     filteredProjectIds.includes(project.slug)
   );
 
-  if (!dataSetIsEmpty && sortOption === ProjectSortOrder.MostOpenIssues) {
-    // Sort projects by most open issues (highest count of opened issues)
-    filteredProjects.sort((projectA, projectB) => {
-      return (
-        githubDataSet[projectB.slug].totalOpenIssues -
-        githubDataSet[projectA.slug].totalOpenIssues
-      );
-    });
-  } else if (!dataSetIsEmpty && sortOption === ProjectSortOrder.MostActive) {
-    // Sort projects by most active (highest count of recently-closed PRs)
-    filteredProjects.sort((projectA, projectB) => {
-      return (
-        githubDataSet[projectB.slug].prsMerged.count -
-        githubDataSet[projectA.slug].prsMerged.count
-      );
-    });
-  } else if (!dataSetIsEmpty && sortOption === ProjectSortOrder.MostPopular) {
-    // Sort projects by most popularity (highest number of contributors)
-    filteredProjects.sort((projectA, projectB) => {
-      return (
-        githubDataSet[projectB.slug].totalContributors -
-        githubDataSet[projectA.slug].totalContributors
-      );
-    });
-  } else if (
-    !dataSetIsEmpty &&
-    sortOption === ProjectSortOrder.MostRecentlyAdded
-  ) {
-    // Sort projects by most popularity (highest number of contributors)
-    filteredProjects.sort((projectA, projectB) => {
-      return (
-        new Date(projectB.attributes.created).getTime() -
-        new Date(projectA.attributes.created).getTime()
-      );
-    });
+  if (!dataSetIsEmpty) {
+    switch (sortOption) {
+      case ProjectSortOrder.MostOpenIssues:
+        // Sort projects by most open issues (highest count of opened issues)
+        filteredProjects.sort((projectA, projectB) => {
+          return (
+            githubDataSet[projectB.slug].totalOpenIssues -
+            githubDataSet[projectA.slug].totalOpenIssues
+          );
+        });
+        break;
+      case ProjectSortOrder.MostActive:
+        // Sort projects by most active (highest count of recently-closed PRs)
+        filteredProjects.sort((projectA, projectB) => {
+          return (
+            githubDataSet[projectB.slug].prsMerged.count -
+            githubDataSet[projectA.slug].prsMerged.count
+          );
+        });
+        break;
+      case ProjectSortOrder.MostPopular:
+        // Sort projects by most popularity (highest number of contributors)
+        filteredProjects.sort((projectA, projectB) => {
+          return (
+            githubDataSet[projectB.slug].totalContributors -
+            githubDataSet[projectA.slug].totalContributors
+          );
+        });
+        break;
+      case ProjectSortOrder.MostRecentlyAdded:
+        // Sort projects by most popularity (highest number of contributors)
+        filteredProjects.sort((projectA, projectB) => {
+          return (
+            new Date(projectB.attributes.created).getTime() -
+            new Date(projectA.attributes.created).getTime()
+          );
+        });
+        break;
+    }
   }
 
   return (
