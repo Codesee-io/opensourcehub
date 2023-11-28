@@ -251,6 +251,6 @@ export async function calculateGithubData(githubAPI: any, repoUrl: string) {
 
     return githubData;
   } catch (err) {
-    console.warn(err);
+    console.warn(`Unable to fetch "${repoUrl}"`);
   }
 }

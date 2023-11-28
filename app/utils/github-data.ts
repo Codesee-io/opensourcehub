@@ -71,9 +71,6 @@ export async function getGitHubDataForProjects(
         // We were unable to fetch data from GitHub for this project. This
         // usually means it was archived, so we don't want to list it on the
         // site.
-        console.warn(
-          `Unable to fetch data for "${repoUrl}" so we're removing it from the list`
-        );
         invalidProjectSlugs.add(project.slug);
       }
     }
