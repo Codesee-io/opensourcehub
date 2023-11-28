@@ -150,7 +150,7 @@ async function exportProjectsToJson() {
 
   // Remove the invalid projects
   const validProjects = projectsData.filter(
-    (project) => !invalidProjectSlugs.includes(project.slug)
+    (project) => !invalidProjectSlugs.has(project.slug)
   );
 
   console.log(

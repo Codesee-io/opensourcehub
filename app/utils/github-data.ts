@@ -6,7 +6,7 @@ require("dotenv").config();
 
 type ReturnType = {
   githubDataSet: { [key: string]: GitHubData };
-  invalidProjectSlugs: string[];
+  invalidProjectSlugs: Set<string>;
 };
 
 export async function getGitHubDataForProjects(
@@ -28,13 +28,13 @@ export async function getGitHubDataForProjects(
     );
     return {
       githubDataSet: {},
-      invalidProjectSlugs: [],
+      invalidProjectSlugs: new Set(),
     };
   } else if (!process.env.GITHUB_PERSONAL_ACCESS_TOKEN) {
     console.log("No GitHub API Token set, GitHub data will not be available.");
     return {
       githubDataSet: {},
-      invalidProjectSlugs: [],
+      invalidProjectSlugs: new Set(),
     };
   }
 
@@ -48,7 +48,7 @@ export async function getGitHubDataForProjects(
   console.log(`Fetching project data from GitHub`);
   progressBar.start(projects.length, 0);
 
-  const invalidProjectUrls: string[] = [];
+  const invalidProjectSlugs = new Set<string>();
 
   for (const project of projects) {
     const repoUrl = project.attributes.repoUrl;
@@ -74,12 +74,12 @@ export async function getGitHubDataForProjects(
         console.warn(
           `Unable to fetch data for "${repoUrl}" so we're removing it from the list`
         );
-        invalidProjectUrls.push(project.slug);
+        invalidProjectSlugs.add(project.slug);
       }
     }
   }
 
   progressBar.stop();
 
-  return { githubDataSet, invalidProjectSlugs: invalidProjectUrls };
+  return { githubDataSet, invalidProjectSlugs };
 }
